@@ -7,26 +7,26 @@ author : Roy Zhang
 update : promiseEvent; trigger; flowContoller
 
 ## Util
-//合并默认数据方法,将obj中不空的内容从defObj中复制
+    //合并默认数据方法,将obj中不空的内容从defObj中复制
 
-st.mergeObj(deep, obj, defObj, exclude)
+    st.mergeObj(deep, obj, defObj, exclude)
 
-//在目标对象方法中注入方法，返回结果
+    //在目标对象方法中注入方法，返回结果
 
-st.injectFn(target, name, fn, before,stopOnFalse)
+    st.injectFn(target, name, fn, before,stopOnFalse)
 
-//合并方法，返回结果
+    //合并方法，返回结果
 
-st.mergeFn(fn, mergeFn,stopOnFalse)
+    st.mergeFn(fn, mergeFn,stopOnFalse)
 
 ## PromiseEvent 
 基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能
 
-var events = st.promiseEvent(mode);
+    var events = st.promiseEvent(mode);
 
-events.add(name,function(e,arg,……){},priority,eventMode)
+    events.add(name,function(e,arg,……){},priority,eventMode)
 
-event.fire(arg);
+    event.fire(arg);
 
 mode ：once和callback两种模式,(callback模式不会加入事件参数) name ：加入的事件名称 priority ：权重设置 eventMode ：加入的事件模式；once
 
@@ -43,32 +43,32 @@ e.reject() 拒绝契约
 ## Trigger 
 触发器，在对象上应用触发器（aop）功能，目标对象会具有方法注入功能（基于promiseEvent），注入的类型有before，after和round环绕三种;
 
-var obj = {
+    var obj = {
 
-   test : function(text){
-   
-      alert(text);
-      
-   }
+       test : function(text){
+       
+          alert(text);
+          
+       }
 
-};
+    };
 
-//加入触发器
+    //加入触发器
 
-st.attachTrigger(obj);
+    st.attachTrigger(obj);
 
-//注入方法
+    //注入方法
 
-obj.on("test","trigger",function(e,text){alert(text + " world")});
+    obj.on("test","trigger",function(e,text){alert(text + " world")});
 
-obj.test('hello');
+    obj.test('hello');
 
 结果hello, hello world
 
 ## FlowController
 流程控制器，控制流程的执行和aop（基于Trigger）
 
-var flow = {
+    var flow = {
       
       init: function(e, name) {
      
@@ -89,31 +89,31 @@ var flow = {
           alert('complete');
      }
      
-};
+    };
 
-st.flowController({
+    st.flowController({
 
-   flow: flow,
+      flow: flow,
     
-    order: ["init", "render", "complete"],
-    
-    trigger: true
-});
+      order: ["init", "render", "complete"],
+      
+      trigger: true
+    });
 
-flow.boot();
+    flow.boot();
 
 结果init,render,complete
 
 //加入触发器
 
-flow.onBefore('init','preInit',function(e){
+    flow.onBefore('init','preInit',function(e){
 
-   e.stop();
+       e.stop();
 
-   alert('preInit');
+       alert('preInit');
 
-})
+    })
 
-flow.boot();
+    flow.boot();
 
 结果preInit,render,complete
