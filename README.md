@@ -38,9 +38,9 @@ e.stopProgation() 阻止后续回调 e.result 上一个回调的结果 e.remove(
 var obj = {
 
    test : function(text){
-
+   
       alert(text);
-
+      
    }
 
 };
@@ -86,9 +86,12 @@ flow.boot();
 结果init,render,complete
 
 //加入触发器
+
 flow.onBefore('init','preInit',function(e){
      e.stop();
      alert('preInit');
 })
+
 flow.boot();
+
 结果preInit,render,complete
