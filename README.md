@@ -2,9 +2,11 @@
 
 ver : 0.1
 
-author : Roy Zhang
+author : Roy Zhang 
 
 update : promiseEvent; trigger; flowContoller
+
+详细api在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 ## Util
     //合并默认数据方法,将obj中不空的内容从defObj中复制
