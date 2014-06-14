@@ -11,7 +11,6 @@ update :
 ver 0.2 - 2014.6.14
 
   1.新增oop(klass,factory)模块；
-<<<<<<< HEAD
 
   2.promiseEvent加入非阻塞模式noBlock；
 
@@ -19,29 +18,15 @@ ver 0.2 - 2014.6.14
 
   4.smartjs主模块优化，支持requirejs和seajs
 
-=======
   
-  2.promiseEvent加入非阻塞模式noBlock；
-  
-  3.trigger加入属性监听
-  
-  4.smartjs主模块优化，支持requirejs和seajs
-  
->>>>>>> 76c621e62931b259e60fb7b7bfe4f0148301a82e
   5.单元测试页面优化
 
 ver 0.1 - 2014.6.7
 
   1.smartjs主模块
-<<<<<<< HEAD
 
   2.util 模块
 
-=======
-  
-  2.util 模块
-  
->>>>>>> 76c621e62931b259e60fb7b7bfe4f0148301a82e
   3.aop模块(promiseEvent; trigger; flowContoller)
 
 
