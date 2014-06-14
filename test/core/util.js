@@ -1,4 +1,4 @@
-(function(st) {
+define(function() {
 
     describe('Util Test', function() {
         it("slice arguments", function() {
@@ -230,4 +230,4 @@
             expect(result + '').toBe('inject');
         })
     })
-})(window.st);
+});

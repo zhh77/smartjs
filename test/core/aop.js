@@ -1,4 +1,5 @@
-(function(st) {
+define(function() {
+
     describe('PromiseEvent Test', function() {
         var calls = st.promiseEvent(),
             result;
@@ -178,9 +179,67 @@
                 testCall();
             });
         })
+
+        it("noBlock mode", function(testCall) {
+            var noBlockCalls = st.promiseEvent("noBlock");
+
+            noBlockCalls.add("c1", function(d) {
+                setTimeout(function() {
+                    result.push('c1');
+                    d.resolve();
+                }, 100);
+                return d.promise();
+            });
+
+            noBlockCalls.add("c2", function(d) {
+                result.push('c2');
+            });
+
+            noBlockCalls.add("c3", function(d) {
+                setTimeout(function() {
+                    result.push('c3');
+                    d.resolve();
+                }, 50);
+                return d.promise();
+            });
+
+            $.when(noBlockCalls.fire()).done(function(data) {
+                expect(result + '').toBe('c2,c3,c1');
+                testCall();
+            });
+        })
+
+        it("promise - noBlock", function(testCall) {
+            var noBlockCalls2 = st.promiseEvent();
+
+            noBlockCalls2.add("c1", function(d) {
+                setTimeout(function() {
+                    result.push('c1');
+                    d.resolve();
+                }, 100);
+                return d.promise("noBlock");
+            });
+
+            noBlockCalls2.add("c2", function(d) {
+                result.push('c2');
+            });
+
+            noBlockCalls2.add("c3", function(d) {
+                setTimeout(function() {
+                    result.push('c3');
+                    d.resolve();
+                }, 100);
+                return d.promise();
+            });
+
+            $.when(noBlockCalls2.fire()).done(function(data) {
+                expect(result + '').toBe('c2,c1,c3');
+                testCall();
+            });
+        })
     })
 
-    describe('attachTrigger Test', function() {
+    describe('Trigger Test', function() {
         var result, obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
@@ -249,7 +308,7 @@
                 result.push('before');
                 fn(name);
                 result.push('after');
-            }, 'round');
+            });
 
             obj3.test('round');
             expect(result.join(',')).toBe("before,round,after");
@@ -556,7 +615,85 @@
             expect(result.join(',')).toBe('call');
 
         })
+
+
     });
+
+    describe("property trigger", function() {
+        var result;
+        beforeEach(function() {
+            result = [];
+        })
+
+        it("watch prop change", function() {
+            var obj = st.attachTrigger({
+                test: 1
+            });
+
+            obj.onBefore('test', 'testBefore', function(d, value,oldValue) {
+                result.push(value + '-before-' + oldValue);
+            })
+
+            obj.on('test', 'testAfter', function(d, value,oldValue) {
+                result.push(value + '-after-' + oldValue);
+            })
+
+            obj.test;
+            expect(obj.test).toBe(1);
+            obj.test = 2;
+            expect(result.join(',')).toBe('2-before-1,2-after-1');
+            expect(obj.test).toBe(2);
+
+        })
+
+        it("watch prop change cancel", function() {
+            var obj = st.attachTrigger({
+                test: 1
+            });
+
+            obj.onBefore('test', 'testBefore', function(d, value) {
+                result.push(value + '-before');
+                //停止方法，阻止赋值行为
+                d.stop();
+            })
+
+            obj.on('test', 'testAfter', function(d, value) {
+                result.push(value + '-after');
+            })
+
+            obj.test = 2;
+
+            expect(result.join(',')).toBe('2-before');
+            expect(obj.test).toBe(1);
+        })
+
+         it("watch prop change value", function() {
+            var obj = st.attachTrigger({
+                test: 1
+            });
+
+            //改变传递值只有在前置中有效
+            obj.onBefore('test', 'testBefore', function(d, value,oldValue) {
+                result.push('before:[' + value + ',' + oldValue + ',' + d.result +']');
+                return ++value;
+            })
+
+            obj.onBefore('test', 'testBefore2', function(d, value,oldValue) {
+                result.push('before2:[' + value + ',' + oldValue + ',' + d.result +']');
+                return ++d.result;
+            })
+
+            //后置得到前面正确修改的值
+            obj.on('test', 'testAfter', function(d, value,oldValue) {
+                result.push('after:[' + value + ',' + oldValue + ',' + d.result +']');
+            })
+
+            obj.test = 2;
+
+            expect(result.join(',')).toBe('before:[2,1,undefined],before2:[2,1,3],after:[4,1,4]');
+            expect(obj.test).toBe(4);
+        })
+    })
 
     describe("flowController", function() {
         var log = function() {
@@ -1027,4 +1164,4 @@
             });
         });
     })
-})(window.st);
+})
