@@ -1,5 +1,6 @@
 define(function() {
-    
+
+
     describe('OOP Test', function() {
         var user = st.klass("user", {
             klassInit: function(name) {
@@ -12,14 +13,14 @@ define(function() {
             result = [];
 
         it("klass prop check", function() {
-
-            expect(user.fn.__klass).toBe(true);
-            expect(user.fn.__kName).toBe('user');
-            expect(user.fn.__inheirts + '').toBe('user');
+            expect(user.fn._$klass).toBe(true);
+            expect(user.fn._$kName).toBe('user');
+            expect(user.fn._$inheirts + '').toBe('user');
         })
 
         it("class init", function() {
             var user1 = new user('roy'),
+                //执行方法与实例化等效
                 user2 = user('tracy');
 
             expect(user1.name).toBe('roy');
@@ -32,9 +33,11 @@ define(function() {
 
         var user1 = st.klass("user1", {
             name: 'user1',
+            //自初始化方法为：klassInit，在实例化时执行
             klassInit: function() {}
         }, user);
 
+        //继承测试
         it("inheirt", function() {
 
             var roy = user1('roy');
@@ -43,12 +46,14 @@ define(function() {
             expect(roy.say('hello')).toBe('user1,hello');
         })
 
+        //调用父类测试
         it("klassBase - callBase", function() {
             var roy = user1();
             roy.callBase('klassInit', ['roy']);
             expect(roy.name).toBe('roy');
         })
 
+        //扩展例子
         it("klassBase - extend", function() {
             var roy = user1();
             roy.extend({
@@ -81,7 +86,7 @@ define(function() {
             }, user3);
 
             var roy = new user4('roy');
-            expect(roy.__inheirts + '').toBe('user4,user3,user2,user');
+            expect(roy._$inheirts + '').toBe('user4,user3,user2,user');
             expect(roy.say('hello')).toBe('roy,hello-lv2-lv3-lv4');
             expect(roy.callBase('say', ['hello'])).toBe("roy,hello-lv2-lv3");
             expect(roy.callBase('say', 'user', ['hello'])).toBe("roy,hello");

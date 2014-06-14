@@ -181,8 +181,10 @@ define(function() {
         })
 
         it("noBlock mode", function(testCall) {
+            //创建一个noBlock模式的promiseEvents;
             var noBlockCalls = st.promiseEvent("noBlock");
 
+            //第一个回调延迟100
             noBlockCalls.add("c1", function(d) {
                 setTimeout(function() {
                     result.push('c1');
@@ -191,10 +193,12 @@ define(function() {
                 return d.promise();
             });
 
+            //第二个正常执行
             noBlockCalls.add("c2", function(d) {
                 result.push('c2');
             });
 
+            //第三个回调延迟50
             noBlockCalls.add("c3", function(d) {
                 setTimeout(function() {
                     result.push('c3');
@@ -204,6 +208,7 @@ define(function() {
             });
 
             $.when(noBlockCalls.fire()).done(function(data) {
+                //最终执行顺序是c2-c3-c1
                 expect(result + '').toBe('c2,c3,c1');
                 testCall();
             });
@@ -211,19 +216,20 @@ define(function() {
 
         it("promise - noBlock", function(testCall) {
             var noBlockCalls2 = st.promiseEvent();
-
+            //第一个回调延迟100
             noBlockCalls2.add("c1", function(d) {
                 setTimeout(function() {
                     result.push('c1');
                     d.resolve();
                 }, 100);
+                //在返回promise的时候，指定noBlock模式
                 return d.promise("noBlock");
             });
-
+            //第二个正常执行
             noBlockCalls2.add("c2", function(d) {
                 result.push('c2');
             });
-
+            //第三个回调延迟100
             noBlockCalls2.add("c3", function(d) {
                 setTimeout(function() {
                     result.push('c3');
@@ -233,6 +239,7 @@ define(function() {
             });
 
             $.when(noBlockCalls2.fire()).done(function(data) {
+                //最终执行顺序是c2-c1-c3
                 expect(result + '').toBe('c2,c1,c3');
                 testCall();
             });

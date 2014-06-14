@@ -4,21 +4,30 @@ ver : 0.2
 
 author : Roy Zhang 
 
+desc ： 详细api在我的博客中同步http://www.cnblogs.com/zhh8077/
+
 update : 
 
 ver 0.2 - 2014.6.14
+
   1.新增oop(klass,factory)模块；
+
   2.promiseEvent加入非阻塞模式noBlock；
+
   3.trigger加入属性监听
+
   4.smartjs主模块优化，支持requirejs和seajs
+
   5.单元测试页面优化
 
 ver 0.1 - 2014.6.7
+
   1.smartjs主模块
+
   2.util 模块
+
   3.aop模块(promiseEvent; trigger; flowContoller)
 
-详细api在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 ## Util
     //合并默认数据方法,将obj中不空的内容从defObj中复制

@@ -227,8 +227,10 @@ stDefine('aop', function(st) {
     "use strict"
 
     //默认权重
-    var DEFAULT_PRIORITY = 0,
-        sliceArgs = st.sliceArgs;
+    var sliceArgs = st.sliceArgs;
+
+    //设置默认权重
+    st.conf("aop-Priority",0);
 
     function isDefined(data) {
         return data !== undefined;
@@ -278,6 +280,7 @@ stDefine('aop', function(st) {
         var _mode, _callbackMode, _noBlock,
             _onceMode,
             _list,
+            _defPriority = st.conf("aop-Priority"),
             _maxPriority,
             _minPriority;
 
@@ -296,7 +299,7 @@ stDefine('aop', function(st) {
 
         function reset() {
             _list = [];
-            _maxPriority = _minPriority = DEFAULT_PRIORITY;
+            _maxPriority = _minPriority = _defPriority;
             return false;
         }
 
@@ -308,7 +311,7 @@ stDefine('aop', function(st) {
                 return;
 
             if (priority == null)
-                priority = DEFAULT_PRIORITY;
+                priority = _defPriority;
             var item = {
                 name: name,
                 fn: fn,
@@ -931,31 +934,34 @@ Needs：util
 stDefine('oop', function(st) {
     "use strict"
 
-    var //_onKlassInit = st.promiseEvent(),
+    //初始化扩展函数
+    var _onKlassInit = st.promiseEvent(),
         _klassBase = {
+            //获取基类对象
             getBase: function(baseName) {
                 var self = this,
-                    parent = self.__super;
+                    parent = self._$super;
 
                 if (baseName && typeof baseName == 'number')
-                    baseName = self.__inheirts[baseName];
+                    baseName = self._$inheirts[baseName];
 
 
                 if (parent) {
                     if (baseName) {
-                        while (parent && parent.__kName != baseName) {
-                            parent = parent.__super;
+                        while (parent && parent._$kName != baseName) {
+                            parent = parent._$super;
                         }
-                    } else if (parent.__kName == self.__kName) {
+                    } else if (parent._$kName == self._$kName) {
                         return null;
                     }
                 }
                 return parent;
             },
+            //执行基类对象
             callBase: function(fnName, baseName, args) {
                 var self = this,
-                    base = self.__super,
-                    fn, result, current, indicator = self.__indicator;
+                    base = self._$super,
+                    fn, result, current, indicator = self._$indicator;
 
                 if (!base)
                     return;
@@ -968,7 +974,7 @@ stDefine('oop', function(st) {
                 if (baseName)
                     base = self.getBase(baseName);
                 else if (current = indicator[fnName])
-                    base = current.__super || current.fn.__super || current;
+                    base = current._$super || current.fn._$super || current;
 
                 if (base && (fn = base[fnName])) {
                     indicator[fnName] = base;
@@ -977,12 +983,13 @@ stDefine('oop', function(st) {
                 }
                 return result;
             },
+            //类扩展方法
             extend: function(prop) {
                 $.extend(this, prop);
             }
         };
 
-
+    st.conf('oop-KlassBase',_klassBase);
 
     function klass(name, prop, parent, config) {
         var _super, _proto, _prop = prop,
@@ -992,6 +999,7 @@ stDefine('oop', function(st) {
                     args = arguments,
                     len = args.length;
 
+                //自执行初始化判断
                 if (!(self instanceof _obj)) {
                     if (len === 0)
                         return new _obj();
@@ -1002,19 +1010,22 @@ stDefine('oop', function(st) {
                     else
                         return new _obj(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
                 }
-                self.__indicator = {};
-                //_onKlassInit.fireWith(self);
+                //设置指针对象
+                self._$indicator = {};
+                //执行扩展方法
+                _onKlassInit.fireWith(self,config);
+                //klassInit默认初始化
                 self.klassInit && self.klassInit.apply(self, args);
             }
 
         if (parent) {
             _super = parent.prototype || parent;
             _proto = _obj.prototype = Object.create(_super);
-            _proto.__super = _super;
+            _proto._$super = _super;
             _proto.constructor = parent;
             //添加父的继承路径
-            if (_super.__inheirts)
-                _inheirts = _inheirts.concat(_super.__inheirts);
+            if (_super._$inheirts)
+                _inheirts = _inheirts.concat(_super._$inheirts);
             else
                 _inheirts.push(parent.name);
         } else
@@ -1022,9 +1033,12 @@ stDefine('oop', function(st) {
 
         _obj.fn = _proto;
         $.extend(_proto, _prop, {
-            __klass: true,
-            __kName: name,
-            __inheirts: _inheirts
+            //类标示
+            _$klass: true,
+            //类名
+            _$kName: name,
+            //继承链
+            _$inheirts: _inheirts
         });
         return _obj;
     }
@@ -1136,6 +1150,7 @@ stDefine('oop', function(st) {
 
     return {
         klass: klass,
+        onKlassInit : _onKlassInit,
         factory: factory
     };
 })
