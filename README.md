@@ -4,9 +4,13 @@ ver : 0.2
 
 author : Roy Zhang 
 
-desc ： 详细api在我的博客中同步http://www.cnblogs.com/zhh8077/
+desc ： 详细的介绍和api在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 update : 
+
+ver 0.3 - 2014.6.21
+
+  1.加入dataManager模块，包括dataManager，dataService和dataPolicyManager三个对象；
 
 ver 0.2 - 2014.6.14
 
@@ -18,7 +22,6 @@ ver 0.2 - 2014.6.14
 
   4.smartjs主模块优化，支持requirejs和seajs
 
-  
   5.单元测试页面优化
 
 ver 0.1 - 2014.6.7
