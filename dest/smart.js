@@ -937,6 +937,12 @@ stDefine('oop', function(st) {
     //初始化扩展函数
     var _onKlassInit = st.promiseEvent(),
         _klassBase = {
+            //执行原型链方法
+            callProto : function(name,args){
+                var fn = this._$fn[name];
+                if(fn)
+                    return fn.apply(this,args);
+            },
             //获取基类对象
             getBase: function(baseName) {
                 var self = this,
@@ -1012,6 +1018,8 @@ stDefine('oop', function(st) {
                 }
                 //设置指针对象
                 self._$indicator = {};
+                //设置原型链
+                self._$fn = _proto;
                 //执行扩展方法
                 _onKlassInit.fireWith(self,config);
                 //klassInit默认初始化
@@ -1090,7 +1098,7 @@ stDefine('oop', function(st) {
         //设置默认项
         _initDefault && (_defaultItem = needInit ? new _base : _base);
 
-        function create(name, item, parent) {
+        function build(name, item, parent) {
             parent = parent ? find(parent) || _base : _base;
 
             if (mergeMode)
@@ -1102,7 +1110,7 @@ stDefine('oop', function(st) {
         }
 
         function add(name, item, parent) {
-            return (_store[name] = create(name, item, parent));
+            return (_store[name] = build(name, item, parent));
         }
 
         function find(name, defaultMode) {
@@ -1126,7 +1134,7 @@ stDefine('oop', function(st) {
         }
 
         proto = $.extend({
-            create: create,
+            build: build,
             add: add,
             find: find,
             remove: remove,
@@ -1153,4 +1161,543 @@ stDefine('oop', function(st) {
         onKlassInit : _onKlassInit,
         factory: factory
     };
+});/************************************* Smart JS **************************
+NOTE: dataManager数据管理 
+Features：
+    1.dataServices ：数据服务接口
+    2.dataManager ：基于策略的数据管理基类；
+    2.dataPolicyManager ：数据策略管理器；
+
+Update Note：
+    2014.6 ：Created
+
+Needs：util,aop,oop
+    
+****************************************************************************/
+stDefine('dataManager', function(st) {
+
+	var dataManager, policyManager, dataServices,
+		dsConfig = {
+			set: {},
+			get: {}
+		}, promiseEvent;
+
+	promiseEvent = st.promiseEvent;
+
+
+	//数据服务
+	dataServices = st.factory({
+		name: "dataServices",
+		type: 'merge',
+		proto: {
+			operate: function(type, op) {
+				var ds = this.find(op.dsType);
+				if (ds) {
+					if(type !== 'initOptions'){
+						ds.initOptions(op);
+					}
+					return ds[type](op);
+				} else
+					throw op.dsType + ",not defined in dataServices!";
+			},
+			search: function(op) {
+				return this.operate('search', op);
+			},
+			update: function(op) {
+				return this.operate('update', op);
+			}
+		},
+		base: {
+			search: function(op) {},
+			update: function(op) {},
+			initOptions : function(op){
+			}
+		}
+	})
+
+	function isFunction(fn) {
+		return typeof fn === 'function';
+	}
+
+	//在success中注入委托
+	function injectFireHandler(dm, handler,conf) {
+		return st.mergeFn(conf.success, function(result) {
+			dm.fireHandler(handler, [result, conf]);
+		})
+	}
+
+	//初始化dm的get，set配置
+	function initConf(dm, type, conf) {
+		if (!conf) {
+			conf = {};
+		}
+		var success = injectFireHandler(dm, type, conf),
+			error = conf.error;
+
+		conf.success = null;
+		conf.error = null;
+
+		return {
+			policy: conf,
+			success: success,
+			error: error
+		};
+	}
+
+	//数据管理
+	dataManager = st.factory({
+		name: "dataManager",
+		type: "class",
+		proto: {
+			create: function(name, op) {
+				var dm = this.find(name);
+				if (dm)
+					return new dm(op);
+				else
+					console.log(name + ",not defined in dataManager");
+			},
+			//生成fitler方法
+			buildFilter: function(filter,conf) {
+				if (filter && !$.isFunction(filter)) {
+					if ($.isPlainObject(filter)) {
+						return function(item) {
+							var check = true;
+							$.each(filter, function(name, value) {
+								if (item[name] !== value) {
+									check = false;
+									return check;
+								}
+							})
+							return check;
+						}
+					}
+				}
+				return filter;
+			}
+		},
+		base: {
+			klassInit: function(op) {
+				var dm = this;
+				op = dm.op = st.mergeObj(op, dsConfig);
+				op.handler = {};
+				//添加委托处理器
+				dm.addHandler("get", "set");
+				initFlow(dm);
+				policyManager.applyPolicy(dm, dm._Flow, op);
+				this.init(op);
+			},
+			//dm初始化方法
+			init: function(op) {
+
+			},
+			//获取数据
+			get: function(conf) {
+				var dm = this;
+				conf = initConf(dm, "get", conf);
+				return whenFlow(dm._Flow.boot(dm, dm.op, conf.policy), conf.success, conf.error);
+			},
+			//设置数据
+			set: function(conf) {
+				var dm = this;
+				conf = initConf(dm, "set", conf);
+				return whenFlow(dm._Flow.bootWithStart("setData", [dm, dm.op, conf.policy]), conf.success, conf.error);
+			},
+			//注册方法到事件委托，handler委托名称：get，set，trigger
+			onHandler: function(handler, fnName, fn, priority, mode) {
+				if (handler = this.op.handler[handler])
+					return handler.add(fnName, fn, priority, mode);
+			},
+			//添加事件委托
+			addHandler: function() {
+				var handler = this.op.handler,
+					mode = "callback";
+
+				$.each(arguments, function(i, name) {
+					handler[name] = promiseEvent(mode);
+				})
+			},
+			//执行事件委托
+			fireHandler: function(name, args) {
+				var dm = this,
+					handler = dm.op.handler[name];
+				if (handler)
+					return handler.fireWith(dm, args);
+			},
+			//dm内置查询
+			innerSearch: function(op) {
+
+			},
+			//dm内置更新
+			innerUpdate: function(op) {
+
+			},
+			//检查数据是否为空
+			checkEmpty: function(data, conf) {
+				return data === undefined;
+			},
+			//验证方法
+			validate: function() {
+
+			},
+			//清空方法
+			clear: function() {
+
+			},
+			//初始化数据服务配置方法
+			setDataSerive : function(config){
+
+			}
+		}
+	});
+
+	function checkEmpty(dm, data, policy) {
+		return (dm.op.checkEmpty || dm.checkEmpty)(data, policy)
+	}
+
+	function whenFlow(fireResult, success, error) {
+		return $.when(fireResult).then(success, error);
+	}
+
+	//编译字符串过滤如 name > @name and (age < @age or type = '')
+	function compileFilter(policy){
+		var filter = policy.filter;
+		if(typeof filter === "string")
+		{
+
+		}
+	}
+
+	function mergeFilter(policy, mgPolicy, args) {
+		var mgParams, mgPType, mgFilter, params = policy.params,
+			pType = typeof params,isMergeFilter;
+
+		//条件参数处理
+		if (pType === 'function') {
+			params = params.apply(null, args);
+		}
+
+		if (mgPolicy) {
+			mgParams = mgPolicy.params;
+			mgPType = typeof mgParams;
+			mgFilter = mgPolicy.filter;
+
+			if (mgPType === 'function') {
+				mgParams = mgParams.apply(null, args);
+				mgPType = typeof mgParams;
+			}
+
+			if (params) {
+				if (pType === mgPType && pType === 'object') {
+					//合并条件参数
+					st.mergeObj(params, mgParams);
+					isMergeFilter = true;
+				}
+			} else {
+				if (mgParams)
+					params = mgParams;
+				else
+					isMergeFilter = true;
+			}
+		}
+
+		policy.params = params;
+
+		//合并过滤方法
+		if(isMergeFilter && mgFilter)
+			st.injectFn(policy, 'filter', mgFilter, false, true);
+		else
+			policy.filter == null && (policy.filter = params);
+		return policy;
+	}
+
+	function mergePolicy(policy, mgPolicy, args) {
+		//合并过滤条件
+		policy.mergeFilter !== false && mergeFilter(policy, mgPolicy, args);
+
+		//合并策略
+		st.mergeObj(policy, mgPolicy, ["filter", "params"]);
+		return policy;
+	}
+
+	function buildGetSetPolicy(dm, data, policy, success, error) {
+		var setPolicy = {
+			data: data,
+			filter: policy.filter,
+			params: policy.params,
+			updateToDs: false,
+			pending: false,
+			success: success,
+			error: error
+		};
+		policy.set && (setPolicy = mergePolicy(policy.set, setPolicy, [dm, policy]));
+
+		return setPolicy;
+	}
+
+	function searchDM(dm, policy) {
+		return dm.innerSearch(policy);
+	}
+
+	function initFlow(dm) {
+		dm._Flow = st.flowController({
+			flow: {
+				buildGetPolicy: function(e, dm, op, policy) {
+					//合并策略
+					mergePolicy(policy, op.get, [dm, policy]);
+				},
+				getData: function(e, dm, op, policy) {
+					var result = searchDM(dm, policy);
+					e.__getDone = true;
+					if (checkEmpty(dm, result, policy)) {
+						e.next("getFromDs");
+					} else {
+						e.next("getFromDm");
+					}
+					return result;
+				},
+				getFromDm: function(e, dm, op, policy) {
+					e.end();
+					if (!e.__getDone)
+						return searchDM(dm, policy);
+				},
+				getFromDs: function(e, dm, op, policy) {
+					var success, ds = getDs(policy, op);
+					if (ds) {
+						success = function(result) {
+							if (policy.update !== false) {
+								dm.set(buildGetSetPolicy(dm, result, policy,
+									function(result) {
+										e.end().resolve(result);
+									}, e.reject));
+
+							} else {
+								e.end().resolve(result);
+							}
+						}
+
+						openDatatransfer('search', ds, dm, policy, success, e.reject);
+						return e.promise();
+					} else {
+						e.end().resolve(searchDM(dm, policy));
+					}
+				},
+				setData: function(e, dm, op, policy) {
+					//合并策略
+					mergePolicy(policy, op.set, [dm, policy]);
+
+					if (policy.updateToDs !== false) {
+						e.next('setToDs');
+					}
+					return dm.innerUpdate(policy);;
+				},
+				setToDs: function(e, dm, op, policy) {
+					var success, error, ds = getDs(policy, op),
+						isPending = policy.pending !== false;
+
+					if (ds) {
+						if (isPending) {
+							success = e.resolve;
+							error = e.reject;
+						} else {
+							e.resolve(data);
+						}
+
+						openDatatransfer('update', ds, dm, policy, success, error);
+
+						if (isPending)
+							return e.promise();
+					}
+				}
+			},
+			order: ["buildGetPolicy", "getData", "setData"],
+			trigger: true
+		});
+	}
+
+	function getDs() {
+		var args = arguments,
+			len = args.length,
+			i = 0,
+			ds;
+
+		for (; i < len; i++) {
+			if ((arg = args[i]) && (ds = arg.dataServices))
+				return ds;
+		};
+	}
+
+	//开启数据传输
+	function openDatatransfer(type, ds, dm, policy, success, error) {
+		var dsOp, fnDsQueue, i = 0;
+
+		function buildDsOp(op) {
+			var conf = $.extend(true,{},op,policy);
+			conf.success = success;
+			conf.error = error;
+			dm.setDataSerive(conf);
+			return conf;
+		}
+		if ($.isArray(ds)) {
+			fnDsQueue = function() {
+				if (dsOp = ds[i++]) {
+					dsOp = buildDsOp(dsOp);
+					dsOp.success = function(result) {
+						checkEmpty(dm, result, policy) ? fnDsQueue() : success(result);
+					}
+					dataServices.operate(type, dsOp);
+				} else
+					success(data);
+			}
+			fnDsQueue();
+		} else
+			dataServices.operate(type, buildDsOp(ds));
+	}
+
+	//策略管理器
+	policyManager = st.factory({
+		name: "DataPolicyManager",
+		type: 'copy',
+		proto: {
+			applyPolicy: function(dm, flow, op) {
+				this.fire('init', [dm, flow, op]);
+			}
+		},
+		base: {
+			init: function(dm, flow, op) {
+
+			}
+		}
+	});
+
+	policyManager.add("getWay", {
+		init: function(dm, flow, op) {
+			flow.onBefore("getData", "checkGetWay", function(e, dm, op, policy) {
+				var way = policy.way,
+					node;
+				if (way) {
+					if (way === 'ds') {
+						node = 'getFromDs';
+					} else if (way === 'dm') {
+						node = 'getFromDm';
+					}
+					node && e.next(node).stop();
+				}
+			})
+
+		}
+	});
+
+	//判断并设置定时器
+	function checkTimer(id, timer, fn, dm) {
+		if (!timer)
+			return fn;
+
+		var timers = dm.__timers;
+		if (!__timers) {
+			timers = dm.__timers = {};
+			dm.stopTimer = function(id) {
+				var ts = this.__timers,
+					no;
+				if ($.isEmptyObject(ts))
+					return;
+
+				if (id) {
+					if (no = ts[id]) {
+						ts[id] = null;
+						clearInterval(no);
+					}
+				} else {
+					$.each(ts, function(i, no) {
+						no && clearInterval(no);
+					});
+					this.__timers = {};
+				}
+
+			}
+		}
+		return function() {
+			timers[id] = setInterval(fn, timer)
+		}
+	}
+
+	//解析Trigger
+	function compileTrigger(i, trPolicy, dm, flow, op) {
+		var flowNode, fnRemove, isDef = trPolicy.def,
+			setPolicy = trPolicy.set,
+			pos = trPolicy.position,
+			delay = trPolicy.delay || 0,
+			timer = trPolicy.timer,
+			error = trPolicy.error,
+			userfulLife = trPolicy.userfulLife;
+
+		//判断注入的流程节点
+		flowNode = trPolicy.def ? "buildGetPolicy" : (pos === "get" ? "getData" : (pos === "dm" ? "getFromDm" : "getFromDs"));
+
+		//注入Handler
+		success = injectFireHandler(dm, "trigger", trPolicy);
+
+		//有效期
+		if (userfulLife) {
+			if (userfulLife === "once") {
+				fnRemove = function() {
+					return true;
+				}
+			} else if (isFunction(userfulLife)) {
+				fnRemove = userfulLife;
+			}
+		}
+
+		flow.on(flowNode, "trigger", function(e, dm, op, policy) {
+			var fnRequest, ds, _policy, fnSuccess;
+			//默认时与get动作policy合并
+			if (isDef) {
+				mergePolicy(policy, trPolicy, [dm, policy]);
+				return;
+			}
+
+			_policy = $.extend({}, trPolicy);
+
+			//合并filter
+			mergeFilter(_policy, trPolicy.mergeFilter ? policy : null, [dm, policy]);
+
+			ds = getDs(_policy, op);
+
+			if (ds) {
+				fnSuccess = function(result) {
+					if (_policy.update !== false) {
+						dm.set(buildGetSetPolicy(dm, result, _policy, success, error));
+					} else
+						success(result);
+				}
+
+				fnRequest = function() {
+					openDatatransfer('search', ds, dm, _policy, fnSuccess, error);
+				};
+
+				setTimeout(checkTimer(i, timer, fnRequest, dm), delay);
+			}
+		})
+	}
+
+	//添加触发器
+	policyManager.add("trigger", {
+		init: function(dm, flow, op) {
+			var trigger = op.get && op.get.trigger;
+			if (trigger) {
+				//添加trigger的委托处理器
+				dm.addHandler("trigger");
+
+				$.each(trigger, function(i, trPolicy) {
+					compileTrigger(i, trPolicy, dm, flow, op);
+				});
+				op.get.trigger = null;
+			}
+		}
+	});
+
+	return {
+		dataManager: dataManager,
+		dataPolicyManager: policyManager,
+		dataServices: dataServices
+	};
 })
