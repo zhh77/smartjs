@@ -250,6 +250,11 @@ define(function() {
         var result, obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
+                },
+                child : {
+                    test : function(name){
+                        result.push(name);
+                    }
                 }
             });
 
@@ -261,6 +266,16 @@ define(function() {
             obj.onBefore("test", "addBefore", function(d, name) {
                 result.push('before-' + name)
             }).on("test", "addAfter", function(d, name) {
+                result.push('after-' + name)
+            });
+            obj.test('bind');
+            expect(result.join(',')).toBe("before-bind,bind,after-bind");
+        })
+
+         it("Bind Child", function() {
+            obj.onBefore("child.test", "addBefore", function(d, name) {
+                result.push('before-' + name)
+            }).on("child.test", "addAfter", function(d, name) {
                 result.push('after-' + name)
             });
             obj.test('bind');
@@ -497,6 +512,24 @@ define(function() {
             });
         })
 
+        it("onError", function(testCall) {
+            var testError = st.attachTrigger({
+            test: function(name) {
+                var d = $.Deferred();
+                setTimeout(function() {
+                     d.reject('reject');
+                }, 100);
+                return d.promise();
+            }
+        });
+            testError.onError("test","triggerError",function(err,name){
+                  expect(err).toBe('reject');
+                  expect(name).toBe('call');
+                   testCall();
+            })
+            testError.test('call');
+        })
+
         it("stopPropagation", function() {
             var obj = st.attachTrigger({
                 test: function(name) {
@@ -636,18 +669,19 @@ define(function() {
             var obj = st.attachTrigger({
                 test: 1
             });
-
-            obj.onBefore('test', 'testBefore', function(d, value,oldValue) {
+            //回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
+            obj.onBefore('test', 'testBefore', function(e, value,oldValue) {
                 result.push(value + '-before-' + oldValue);
             })
 
-            obj.on('test', 'testAfter', function(d, value,oldValue) {
+            obj.on('test', 'testAfter', function(e, value,oldValue) {
                 result.push(value + '-after-' + oldValue);
             })
 
-            obj.test;
             expect(obj.test).toBe(1);
+
             obj.test = 2;
+            //输出前后置监听
             expect(result.join(',')).toBe('2-before-1,2-after-1');
             expect(obj.test).toBe(2);
 
@@ -669,7 +703,7 @@ define(function() {
             })
 
             obj.test = 2;
-
+            //最终更新失败，输出前置的监听内容
             expect(result.join(',')).toBe('2-before');
             expect(obj.test).toBe(1);
         })
@@ -699,6 +733,30 @@ define(function() {
 
             expect(result.join(',')).toBe('before:[2,1,undefined],before2:[2,1,3],after:[4,1,4]');
             expect(obj.test).toBe(4);
+        })
+
+         it("watch child prop", function() {
+            var obj = st.attachTrigger({
+                child : {
+                    test : 1
+                }
+            });
+            //回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
+            obj.onBefore('child.test', 'testBefore', function(e, value,oldValue) {
+                result.push(value + '-before-' + oldValue);
+            })
+
+            obj.on('child.test', 'testAfter', function(e, value,oldValue) {
+                result.push(value + '-after-' + oldValue);
+            })
+
+            expect(obj.child.test).toBe(1);
+
+            obj.child.test = 2;
+            //输出前后置监听
+            expect(result.join(',')).toBe('2-before-1,2-after-1');
+            expect(obj.child.test).toBe(2);
+
         })
     })
 

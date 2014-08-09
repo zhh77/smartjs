@@ -8,7 +8,7 @@ define(function() {
     });
 
     var libs = ["lib/jquery", '../dest/smart'],
-        res = ['core/util', 'core/aop', 'core/oop','core/dataManager'],
+        res = ['core/util', 'core/aop', 'core/oop','core/filterBuilder', 'core/dataManager', 'core/dataManager-table'],
         fns = [];
 
     function reqJS(_res, success) {

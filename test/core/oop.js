@@ -67,6 +67,15 @@ define(function() {
         })
 
         it("muilt heirht - callBase", function() {
+            var user = st.klass("user", {
+                klassInit: function(name) {
+                    this.name = name;
+                },
+                say: function(text) {
+                    return this.name + ',' + text;
+                }
+            })
+
             var user2 = st.klass('user2', {
                 say: function(text) {
                     return this.callBase('say', [text]) + "-lv2";
@@ -87,66 +96,98 @@ define(function() {
 
             var roy = new user4('roy');
             expect(roy._$inheirts + '').toBe('user4,user3,user2,user');
+            //依次执行到根，正确将当前的this对象的值输出
             expect(roy.say('hello')).toBe('roy,hello-lv2-lv3-lv4');
+
+            //从3级开始执行
             expect(roy.callBase('say', ['hello'])).toBe("roy,hello-lv2-lv3");
+
+            //指定从user开始执行
             expect(roy.callBase('say', 'user', ['hello'])).toBe("roy,hello");
+
+            //上向略过2级执行
             expect(roy.callBase('say', 2, ['hello'])).toBe("roy,hello-lv2");
-            //expect(roy.say()).toBe('extend');
+
         })
 
-        var widgetFactory = st.factory('wdigetfactory', {
+        //widget基类
+        var baseWidget = {
+            //widget类型
             type: '',
+            //widget的渲染方法
             render: function(id) {
                 return this.type + ':' + id;
             }
-        })
+        };
+
+        //一个widget工厂
+        var widgetFactory = st.factory('wdigetfactory', baseWidget);
+
+        //添加一个input
         widgetFactory.add('input', {
             type: 'input'
         })
 
         it("factory add", function() {
+            //找到添加的input
             var input = widgetFactory.find('input');
             expect(input).toBeDefined();
+            //输出
             expect(input.render('txt')).toBe("input:txt");
         });
 
         it("factory inheirt", function() {
+            //添加一个number类型的input
             var num = widgetFactory.add('number', {
                 type: 'input[number]'
             }, 'input')
+
             expect(num.render('txtNum')).toBe("input[number]:txtNum");
         });
 
         it("factory class mode", function() {
-            var f1 = st.factory('classMode', {
-                klassInit: function(name) {
-                    this.name = name;
+            var f1 = st.factory({
+                name: 'classMode',
+                //设置class类型
+                type: 'class',
+                base: {
+                    klassInit: function(name) {
+                        this.name = name;
+                    }
+
                 }
-            }, null, 'class');
+            });
 
             var c1 = f1.add('c1', {
                 type: 'c1'
             });
 
             expect(c1.fn).toBeDefined();
-
+            //需要初始化
             var c = new c1('class1');
             expect(c.type).toBe("c1");
             expect(c.name).toBe("class1");
         });
 
         it("factory merge mode", function() {
-            var f2 = st.factory('copyMode', {
-                name : 'copy',
-                project : {
-                    name : 'smartjs'
+            var f2 = st.factory({
+                name: 'copyMode',
+                //设置merge类型
+                type: 　'merge',
+                //设置默认模式
+                initDefault: true,
+                base: {
+                    name: 'copy',
+                    project: {
+                        name: 'smartjs'
+                    }
                 }
-            }, null, 'merge',true);
+            })
 
             var c = f2.add('c1', {
                 name: 'c1',
-                project : {
-                    role : 'pm'
+                project: {
+                    role: 'pm'
                 }
             });
 

@@ -4,6 +4,7 @@ define(function() {
 		_db = [],
 		_cache = [];
 
+	//将params解析成过滤方法
 	function buildFilterByParams(params) {
 		if (params) {
 			return function(item) {
@@ -19,8 +20,16 @@ define(function() {
 		}
 	}
 
+	//取对象数据，测试使用array只取第一条
 	function getData(data) {
 		return $.isArray(data) ? data[0] : data;
+	}
+
+	function buildFitler(filter) {
+		if (filter && typeof filter === 'object') {
+			return buildFilterByParams(filter);
+		}
+		return filter;
 	}
 
 	//模拟服务端异步返回数据,只接受params
@@ -28,7 +37,9 @@ define(function() {
 		search: function(op) {
 			//模拟异步查询
 			setTimeout(function() {
-				var result, filter = buildFilterByParams(op.params);
+				var result,
+					filter = op.filter;
+
 				result = filter ? _db.filter(filter) : _db;
 
 				op.success && op.success(result);
@@ -37,10 +48,11 @@ define(function() {
 		update: function(op) {
 			//模拟异步更新
 			setTimeout(function() {
-				var filter = buildFilterByParams(op.params),
+				var filter = op.filter,
 					data = getData(op.data);
 
 				if (filter) {
+					//测试使用，只更新第一条匹配数据
 					$.each(_db, function(i, item) {
 						if (filter(item)) {
 							_db[i] = data;
@@ -50,24 +62,32 @@ define(function() {
 				} else {
 					_db = op.data || [];
 				}
+
 				op.success && op.success(op.data);
+
 			}, 100);
+		},
+		initOptions: function(op) {
+			//初始化设置参数将params编译成filter过滤方法
+			op.filter = buildFilterByParams(op.params);
 		}
 	});
 
 	//模拟客户端本地存储
 	dataServices.add("cache", {
 		search: function(op) {
-			var result, filter = buildFitler(op.filter);
+			var result, filter = op.filter;
+
 			result = filter ? _cache.filter(filter) : _cache;
 
 			op.success && op.success(result);
 		},
 		update: function(op) {
-			var filter = buildFitler(op.filter),
+			var filter = op.filter,
 				data = getData(op.data);
 
 			if (filter) {
+				//测试使用，只更新第一条匹配数据
 				$.each(_cache, function(i, item) {
 					if (filter(item)) {
 						_cache[i] = data;
@@ -78,26 +98,26 @@ define(function() {
 				_cache = op.data || [];
 			}
 			op.success && op.success(op.data);
+		},
+		initOptions: function(op) {
+			//生成fitler，当filter为obj类型时，编译成fn
+			op.filter = buildFitler(op.filter || op.params);
 		}
 	});
 
-	function buildFitler(filter) {
-		if (filter && typeof filter === 'object') {
-			return buildFilterByParams(filter);
-		}
-		return filter;
-	}
 
 	//添加一个简单的table类型的数据管理
 	dataManager.add("Table", {
 		init: function() {
 			this._data = [];
 		},
-		innerSearch: function(conf) {
+		//dm内置查询
+		_innerSearch: function(conf) {
 			var filter = conf ? buildFitler(conf.filter) : null;
 			return filter ? this._data.filter(filter) : this._data;
 		},
-		innerUpdate: function(conf) {
+		//dm内置更新
+		_innerUpdate: function(conf) {
 			var isUpdate, _data = this._data,
 				data = conf.data,
 				updateData, filter;
@@ -120,9 +140,11 @@ define(function() {
 			}
 			return data;
 		},
+		//判断数据是否为空
 		checkEmpty: function(data, conf) {
 			return data === undefined || data.length === 0;
 		},
+		//清空数据
 		clear: function() {
 			this._data = [];
 		}
@@ -130,6 +152,7 @@ define(function() {
 
 	describe('dataServices Test', function() {
 		it("update", function(endTest) {
+			//更新server的数据
 			dataServices.update({
 				dsType: 'server',
 				data: [{
@@ -147,6 +170,7 @@ define(function() {
 		})
 
 		it("search", function(endTest) {
+			//重新server的数据
 			dataServices.search({
 				dsType: 'server',
 				params: {
@@ -185,6 +209,7 @@ define(function() {
 			}];
 		})
 
+		//创建一个tabel的manager
 		var dm1 = dataManager.create("Table");
 
 		it("add", function() {
@@ -193,7 +218,7 @@ define(function() {
 		})
 
 		it("update", function() {
-			dm1.innerUpdate({
+			dm1._innerUpdate({
 				data: [{
 					name: 'user1',
 					age: 10
@@ -204,17 +229,19 @@ define(function() {
 		})
 
 		it("search", function() {
-			var result = dm1.innerSearch();
+			var result = dm1._innerSearch();
 			expect(result.length).toBe(1);
 			expect(result[0].name).toBe('user1');
 		})
 
 		it("update by filter", function() {
-			dm1.innerUpdate({
+			//找不到匹配的数据，则插入新数据
+			dm1._innerUpdate({
 				data: {
 					name: 'user3',
 					age: 10
 				},
+				//方法过滤器
 				filter: function(user) {
 					return user.name == 'user3';
 				}
@@ -222,11 +249,13 @@ define(function() {
 			expect(dm1._data.length).toBe(2);
 			expect(dm1._data[1].name).toBe('user3');
 
-			dm1.innerUpdate({
+			//更新数据
+			dm1._innerUpdate({
 				data: {
 					name: 'user3',
 					age: 40
 				},
+				//方法过滤器
 				filter: function(user) {
 					return user.name == 'user3';
 				}
@@ -237,7 +266,8 @@ define(function() {
 		})
 
 		it("search by filter", function() {
-			var result = dm1.innerSearch({
+			var result = dm1._innerSearch({
+				//方法过滤器
 				filter: function(user) {
 					return user.name == 'user3';
 				}
@@ -247,7 +277,8 @@ define(function() {
 		})
 
 		it("search by params", function() {
-			var result = dm1.innerSearch({
+			var result = dm1._innerSearch({
+				//参数过滤器
 				filter: {
 					name: 'user3'
 				}
@@ -258,7 +289,7 @@ define(function() {
 
 		it("get from ds and update", function(endTest) {
 			dm1.clear();
-			//首先会在dm内部查询，找不到数据然后在到
+			//首先会在dm内部查询，找不到数据然后在到server上查询
 			dm1.get({
 				//设置数据服务为server
 				dataServices: {
@@ -276,6 +307,7 @@ define(function() {
 		it("get from ds and no update", function(endTest) {
 			dm1.clear();
 			dm1.get({
+				//设置查询不更新
 				update: false,
 				dataServices: {
 					dsType: 'server'
@@ -288,6 +320,7 @@ define(function() {
 		})
 
 		it("set to ds", function(endTest) {
+			//更新到ds
 			dm1.set({
 				data: [{
 					name: "userUpdate"
@@ -305,6 +338,7 @@ define(function() {
 		})
 
 		it("set to ds by params", function(endTest) {
+			//根据条件更新到ds，条件同时在dm和ds中生效
 			dm1.set({
 				data: [{
 					name: "userUpdate"
@@ -458,7 +492,7 @@ define(function() {
 			})
 		})
 
-		it("handler - get & set", function(endTest) {
+		it("trigger - get & set", function(endTest) {
 			var dmHandler = dataManager.create('Table', {
 				get: {
 					update: false
@@ -468,18 +502,18 @@ define(function() {
 				}
 			});
 
-			dmHandler.onHandler("set", "getHandle", function(result, setPolicy) {
+			dmHandler.on("set", "getHandle", function(e) {
 				expect(dmHandler._data[0].name).toBe('user1');
 
 				endTest();
 			})
 
-			dmHandler.onHandler("get", "getHandle", function(result, getPolicy) {
-				expect(result.length).toBe(1);
-				expect(result[0].name).toBe('user1');
+			dmHandler.on("get", "getHandle", function(e) {
+				expect(e.result.length).toBe(1);
+				expect(e.result[0].name).toBe('user1');
 
 				dmHandler.set({
-					data: result
+					data: e.result
 				});
 
 			})
@@ -503,7 +537,7 @@ define(function() {
 				}
 			});
 
-			dmTest.innerUpdate({
+			dmTest._innerUpdate({
 				data: [{
 					id: 2,
 					name: "userDM"
@@ -595,7 +629,7 @@ define(function() {
 					}
 				});
 
-			dmTest.onHandler("trigger", "triggerHandler", function(result, trigger) {
+			dmTest.onHandler("trigger", "triggerHandler", function(e,result, trigger) {
 				expect(trigger.name).toBe("delayLoad");
 				expect(done).toBe(true);
 				expect(dmTest._data[0].name).toBe('user1');

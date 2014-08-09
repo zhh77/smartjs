@@ -1,12 +1,19 @@
 # smartjs 
 
-ver : 0.2
+ver : 0.4
 
 author : Roy Zhang 
 
 desc ： 详细的介绍和api在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 update : 
+ver 0.3 - 2014.6.21
+
+  1.添加权重数组 - priorityList,优化aop；
+
+  2.新增filterBuilder模块，数组查询条件对象生成器，支持3中类型，字符查询串（如：name like @name and age > @maxAge），条件对象，过滤方法；
+
+  3.新增datamanager-table，实现初步crud控制
 
 ver 0.3 - 2014.6.21
 

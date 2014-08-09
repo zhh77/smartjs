@@ -229,5 +229,39 @@ define(function() {
             target.test(result);
             expect(result + '').toBe('inject');
         })
+
+        it("priorityList", function() {
+            var list = st.priorityList(),
+                result = [];
+
+            //添加项
+            list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
+
+            //10为第一个
+            expect(list.at(0)).toBe(10);
+
+
+            //按优先级大到小循环
+            list.each(function(item) {
+                result.push(item);
+            })
+
+            expect(result + '').toBe('10,5,1,0,-1');
+
+            result = [];
+
+            //删除
+            list.remove(function(item){
+                if(item === 1)
+                    return "break";
+            })
+
+            //按优先级小到大循环
+            list.each(true,function(item) {
+                result.push(item);
+            })
+
+            expect(result + '').toBe('-1,0,5,10');
+        });
     })
 });
