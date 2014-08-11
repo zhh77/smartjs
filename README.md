@@ -7,7 +7,7 @@ author : Roy Zhang
 desc ： 详细的介绍和api在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 update : 
-ver 0.4 - 2014.6.21
+ver 0.4 - 2014.8.9
 
   1.添加权重数组 - priorityList,优化aop；
 
