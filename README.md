@@ -4,40 +4,42 @@ ver : 0.4
 
 author : Roy Zhang 
 
-desc ： 详细的介绍和api在我的博客中同步http://www.cnblogs.com/zhh8077/
+desc ： 详细的API : http://zhh77.github.io/smartjs/  
+
+        介绍在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 update : 
 ver 0.4 - 2014.8.9
 
-  1.添加权重数组 - priorityList,优化aop；
+  1. 添加权重数组 - priorityList,优化aop；
 
-  2.新增filterBuilder模块，数组查询条件对象生成器，支持3中类型，字符查询串（如：name like @name and age > @maxAge），条件对象，过滤方法；
+  2. 新增filterBuilder模块，数组查询条件对象生成器，支持3中类型，字符查询串（如：name like @name and age > @maxAge），条件对象，过滤方法；
 
-  3.新增datamanager-table，实现初步crud控制
+  3. 新增datamanager-table，实现初步crud控制
 
 ver 0.3 - 2014.6.21
 
-  1.加入dataManager模块，包括dataManager，dataService和dataPolicyManager三个对象；
+  1. 加入dataManager模块，包括dataManager，dataService和dataPolicyManager三个对象；
 
 ver 0.2 - 2014.6.14
 
-  1.新增oop(klass,factory)模块；
+  1. 新增oop(klass,factory)模块；
 
-  2.promiseEvent加入非阻塞模式noBlock；
+  2. promiseEvent加入非阻塞模式noBlock；
 
-  3.trigger加入属性监听
+  3. trigger加入属性监听
 
-  4.smartjs主模块优化，支持requirejs和seajs
+  4. smartjs主模块优化，支持requirejs和seajs
 
-  5.单元测试页面优化
+  5. 单元测试页面优化
 
 ver 0.1 - 2014.6.7
 
-  1.smartjs主模块
+  1. smartjs主模块
   
-  2.util 模块
+  2. util 模块
   
-  3.aop模块(promiseEvent; trigger; flowContoller)
+  3. aop模块(promiseEvent; trigger; flowContoller)
 
 
 ## Util
