@@ -4,8 +4,10 @@ ver : 0.4
 
 author : Roy Zhang 
 
-desc ： 详细的API : http://zhh77.github.io/smartjs/  
-
+desc ： 
+        
+        详细的API : http://zhh77.github.io/smartjs/  
+        
         介绍在我的博客中同步http://www.cnblogs.com/zhh8077/
 
 update : 
