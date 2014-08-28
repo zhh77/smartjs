@@ -1,0 +1,2001 @@
+{
+    "project": {
+        "name": "smartjs",
+        "description": "smatjs",
+        "version": "0.4.0",
+        "url": "https://github.com/zhh77/smartjs"
+    },
+    "files": {
+        "src\\core\\aop.js": {
+            "name": "src\\core\\aop.js",
+            "modules": {
+                "AOP": 1
+            },
+            "classes": {
+                "promiseEvent": 1,
+                "EventArg": 1,
+                "attachTrigger": 1,
+                "EventArg(trigger)": 1,
+                "flowController": 1,
+                "EventArg(flowController)": 1
+            },
+            "fors": {
+                "promiseEvent": 1,
+                "attachTrigger": 1,
+                "flowController": 1
+            },
+            "namespaces": {}
+        },
+        "src\\core\\dataManager.js": {
+            "name": "src\\core\\dataManager.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\core\\filterBuilder.js": {
+            "name": "src\\core\\filterBuilder.js",
+            "modules": {
+                "FilterBuilder": 1
+            },
+            "classes": {
+                "FilterBuilder": 1,
+                "Operations": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\core\\oop.js": {
+            "name": "src\\core\\oop.js",
+            "modules": {
+                "OOP": 1
+            },
+            "classes": {
+                "klassBase": 1,
+                "klass": 1,
+                "factory": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\core\\util.js": {
+            "name": "src\\core\\util.js",
+            "modules": {
+                "Util": 1
+            },
+            "classes": {
+                "util": 1,
+                "priorityList": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\smart.js": {
+            "name": "src\\smart.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "AOP": {
+            "name": "AOP",
+            "submodules": {},
+            "classes": {
+                "promiseEvent": 1,
+                "EventArg": 1,
+                "attachTrigger": 1,
+                "EventArg(trigger)": 1,
+                "flowController": 1,
+                "EventArg(flowController)": 1
+            },
+            "fors": {
+                "promiseEvent": 1,
+                "attachTrigger": 1,
+                "flowController": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\core\\aop.js",
+            "line": 1314,
+            "description": "面向切面编程的辅助模块\n\nFeartures : \n    1. promiseEvent ：基于promise和event机制的回调管理\n    2. trigger ：对象触发器\n    3. flowController ：流程/生命周期控制器\n\nUpdate Note：\n    + 2014.8.06 ：将priorityList应用到promiseEvent中\n    + 2014.6.13 ：trigger添加属性变化监听支持\n    + 2014.6.11 ：promiseEvent添加非阻塞模式\n    + 2014.5 ：Created"
+        },
+        "FilterBuilder": {
+            "name": "FilterBuilder",
+            "submodules": {},
+            "classes": {
+                "FilterBuilder": 1,
+                "Operations": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\core\\filterBuilder.js",
+            "line": 377,
+            "description": "过滤器生成器\n\nFeartures : \n    1. 编译字符串过滤，“name = @name and (age > @age and type = @type)”，生产过滤条件参数或者过滤方法\n    2. 参数过滤，以参数的方式全部构建\"=\"的方式构建查询方法\n    3. 方法过滤\n    4. 忽略null的条件\n    5. 自定义扩展过滤操作符\n    6. 条件&参数合并\n\nUpdate Note：\n    + 2014.7 ：Created"
+        },
+        "OOP": {
+            "name": "OOP",
+            "submodules": {},
+            "classes": {
+                "klassBase": 1,
+                "klass": 1,
+                "factory": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\core\\oop.js",
+            "line": 246,
+            "description": "面向对象思想的辅助实现模块;\n\nFeartures : \n    1. klass ：类继承；实现执行指针，类常用方法，继承路径\n    2. factory ：对象/类工厂方法；\n\nUpdate Note：\n    + 2014.6 ：Created"
+        },
+        "Util": {
+            "name": "Util",
+            "submodules": {},
+            "classes": {
+                "util": 1,
+                "priorityList": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\core\\util.js",
+            "line": 330,
+            "description": "工具包模块\n\nFeartures : \n\t1. 基础公共方法\n\t2. 基础公共对象\n\nUpdate Note：\n\t+ 2014.8.06 加入priorityList\n\t+ 2014.5 ：Created"
+        }
+    },
+    "classes": {
+        "promiseEvent": {
+            "name": "promiseEvent",
+            "shortname": "promiseEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 70,
+            "description": "基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；\n默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），\n直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "promiseEvent的模式，可以混用；\n    1. 默认；event模式，所有的注册的事件，执行时，第一个事件参数为e（详细说明见promiseEvent-EventArg）\n    2. 'callback' : 回调模式; 与event模式对立，执行时不会添加事件参数e\n    2. 'none' : 全部事件执行一次，即有执行动作就销毁\n    3. 'noBlock' : 非阻塞模式；",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n\n    //使用once和callback模式创建promiseEvent\n    var calls = st.promiseEvent(\"once callback\")"
+            ]
+        },
+        "EventArg": {
+            "name": "EventArg",
+            "shortname": "EventArg",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 230,
+            "description": "promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；\nEventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；"
+        },
+        "attachTrigger": {
+            "name": "attachTrigger",
+            "shortname": "attachTrigger",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 517,
+            "description": "给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理\n目前有四种注入方式： \n1. before，前置注入，在目标方法执行之前执行；\n2. after，后置执行，在目标方法执行之后执行；\n3. round，环绕，将目标方法包装，自定义控制；\n4. error，错误，捕获reject的事件；",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "target",
+                    "description": "[object] 目标对象"
+                },
+                {
+                    "name": "mode",
+                    "description": "[string] 注入前置和后置所采用的promiseEvent的模式，具体见promsieEvent的add",
+                    "optional": true
+                },
+                {
+                    "name": "fnInterface",
+                    "description": "；自定义接口方法；在使用attachTrigger方法后，会在target上附加一些控制方法，为了避免重名和控制对外的方法，使用fnInterface来自定义",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回附加上了trigger的对象;",
+                "type": "Trigger"
+            },
+            "example": [
+                "\n     var obj1 = {\n        test: function(name) {\n            result.push(name);\n        }\n    };\n\n    //给obj1对象附上触发器功能\n    st.attachTrigger(obj1);\n    \n    //直接初始化成trigger对象\n    var obj2 = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n    \n    //定制trigger的接口方法\n     var obj3 = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    }, {\n        //屏蔽trigger的on方法\n        on: null,\n        //将trigger的onBebefore方法名改成bind\n        onBefore: \"bind\"\n    })"
+            ]
+        },
+        "EventArg(trigger)": {
+            "name": "EventArg(trigger)",
+            "shortname": "EventArg(trigger)",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 697,
+            "description": "trigger下的事件参数，由EventArg扩展而来",
+            "extends": "EventArg"
+        },
+        "flowController": {
+            "name": "flowController",
+            "shortname": "flowController",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 1167,
+            "description": "流程或者生命周期管理器。控制流程的走向，流程扩展，注入控制等等；FlowController是基于trigger封装，具有所有trigger的特性；",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数设置 ：",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "flow",
+                            "description": "流程对象",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "order",
+                            "description": "流程顺序",
+                            "type": "Array",
+                            "optional": true
+                        },
+                        {
+                            "name": "trigger",
+                            "description": "trigger设置",
+                            "type": "Bool|object",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "mode",
+                                    "description": "trigger的mode设置",
+                                    "type": "Object",
+                                    "optional": true
+                                },
+                                {
+                                    "name": "iFace",
+                                    "description": "trigger的接口方法设置",
+                                    "type": "Object",
+                                    "optional": true
+                                }
+                            ]
+                        },
+                        {
+                            "name": "mode",
+                            "description": "流程的模式， \n    1. 默认为EventArg模式\n    2. 'simple', 简单模式不带流程中不带EventArg参数",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "返回流程控制器",
+                "type": "FlowController"
+            },
+            "example": [
+                "\n    //以widget简单的的生命周期为例\n    var flow = st.flowController({\n        flow: {\n            init: function(e, name, op) {\n                log(name, 'init');\n                //input的进入buildInput流程\n                if (name === 'input')\n                    //指定进入buildInput，同时指定的参数\n                    e.next(\"buildInput\", [op.type]);\n                //进入cancel流程\n                else if (name === 'cancel')\n                    e.next('cancel')\n            },\n            buildInput: function(e, type) {\n                log('buildInput');\n                //返回传递结果\n                return type;\n            },\n            cancel: function(e) {\n                log('cancel');\n                e.end();\n            },\n            render: function(e, name, op) {\n                //判断是否存在传递结果\n                e.result && log(e.result);\n                log('render');\n            },\n            complete: function(e, name, op) {\n                log('complete');\n            }\n        },\n        //设定执行流程\n        order: [\"init\", \"render\", \"complete\"]\n    });\n\n\n    \n    //简单流程，流程中不带事件参数EventArg\n    var simpleFlow = st.flowController({\n        flow: {\n            init: function(name, op) {\n                log(name, 'init');\n            },\n            render: function(name, op) {\n                log('render');\n            },\n            complete: function(name, op) {\n                log('complete');\n            }\n        },\n        order: [\"init\", \"render\", \"complete\"],\n        //简单模式\n        mode: \"simple\"\n    });\n\n    //异步的流程,开启trigger\n    var triggerFlow = st.flowController({\n        flow: {\n            init: function(e, name, op) {\n                //模拟异步\n                setTimeout(function() {\n                    log(name, 'init');\n                    e.resolve();\n                }, 100)\n                return e.promise();\n            },\n            render: function(e, name, op) {\n                log('render');\n            },\n            complete: function(e, name, op) {\n                log('complete');\n            }\n        },\n        order: [\"init\", \"render\", \"complete\"],\n        trigger: true\n    });\n\n    //在init之前注入\n    triggerFlow.onBefore(\"init\", \"initBefore\", function(e, name, op) {\n        log('initBefore');\n    }, \"once\");\n\n    //在init之后注入异步\n    triggerFlow.on(\"init\", \"initAfter\", function(e, name, op) {\n        setTimeout(function() {\n            log('initAfter');\n            e.resolve();\n        }, 100)\n        return e.promise();\n    }, \"once\");\n\n    //使用when来捕获异步的流程执行结果\n    $.when(triggerFlow.boot(\"div\")).done(function() {\n        expect(arr + '').toBe('initBefore,div,init,initAfter,render,complete');\n    })"
+            ]
+        },
+        "EventArg(flowController)": {
+            "name": "EventArg(flowController)",
+            "shortname": "EventArg(flowController)",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "AOP",
+            "namespace": "",
+            "file": "src\\core\\aop.js",
+            "line": 1314,
+            "description": "flowController下的事件参数，由EventArg(trigger)扩展而来，具有EventArg(trigger)的所有特性;\n其中stop方法为结束当前流程节点；",
+            "extends": "EventArg(trigger)"
+        },
+        "FilterBuilder": {
+            "name": "FilterBuilder",
+            "shortname": "FilterBuilder",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FilterBuilder",
+            "namespace": "",
+            "file": "src\\core\\filterBuilder.js",
+            "line": 25,
+            "description": "过滤生成器对象",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "三种类型： \n1. {string}, 查询字符串\n2. {object}, 参数对象\n3. {function}, 过滤方法",
+                    "type": "String|function|object"
+                }
+            ],
+            "return": {
+                "description": "返回过滤生成器对象",
+                "type": "FilterBuilder"
+            },
+            "example": [
+                "\n\t\t//查询字符串,{age > @age}用{}包含的条件表示当@age为null的时候，忽略此条件\n\t\tvar str = \"{age > @age} and (role = @sa or role = @coder) and project = @project\";\n\t\t\t\n\t\t\t//创建过滤器\n\t\t\tvar filter = st.filterBuilder(str);\n\t\t\t\n\t\t\t//生成过滤方法\n\t\t\tvar filterFn = filter.buildFn({\n\t\t\t\tage : 20,\n\t\t\t\tsa : 'sa',\n\t\t\t\tcoder : 'coder',\n\t\t\t\tproject : \"smartjs\"\n\t\t\t});\n\t\t\t\n\t\t\t//定义数据\n\t\t\tvar data = [\n\t\t\t\t\t{name: \"roy\",age: 30,role: \"coder\",project: \"smartjs\"},\n\t\t\t \t\t{name: \"coder1\", age: 20, role: \"coder\", project: \"smartjs\"}\n\t\t\t];\n\t\t\t\n\t\t\t//过滤数据\n\t\t\tvar result = data.filter(filterFn);"
+            ]
+        },
+        "Operations": {
+            "name": "Operations",
+            "shortname": "Operations",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "FilterBuilder",
+            "namespace": "",
+            "file": "src\\core\\filterBuilder.js",
+            "line": 377,
+            "description": "判断操作配置对象"
+        },
+        "klassBase": {
+            "name": "klassBase",
+            "shortname": "klassBase",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "OOP",
+            "namespace": "",
+            "file": "src\\core\\oop.js",
+            "line": 19,
+            "description": "klass的基类对象"
+        },
+        "klass": {
+            "name": "klass",
+            "shortname": "klass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "OOP",
+            "namespace": "",
+            "file": "src\\core\\oop.js",
+            "line": 107,
+            "description": "js类创建，具有执行指针功能(解决了多级继承域对象的问题)\n\n此外提供两种全局扩展方式： \n    1. 基于原形链的基类扩展，使用st.conf('oop-KlassBase')，可以取到基类对象进行扩展\n    2. 在类初始化时，对实例化的对象进行扩展，可以使用st.onKlassInit对象进行添加扩展方法。st.onKlassInit 是promiseEvent对象，st.onKlassInit(obj,config);",
+            "is_constructor": 1,
+            "extends": "klassBase",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "类名称",
+                    "type": "String"
+                },
+                {
+                    "name": "prop",
+                    "description": "类的属性和方法",
+                    "type": "Object"
+                },
+                {
+                    "name": "parent",
+                    "description": "父类",
+                    "type": "Klass|object|function",
+                    "optional": true
+                },
+                {
+                    "name": "config",
+                    "description": "扩展参数",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回类",
+                "type": "Klass"
+            },
+            "example": [
+                "\n    //创建一个class\n    var User = st.klass('User',{\n        klassInit:function(name){\n            this.name = name;\n        },\n        say: function(text) {\n            return this.name + ',' + text;\n        }\n    });\n\n    //实例化一个User\n    var xiaoming = new User('小明');\n    \n    //方法实例化\n    var xiaozhang = User('小张');\n\n\n\n    \n    //多级继承例子。在多级继承中有一种场景每个子类方法都会调用父类的方法，而方法中又会使用到当前对象的属性，则问题就来了；\n    //如果是采用的parent.xxx然后传递this下的属性值过去，则没太大的问题。backbone就采用的这种。\n    //另外像base.js直接改写原始方法，将父对象封入闭包中，也无问题。只是这种限制比较大，只能调用父类的同名方法。\n    //而dojo采用的是this.parent.xxx.call(this)的方式，则就会悲剧了，死循环就来了。\n    //导致这样的原因就是将this带入parent方法后，父类又执行this.parent。而这是this则是子类的对象，那么方法就只会不停的调用parent的方法。\n    //在smartjs中klass调用父类方法由callBae这个方法来代理，同时使用指针来记录方法的执行轨迹，这样保证了从子到根的各级调用\n\n    var user2 = st.klass('user2', {\n        say: function(text) {\n            //调用父类\n            return this.callBase('say', [text]) + \"-lv2\";\n        }\n    }, User);\n\n    var user3 = st.klass('user3', {\n        say: function(text) {\n            //调用父类\n            return this.callBase('say', [text]) + \"-lv3\";\n        }\n    }, User);\n\n    var user4 = st.klass('user4', {\n        say: function(text) {\n            //调用父类\n            return this.callBase('say', [text]) + \"-lv4\";\n        }\n    }, user3);\n\n    var roy = new user4('roy');\n    \n    //继承路径\n    expect(roy._$inheirts + '').toBe('user4,user3,user2,user');\n\n    //依次执行到根，正确将当前的this对象的值输出\n    expect(roy.say('hello')).toBe('roy,hello-lv2-lv3-lv4');\n\n    //从3级开始执行\n    expect(roy.callBase('say', ['hello'])).toBe(\"roy,hello-lv2-lv3\");\n\n    //指定从user开始执行\n    expect(roy.callBase('say', 'user', ['hello'])).toBe(\"roy,hello\");\n\n    //上向略过2级执行\n    expect(roy.callBase('say', 2, ['hello'])).toBe(\"roy,hello-lv2\");"
+            ]
+        },
+        "factory": {
+            "name": "factory",
+            "shortname": "factory",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "OOP",
+            "namespace": "",
+            "file": "src\\core\\oop.js",
+            "line": 246,
+            "description": "factory并不只是指的是工厂模式。在factory要求定义一个基础对象，这个对象可以是基类，也可以是模板对象或者是接口。然后factory就已此基础对象为基础，其他添加或者创建的对象，继承或者是复制基础对象的属性和方法。factory在提供一系列方法来对这些对象做控制。\n       factory经过简单的处理可以实现工厂、外观、模板等设计模式。",
+            "is_constructor": 1,
+            "extends": "klass",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "工厂名称",
+                    "type": "String"
+                },
+                {
+                    "name": "base",
+                    "description": "基类对象，所有在工厂中添加的对象都以base为基础",
+                    "type": "Object"
+                },
+                {
+                    "name": "proto",
+                    "description": "工厂的扩展属性和方法对象",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "type",
+                    "description": "工厂的类型； \n1. 默认:类实例化后的对象；\n2. class：类对象，未实例化；\n3. merge：对象复制合并",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "initDefault",
+                    "description": "是否将base设置成为默认的对象；当使用factory.get找不到对象时返回默认对象",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回创建的工厂对象",
+                "type": "Factory"
+            },
+            "example": [
+                "\n    //widget基类\n           var baseWidget = {\n               //widget类型\n               type: '',\n               //widget的渲染方法\n               render: function(id) {\n                   return this.type + ':' + id;\n               }\n           };\n\n           //一个widget工厂\n           var widgetFactory = st.factory('wdigetfactory', baseWidget);\n\n           //添加一个input\n           widgetFactory.add('input', {\n               type: 'input'\n           })\n\n           //找到添加的input\n           var input = widgetFactory.find('input');\n\n           //输出\n           expect(input.render('txt')).toBe(\"input:txt\");\n\n\n           //添加一个number类型的input\n           var num = widgetFactory.add('number', {\n               type: 'input[number]'\n               //指定父类为input\n           }, 'input')\n\n           //输出\n           expect(num.render('txtNum')).toBe(\"input[number]:txtNum\");\n\n\n\n           // class mode\n           var f1 = st.factory({\n               name: 'classMode',\n               //设置class类型\n               type: 'class',\n               base: {\n                   klassInit: function(name) {\n                       this.name = name;\n                   }\n\n               }\n           });\n\n           var c1 = f1.add('c1', {\n               type: 'c1'\n           });\n\n           expect(c1.fn).toBeDefined();\n           //需要初始化\n           var c = new c1('class1');\n           expect(c.type).toBe(\"c1\");\n           expect(c.name).toBe(\"class1\");\n\n\n\n           //merget mode\n            var f2 = st.factory({\n               name: 'copyMode',\n               //设置merge类型\n               type: 　'merge',\n               //设置默认模式\n               initDefault: true,\n               base: {\n                   name: 'copy',\n                   project: {\n                       name: 'smartjs'\n                   }\n               }\n           })\n\n           var c = f2.add('c1', {\n               name: 'c1',\n               project: {\n                   role: 'pm'\n               }\n           });\n           \n           expect(f2.find().name).toBe(\"copy\");\n           expect(c.name).toBe(\"c1\");\n           expect(c.project.name).toBe(\"smartjs\");\n           expect(c.project.role).toBe(\"pm\");\n"
+            ]
+        },
+        "util": {
+            "name": "util",
+            "shortname": "util",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Util",
+            "namespace": "",
+            "file": "src\\core\\util.js",
+            "line": 18,
+            "description": "util常用公共方法"
+        },
+        "priorityList": {
+            "name": "priorityList",
+            "shortname": "priorityList",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Util",
+            "namespace": "",
+            "file": "src\\core\\util.js",
+            "line": 330,
+            "description": "权重列表,根据权重的由大到小进入插入。\n具有两种item模式：\n\t1. 默认，正常item，手动设置priority\n\t2. self，读取item的priority属性",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "item模式",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "defaultPriority",
+                    "description": "item模式",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "example": [
+                "\n\tvar list = st.priorityList();"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "src\\core\\aop.js",
+            "line": 104,
+            "description": "清空所有事件回调",
+            "itemtype": "method",
+            "name": "clear",
+            "chainable": 1,
+            "example": [
+                "\n    //清除calls下面注册的事件\n    calls.clear();"
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 117,
+            "description": "添加事件回调方法",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件回调名",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "事件回调方法",
+                    "type": "String"
+                },
+                {
+                    "name": "priority",
+                    "description": "权重",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "mode",
+                    "description": "回调模式：\"once\":执行一次",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n\n    //注册事件\n    calls.add('call1', function(e, text) {})\n\n    //自定义priority注册事件\n    calls.add('call2', function(e, text) {},100)\n\n    //单once模式注册\n    calls.add('call3', function(e, text) {},'mode')\n\n    //所有设置\n    calls.add('call4', function(e, text) {},50,'mode')\n    \n\n\n    //返回promise\n    call.add(\"promiseCall\", function(e, name) {\n        //异步的方法\n        async(function() {\n            e.resolve();\n        });\n        return e.promise();\n    });\n    \n\n\n    //result传递\n    var resultCalls = st.promiseEvent();\n    resultCalls.add(\"c1\", function(e) {\n        //传递结果（promise下的resolve与return效果相同）\n        return \"c1\";\n    }).add(\"c2\", function(e) {\n        //e.result是由c1返回过来的值\n        return e.result + \",c2\";\n    });\n    \n\n\n    //callbak 模式下添加事件\n    var calls1 = st.promiseEvent(\"callback\");\n\n    //没有eventArg参数\n    calls1.add(\"c1\", function(name) {\n    });"
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 184,
+            "description": "删除事件回调方法",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件回调名",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    //注册事件\n    calls.add('call1', function(e, text) {})\n\n    //删除事件\n    calls.remove('call1');\n    "
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 204,
+            "description": "根据上下文对象执行回调;fire方法的增强",
+            "itemtype": "method",
+            "name": "fireWith",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "上下文对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array"
+                },
+                {
+                    "name": "argHandle",
+                    "description": "参数处理方法，可以对eventarg进行修改；例如：argHandle(e)",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回执行结果",
+                "type": "Object|promise"
+            },
+            "example": [
+                "\n    //使用context上下执行\n    calls.fireWith(context,[param1,param2],function(e){\n        //此处在e(EventArg)初始化时，进行扩展\n    })"
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 236,
+            "description": "停止所有后续事件执行",
+            "itemtype": "method",
+            "name": "stopPropagation",
+            "chainable": 1,
+            "example": [
+                "\n    calls.add(\"c1\", function(e) {\n        //阻止冒泡\n        e.stopPropagation();\n    })\n    .add(\"c2\", function() {});\n\n    //只执行了c1\n    calls.fire();"
+            ],
+            "class": "EventArg",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 254,
+            "description": "完成契约",
+            "itemtype": "method",
+            "name": "resolve",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "返回结果",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n    var pCalls = st.promiseEvent();\n\n    pCalls.add(\"c1\", function(e, name) {\n        //延迟100ms\n        setTimeout(function() {\n            //完成promise,并返回结果\n            e.resolve(name + ',resolve!');\n        }, 100);\n        //返回promise\n        return e.promise();\n    });\n    \n    //使用when来监控promiseEvent的执行，使用done来处理执行完毕的方法\n    $.when(pCalls.fire(\"call\")).done(function(data) {\n        expect(data).toBe('call,resolve!');\n    });\n"
+            ],
+            "class": "EventArg",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 282,
+            "description": "拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行",
+            "itemtype": "method",
+            "name": "resolve",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "拒绝参数",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n    pCalls.add(\"c1\", function(e, name) {\n        //延迟100ms\n        setTimeout(function() {\n            //拒绝promise,并返回结果\n            e.reject(name + ',reject!');\n        }, 100);\n\n        //返回promise\n        return e.promise();\n    });\n\n    //使用when来监控promiseEvent的执行，使用fail捕获reject\n    $.when(pCalls.fire(\"call\")).fail(function(data) {\n        expect(data).toBe('call,reject!');\n        testCall();\n    });"
+            ],
+            "class": "EventArg",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 307,
+            "description": "删除当前事件；与promiseEvent.add的'once'模式，不同在于可以手动进行控制",
+            "itemtype": "method",
+            "name": "remove",
+            "chainable": 1,
+            "example": [
+                "\n     calls.add(\"onceTest\", function(e) {\n        //删除\"onceTest\"这个事件；\n        e.remove();\n    });\n    //执行后才会触发删除\n    calls.fire();\n\n    //\"onceTest\"已经不在calls中\n    expect(calls.has(\"onceTest\")).toBe(false);"
+            ],
+            "class": "EventArg",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 387,
+            "description": "判断是否存在事件回调",
+            "itemtype": "method",
+            "name": "has",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件回调名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "是否存在",
+                "type": "Boolean"
+            },
+            "example": [
+                " \n    //判断是否注册了\"call1\"的event\n    if(calls.has(\"call1\"))\n        ........."
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 415,
+            "description": "执行回调",
+            "itemtype": "method",
+            "name": "fire",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array"
+                },
+                {
+                    "name": "argHandle",
+                    "description": "参数处理方法，可以对eventarg进行修改；例如：argHandle(e)",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回执行结果",
+                "type": "Object"
+            },
+            "example": [
+                "\n    //注册call1\n    calls.add('call1', function(e, text) {\n        alert(text);\n    })\n\n    //执行call1，返回called\n    calls.fire('called');\n    \n    //使用eventArg控制\n    calls.add(\"c1\", function(e) {\n        //阻止后续回调\n        e.stopPropagation();\n    })\n    .add(\"c2\", function() {\n    });\n\n    //只执行了c1\n    calls.fire();\n\n\n\n    //promise模式下\n    calls.add(\"c1\", function(e, name) {\n        setTimeout(function() {\n            e.resolve(name + '-c1');\n        }, 100);\n        return e.promise();\n    });\n    \n    //使用when来监控返回的result\n    $.when(calls.fire(\"call\")).done(function(result) {\n\n    }.fail(function(error){\n    \n    }));\n    \n\n\n    //noBlock模式的promiseEvents;\n    var noBlockCalls = st.promiseEvent(\"noBlock\");\n\n    //第一个回调延迟100\n    noBlockCalls.add(\"c1\", function(e) {\n        setTimeout(function() {\n            result.push('c1');\n            e.resolve();\n        }, 100);\n        return e.promise();\n    });\n\n    //第二个正常执行\n    noBlockCalls.add(\"c2\", function(e) {\n        result.push('c2');\n    });\n\n    //第三个回调延迟50\n    noBlockCalls.add(\"c3\", function(e) {\n        setTimeout(function() {\n            result.push('c3');\n            e.resolve();\n        }, 50);\n        return e.promise();\n    });\n\n    $.when(noBlockCalls.fire()).done(function(data) {\n        //最终执行顺序是c2-c3-c1\n        expect(result + '').toBe('c2,c3,c1');\n        testCall();\n    });"
+            ],
+            "class": "promiseEvent",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 702,
+            "description": "阻止默认的方法执行；",
+            "itemtype": "method",
+            "name": "preventDefault",
+            "chainable": 1,
+            "example": [
+                "\n    var obj = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n\n    obj.onBefore('test', 'testBefore', function(e, name) {\n        result.push(name + '-before1');\n        //阻止前置后续的事件&阻止默认方法\n        e.stopPropagation().preventDefault();\n    })\n\n    obj.onBefore('test', 'testAfter', function(e, name) {\n        result.push(name + '-before2');\n    })\n\n    obj.on('test', 'testBefore2', function(e, name) {\n        result.push(name + '-after');\n    })\n\n    obj.test('call');\n    //最终输出前置call-before1和后置\n    expect(result.join(',')).toBe('call-before1,call-after');"
+            ],
+            "class": "EventArg(trigger)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 736,
+            "description": "停止当前方法执行和后置所有事件；在属性监听时，则阻止赋值；",
+            "itemtype": "method",
+            "name": "stop",
+            "chainable": 1,
+            "example": [
+                "\n    var obj = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n\n    obj.onBefore('test', 'testBefore', function(e, name) {\n        result.push(name + '-before1');\n        //停止执行\n        e.stop();\n    })\n\n    obj.onBefore('test', 'testBefore2', function(e, name) {\n        result.push(name + '-before2');\n    })\n\n    obj.on('test', 'testAfter', function(e, name) {\n        result.push(name + '-after');\n    })\n\n    obj.test('call');\n\n    //最终只输入前置call-before1\n    expect(result.join(',')).toBe('call-before1');"
+            ],
+            "class": "EventArg(trigger)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 887,
+            "description": "注册手动的触发的Handler",
+            "itemtype": "method",
+            "name": "onHandler",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string] 注册事件方法的名称"
+                },
+                {
+                    "name": "fn",
+                    "description": "[function] 注册事件方法"
+                },
+                {
+                    "name": "priority",
+                    "description": "[number] 权重设置，同PrmiseEvent",
+                    "optional": true
+                },
+                {
+                    "name": "mode",
+                    "description": "[string] 加入的事件模式，同PrmiseEvent",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    "
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 904,
+            "description": "执行手动触发的Handler",
+            "itemtype": "method",
+            "name": "fireHandler",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "args",
+                    "description": "[array] 执行参数数组"
+                }
+            ],
+            "return": {
+                "description": "[object] 执行结果"
+            },
+            "example": [
+                "\n    "
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 917,
+            "description": "注册后置的事件方法",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string] 注册事件方法的名称"
+                },
+                {
+                    "name": "fn",
+                    "description": "[function] 注册事件方法"
+                },
+                {
+                    "name": "priority",
+                    "description": "[number] 权重设置，同PrmiseEvent",
+                    "optional": true
+                },
+                {
+                    "name": "mode",
+                    "description": "[string] 加入的事件模式，同PrmiseEvent",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    var result = [], obj = st.attachTrigger({\n        //方法\n        test: function(name) {\n            result.push(name);\n        },\n        //子对象\n        child : {\n            test : function(name){\n                result.push(name);\n            }\n        }，\n        //属性\n        prop : 1\n    });\n\n    //注册前置\n    obj.onBefore(\"test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    })\n    //注册后置\n    .on(\"test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //执行test方法\n    obj.test('bind');\n    //前后置正确触发\n    expect(result.join(',')).toBe(\"before-bind,bind,after-bind\");\n    \n\n    //支持子对象方法注册\n    obj.onBefore(\"child.test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    }).on(\"child.test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //属性监听只有before，after两种方法注入类型，不支持round环绕模式。\n    //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。\n    //after：在after则是无法干预值的变化，因此只是做监听使用；\n\n    \n    //注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue\n     obj.onBefore('prop', 'testBefore', function(e, value,oldValue) {\n        result.push(value + '-before-' + oldValue);\n    })\n    \n    obj.on('prop', 'testAfter', function(e, value,oldValue) {\n        result.push(value + '-after-' + oldValue);\n    })\n    \n    expect(obj.prop).toBe(1);\n\n    obj.prop = 2;\n    //输出前后置监听\n    expect(result.join(',')).toBe('2-before-1,2-after-1');\n    expect(obj.prop).toBe(2);\n    \n    //前置中干预赋值\n    obj.onBefore('prop', 'testBefore', function(e, value) {\n        result.push(value + '-before');\n        //停止方法，阻止赋值行为\n        e.stop();\n    })"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 996,
+            "description": "注册前置的事件方法",
+            "itemtype": "method",
+            "name": "onBefore",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string] 注册事件方法的名称"
+                },
+                {
+                    "name": "fn",
+                    "description": "[function] 注册事件方法"
+                },
+                {
+                    "name": "priority",
+                    "description": "[number] 权重设置，同PrmiseEvent",
+                    "optional": true
+                },
+                {
+                    "name": "mode",
+                    "description": "[string] 加入的事件模式，同PrmiseEvent",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    //见on方法"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1012,
+            "description": "注册环绕触发事件",
+            "itemtype": "method",
+            "name": "onRound",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string] 注册事件方法的名称"
+                },
+                {
+                    "name": "fn",
+                    "description": "[function] 注册事件方法"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n     var obj3 = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n\n    //注册环绕事件，事件方法参数第一为fn为原方法，后面的为执行参数\n    obj3.onRound(\"test\", \"roundTest\", function(fn, name) {\n        result.push('before');\n        //执行原有方法\n        fn(name);\n        result.push('after');\n    });\n\n    obj3.test('round');\n    expect(result.join(',')).toBe(\"before,round,after\");"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1041,
+            "description": "注册错误捕获事件，当执行reject的时候触发",
+            "itemtype": "method",
+            "name": "onError",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string] 注册事件方法的名称"
+                },
+                {
+                    "name": "fn",
+                    "description": "[function] 注册事件方法"
+                },
+                {
+                    "name": "mode",
+                    "description": "[string] 加入的事件模式，同PrmiseEvent",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    var testError = st.attachTrigger({\n        test: function(name) {\n            var e = $.Deferred();\n            setTimeout(function() {\n                //拒绝契约\n                 e.reject('reject');\n            }, 100);\n            return e.promise();\n        }\n    });\n    //注册错误捕获事件\n    testError.onError(\"test\",\"triggerError\",function(err,name){\n          expect(err).toBe('reject');\n          expect(name).toBe('call');\n          testCall();\n    })\n    testError.test('call');"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1072,
+            "description": "注销注册的后置事件方法",
+            "itemtype": "method",
+            "name": "off",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string|array] 注册事件方法的名称：\n        1. 空为清除所有\n        2. 字符串为单个\n        3. 数组为多个",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    //注册后置testAfter\n    obj.on('test', 'testAfter', function(e, name) {\n        result.push(name + '-after');\n    })\n\n    //注销单个后置\n    obj.off('test', 'testAfter');"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1095,
+            "description": "注销注册的前置事件方法",
+            "itemtype": "method",
+            "name": "offBefore",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "[string] 目标方法或者属性名称"
+                },
+                {
+                    "name": "trName",
+                    "description": "[string|array] 注册事件方法的名称：\n        1. 空为清除所有\n        2. 字符串为单个\n        3. 数组为多个",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n    //注册前置testBefore\n    obj.onBefore('test', 'testBefore', function(e, name) {\n        result.push(name + '-before1');\n    })\n\n    //注册前置testBefore2\n    obj.onBefore('test', 'testBefore2', function(e, name) {\n        result.push(name + '-before2');\n    })\n\n    //注销多个前置\n    obj.offBefore('test', ['testBefore', 'testBefore2']);"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1123,
+            "description": "扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）",
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "[object] 目标方法或者属性名称"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n     var obj = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n    obj.extend({\n        test : function(name){\n            result.push(name + '-extend')\n        }\n    })"
+            ],
+            "class": "attachTrigger",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1291,
+            "description": "已手动设定流程开始的节点启动流程",
+            "itemtype": "method",
+            "name": "bootWithStart",
+            "params": [
+                {
+                    "name": "start",
+                    "description": "流程开始的节点",
+                    "type": "String"
+                },
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "返回执行结果或者promise（异步）",
+                "type": "Object|promise"
+            },
+            "example": [
+                "\n     //从render阶段开始构建div\n               flow.bootWithStart('render', [\"div\"]);\n\n               //略过了render阶段\n               expect(arr + '').toBe('render,complete');"
+            ],
+            "class": "flowController",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1321,
+            "description": "结束流程。无论是注册的事件方法还是流程方法全部结束",
+            "itemtype": "method",
+            "name": "end",
+            "chainable": 1,
+            "example": [
+                "\n     triggerFlow.onBefore(\"init\", \"initBefore\", function(e, name, op) {\n                               setTimeout(function() {\n                                   log('initBefore');\n                                   //停止流程\n                                   e.end().resolve();\n                               }, 100)\n                               return e.promise();\n                           }, \"once\");\n\n                           $.when(triggerFlow.boot(\"div\")).done(function() {\n                               //执行了注入事件initBefore后停止流程\n                               expect(arr + '').toBe('initBefore');\n                           })"
+            ],
+            "class": "EventArg(flowController)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1348,
+            "description": "拒绝契约同时设置流程状态为失败，结束流程",
+            "itemtype": "method",
+            "name": "reject",
+            "params": [
+                {
+                    "name": "comment",
+                    "description": "拒绝的说明或参数",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n     flowReject.onBefore(\"init\", \"initBefore\", function(e, name, op) {\n                               setTimeout(function() {\n                                   //拒绝契约，结束流程\n                                   e.reject(\"initBefore-reject\");\n                               }, 100)\n                               return e.promise();\n                           });\n                           \n                           //使用fail来捕获\n                           $.when(flowReject.boot('boot')).fail(function(err) {\n                               expect(err).toBe('initBefore-reject');\n                           });"
+            ],
+            "class": "EventArg(flowController)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1369,
+            "description": "手动指定下一个流程，（指定的流程可以不在order配置中）",
+            "itemtype": "method",
+            "name": "next",
+            "params": [
+                {
+                    "name": "nextNode",
+                    "description": "下一个流程名称",
+                    "type": "String"
+                },
+                {
+                    "name": "pass",
+                    "description": "下个流程执行完毕略过的流程数（相对于order）",
+                    "type": "Number"
+                },
+                {
+                    "name": "args",
+                    "description": "下个流程的参数，只在该流程节点有效，在之后就会恢复成原始参数，如想改变后续参数，请使用changeArgs方法",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "class": "EventArg(flowController)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1387,
+            "description": "改变后续流程的执行参数",
+            "itemtype": "method",
+            "name": "changeArgs",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array"
+                }
+            ],
+            "class": "EventArg(flowController)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1393,
+            "description": "恢复原始执行参数，下个流程中生效，与changeArgs方法对应",
+            "itemtype": "method",
+            "name": "recoverArgs",
+            "chainable": 1,
+            "class": "EventArg(flowController)",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\aop.js",
+            "line": 1471,
+            "description": "启动流程，",
+            "itemtype": "method",
+            "name": "boot",
+            "params": [
+                {
+                    "name": "流程参数",
+                    "description": "",
+                    "type": "Argument"
+                }
+            ],
+            "return": {
+                "description": "返回执行结果或者promise（异步）",
+                "type": "Object|promise"
+            },
+            "example": [
+                "\n     //执行构建div的流程\n               flow.boot(\"div\");\n               \n               //正常输出init，render，complete三个流程\n               expect(arr + '').toBe('div,init,render,complete');\n\n               //执行构建input的流程，设置input的type\n               flow.boot(\"input\", {\n                   type: 'text'\n               });\n\n               //除正常流程外，在init后进入buildInput流程\n               expect(arr + '').toBe('input,init,buildInput,text,render,complete');"
+            ],
+            "class": "flowController",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 1,
+            "description": "NOTE: dataManager数据管理 \nFeatures：\n    1.dataServices ：数据服务接口\n    2.dataManager ：基于策略的数据管理基类；\n    2.dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util,aop,oop",
+            "class": "FilterBuilder",
+            "module": "AOP"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 78,
+            "description": "生成条件参数,当使用查询字符串进行构建过滤器时，根据传入的参数值生产最终的带关系和操作过滤参数",
+            "itemtype": "method",
+            "name": "buildCondition",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "过滤的参数值",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "条件参数",
+                "type": "Object"
+            },
+            "example": [
+                "\n\t\tvar str = \"age > @age and (role = @sa or role = @coder) and project = @project\";\n\t\t\t\tvar filter = st.filterBuilder(str);\n\n\t\t//生成条件\n\t\tvar conditions = filter.buildCondition({\n\t\t\tage : 20,\n\t\t\t\t\tsa : 'sa',\n\t\t\t\t\tcoder : 'coder',\n\t\t\t\t\tproject : \"smartjs\"\n\t\t\t\t})\n\n\t\t//生成的conditions对象\n\t\t{\"and\":[\n\t\t\t{\"field\":\"age\",\"operation\":\">\",\"param\":20},\n\t\t\t\t{\"or\":[\n\t\t\t\t\t{\"field\":\"role\",\"operation\":\"=\",\"param\":\"sa\"},\n\t\t\t\t\t{\"field\":\"role\",\"operation\":\"=\",\"param\":\"coder\"}\n\t\t\t\t]},\n\t\t\t{\"field\":\"project\",\"operation\":\"=\",\"param\":\"smartjs\"}\n\t\t]}"
+            ],
+            "class": "FilterBuilder",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 109,
+            "description": "生成过滤方法",
+            "itemtype": "method",
+            "name": "buildFn",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "过滤的参数值",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "mergeFilter",
+                    "description": "需要合并的过滤条件",
+                    "type": "String|function|object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "过滤方法",
+                "type": "Function"
+            },
+            "example": [
+                "\n\t\t//创建role的过滤器\n\t\tvar filter = st.filterBuilder(\"role = @role\");\n\n\t\t//传入条件参数，合并age的过滤\n\t\tfilter.buildFn({role:\"sa\",age:20},\"age > @age\")"
+            ],
+            "class": "FilterBuilder",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 382,
+            "description": "非判断，在判断操作符之前加入!,则将判断结果取非",
+            "itemtype": "property",
+            "name": "!",
+            "type": "Function",
+            "example": [
+                "\n\t\t//查询name不等于'roy'的数据\n\t\tvar filter = \"name != 'roy'\""
+            ],
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 390,
+            "description": "等于判断",
+            "itemtype": "property",
+            "name": "=",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 397,
+            "description": "小于判断",
+            "itemtype": "property",
+            "name": "<",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 404,
+            "description": "小于等于判断",
+            "itemtype": "property",
+            "name": "<=",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 411,
+            "description": "大于判断",
+            "itemtype": "property",
+            "name": ">",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 418,
+            "description": "大于等于判断",
+            "itemtype": "property",
+            "name": ">=",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 425,
+            "description": "参数中包含数据",
+            "itemtype": "property",
+            "name": "in",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 432,
+            "description": "数据中包含参数",
+            "itemtype": "property",
+            "name": "like",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 437,
+            "description": "以参数为开头",
+            "itemtype": "property",
+            "name": "startOf",
+            "type": "Function",
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 442,
+            "description": "以参数为结尾",
+            "itemtype": "property",
+            "name": "endOf",
+            "type": "Function",
+            "example": [
+                "\n\t\t//匹配以'es'结尾的name\n\t\tvar filter = \"name endOf 'es'\";"
+            ],
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\filterBuilder.js",
+            "line": 472,
+            "description": "扩展判断操作符,如：'='比较操作符,name = @name",
+            "itemtype": "method",
+            "name": "extendOperation",
+            "params": [
+                {
+                    "name": "operation",
+                    "description": "操作名称",
+                    "type": "String"
+                },
+                {
+                    "name": "checkFn",
+                    "description": "判断方法",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\n\t\t//添加大于操作符'>'\n\t\tst.extendOperation('>',function(data, param) {\n\t\t\t//data为数据，param为条件参数\n\t\t\t\t\treturn data > param;\n\t\t\t\t});"
+            ],
+            "class": "Operations",
+            "module": "FilterBuilder"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 24,
+            "description": "调用原型链方法",
+            "itemtype": "method",
+            "name": "callProto",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "需要执行的原型链方法名",
+                    "type": "String"
+                },
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[object] 返回执行结果"
+            },
+            "class": "klassBase",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 36,
+            "description": "获取基类对象",
+            "itemtype": "method",
+            "name": "getBase",
+            "params": [
+                {
+                    "name": "baseName",
+                    "description": "基类名称,不设置则返回父类",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[object] 返回基类"
+            },
+            "class": "klassBase",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 60,
+            "description": "调用基类的方法",
+            "itemtype": "method",
+            "name": "callBase",
+            "params": [
+                {
+                    "name": "fnName",
+                    "description": "方法名称",
+                    "type": "String"
+                },
+                {
+                    "name": "baseName",
+                    "description": "基类名称",
+                    "type": "[type]",
+                    "optional": true
+                },
+                {
+                    "name": "args",
+                    "description": "方法参数数组",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "执行结果",
+                "type": "Object"
+            },
+            "class": "klassBase",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 93,
+            "description": "类扩展方法",
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "[description]",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "klassBase",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 393,
+            "description": "使用工厂创建产品方法，但不注册到factory中",
+            "itemtype": "method",
+            "name": "build",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "产品名称",
+                    "type": "String"
+                },
+                {
+                    "name": "item",
+                    "description": "产品特性",
+                    "type": "Object"
+                },
+                {
+                    "name": "parent",
+                    "description": "父类名称，注册到factory中产品名称",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回创建的产品",
+                "type": "Object|klass"
+            },
+            "example": [
+                "\n"
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 414,
+            "description": "添加产品方法，注册到factory中",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "产品名称",
+                    "type": "String"
+                },
+                {
+                    "name": "item",
+                    "description": "产品特性",
+                    "type": "Object"
+                },
+                {
+                    "name": "parent",
+                    "description": "父类名称，注册到factory中产品名称",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "返回创建的产品",
+                "type": "Object|klass"
+            },
+            "example": [
+                "\n"
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 428,
+            "description": "查找注册的产品",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "产品名称",
+                    "type": "String"
+                },
+                {
+                    "name": "defaultMode",
+                    "description": "是否在找不到产品的时候返回默认产品",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "返回查找的产品",
+                "type": "Object"
+            },
+            "example": [
+                "\n"
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 449,
+            "description": "将注册的产品设置成默认产品",
+            "itemtype": "method",
+            "name": "setDefault",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "产品名称",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n"
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 462,
+            "description": "在工厂中移除注册的产品",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "产品名称",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                "\n"
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\oop.js",
+            "line": 480,
+            "description": "执行工厂中产品的方法",
+            "itemtype": "method",
+            "name": "fire",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "方法名称",
+                    "type": "String"
+                },
+                {
+                    "name": "args",
+                    "description": "执行参数",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "class": "factory",
+            "module": "OOP"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 33,
+            "description": "将argument转换成array",
+            "itemtype": "method",
+            "name": "sliceArgs",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "argument对象",
+                    "type": "Function"
+                },
+                {
+                    "name": "[start",
+                    "description": "= 0]  开始位置",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[array] 返回转换的数组"
+            },
+            "example": [
+                "\n\t function test() {\n\t \t//从第二个参数开发返回\n        return st.sliceArgs(arguments, 1);\n    }\n    expect(test(1, 2, 3, 4).join(',')).toBe('2,3,4');"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 54,
+            "description": "复制数据方法,支持对象字面量和数组的复制",
+            "itemtype": "method",
+            "name": "copy",
+            "todo": [
+                "：st内部对象的复制功能"
+            ],
+            "params": [
+                {
+                    "name": "deep",
+                    "description": "是否深度复制",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "obj",
+                    "description": "注入的方法名",
+                    "type": "Object | array"
+                }
+            ],
+            "return": {
+                "description": "返回复制之后的对象"
+            },
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 70,
+            "description": "在目标对象方法中注入方法，返回结果",
+            "itemtype": "method",
+            "name": "injectFn",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "注入的目标对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "name",
+                    "description": "注入的方法名",
+                    "type": "String"
+                },
+                {
+                    "name": "fn",
+                    "description": "注入方法",
+                    "type": "Function"
+                },
+                {
+                    "name": "before",
+                    "description": "是否前置注入，默认后置",
+                    "type": "Boolean",
+                    "optional": true
+                },
+                {
+                    "name": "stopOnFalse",
+                    "description": "是否开启返回值为false停止后续执行",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "example": [
+                " \n\tvar result = [],\n        target = {\n            test: function(arr) {\n                arr.push(\"test\");\n            }\n        };\n\n        \n    function fn(arr) {\n        arr.push(\"inject\");\n    }\n    \n    //向target注入方法fn\n    st.injectFn(target, \"test\", fn);\n\n    target.test(result);\n\n    //结果执行注入函数fn\n    expect(result + '').toBe('test,inject');"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 107,
+            "description": "合并方法，返回结果",
+            "itemtype": "method",
+            "name": "mergeFn",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "目标方法",
+                    "type": "Function"
+                },
+                {
+                    "name": "mergeFn",
+                    "description": "合并方法，合并的方法始终在后执行",
+                    "type": "Function"
+                },
+                {
+                    "name": "stopOnFalse",
+                    "description": "是否开启返回值为false停止后续执行",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[function] 返回合并之后的新方法"
+            },
+            "example": [
+                "\n\tvar result = [],\n        fn1, fn2, fn3;\n\n    //合并方法1\n    fn1 = function(arr) {\n        arr.push(\"fn1\");\n        return false;\n    }\n    //合并方法2\n    fn2 = function(arr) {\n        arr.push(\"fn2\");\n    }\n\n    //将fn1和fn2合并成一个新方法fn3，并开启stopOnFalse\n    fn3 = st.mergeFn(fn1, fn2, true);\n\n    fn3(result);\n    //最终因为fn1执行返回false，fn2不执行，\n    expect(result + '').toBe('fn1');"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 181,
+            "description": "合并默认数据方法,将obj中不空的内容从defObj中复制",
+            "itemtype": "method",
+            "name": "mergeObj",
+            "params": [
+                {
+                    "name": "deep",
+                    "description": "是否深度合并",
+                    "type": "Number",
+                    "optional": true
+                },
+                {
+                    "name": "obj",
+                    "description": "合并对象",
+                    "type": "Function"
+                },
+                {
+                    "name": "defObj",
+                    "description": "默认对象",
+                    "type": "Function"
+                },
+                {
+                    "name": "exclude",
+                    "description": "排除合并的设置",
+                    "type": "Array|function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[function] 返回合并之后的对象；如obj不为空时返回obj，否则返回新对象"
+            },
+            "example": [
+                "\n\tvar person = {\n\t            name: \"piter\",\n\t            age: 10,\n\t            child: [{\n\t                name: 'lily'\n\t            }]\n\t        };\n\n\t        var obj = {\n        name: 'a'\n    };\n\n    //根据person的数据进行合并\n    st.mergeObj(obj, person);\n\n    //child被复制\n    expect(obj.child).toBeDefined();\n\n    //age被复制\n    expect(obj.age).toBe(10);\n\n    //name不为null，未被复制\n    expect(obj.name).toBe('a');"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 258,
+            "description": "获取对象的属性或方法，支持命名空间方式获取",
+            "itemtype": "method",
+            "name": "getObj",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "目标对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "ns",
+                    "description": "属性名称或者相对于target的路径，使用\".\"进行分割",
+                    "type": "String"
+                },
+                {
+                    "name": "root",
+                    "description": "是否从根开始，默认从target子开始；从根开始则忽略ns的第一级",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[object] 返回获取的属性或者方法"
+            },
+            "example": [
+                "\n\t//等同于user.project.name\n\tst.getObj(user,'project.name');\n\t\t\t\n\t\t\t//等同于user.name\n\tst.getObj(user,'u.name',true);\n"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 284,
+            "description": "设置对象的属性或方法，支持命名空间方式设置",
+            "itemtype": "method",
+            "name": "setObj",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "目标对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "ns",
+                    "description": "属性名称或者相对于target的路径，使用\".\"进行分割",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "设置的值",
+                    "type": "Object"
+                },
+                {
+                    "name": "mode",
+                    "description": "值设置的方式,目标对象和值都为object类型有效，默认为替换；\"merge\" : 合并默认值；\"extend\" : extend方式合并值；",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "root",
+                    "description": "是否从根开始，默认从target子开始；从根开始则忽略ns的第一级",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[object] 返回获取的属性或者方法"
+            },
+            "example": [
+                "\n\n\t//等同于 user.name = 'roy'\n\tst.setObj(user,'name','roy');\n\n\t\t\t//等同于 user.project.name = 'smartjs';\n\tst.setObj(user,'project.name','smartjs');\n\n\t//等同于 st.mergeObj(user.project,{name:'smartjs'});\n\tst.setObj(user,'project',{name:'smartjs'},\"merge\");\n"
+            ],
+            "class": "util",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 353,
+            "description": "执行回调",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "添加对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "priority",
+                    "description": "权重",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                " \n\t            //添加项\n\t            list.add(1).add(0);\n\n\t            //根据priority添加项\n\t            list.add(10, 10).add(5, 5).add(-1, -1);\n\n\t            //最终存储为[10,5,1,0,-1]"
+            ],
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 409,
+            "description": "执行回调",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "过滤函数，返回值：\n 1. {boolean}：是否匹配；\n 2. 'break' : 结束匹配；\n 3. 'done' : 完成匹配",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                " \n\t           \t//删除 item为1的项\n\t            list.remove(function(item){\n\t                if(item === 1)\n\t                \t//结束匹配\n\t                    return \"done\";\n\t            })"
+            ],
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 450,
+            "description": "循环列表方法，默认根据priority大到小",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "desc",
+                    "description": "是否降序，即根据priority由小到大",
+                    "type": "Boolean",
+                    "optional": true
+                },
+                {
+                    "name": "handler",
+                    "description": "循环处理函数",
+                    "type": "Function"
+                }
+            ],
+            "chainable": 1,
+            "example": [
+                " \n\t\t\t\t //按优先级大到小循环\n\t            list.each(function(item) {\n\t                result.push(item);\n\t            })\n\t            expect(result + '').toBe('10,5,1,0,-1');\n\n\t\t\t\t//按优先级小到大循环\n\t            list.each(true,function(item) {\n\t                result.push(item);\n\t            })\n\t            expect(result + '').toBe('-1,0,1,5,10');"
+            ],
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 498,
+            "description": "根据序号获取item",
+            "itemtype": "method",
+            "name": "at",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "序号",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "返回item",
+                "type": "Object"
+            },
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 508,
+            "description": "清除所有项",
+            "itemtype": "method",
+            "name": "clear",
+            "chainable": 1,
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\core\\util.js",
+            "line": 518,
+            "description": "获取列表长度",
+            "itemtype": "method",
+            "name": "len",
+            "return": {
+                "description": "列表长度",
+                "type": "Number"
+            },
+            "class": "priorityList",
+            "module": "Util"
+        },
+        {
+            "file": "src\\smart.js",
+            "line": 1,
+            "description": "NOTE: smartjs入口 \nFeatures：\n    1.smartjs模块定义方法，兼容requirejs和seajs\n    2.conf配置管理方法\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util",
+            "class": "",
+            "module": "Util"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " src\\core\\oop.js:107"
+        },
+        {
+            "message": "Missing item type\nNOTE: dataManager数据管理 \nFeatures：\n    1.dataServices ：数据服务接口\n    2.dataManager ：基于策略的数据管理基类；\n    2.dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util,aop,oop",
+            "line": " src\\core\\dataManager.js:1"
+        },
+        {
+            "message": "Missing item type\nNOTE: smartjs入口 \nFeatures：\n    1.smartjs模块定义方法，兼容requirejs和seajs\n    2.conf配置管理方法\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util",
+            "line": " src\\smart.js:1"
+        }
+    ]
+}

@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>factory - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>factory <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+        <div class="extends">
+            Extends Klass
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_core_oop.js.html#l246"><code>src\core\oop.js:246</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/OOP.html">OOP</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="well well-small">
+    <p>factory并不只是指的是工厂模式。在factory要求定义一个基础对象，这个对象可以是基类，也可以是模板对象或者是接口。然后factory就已此基础对象为基础，其他添加或者创建的对象，继承或者是复制基础对象的属性和方法。factory在提供一系列方法来对这些对象做控制。
+       factory经过简单的处理可以实现工厂、外观、模板等设计模式。</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_factory" class="method item">
+    <h3 class="name">factory</h3>
+    <code>
+    factory
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        base
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [proto]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [type]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [initDefault]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Factory</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l246"><code>src\core\oop.js:246</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>工厂名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">base</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>基类对象，所有在工厂中添加的对象都以base为基础</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[proto]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>工厂的扩展属性和方法对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[type]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>工厂的类型； </p>
+<ol>
+<li>默认:类实例化后的对象；</li>
+<li>class：类对象，未实例化；</li>
+<li>merge：对象复制合并</li>
+</ol>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[initDefault]</code></td>
+                    <td><span class="type">Boolean</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>是否将base设置成为默认的对象；当使用factory.get找不到对象时返回默认对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Factory</span>:
+                    
+                    <p>返回创建的工厂对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//widget基类
+       var baseWidget = {
+           //widget类型
+           type: &#39;&#39;,
+           //widget的渲染方法
+           render: function(id) {
+               return this.type + &#39;:&#39; + id;
+           }
+       };
+
+       //一个widget工厂
+       var widgetFactory = st.factory(&#39;wdigetfactory&#39;, baseWidget);
+
+       //添加一个input
+       widgetFactory.add(&#39;input&#39;, {
+           type: &#39;input&#39;
+       })
+
+       //找到添加的input
+       var input = widgetFactory.find(&#39;input&#39;);
+
+       //输出
+       expect(input.render(&#39;txt&#39;)).toBe("input:txt");
+
+
+       //添加一个number类型的input
+       var num = widgetFactory.add(&#39;number&#39;, {
+           type: &#39;input[number]&#39;
+           //指定父类为input
+       }, &#39;input&#39;)
+
+       //输出
+       expect(num.render(&#39;txtNum&#39;)).toBe("input[number]:txtNum");
+
+
+
+       // class mode
+       var f1 = st.factory({
+           name: &#39;classMode&#39;,
+           //设置class类型
+           type: &#39;class&#39;,
+           base: {
+               klassInit: function(name) {
+                   this.name = name;
+               }
+
+           }
+       });
+
+       var c1 = f1.add(&#39;c1&#39;, {
+           type: &#39;c1&#39;
+       });
+
+       expect(c1.fn).toBeDefined();
+       //需要初始化
+       var c = new c1(&#39;class1&#39;);
+       expect(c.type).toBe("c1");
+       expect(c.name).toBe("class1");
+
+
+
+       //merget mode
+        var f2 = st.factory({
+           name: &#39;copyMode&#39;,
+           //设置merge类型
+           type: 　&#39;merge&#39;,
+           //设置默认模式
+           initDefault: true,
+           base: {
+               name: &#39;copy&#39;,
+               project: {
+                   name: &#39;smartjs&#39;
+               }
+           }
+       })
+
+       var c = f2.add(&#39;c1&#39;, {
+           name: &#39;c1&#39;,
+           project: {
+               role: &#39;pm&#39;
+           }
+       });
+
+       expect(f2.find().name).toBe("copy");
+       expect(c.name).toBe("c1");
+       expect(c.project.name).toBe("smartjs");
+       expect(c.project.role).toBe("pm");</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+    </div>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+        
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_add" data-tablink="add">add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_build" data-tablink="build">build</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_callBase" data-tablink="callBase">callBase</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_callProto" data-tablink="callProto">callProto</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_extend" data-tablink="extend">extend</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_find" data-tablink="find">find</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_fire" data-tablink="fire">fire</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_getBase" data-tablink="getBase">getBase</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setDefault" data-tablink="setDefault">setDefault</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_add" class="method item">
+    <h3 class="name">add</h3>
+    <code>
+    add
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        item
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [parent]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object | Klass</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l414"><code>src\core\oop.js:414</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>添加产品方法，注册到factory中</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">item</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品特性</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[parent]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>父类名称，注册到factory中产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object | Klass</span>:
+                    
+                    <p>返回创建的产品</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_build" class="method item">
+    <h3 class="name">build</h3>
+    <code>
+    build
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        item
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [parent]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object | Klass</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l393"><code>src\core\oop.js:393</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>使用工厂创建产品方法，但不注册到factory中</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">item</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品特性</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[parent]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>父类名称，注册到factory中产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object | Klass</span>:
+                    
+                    <p>返回创建的产品</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_callBase" class="method item inherited">
+    <h3 class="name">callBase</h3>
+    <code>
+    callBase
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        fnName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [baseName]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_callBase">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l60"><code>src\core\oop.js:60</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>调用基类的方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fnName</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[baseName]</code></td>
+                    <td><span class="type">type</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>基类名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法参数数组</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_callProto" class="method item inherited">
+    <h3 class="name">callProto</h3>
+    <code>
+    callProto
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_callProto">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l24"><code>src\core\oop.js:24</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>调用原型链方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>需要执行的原型链方法名</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>执行参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>[object] 返回执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_extend" class="method item inherited">
+    <h3 class="name">extend</h3>
+    <code>
+    extend
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        prop
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_extend">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l93"><code>src\core\oop.js:93</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>类扩展方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">prop</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[description]</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_find" class="method item">
+    <h3 class="name">find</h3>
+    <code>
+    find
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        defaultMode
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l428"><code>src\core\oop.js:428</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>查找注册的产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">defaultMode</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>是否在找不到产品的时候返回默认产品</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>返回查找的产品</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_fire" class="method item">
+    <h3 class="name">fire</h3>
+    <code>
+    fire
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l480"><code>src\core\oop.js:480</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>执行工厂中产品的方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>执行参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getBase" class="method item inherited">
+    <h3 class="name">getBase</h3>
+    <code>
+    getBase
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [baseName]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_getBase">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l36"><code>src\core\oop.js:36</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>获取基类对象</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[baseName]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>基类名称,不设置则返回父类</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>[object] 返回基类</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_remove" class="method item">
+    <h3 class="name">remove</h3>
+    <code>
+    remove
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l462"><code>src\core\oop.js:462</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>在工厂中移除注册的产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_setDefault" class="method item">
+    <h3 class="name">setDefault</h3>
+    <code>
+    setDefault
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l449"><code>src\core\oop.js:449</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>将注册的产品设置成默认产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

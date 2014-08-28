@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>EventArg(trigger) - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>EventArg(trigger) <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+        <div class="extends">
+            Extends <a href="../classes/EventArg.html" class="crosslink">EventArg</a>
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_core_aop.js.html#l697"><code>src\core\aop.js:697</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/AOP.html">AOP</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="well well-small">
+    <p>trigger下的事件参数，由EventArg扩展而来</p>
+
+</div>
+
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+        
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_preventDefault" data-tablink="preventDefault">preventDefault</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_stop" data-tablink="stop">stop</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_stopPropagation" data-tablink="stopPropagation">stopPropagation</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_preventDefault" class="method item">
+    <h3 class="name">preventDefault</h3>
+    <code>
+    preventDefault
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l702"><code>src\core\aop.js:702</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>阻止默认的方法执行；</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var obj = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+});
+
+obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+    result.push(name + &#39;-before1&#39;);
+    //阻止前置后续的事件&amp;阻止默认方法
+    e.stopPropagation().preventDefault();
+})
+
+obj.onBefore(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+    result.push(name + &#39;-before2&#39;);
+})
+
+obj.on(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+    result.push(name + &#39;-after&#39;);
+})
+
+obj.test(&#39;call&#39;);
+//最终输出前置call-before1和后置
+expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_remove" class="method item inherited">
+    <h3 class="name">remove</h3>
+    <code>
+    remove
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventArg.html#method_remove">EventArg</a>:
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l307"><code>src\core\aop.js:307</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>删除当前事件；与promiseEvent.add的&#39;once&#39;模式，不同在于可以手动进行控制</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> calls.add("onceTest", function(e) {
+    //删除"onceTest"这个事件；
+    e.remove();
+});
+//执行后才会触发删除
+calls.fire();
+
+//"onceTest"已经不在calls中
+expect(calls.has("onceTest")).toBe(false);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_resolve" class="method item inherited">
+    <h3 class="name">resolve</h3>
+    <code>
+    resolve
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [result]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/EventArg.html#method_resolve">
+                EventArg
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l254"><code>src\core\aop.js:254</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>完成契约</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[result]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>返回结果</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
+
+pCalls.add("c1", function(e, name) {
+    //延迟100ms
+    setTimeout(function() {
+        //完成promise,并返回结果
+        e.resolve(name + &#39;,resolve!&#39;);
+    }, 100);
+    //返回promise
+    return e.promise();
+});
+
+//使用when来监控promiseEvent的执行，使用done来处理执行完毕的方法
+$.when(pCalls.fire("call")).done(function(data) {
+    expect(data).toBe(&#39;call,resolve!&#39;);
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_stop" class="method item">
+    <h3 class="name">stop</h3>
+    <code>
+    stop
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l736"><code>src\core\aop.js:736</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>停止当前方法执行和后置所有事件；在属性监听时，则阻止赋值；</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var obj = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+});
+
+obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+    result.push(name + &#39;-before1&#39;);
+    //停止执行
+    e.stop();
+})
+
+obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+    result.push(name + &#39;-before2&#39;);
+})
+
+obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+    result.push(name + &#39;-after&#39;);
+})
+
+obj.test(&#39;call&#39;);
+
+//最终只输入前置call-before1
+expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1&#39;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_stopPropagation" class="method item inherited">
+    <h3 class="name">stopPropagation</h3>
+    <code>
+    stopPropagation
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/EventArg.html#method_stopPropagation">EventArg</a>:
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l236"><code>src\core\aop.js:236</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>停止所有后续事件执行</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>calls.add("c1", function(e) {
+    //阻止冒泡
+    e.stopPropagation();
+})
+.add("c2", function() {});
+
+//只执行了c1
+calls.fire();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

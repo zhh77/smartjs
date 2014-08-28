@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>promiseEvent - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>promiseEvent <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_core_aop.js.html#l70"><code>src\core\aop.js:70</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/AOP.html">AOP</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="well well-small">
+    <p>基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
+默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），
+直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_promiseEvent" class="method item">
+    <h3 class="name">promiseEvent</h3>
+    <code>
+    promiseEvent
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l70"><code>src\core\aop.js:70</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>promiseEvent的模式，可以混用；</p>
+<pre><code>1. 默认；event模式，所有的注册的事件，执行时，第一个事件参数为e（详细说明见promiseEvent-EventArg）
+2. &#39;callback&#39; : 回调模式; 与event模式对立，执行时不会添加事件参数e
+2. &#39;none&#39; : 全部事件执行一次，即有执行动作就销毁
+3. &#39;noBlock&#39; : 非阻塞模式；</code></pre>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//使用once和callback模式创建promiseEvent
+var calls = st.promiseEvent("once callback")</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+    </div>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+        
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_add" data-tablink="add">add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_clear" data-tablink="clear">clear</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_fire" data-tablink="fire">fire</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_fireWith" data-tablink="fireWith">fireWith</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_has" data-tablink="has">has</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_add" class="method item">
+    <h3 class="name">add</h3>
+    <code>
+    add
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [priority=0]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l117"><code>src\core\aop.js:117</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>添加事件回调方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>事件回调名</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>事件回调方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[priority=0]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>权重</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>回调模式："once":执行一次</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//注册事件
+calls.add(&#39;call1&#39;, function(e, text) {})
+
+//自定义priority注册事件
+calls.add(&#39;call2&#39;, function(e, text) {},100)
+
+//单once模式注册
+calls.add(&#39;call3&#39;, function(e, text) {},&#39;mode&#39;)
+
+//所有设置
+calls.add(&#39;call4&#39;, function(e, text) {},50,&#39;mode&#39;)
+
+
+
+//返回promise
+call.add("promiseCall", function(e, name) {
+    //异步的方法
+    async(function() {
+        e.resolve();
+    });
+    return e.promise();
+});
+
+
+
+//result传递
+var resultCalls = st.promiseEvent();
+resultCalls.add("c1", function(e) {
+    //传递结果（promise下的resolve与return效果相同）
+    return "c1";
+}).add("c2", function(e) {
+    //e.result是由c1返回过来的值
+    return e.result + ",c2";
+});
+
+
+
+//callbak 模式下添加事件
+var calls1 = st.promiseEvent("callback");
+
+//没有eventArg参数
+calls1.add("c1", function(name) {
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_clear" class="method item">
+    <h3 class="name">clear</h3>
+    <code>
+    clear
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l104"><code>src\core\aop.js:104</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>清空所有事件回调</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//清除calls下面注册的事件
+calls.clear();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_fire" class="method item">
+    <h3 class="name">fire</h3>
+    <code>
+    fire
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        args
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [argHandle]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l415"><code>src\core\aop.js:415</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>执行回调</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">args</code>
+                       <td> <span class="type">Array</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>执行参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[argHandle]</code></td>
+                    <td><span class="type">Function</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>参数处理方法，可以对eventarg进行修改；例如：argHandle(e)</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>返回执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//注册call1
+calls.add(&#39;call1&#39;, function(e, text) {
+    alert(text);
+})
+
+//执行call1，返回called
+calls.fire(&#39;called&#39;);
+
+//使用eventArg控制
+calls.add("c1", function(e) {
+    //阻止后续回调
+    e.stopPropagation();
+})
+.add("c2", function() {
+});
+
+//只执行了c1
+calls.fire();
+
+
+
+//promise模式下
+calls.add("c1", function(e, name) {
+    setTimeout(function() {
+        e.resolve(name + &#39;-c1&#39;);
+    }, 100);
+    return e.promise();
+});
+
+//使用when来监控返回的result
+$.when(calls.fire("call")).done(function(result) {
+
+}.fail(function(error){
+
+}));
+
+
+
+//noBlock模式的promiseEvents;
+var noBlockCalls = st.promiseEvent("noBlock");
+
+//第一个回调延迟100
+noBlockCalls.add("c1", function(e) {
+    setTimeout(function() {
+        result.push(&#39;c1&#39;);
+        e.resolve();
+    }, 100);
+    return e.promise();
+});
+
+//第二个正常执行
+noBlockCalls.add("c2", function(e) {
+    result.push(&#39;c2&#39;);
+});
+
+//第三个回调延迟50
+noBlockCalls.add("c3", function(e) {
+    setTimeout(function() {
+        result.push(&#39;c3&#39;);
+        e.resolve();
+    }, 50);
+    return e.promise();
+});
+
+$.when(noBlockCalls.fire()).done(function(data) {
+    //最终执行顺序是c2-c3-c1
+    expect(result + &#39;&#39;).toBe(&#39;c2,c3,c1&#39;);
+    testCall();
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_fireWith" class="method item">
+    <h3 class="name">fireWith</h3>
+    <code>
+    fireWith
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        context
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        args
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [argHandle]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object | Promise</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l204"><code>src\core\aop.js:204</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>根据上下文对象执行回调;fire方法的增强</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">context</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>上下文对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">args</code>
+                       <td> <span class="type">Array</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>执行参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[argHandle]</code></td>
+                    <td><span class="type">Function</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>参数处理方法，可以对eventarg进行修改；例如：argHandle(e)</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object | Promise</span>:
+                    
+                    <p>返回执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//使用context上下执行
+calls.fireWith(context,[param1,param2],function(e){
+    //此处在e(EventArg)初始化时，进行扩展
+})</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_has" class="method item">
+    <h3 class="name">has</h3>
+    <code>
+    has
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l387"><code>src\core\aop.js:387</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>判断是否存在事件回调</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>事件回调名</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>是否存在</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//判断是否注册了"call1"的event
+if(calls.has("call1"))
+    .........</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_remove" class="method item">
+    <h3 class="name">remove</h3>
+    <code>
+    remove
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l184"><code>src\core\aop.js:184</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>删除事件回调方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>事件回调名</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//注册事件
+calls.add(&#39;call1&#39;, function(e, text) {})
+
+//删除事件
+calls.remove(&#39;call1&#39;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>attachTrigger - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>attachTrigger <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_core_aop.js.html#l517"><code>src\core\aop.js:517</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/AOP.html">AOP</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="well well-small">
+    <p>给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理
+目前有四种注入方式： </p>
+<ol>
+<li>before，前置注入，在目标方法执行之前执行；</li>
+<li>after，后置执行，在目标方法执行之后执行；</li>
+<li>round，环绕，将目标方法包装，自定义控制；</li>
+<li>error，错误，捕获reject的事件；</li>
+</ol>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_attachTrigger" class="method item">
+    <h3 class="name">attachTrigger</h3>
+    <code>
+    attachTrigger
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        target
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [fnInterface]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Trigger</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l517"><code>src\core\aop.js:517</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">target</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[object] 目标对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注入前置和后置所采用的promiseEvent的模式，具体见promsieEvent的add</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[fnInterface]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>；自定义接口方法；在使用attachTrigger方法后，会在target上附加一些控制方法，为了避免重名和控制对外的方法，使用fnInterface来自定义</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Trigger</span>:
+                    
+                    <p>返回附加上了trigger的对象;</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> var obj1 = {
+    test: function(name) {
+        result.push(name);
+    }
+};
+
+//给obj1对象附上触发器功能
+st.attachTrigger(obj1);
+
+//直接初始化成trigger对象
+var obj2 = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+});
+
+//定制trigger的接口方法
+ var obj3 = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+}, {
+    //屏蔽trigger的on方法
+    on: null,
+    //将trigger的onBebefore方法名改成bind
+    onBefore: "bind"
+})</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+    </div>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+        
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_extend" data-tablink="extend">extend</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_fireHandler" data-tablink="fireHandler">fireHandler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_off" data-tablink="off">off</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_offBefore" data-tablink="offBefore">offBefore</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_on" data-tablink="on">on</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_onBefore" data-tablink="onBefore">onBefore</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_onError" data-tablink="onError">onError</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_onHandler" data-tablink="onHandler">onHandler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_onRound" data-tablink="onRound">onRound</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_extend" class="method item">
+    <h3 class="name">extend</h3>
+    <code>
+    extend
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        prop
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l1123"><code>src\core\aop.js:1123</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">prop</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[object] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> var obj = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+});
+obj.extend({
+    test : function(name){
+        result.push(name + &#39;-extend&#39;)
+    }
+})</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_fireHandler" class="method item">
+    <h3 class="name">fireHandler</h3>
+    <code>
+    fireHandler
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        args
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l904"><code>src\core\aop.js:904</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>执行手动触发的Handler</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">args</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[array] 执行参数数组</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>[object] 执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_off" class="method item">
+    <h3 class="name">off</h3>
+    <code>
+    off
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [trName]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l1072"><code>src\core\aop.js:1072</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注销注册的后置事件方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[trName]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string|array] 注册事件方法的名称：</p>
+<pre><code>    1. 空为清除所有
+    2. 字符串为单个
+    3. 数组为多个</code></pre>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//注册后置testAfter
+obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+    result.push(name + &#39;-after&#39;);
+})
+
+//注销单个后置
+obj.off(&#39;test&#39;, &#39;testAfter&#39;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_offBefore" class="method item">
+    <h3 class="name">offBefore</h3>
+    <code>
+    offBefore
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [trName]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l1095"><code>src\core\aop.js:1095</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注销注册的前置事件方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[trName]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string|array] 注册事件方法的名称：</p>
+<pre><code>    1. 空为清除所有
+    2. 字符串为单个
+    3. 数组为多个</code></pre>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//注册前置testBefore
+obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+    result.push(name + &#39;-before1&#39;);
+})
+
+//注册前置testBefore2
+obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+    result.push(name + &#39;-before2&#39;);
+})
+
+//注销多个前置
+obj.offBefore(&#39;test&#39;, [&#39;testBefore&#39;, &#39;testBefore2&#39;]);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_on" class="method item">
+    <h3 class="name">on</h3>
+    <code>
+    on
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        trName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [priority]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l917"><code>src\core\aop.js:917</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注册后置的事件方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">trName</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注册事件方法的名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[function] 注册事件方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[priority]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[number] 权重设置，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 加入的事件模式，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var result = [], obj = st.attachTrigger({
+    //方法
+    test: function(name) {
+        result.push(name);
+    },
+    //子对象
+    child : {
+        test : function(name){
+            result.push(name);
+        }
+    }，
+    //属性
+    prop : 1
+});
+
+//注册前置
+obj.onBefore("test", "addBefore", function(e, name) {
+    result.push(&#39;before-&#39; + name)
+})
+//注册后置
+.on("test", "addAfter", function(e, name) {
+    result.push(&#39;after-&#39; + name)
+});
+
+//执行test方法
+obj.test(&#39;bind&#39;);
+//前后置正确触发
+expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");
+
+
+//支持子对象方法注册
+obj.onBefore("child.test", "addBefore", function(e, name) {
+    result.push(&#39;before-&#39; + name)
+}).on("child.test", "addAfter", function(e, name) {
+    result.push(&#39;after-&#39; + name)
+});
+
+//属性监听只有before，after两种方法注入类型，不支持round环绕模式。
+//before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
+//after：在after则是无法干预值的变化，因此只是做监听使用；
+
+
+//注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
+ obj.onBefore(&#39;prop&#39;, &#39;testBefore&#39;, function(e, value,oldValue) {
+    result.push(value + &#39;-before-&#39; + oldValue);
+})
+
+obj.on(&#39;prop&#39;, &#39;testAfter&#39;, function(e, value,oldValue) {
+    result.push(value + &#39;-after-&#39; + oldValue);
+})
+
+expect(obj.prop).toBe(1);
+
+obj.prop = 2;
+//输出前后置监听
+expect(result.join(&#39;,&#39;)).toBe(&#39;2-before-1,2-after-1&#39;);
+expect(obj.prop).toBe(2);
+
+//前置中干预赋值
+obj.onBefore(&#39;prop&#39;, &#39;testBefore&#39;, function(e, value) {
+    result.push(value + &#39;-before&#39;);
+    //停止方法，阻止赋值行为
+    e.stop();
+})</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_onBefore" class="method item">
+    <h3 class="name">onBefore</h3>
+    <code>
+    onBefore
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        trName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [priority]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l996"><code>src\core\aop.js:996</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注册前置的事件方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">trName</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注册事件方法的名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[function] 注册事件方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[priority]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[number] 权重设置，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 加入的事件模式，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>//见on方法</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_onError" class="method item">
+    <h3 class="name">onError</h3>
+    <code>
+    onError
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        trName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l1041"><code>src\core\aop.js:1041</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注册错误捕获事件，当执行reject的时候触发</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">trName</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注册事件方法的名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[function] 注册事件方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 加入的事件模式，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var testError = st.attachTrigger({
+    test: function(name) {
+        var e = $.Deferred();
+        setTimeout(function() {
+            //拒绝契约
+             e.reject(&#39;reject&#39;);
+        }, 100);
+        return e.promise();
+    }
+});
+//注册错误捕获事件
+testError.onError("test","triggerError",function(err,name){
+      expect(err).toBe(&#39;reject&#39;);
+      expect(name).toBe(&#39;call&#39;);
+      testCall();
+})
+testError.test(&#39;call&#39;);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_onHandler" class="method item">
+    <h3 class="name">onHandler</h3>
+    <code>
+    onHandler
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        trName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [priority]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [mode]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l887"><code>src\core\aop.js:887</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注册手动的触发的Handler</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">trName</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注册事件方法的名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[function] 注册事件方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[priority]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[number] 权重设置，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[mode]</code></td>
+                    <td><span class="type">Object</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 加入的事件模式，同PrmiseEvent</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_onRound" class="method item">
+    <h3 class="name">onRound</h3>
+    <code>
+    onRound
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        trName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        fn
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_aop.js.html#l1012"><code>src\core\aop.js:1012</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>注册环绕触发事件</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 目标方法或者属性名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">trName</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[string] 注册事件方法的名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fn</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>[function] 注册事件方法</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> var obj3 = st.attachTrigger({
+    test: function(name) {
+        result.push(name);
+    }
+});
+
+//注册环绕事件，事件方法参数第一为fn为原方法，后面的为执行参数
+obj3.onRound("test", "roundTest", function(fn, name) {
+    result.push(&#39;before&#39;);
+    //执行原有方法
+    fn(name);
+    result.push(&#39;after&#39;);
+});
+
+obj3.test(&#39;round&#39;);
+expect(result.join(&#39;,&#39;)).toBe("before,round,after");</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\core\dataManager.js - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\core\dataManager.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+/************************************* Smart JS **************************
+NOTE: dataManager数据管理 
+Features：
+    1.dataServices ：数据服务接口
+    2.dataManager ：基于策略的数据管理基类；
+    2.dataPolicyManager ：数据策略管理器；
+
+Update Note：
+    2014.6 ：Created
+
+Needs：util,aop,oop
+    
+****************************************************************************/
+stDefine(&#x27;dataManager&#x27;, function(st) {
+
+	var dataManager, policyManager, dataServices,
+		_config = {
+			ignoreMerges: [&quot;params&quot;, &quot;filter&quot;, &quot;_filterBuilder&quot;],
+			dmOp: {
+				set: {},
+				get: {}
+			}
+		},
+		defFilterBuilder = st.filterBuilder(),
+		promiseEvent = st.promiseEvent,
+		isFunction = $.isFunction;
+
+
+	//数据服务
+	dataServices = st.factory({
+		name: &quot;dataServices&quot;,
+		proto: {
+			//通过操作方法；type：操作类型; op：操作参数
+			operate: function(type, op) {
+				var ds = this.find(op.dsType);
+				if (ds) {
+					if (type !== &#x27;initOptions&#x27;) {
+						ds.initOptions(op);
+					}
+					return ds[type](op);
+				} else
+					throw op.dsType + &quot;,not defined in dataServices!&quot;;
+			},
+			//查询方法；op：操作参数
+			search: function(op) {
+				return this.operate(&#x27;search&#x27;, op);
+			},
+			//更新方法；op：操作参数
+			update: function(op) {
+				return this.operate(&#x27;update&#x27;, op);
+			}
+		},
+		base: {
+			//查询接口
+			search: function(op) {},
+			//更新接口
+			update: function(op) {},
+			//通用初始化参数接口
+			initOptions: function(op) {}
+		}
+	})
+
+	//数据管理器
+	dataManager = st.factory({
+		name: &quot;dataManager&quot;,
+		type: &quot;class&quot;,
+		proto: {
+			//创建dm方法
+			create: function(type, op) {
+				var dm = this.find(type);
+				if (dm)
+					return new dm(op);
+				else
+					console.log(type + &quot;,not defined in dataManager&quot;);
+			}
+		},
+		base: {
+			_filterMode: true,
+			//_operations : [&quot;get&quot;,&quot;set&quot;],
+			klassInit: function(op) {
+				var dm = st.attachTrigger(this);
+
+				op = dm.op = st.mergeObj(op, _config.dmOp);
+
+				initPolicy(dm, op.get, &#x27;get&#x27;);
+				initPolicy(dm, op.set, &#x27;set&#x27;);
+
+				initFlow(dm);
+				policyManager.applyPolicy(dm, dm._Flow, op);
+				this.init(op);
+			},
+			//dm初始化方法
+			init: function(op) {},
+			//获取数据
+			get: function(conf) {
+				var dm = this;
+				conf = initConf(dm, conf);
+				return whenFlow(dm._Flow.boot(dm, dm.op, conf.policy), conf.success, conf.error);
+			},
+			//设置数据
+			set: function(conf) {
+				var dm = this;
+				conf = initConf(dm, conf);
+				return whenFlow(dm._Flow.bootWithStart(&quot;setData&quot;, [dm, dm.op, conf.policy]), conf.success, conf.error);
+			},
+			//dm内置查询
+			_innerSearch: function(op) {
+
+			},
+			//dm内置更新
+			_innerUpdate: function(op) {
+
+			},
+			//检查数据是否为空
+			checkEmpty: function(data, conf) {
+				return data === undefined;
+			},
+			//验证方法
+			validate: function() {
+
+			},
+			//清空方法
+			clear: function() {
+
+			},
+			//初始化数据服务配置方法
+			setDataSerive: function(config) {},
+			initPolicy: function(policy, type) {
+				if (this._filterMode) {
+					policy._filterBuilder = policy.filter ? st.filterBuilder(policy.filter) : defFilterBuilder;
+				}
+			},
+			buildParams: function(policy, defPolicy) {
+				buildParams(this, policy, defPolicy);
+			},
+			buildPolicy: function(policy, defPolicy) {
+				this.buildParams(policy, defPolicy)
+				st.mergeObj(policy, defPolicy, _config.ignoreMerges);
+			}
+		}
+	});
+
+	function initFlow(dm) {
+		dm._Flow = st.flowController({
+			flow: {
+				buildGetPolicy: function(e, dm, op, policy, isTrigger) {
+					//合并策略
+					dm.buildPolicy(policy, op.get);
+				},
+				getData: function(e, dm, op, policy, isTrigger) {
+					var result = searchDM(dm, policy);
+					e.__getDone = true;
+					if (checkEmpty(dm, result, policy)) {
+						e.next(&quot;getFromDs&quot;);
+					} else {
+						e.next(&quot;getFromDm&quot;);
+					}
+					return result;
+				},
+				getFromDm: function(e, dm, op, policy, isTrigger) {
+					var result = e.__getDone ? e.result : searchDM(dm, policy);
+					if (!policy.update)
+						e.end();
+
+					return result;
+				},
+				getFromDs: function(e, dm, op, policy, isTrigger) {
+					var success, ds = getDs(policy, op);
+					if (ds) {
+						success = function(result) {
+							if (policy.update !== false) {
+								dm.set(buildGetSetPolicy(dm, result, policy,
+									function(result) {
+										e.end().resolve(result);
+									}, e.reject));
+
+							} else {
+								e.end().resolve(result);
+							}
+						}
+
+						openDatatransfer(&#x27;search&#x27;, ds, dm, policy, success, e.reject);
+						return e.promise();
+					} else {
+						e.end().resolve(searchDM(dm, policy));
+					}
+				},
+				setData: function(e, dm, op, policy, isTrigger) {
+					//合并策略
+					dm.buildPolicy(policy, op.set);
+					e.next(policy.way === &#x27;ds&#x27; ? &#x27;setToDs&#x27; : &#x27;setToDm&#x27;);
+				},
+				setToDm : function(e, dm, op, policy, isTrigger){
+					if(policy.way !== &#x27;dm&#x27;)
+						e.next(&#x27;setToDs&#x27;);
+					return dm._innerUpdate(policy);;
+				},
+				setToDs: function(e, dm, op, policy, isTrigger) {
+					var success, error, ds = getDs(policy, op),
+						isPending = policy.pending !== false;
+
+					if (ds) {
+						if (isPending) {
+							success = e.resolve;
+							error = e.reject;
+						} else {
+							e.resolve(data);
+						}
+
+						openDatatransfer(&#x27;update&#x27;, ds, dm, policy, success, error);
+
+						if (isPending)
+							return e.promise();
+					}
+				}
+			},
+			order: [&quot;buildGetPolicy&quot;, &quot;getData&quot;, &quot;setData&quot;],
+			trigger: true
+		});
+	}
+
+	function initPolicy(dm, policy, type) {
+		if (policy) {
+			dm.initPolicy(policy, type);
+			if (policy.get &amp;&amp; (type === &#x27;get&#x27; || type === &#x27;trigger&#x27;))
+				dm.initPolicy(policy.get, &#x27;set&#x27;);
+		}
+	}
+
+	//初始化dm的get，set配置
+
+	function initConf(dm, conf) {
+		if (!conf) {
+			conf = {};
+		}
+		var success = conf.success,
+			error = conf.error;
+
+		conf.success = null;
+		conf.error = null;
+
+		return {
+			policy: conf,
+			success: success,
+			error: error
+		};
+	}
+
+	function checkEmpty(dm, data, policy) {
+		return (dm.op.checkEmpty || dm.checkEmpty)(data, policy)
+	}
+
+	function whenFlow(fireResult, success, error) {
+		var d = $.Deferred();
+		$.when(fireResult).done(function(result) {
+			success &amp;&amp; success(result);
+			d.resolve(result);
+		}).fail(function(err) {
+			error &amp;&amp; error(err);
+			d.resolve(err);
+		})
+		return d.promise();
+	}
+
+	function buildParams(dm, policy, mgPolicy) {
+		if(policy._$builded)
+			return;
+		
+		var mgParams, pType, params = policy.params;
+
+		//条件参数处理
+		if (isFunction(params)) {
+			params = policy.params = params.apply(null, [dm, policy]);
+		}
+
+		if (mgPolicy &amp;&amp; policy.mergeFilter !== false) {
+			mgParams = mgPolicy.params;
+
+			if (isFunction(mgParams)) {
+				mgParams = mgParams.apply(null, [dm, policy]);
+			}
+
+			if (params) {
+				pType = typeof params;
+				if (pType === typeof mgParams &amp;&amp; pType === &#x27;object&#x27;) {
+					//合并条件参数
+					st.mergeObj(params, mgParams);
+				}
+			} else {
+				policy.params = mgParams;
+			}
+		}
+		if (dm._filterMode) {
+			var filterBuilder = mgPolicy &amp;&amp; mgPolicy._filterBuilder || defFilterBuilder;
+			policy.filter = filterBuilder.buildFn(policy.params, policy.filter);
+		}
+		policy._$builded = true;
+	}
+
+	function buildGetSetPolicy(dm, data, policy, success, error) {
+		var setPolicy = {
+			data: data,
+			filter: policy.filter,
+			params: policy.params,
+			way: &#x27;dm&#x27;,
+			pending: false,
+			success: success,
+			error: error
+		};
+
+		if (policy.set) {
+			dm.buildPolicy(policy.set, setPolicy);
+			return policy.set
+		}
+		return setPolicy;
+	}
+
+	function searchDM(dm, policy) {
+		return dm._innerSearch(policy);
+	}
+
+	function getDs() {
+		var args = arguments,
+			len = args.length,
+			i = 0,
+			ds;
+
+		for (; i &lt; len; i++) {
+			if ((arg = args[i]) &amp;&amp; (ds = arg.dataServices))
+				return ds;
+		};
+	}
+
+	//开启数据传输
+
+	function openDatatransfer(type, ds, dm, policy, success, error) {
+		var dsOp, fnDsQueue, i = 0;
+
+		function buildDsOp(op) {
+			var conf = $.extend(true, {}, op, policy);
+			conf.success = success;
+			conf.error = error;
+			dm.setDataSerive(conf);
+			return conf;
+		}
+		if ($.isArray(ds)) {
+			fnDsQueue = function() {
+				if (dsOp = ds[i++]) {
+					dsOp = buildDsOp(dsOp);
+					dsOp.success = function(result) {
+						checkEmpty(dm, result, policy) ? fnDsQueue() : success(result);
+					}
+					dataServices.operate(type, dsOp);
+				} else
+					success(data);
+			}
+			fnDsQueue();
+		} else
+			dataServices.operate(type, buildDsOp(ds));
+	}
+
+	//策略管理器
+	policyManager = st.factory({
+		name: &quot;DataPolicyManager&quot;,
+		type: &#x27;copy&#x27;,
+		proto: {
+			applyPolicy: function(dm, flow, op) {
+				this.fire(&#x27;init&#x27;, [dm, flow, op]);
+			}
+		},
+		base: {
+			init: function(dm, flow, op) {
+
+			}
+		}
+	});
+
+	policyManager.add(&quot;getWay&quot;, {
+		init: function(dm, flow, op) {
+			flow.onBefore(&quot;getData&quot;, &quot;checkGetWay&quot;, function(e, dm, op, policy) {
+				var way = policy.way,
+					node;
+				if (way) {
+					if (way === &#x27;ds&#x27;) {
+						node = &#x27;getFromDs&#x27;;
+					} else if (way === &#x27;dm&#x27;) {
+						node = &#x27;getFromDm&#x27;;
+					}
+					node &amp;&amp; e.next(node).stop();
+				}
+			})
+
+		}
+	});
+
+	//判断并设置定时器
+
+	function checkTimer(id, timer, fn, dm) {
+		if (!timer)
+			return fn;
+
+		var timers = dm.__timers;
+		if (!__timers) {
+			timers = dm.__timers = {};
+			dm.stopTimer = function(id) {
+				var ts = this.__timers,
+					no;
+				if ($.isEmptyObject(ts))
+					return;
+
+				if (id) {
+					if (no = ts[id]) {
+						ts[id] = null;
+						clearInterval(no);
+					}
+				} else {
+					$.each(ts, function(i, no) {
+						no &amp;&amp; clearInterval(no);
+					});
+					this.__timers = {};
+				}
+
+			}
+		}
+		return function() {
+			timers[id] = setInterval(fn, timer)
+		}
+	}
+
+	//解析Trigger
+
+	function compileTrigger(i, conf, dm, flow, op) {
+		var flowNode, fnRemove, conf = initConf(dm,conf),
+			trPolicy = conf.policy,
+			isDef = trPolicy.def,
+			setPolicy = trPolicy.set,
+			pos = trPolicy.position,
+			delay = trPolicy.delay || 0,
+			timer = trPolicy.timer,
+			userfulLife = trPolicy.userfulLife;
+
+		initPolicy(dm, trPolicy, &#x27;trigger&#x27;);
+
+		//判断注入的流程节点
+		flowNode = trPolicy.def ? &quot;buildGetPolicy&quot; : (pos === &quot;get&quot; ? &quot;getData&quot; : (pos === &quot;dm&quot; ? &quot;getFromDm&quot; : &quot;getFromDs&quot;));
+
+		//注入Handler
+		// success = st.mergeFn(trPolicy.success, function(result) {
+		// 	dm.fireHandler(&quot;trigger&quot;, [result, trPolicy]);
+		// });
+
+		//有效期
+		if (userfulLife) {
+			if (userfulLife === &quot;once&quot;) {
+				fnRemove = function() {
+					return true;
+				}
+			} else if (isFunction(userfulLife)) {
+				fnRemove = userfulLife;
+			}
+		}
+
+		flow.on(flowNode, &quot;trigger&quot;, function(e, dm, op, policy, isTrigger) {
+			var fnRequest, ds, _policy, fnSuccess;
+			if (isTrigger)
+				return;
+
+			//默认时与get动作policy合并
+			if (isDef) {
+				dm.buildPolicy(policy, trPolicy);
+				return;
+			}
+
+			_policy = $.extend({
+				mergeFilter: false,
+				way: &#x27;ds&#x27;,
+			}, trPolicy);
+
+			//合并filter
+			buildParams(dm, _policy, policy);
+
+			fnRequest = function() {
+				whenFlow(dm._Flow.bootWithStart(&quot;getData&quot;, [dm, dm.op, _policy, true]), conf.success, conf.error).always(function(result) {
+					dm.fireHandler(&quot;trigger&quot;, [result, _policy]);
+				});
+			}
+
+			setTimeout(checkTimer(i, timer, fnRequest, dm), delay);
+		})
+	}
+
+	//添加触发器
+	policyManager.add(&quot;trigger&quot;, {
+		init: function(dm, flow, op) {
+			var trigger = op.get &amp;&amp; op.get.trigger;
+			if (trigger) {
+
+				$.each(trigger, function(i, trPolicy) {
+					compileTrigger(i, trPolicy, dm, flow, op);
+				});
+				op.get.trigger = null;
+			}
+		}
+	});
+
+	return {
+		dataManager: dataManager,
+		dataPolicyManager: policyManager,
+		dataServices: dataServices
+	};
+})
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
