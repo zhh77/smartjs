@@ -6,9 +6,9 @@ author : Roy Zhang
 
 desc ： 
         
-        详细的API : [http://zhh77.github.io/smartjs/](http://zhh77.github.io/smartjs/)   
+        详细的API : http://zhh77.github.io/smartjs/  
         
-        介绍在我的博客中同步[http://www.cnblogs.com/zhh8077/](http://www.cnblogs.com/zhh8077/) 
+        介绍在我的博客中同步 http://www.cnblogs.com/zhh8077/
 
 update : 
 ver 0.4 - 2014.8.9
