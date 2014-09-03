@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\core\dataManager-table.js - smartjs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
+        
+            smartjs
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.4.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
+            <li><a href="#classes" data-toggle="tab">Classes</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/AOP.html">AOP</a></li>
+                    
+                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                    
+                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                    
+                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../modules/OOP.html">OOP</a></li>
+                    
+                        <li><a href="../modules/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+            <div class="tab-pane" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                    
+                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    
+                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                    
+                        <li><a href="../classes/dataServices.html">dataServices</a></li>
+                    
+                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                    
+                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                    
+                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    
+                        <li><a href="../classes/factory.html">factory</a></li>
+                    
+                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
+                    
+                        <li><a href="../classes/flowController.html">flowController</a></li>
+                    
+                        <li><a href="../classes/klass.html">klass</a></li>
+                    
+                        <li><a href="../classes/klassBase.html">klassBase</a></li>
+                    
+                        <li><a href="../classes/Operations.html">Operations</a></li>
+                    
+                        <li><a href="../classes/priorityList.html">priorityList</a></li>
+                    
+                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
+                    
+                        <li><a href="../classes/util.html">util</a></li>
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\core\dataManager-table.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+
+/**
+    针对于表类型的数据进行管理
+    
+    Feartures : 
+        1. 提供CRUD接口
+        2. 内置状态控制
+
+
+    Update Note：
+        + 2014.7 ：Created
+
+    @module DataManager
+    @submodule DataManager-Table
+*/
+stDefine(&quot;dataManager-table&quot;, function(st) {
+	var isArray = $.isArray,
+		isPlainObj = $.isPlainObject,
+		_states = [&quot;_$new&quot;, &quot;_$selected&quot;, &quot;_$updated&quot;, &quot;_$deleted&quot;],
+		_dtConfig = {
+			//分页设置
+			pageInf: {
+				pageSize: 20,
+				groupSize: 20,
+				page : 1,
+				total: 0
+			},
+			getField : {
+				pageInf : &quot;pageInf&quot;,
+				result :　&quot;result&quot;
+			}
+		};
+
+	st.dataManager.add(&quot;DataTable&quot;, {
+		init: function(op) {
+			var dm = this;
+			st.mergeObj(true, op, _dtConfig);
+
+			dm.$store = [];
+
+			if (op.crud) {
+				dm.crud.forEach(function(type, conf) {
+					dm.initPolicy(conf);
+					conf.set &amp;&amp; dm.initPolicy(conf.set);
+				})
+			} else
+				op.crud = {};
+
+			//注册处理设置数据方法
+			dm._Flow.onBefore(&quot;setData&quot;, &quot;handleResult&quot;, handleResult);
+		},
+		getKey: function() {
+			return this.op.key;
+		},
+		checkEmpty: function(data, filter) {
+			return data == null || data.length === 0;
+		},
+		clear: function() {
+			this.$store = [];
+		},
+		_innerUpdate: function(config) {
+			if (!config)
+				return;
+
+			var isReplace = config.updateMode === &#x27;replace&#x27;,
+				updateType = config.updateType,
+				filter = config.filter,
+				dm = this,
+				data = config.data,
+				store = dm.$store,
+				isOneData = !isArray(data);
+
+			if (updateType === &#x27;find&#x27;)
+				updateFindData(dm, data);
+			else if (updateType === &#x27;insert&#x27;) {
+				insertData(dm, data);
+			} else if (updateType === &#x27;delete&#x27;) {
+				deleteData(dm, config);
+			} else {
+				(isArray(data) ? updateData : updateOneData)(dm, data, config, isReplace, updateType === &#x27;save&#x27;);
+			}
+			return data;
+		},
+		store: function(data) {
+			if (checkArray(data)) {
+				this.$store = data;
+			}
+		},
+		//单条数据更新
+		updateOne: function(config) {
+			if (!config)
+				return;
+
+			buildParamByOne(this, config);
+			return this.update(config);
+		},
+		update: function(config) {
+			buildCRUDConfig(this, &#x27;update&#x27;, config);
+			return this.set(config);
+		},
+		insert: function(config) {
+			buildCRUDConfig(this, &#x27;insert&#x27;, config);
+			return this.set(config);
+		},
+		save: function(config) {
+			buildCRUDConfig(this, &#x27;save&#x27;, config);
+			return this.set(config);
+		},
+		_innerSearch: function(config) {
+			return findDm(this, config);
+		},
+		findOne: function(config) {
+			var success;
+			if (config) {
+				buildParamByOne(this, config);
+				success = config.success;
+			} else {
+				config = {};
+			}
+
+			if (success) {
+				config.success = function(data) {
+					success(data &amp;&amp; data[0]);
+				}
+			}
+			return this.find(buildCRUDConfig(this, &#x27;findOne&#x27;, config, true));
+		},
+		find: function(config) {
+			buildCRUDConfig(this, &#x27;find&#x27;, config, true)
+			initFindConfig(this.op, config);
+			return this.get(config);
+		},
+		removeOne: function(config) {
+			if (!config)
+				return;
+
+			buildParamByOne(this, config);
+			return this.remove(config);
+		},
+		remove: function(config) {
+			return this.update(buildCRUDConfig(this, &#x27;remove&#x27;, config));
+		},
+		findWithStates: function(states, config) {
+			var stateFilter = [];
+
+			states.forEach(function(state) {
+				result[state] = [];
+			})
+
+			stateFilter = function(item) {
+				states.some(function(state) {
+					if (item[state]) {
+						result[state].push(item);
+						return true;
+					}
+				})
+			}
+			return result;
+		},
+		findByState: function(state, config) {
+
+		},
+		setDataSerive: function(conf) {
+
+		}
+	});
+
+	function checkArray(data) {
+		if (isArray(data))
+			return true;
+
+		console.log(&quot;存储的数据不正确！&quot;);
+	}
+
+	function buildCRUDConfig(dm, type, conf, isFind) {
+		var defConf = dm.op.crud[type];
+		if (!conf)
+			conf = {};
+
+		defConf &amp;&amp; dm.buildPolicy(conf, defConf);
+
+		if (!isFind &amp;&amp; conf.updateType == null)
+			conf.updateType = type;
+
+		return conf;
+	}
+
+	function initFindConfig(op, config) {
+		var changed, pageInf = config.pageInf,
+			oldPageInf = op.pageInf;
+
+		if (config.update &amp;&amp; !config.updateType)
+			config.updateType = &#x27;find&#x27;;
+
+		if (config.way)
+			return;
+
+		if(pageInf &amp;&amp; checkChanged(pageInf,oldPageInf,[&quot;page&quot;,&quot;pageSize&quot;]))
+			changed = true;
+		else
+			changed = checkChanged(config,op,[&quot;order&quot;,&quot;group&quot;]);;
+
+		changed &amp;&amp; (config.way = &#x27;ds&#x27;);
+	}
+
+	function checkChanged(obj,oldObj,fields){
+		var value,changed;
+		fields.some(function(field){
+			value1 = obj[field];
+			if((value != null) &amp;&amp; value == oldObj[field]){
+				changed = true;
+				return true;
+			}
+		})
+		return changed;
+	}
+
+	//生成操作单个的param
+	function buildParamByOne(dm, policy) {
+		var params, key, keyValue, type;
+
+		if (policy &amp;&amp; (params = policy.params) != null) {
+			type = typeof params;
+			if (type !== &#x27;function&#x27;) {
+				if (type !== &#x27;object&#x27; &amp;&amp; (key = dm.getKey())) {
+					keyValue = params;
+					policy.params = params = {};
+					params[key] = keyValue;
+				}
+			}
+		}
+	}
+
+	function handleResult(e, dm, op, policy, isTrigger) {
+		var data = policy.data,pageInf;
+		if(data &amp;&amp; (pageInf = data[op.getField.pageInf])){
+			$.extend(op.pageInf,pageInf);
+			policy.data = data[op.getField.result];
+		}
+	}
+
+	function updateFindData(dm, data) {
+		dm.store(data || []);
+	}
+
+	function insertData(dm, data) {
+		var store = dm.$store;
+		if (isArray(data))
+			dm.$store = store.concat(data);
+		else
+			store.push(data);
+	}
+
+	function updateItemByFilter(store, data, filter, isReplace) {
+		var isUpdated;
+		//根据条件检索
+		store.forEach(function(item, i) {
+			if (filter(item, i)) {
+				if (isReplace)
+					store[i] = data;
+				else
+					$.extend(item, data);
+
+				isUpdated = true;
+				return false;
+			}
+		})
+		return isUpdated;
+	}
+
+	function updateOneData(dm, data, config, isReplace, saveMode) {
+		var isUpdated, store = dm.$store;
+
+		if (store.length &amp;&amp; config.filter) {
+			isUpdated = updateItemByFilter(store, data, config.filter, isReplace);
+		}
+
+		//没有更新时插入数据
+		saveMode &amp;&amp; isUpdated || insertData(dm, [data]);
+		return true;
+	}
+
+	function updateData(dm, data, config, isReplace, saveMode) {
+		var filter, store = dm.$store,
+			key = dm.getKey(),
+			keyValue, updateNum = 0;
+
+		if (store.length &amp;&amp; key) {
+			//通过Key来更新
+			data.forEach(function(updateItem, i) {
+				keyValue = updateItem[key];
+				if (!updateItemByFilter(store, updateItem, function(item) {
+					return item[key] === keyValue;
+				}, isReplace)) {
+					//找不到更新项时，插入数据
+					if (saveMode) {
+						updateNum++;
+						insertData(dm, updateItem);
+					}
+				} else
+					updateNum++;
+			})
+		} else if (saveMode) {
+			insertData(dm, data);
+			updateNum = data.length;
+		}
+		return updateNum;
+	}
+
+	function findDm(dm, config) {
+		var store = dm.$store,
+			result = [];
+
+		if (store.length === 0)
+			return result;
+
+		if (config &amp;&amp; config.filter) {
+			forEachByFitler(store, config, function(item) {
+				result.push(item);
+			}, true);
+			return result;
+		}
+		return result.concat(store);
+	}
+
+	function forEachByFitler(data, config, handle, filterMode) {
+		var filter, pageInf, index,
+			start = 0,
+			end = data.length,
+			item;
+
+		if (end === 0)
+			return;
+
+		if (config) {
+
+			filter = config.filter;
+			//判断filterMode下，filter为空时退出
+			if (!filter &amp;&amp; filterMode)
+				return;
+
+			pageInf = config.pageInf;
+			//根据分页信息设置检索范围
+			if (pageInf &amp;&amp; pageInf.page) {
+				st.mergeObj(pageinf, _dtConfig.pageInf);
+				start = (pageInf.page - 1) * pageInf.pageSize;
+				start + pageInf.pageSize &gt; end &amp;&amp; (end = start + pageInf.pageSize);
+			}
+		}
+
+		if (filter) {
+			for (; start &lt; end; start++) {
+				item = data[start];
+				if (filter(item, start, data)) {
+					index = handle(item, start, data);
+					if (index != null) {
+						start = index;
+					}
+				}
+			}
+		} else {
+			for (; start &lt; end; start++) {
+				index = handle(item, start, data);
+				if (index != null) {
+					start = index;
+				}
+			}
+		}
+	}
+
+	function deleteData(dm, config) {
+		var filter, store = dm.$store,
+			count = 0,
+			start = 0,
+			end = store.length,
+			index, item, handle;
+
+		if (end === 0)
+			return;
+
+		if (config &amp;&amp; (filter = config.filter)) {
+			if (config.preDelete) {
+				handle = function(item, index) {
+					setState(item, _states[3], true);
+				}
+			} else {
+				handle = function(item, index) {
+					store.splice(index, 1);
+					count++;
+					return --index;
+				}
+			}
+			forEachByFitler(store, config, handle, true);
+		} else
+			dm.$store = [];
+
+		return count;
+	}
+
+	function setState(item, type, value) {
+		item[type] = value;
+	}
+})
+
+// policy = {
+// 	get: {
+// 		//获取的方式，auto默认方式；dm，只用dm获取；ds，从
+// 		way: &quot;&quot;
+// 	},
+// 	set: {
+
+// 	},
+// 	dataServices: [{
+// 		//数据服务类型
+// 		dsType: str,
+// 		//过滤参数
+// 		param： obj,
+// 		//过滤器
+// 		fitler: fn | obj
+// 		//更新的数据
+// 		data： obj,
+// 		//成功以后执行的方法
+// 		success: success,
+// 		//失败以后执行的方法
+// 		error: error
+
+// 	}]
+// }
+
+// //服务端的user数据转成前端model数据
+// var userData = {
+// 	id: 1,
+// 	name: &quot;user1&quot;,
+// 	age: 20,
+// 	role: &quot;tester&quot;，
+// 	//关联projectid
+// 	projectId： 1
+// }
+// //项目数据的model数据
+// var projectData = {
+// 	id: 1
+// 	name: &quot;smartjs&quot;,
+// 	ver： &quot;0.3&quot;
+// }
+
+// //创建一个object的对象
+// var user = dataManager.create(&quot;object&quot;, {
+// 	//设置主键字段
+// 	key: &quot;id&quot;,
+// 	//get动作的策略
+// 	get: {
+// 		//定义数据服务
+// 		dataServices: {
+// 			//ajax数据服务
+// 			dsType: &quot;ajax&quot;,
+// 			//默认的请求url地址；根据id查询
+// 			url: &quot;services/user/{id}&quot;,
+// 			//url规则映射
+// 			fieldMapping: {
+// 				//project的查询地址
+// 				project: &quot;services/project/{projectId}&quot;
+// 			}
+// 		}
+// 	}
+// })
+
+// //首先通过id=1的条件，查询user
+// user.get({
+// 	//设置查询参数，默认匹配key字段
+// 	params: 1,
+// 	//执行成功，数据填充到dm，并执行成功方法
+// 	success: function(result) {
+// 		//进行数据渲染
+// 		renderUser(result);
+// 	}
+// })
+
+// //当需要查询项目信息时
+// user.get({
+// 	//查询的字段；dm会根据field匹配到fieldMapping的ajax设置，从而拿到数据
+// 	field: &quot;project&quot;,
+// 	//执行成功，数据填充到dm，并执行成功方法
+// 	success: function(result) {
+// 		//进行数据渲染
+// 		renderProject(result);
+// 	}
+// })
+
+// //如果采用第二种方式，我们在查询玩user后，想延迟10s在加载project信息，那么应该怎么做？
+// //答案是:使用dataManager的trigger
+
+// var user = dataManager.create(&quot;object&quot;, {
+// 	//设置主键字段
+// 	key: &quot;id&quot;,
+// 	//get动作的策略
+// 	get: {
+// 		//定义数据服务
+// 		dataServices: {
+// 			//ajax数据服务
+// 			dsType: &quot;ajax&quot;,
+// 			//默认的请求url地址；根据id查询
+// 			url: &quot;services/user/{id}&quot;
+// 		},
+// 		//定义触发器
+// 		trigger: [{
+// 			name: &quot;get project&quot;,
+// 			//延迟10s
+// 			delay: 10000,
+// 			field: &quot;project&quot;,
+// 			dataServices: {
+// 				//ajax数据服务
+// 				dsType: &quot;ajax&quot;,
+// 				//project的查询地址
+// 				url: &quot;services/project/{projectId}&quot;,
+// 			},
+// 			//触发器执行成功，数据填充到dm数据的project字段中，并执行成功方法
+// 			success: function(result) {
+// 				//进行数据渲染
+// 				renderProject(result);
+// 			}
+// 		}]
+// 	}
+// })
+// //首先通过id=1的条件，查询user
+// user.get({
+// 	//设置查询参数，默认匹配key字段
+// 	params: 1,
+// 	//执行成功，数据填充到dm，并执行成功方法
+// 	success: function(result) {
+// 		//进行数据渲染
+// 		renderUser(result);
+// 	}
+// })
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

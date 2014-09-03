@@ -28,7 +28,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
         </form>
     </div>
 </div>
@@ -53,6 +53,10 @@
                     
                         <li><a href="../modules/AOP.html">AOP</a></li>
                     
+                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                    
+                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                    
                         <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
                     
                         <li><a href="../modules/OOP.html">OOP</a></li>
@@ -65,6 +69,14 @@
                 <ul id="api-classes" class="nav nav-list">
                     
                         <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                    
+                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    
+                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                    
+                        <li><a href="../classes/dataServices.html">dataServices</a></li>
                     
                         <li><a href="../classes/EventArg.html">EventArg</a></li>
                     
@@ -133,19 +145,20 @@
 
 <div class="file">
     <pre class="prettyprint linenums" id='src_code'>
-/************************************* Smart JS **************************
-NOTE: dataManager数据管理 
-Features：
-    1.dataServices ：数据服务接口
-    2.dataManager ：基于策略的数据管理基类；
-    2.dataPolicyManager ：数据策略管理器；
 
-Update Note：
-    2014.6 ：Created
-
-Needs：util,aop,oop
+/**
+    数据管理模块
     
-****************************************************************************/
+    Feartures : 
+        1. dataServices ：数据服务接口
+        2. dataManager ：基于策略的数据管理基类
+        3. dataPolicyManager ：数据策略管理器；
+
+    Update Note：
+        + 2014.7 ：Created
+
+    @module DataManager
+*/
 stDefine(&#x27;dataManager&#x27;, function(st) {
 
 	var dataManager, policyManager, dataServices,
@@ -161,11 +174,70 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		isFunction = $.isFunction;
 
 
-	//数据服务
+	/**
+	 * 数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
+	 * 数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
+	 * @class dataServices
+	 * @constructor
+	 * @extends factory
+	 * @example
+	 * 		//注册cache的数据服务
+			dataServices.add(&quot;cache&quot;, {
+				//实现search接口方法
+				search: function(op) {
+					var result, filter = op.filter;
+					//过滤数据
+					result = filter ? _cache.filter(filter) : _cache;
+					
+					//执行成功之后的方法
+					op.success &amp;&amp; op.success(result);
+				},
+				//实现update接口方法
+				update: function(op) {
+					var filter = op.filter,
+						data = getData(op.data);
+
+					if (filter) {
+						//测试使用，只更新第一条匹配数据
+						$.each(_cache, function(i, item) {
+							if (filter(item)) {
+								_cache[i] = data;
+								return false;
+							}
+						})
+					} else {
+						_cache = op.data || [];
+					}
+					op.success &amp;&amp; op.success(op.data);
+				},
+				//实现initOptions接口方法
+				initOptions: function(op) {
+					//生成fitler，当filter为obj类型时，编译成fn
+					op.filter = buildFitler(op.filter || op.params);
+				}
+			});
+	 */
 	dataServices = st.factory({
 		name: &quot;dataServices&quot;,
 		proto: {
-			//通过操作方法；type：操作类型; op：操作参数
+			/**
+			 * 数据服务通用操作方法；直接执行到具体的数据服务的方法上
+			 * @method  operate
+			 * @param  {string} type 操作类型；1. search; 2. update
+			 * @param  {object} op   参数；具体参数同数据服务
+			 * @param  {object} op.dsType   数据服务类型
+			 * @return {object}      操作结果
+			 * @example
+			 * 		//执行查询cache的操作
+			 * 		var result = dataServices.operate(&#x27;search&#x27;,{
+			 * 			//设置数据服务类型为cache
+			 * 			dsType : &#x27;cache&#x27;,
+			 * 			//过滤参数
+			 * 			fitler : {name : &#x27;roy&#x27;},
+			 * 			//换成的key，cache类型数据服务特有属性参数
+			 * 			cacheKey : &#x27;test&#x27;
+			 * 		});
+			 */
 			operate: function(type, op) {
 				var ds = this.find(op.dsType);
 				if (ds) {
@@ -176,31 +248,109 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 				} else
 					throw op.dsType + &quot;,not defined in dataServices!&quot;;
 			},
-			//查询方法；op：操作参数
+			/**
+			 * 执行数据服务search操作方法
+			 * @method  search
+			 * @param  {object} op   参数；具体参数同数据服务
+			 * @param  {object} op.dsType   数据服务类型
+			 * @return {object}      操作结果
+			 * @example
+			 * 		//使用ajax进行查询
+			 * 		dataServices.search({
+			 * 			//设置数据服务为ajax类型
+			 * 			dsType:&#x27;ajax&#x27;,
+			 * 			//服务地址
+			 * 			url : &#x27;xxxx&#x27;,
+			 * 			//查询参数
+			 * 			param : {name : &#x27;roy&#x27;},
+			 * 			//成功之后执行的方法
+			 * 			success : function(result){...}
+			 * 		})
+			 */
 			search: function(op) {
 				return this.operate(&#x27;search&#x27;, op);
 			},
-			//更新方法；op：操作参数
+			/**
+			 * 执行数据服务update操作方法
+			 * @method  update
+			 * @param  {object} op   参数；具体参数同数据服务
+			 * @param  {object} op.dsType   数据服务类型
+			 * @return {object}      操作结果
+		 	 * @example
+			 * 		//使用rest进行更新
+			 * 		dataServices.update({
+			 * 			//设置数据服务为ajax类型
+			 * 			dsType:&#x27;rest&#x27;,
+			 * 			//rest服务地址
+			 * 			url : &#x27;user/update/{id}&#x27;,
+			 * 			//更新参数
+			 * 			param : {id : 1 ,name : &#x27;roy&#x27;},
+			 * 			//成功之后执行的方法
+			 * 			success : function(result){...}
+			 * 		})
+			 */
 			update: function(op) {
 				return this.operate(&#x27;update&#x27;, op);
 			}
 		},
+		/**
+		 * 数据服务基类
+		 * @class baseDataService
+		 */
 		base: {
-			//查询接口
+			/**
+			 * 查询操作接口  **[接口方法]**
+			 * @method  search
+			 * @param  {object} op   参数；其他具体参数同见具体数据服务
+			 *    @param  {object} op.filter   过滤器
+			 *    @param  {object} op.success   成功之后执行的方法
+			 *    @param  {object} op.error   失败之后执行的方法
+			 * @return {object}      操作结果
+			 */
 			search: function(op) {},
-			//更新接口
+			/**
+			 * 更新操作接口 **[接口方法]**
+			 * @method  update
+			 * @param  {object} op   参数；其他具体参数同见具体数据服务
+			 *    @param  {object} op.filter   过滤器
+			 *    @param  {object} op.data   更新数据
+			 *    @param  {object} op.success   成功之后执行的方法
+			 *    @param  {object} op.error   失败之后执行的方法
+			 * @return {object}      操作结果
+			 */
 			update: function(op) {},
-			//通用初始化参数接口
+			/**
+			 * 通用初始化参数接口 **[接口方法]**
+			 * @method  initOptions
+			 * @param  {object} op   参数；其他具体参数同见具体数据服务
+			 *    @param  {object} op.filter   过滤器
+			 *    @param  {object} op.success   成功之后执行的方法
+			 *    @param  {object} op.error   失败之后执行的方法
+			 * @return {object}      参数
+			 */
 			initOptions: function(op) {}
 		}
 	})
 
-	//数据管理器
+	/**
+	 * 数据管理器工厂
+	 * @class dataManager
+	 * @constructor
+	 * @extends factory
+	 * @example
+	 *
+	 */
 	dataManager = st.factory({
 		name: &quot;dataManager&quot;,
 		type: &quot;class&quot;,
 		proto: {
-			//创建dm方法
+			/**
+			 * 创建数据管理器
+			 * @method create
+			 * @param  {string} type 数据管理器类型
+			 * @param  {object} op   数据管理参数设置
+			 * @return {dataManager}     数据管理对象
+			 */
 			create: function(type, op) {
 				var dm = this.find(type);
 				if (dm)
@@ -209,9 +359,24 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 					console.log(type + &quot;,not defined in dataManager&quot;);
 			}
 		},
+		/**
+		 * 数据管理器基类
+		 * @class baseDataManager
+		 */
 		base: {
+			/**
+			 * 是否过滤模式
+			 * @type {Boolean} _filterMode
+			 */
 			_filterMode: true,
 			//_operations : [&quot;get&quot;,&quot;set&quot;],
+			/**
+			 * 数据管理对象的类初始化方法；
+			 * @method klassInit
+			 * @final
+			 * @param op {object}  数据管理设置参数
+			 * @return {dataManager}   初始化完成的数据管理对象
+			 */
 			klassInit: function(op) {
 				var dm = st.attachTrigger(this);
 
@@ -224,29 +389,60 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 				policyManager.applyPolicy(dm, dm._Flow, op);
 				this.init(op);
 			},
-			//dm初始化方法
+			/**
+			 * 数据管理对象的初始化接口方法 **[接口方法]**
+			 * @method init
+			 * @param  op {object} 数据管理设置参数
+			 */
 			init: function(op) {},
-			//获取数据
+			/**
+			 * 使用dataManager的数据通道进行获取数据
+			 * @method get
+			 * @param  conf {object} 获取设置参数
+			 * @return {object|promise}   查询结果或者promise
+			 */
 			get: function(conf) {
 				var dm = this;
 				conf = initConf(dm, conf);
 				return whenFlow(dm._Flow.boot(dm, dm.op, conf.policy), conf.success, conf.error);
 			},
-			//设置数据
+			/**
+			 * 使用dataManager的数据通道进行设置数据
+			 * @method set
+			 * @param  conf {object} 设置参数
+			 * @return {object|promise}   设置结果或者promise
+			 */
 			set: function(conf) {
 				var dm = this;
 				conf = initConf(dm, conf);
 				return whenFlow(dm._Flow.bootWithStart(&quot;setData&quot;, [dm, dm.op, conf.policy]), conf.success, conf.error);
 			},
-			//dm内置查询
-			_innerSearch: function(op) {
+			/**
+			 * 使用dataManager内置查询(即只在dataManager内部查询，不查询dataService)接口. **[接口方法]**
+			 * @method _innerSearch
+			 * @param  conf {object} 获取设置参数
+			 * @return {object}   查询结果
+			 */
+			_innerSearch: function(conf) {
 
 			},
-			//dm内置更新
-			_innerUpdate: function(op) {
+			/**
+			 * 使用dataManager内置更新(即只在dataManager内部更新，不更新到dataService)接口. **[接口方法]**
+			 * @method _innerUpdate
+			 * @param  conf {object} 设置参数
+			 * @return {object}   设置结果
+			 */
+			_innerUpdate: function(conf) {
 
 			},
-			//检查数据是否为空
+			/**
+			 * 检查数据是否为空;数据策略的判断空数据会根据此方法的结果来判断;不同类型的数据管理的判断也不同。
+			 * 如：object判断是否为undefined;table判断数据的长度是否大于0
+			 * @method checkEmpty
+			 * @param  data {object} 检查的数据
+			 * @param  conf {object} 设置参数
+			 * @return {[type]}  判断是否为空
+			 */
 			checkEmpty: function(data, conf) {
 				return data === undefined;
 			},
@@ -254,20 +450,46 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 			validate: function() {
 
 			},
-			//清空方法
+			/**
+			 * 清空数据管理内的数据的方法. **[接口方法]**
+			 * @method clear
+			 */
 			clear: function() {
-
 			},
-			//初始化数据服务配置方法
+			/**
+			 * 设置dataService的参数,在每次使用数据通道时执行. **[接口方法]**
+			 * @method setDataSerive
+			 * @param config {object} 设置dataService的参数
+			 */
 			setDataSerive: function(config) {},
+			/**
+			 * 初始化策略参数
+			 * @method initPolicy
+			 * @param  policy {object} 策略设置
+			 * @param  type  {type}  操作类型. 
+			 *  1. get; 
+			 *  2. set;
+			 */
 			initPolicy: function(policy, type) {
 				if (this._filterMode) {
 					policy._filterBuilder = policy.filter ? st.filterBuilder(policy.filter) : defFilterBuilder;
 				}
 			},
+			/**
+			 * 生成传递的参数
+			 * @method buildParam
+			 * @param  policy {object}    策略设置
+			 * @param  defPolicy {object} 默认的策略设置
+			 */
 			buildParams: function(policy, defPolicy) {
 				buildParams(this, policy, defPolicy);
 			},
+			/**
+			 * 生成策略，对策略参数进行初始化，生成传递参数，合并参数
+			 * @method  buildPolicy
+			 * @param  policy {object}    策略设置
+			 * @param  defPolicy {object}  默认的策略设置
+			 */
 			buildPolicy: function(policy, defPolicy) {
 				this.buildParams(policy, defPolicy)
 				st.mergeObj(policy, defPolicy, _config.ignoreMerges);
@@ -362,8 +584,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		}
 	}
 
-	//初始化dm的get，set配置
-
+	/*初始化dm的get，set配置*/
 	function initConf(dm, conf) {
 		if (!conf) {
 			conf = {};
@@ -466,8 +687,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		};
 	}
 
-	//开启数据传输
-
+	/*开启数据传输*/
 	function openDatatransfer(type, ds, dm, policy, success, error) {
 		var dsOp, fnDsQueue, i = 0;
 
@@ -528,8 +748,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		}
 	});
 
-	//判断并设置定时器
-
+	/*判断并设置定时器*/
 	function checkTimer(id, timer, fn, dm) {
 		if (!timer)
 			return fn;
@@ -562,8 +781,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		}
 	}
 
-	//解析Trigger
-
+	/*解析Trigger*/
 	function compileTrigger(i, conf, dm, flow, op) {
 		var flowNode, fnRemove, conf = initConf(dm,conf),
 			trPolicy = conf.policy,

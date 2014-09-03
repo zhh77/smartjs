@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>priorityList - smartjs</title>
+    <title>baseDataService - smartjs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -140,7 +140,7 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>priorityList <small>Class</small></h1>
+    <h1>baseDataService <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
@@ -150,13 +150,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_util.js.html#l330"><code>src\core\util.js:330</code></a>
+            Defined in: <a href="../files/src_core_dataManager.js.html#l149"><code>src\core\dataManager.js:149</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Util.html">Util</a>
+            Module: <a href="../modules/DataManager.html">DataManager</a>
         
     
 
@@ -166,142 +166,10 @@
 
 
 <div class="well well-small">
-    <p>权重列表,根据权重的由大到小进入插入。
-具有两种item模式：</p>
-<pre class="code prettyprint"><code>1. 默认，正常item，手动设置priority
-2. self，读取item的priority属性</code></pre>
+    <p>数据服务基类</p>
 
 </div>
 
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_priorityList" class="method item">
-    <h3 class="name">priorityList</h3>
-    <code>
-    priorityList
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [defaultPriority=0]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l330"><code>src\core\util.js:330</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[mode]</code></td>
-                    <td><span class="type">String</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>item模式</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[defaultPriority=0]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>item模式</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var list = st.priorityList();</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-    </div>
 
 
 <div>
@@ -327,42 +195,21 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_add" data-tablink="add">add</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_initOptions" data-tablink="initOptions">initOptions</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_at" data-tablink="at">at</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_search" data-tablink="search">search</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_clear" data-tablink="clear">clear</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_each" data-tablink="each">each</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_len" data-tablink="len">len</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_update" data-tablink="update">update</a>
 
                                 
                                 
@@ -384,151 +231,17 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_add" class="method item">
-    <h3 class="name">add</h3>
+                    <div id="method_initOptions" class="method item">
+    <h3 class="name">initOptions</h3>
     <code>
-    add
+    initOptions
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        item
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [priority]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l353"><code>src\core\util.js:353</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>执行回调</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">item</code>
-                       <td> <span class="type">Object</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>添加对象</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[priority]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>权重</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>            //添加项
-            list.add(1).add(0);
-
-            //根据priority添加项
-            list.add(10, 10).add(5, 5).add(-1, -1);
-
-            //最终存储为[10,5,1,0,-1]</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_at" class="method item">
-    <h3 class="name">at</h3>
-    <code>
-    at
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        index
+                        op
                     
                 </li>
             
@@ -566,7 +279,7 @@
             
         
         
-        <a href="../files/src_core_util.js.html#l498"><code>src\core\util.js:498</code></a>
+        <a href="../files/src_core_dataManager.js.html#l175"><code>src\core\dataManager.js:175</code></a>
         
         </p>
 
@@ -577,7 +290,7 @@
     </div>
 
     <div class="description well well-small">
-        <p>根据序号获取item</p>
+        <p>通用初始化参数接口 <strong>[接口方法]</strong></p>
 
     </div>
 
@@ -590,18 +303,72 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">index</code>
-                       <td> <span class="type">Number</span>
+                       <td> <code class="param-name">op</code>
+                       <td> <span class="type">Object</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>序号</p>
+                        <p>参数；其他具体参数同见具体数据服务</p>
 
                     </div>
 
+                    
+                        <table class="table table-striped">
+                         <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">filter</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>过滤器</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">success</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>成功之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">error</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>失败之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
                     
                 </tr>
             
@@ -618,7 +385,7 @@
                     
                         <span class="type">Object</span>:
                     
-                    <p>返回item</p>
+                    <p>参数</p>
 
                 
             </div>
@@ -629,82 +396,17 @@
 </div>
 
                 
-                    <div id="method_clear" class="method item">
-    <h3 class="name">clear</h3>
+                    <div id="method_search" class="method item">
+    <h3 class="name">search</h3>
     <code>
-    clear
-    
-        <span class="paren">()</span>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l508"><code>src\core\util.js:508</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>清除所有项</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_each" class="method item">
-    <h3 class="name">each</h3>
-    <code>
-    each
+    search
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        [desc]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        handler
+                        op
                     
                 </li>
             
@@ -714,130 +416,8 @@
     </code>
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l450"><code>src\core\util.js:450</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>循环列表方法，默认根据priority大到小</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[desc]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否降序，即根据priority由小到大</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">handler</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>循环处理函数</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>             //按优先级大到小循环
-            list.each(function(item) {
-                result.push(item);
-            })
-            expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);
-
-            //按优先级小到大循环
-            list.each(true,function(item) {
-                result.push(item);
-            })
-            expect(result + &#39;&#39;).toBe(&#39;-1,0,1,5,10&#39;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_len" class="method item">
-    <h3 class="name">len</h3>
-    <code>
-    len
-    
-        <span class="paren">()</span>
-    
-    </code>
-
-    
         <span class="returns-inline">
-            <span class="type">Number</span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -864,7 +444,7 @@
             
         
         
-        <a href="../files/src_core_util.js.html#l518"><code>src\core\util.js:518</code></a>
+        <a href="../files/src_core_dataManager.js.html#l154"><code>src\core\dataManager.js:154</code></a>
         
         </p>
 
@@ -875,10 +455,90 @@
     </div>
 
     <div class="description well well-small">
-        <p>获取列表长度</p>
+        <p>查询操作接口  <strong>[接口方法]</strong></p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">op</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>参数；其他具体参数同见具体数据服务</p>
+
+                    </div>
+
+                    
+                        <table class="table table-striped">
+                         <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">filter</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>过滤器</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">success</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>成功之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">error</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>失败之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+            </table>
+        </div>
     
 
     
@@ -888,9 +548,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Number</span>:
+                        <span class="type">Object</span>:
                     
-                    <p>列表长度</p>
+                    <p>操作结果</p>
 
                 
             </div>
@@ -901,17 +561,17 @@
 </div>
 
                 
-                    <div id="method_remove" class="method item">
-    <h3 class="name">remove</h3>
+                    <div id="method_update" class="method item">
+    <h3 class="name">update</h3>
     <code>
-    remove
+    update
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        filter
+                        op
                     
                 </li>
             
@@ -921,7 +581,9 @@
     </code>
 
     
-
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
     
 
     
@@ -931,7 +593,7 @@
     
 
     
-        <span class="flag chainable">chainable</span>
+
     
 
     
@@ -947,7 +609,7 @@
             
         
         
-        <a href="../files/src_core_util.js.html#l409"><code>src\core\util.js:409</code></a>
+        <a href="../files/src_core_dataManager.js.html#l164"><code>src\core\dataManager.js:164</code></a>
         
         </p>
 
@@ -958,7 +620,7 @@
     </div>
 
     <div class="description well well-small">
-        <p>执行回调</p>
+        <p>更新操作接口 <strong>[接口方法]</strong></p>
 
     </div>
 
@@ -971,23 +633,88 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">filter</code>
-                       <td> <span class="type">Function</span>
+                       <td> <code class="param-name">op</code>
+                       <td> <span class="type">Object</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>过滤函数，返回值：</p>
-<ol>
-<li>{boolean}：是否匹配；</li>
-<li>&#39;break&#39; : 结束匹配；</li>
-<li>&#39;done&#39; : 完成匹配</li>
-</ol>
+                        <p>参数；其他具体参数同见具体数据服务</p>
 
                     </div>
 
+                    
+                        <table class="table table-striped">
+                         <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">filter</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>过滤器</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">data</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>更新数据</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">success</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>成功之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">error</code>
+                                   <td> <span class="type">Object</span>
+                                   <td>
+                                
+
+                                
+                                </td>
+                                <td><div class="param-description">
+                                    <p>失败之后执行的方法</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
                     
                 </tr>
             
@@ -996,21 +723,21 @@
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
 
-    
-        <div class="example">
-            <h4>Example:</h4>
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>操作结果</p>
 
-            <div class="example-content">
-                <pre class="code prettyprint"><code>               //删除 item为1的项
-            list.remove(function(item){
-                if(item === 1)
-                    //结束匹配
-                    return "done";
-            })</code></pre>
-
+                
             </div>
         </div>
+    
+
     
 </div>
 

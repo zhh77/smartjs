@@ -28,7 +28,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
         </form>
     </div>
 </div>
@@ -53,6 +53,10 @@
                     
                         <li><a href="../modules/AOP.html">AOP</a></li>
                     
+                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                    
+                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                    
                         <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
                     
                         <li><a href="../modules/OOP.html">OOP</a></li>
@@ -65,6 +69,14 @@
                 <ul id="api-classes" class="nav nav-list">
                     
                         <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                    
+                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    
+                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                    
+                        <li><a href="../classes/dataServices.html">dataServices</a></li>
                     
                         <li><a href="../classes/EventArg.html">EventArg</a></li>
                     
@@ -133,7 +145,6 @@
 
 <div class="file">
     <pre class="prettyprint linenums" id='src_code'>
-
 /**
     面向切面编程的辅助模块
     
@@ -413,7 +424,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
                     fireCount++;
                     isDefined(result) &amp;&amp; (_result = result);
                     _stop ? done() : fireItem();
-                }, 
+                },
                 /**
                     拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行
                     @method resolve 
@@ -588,7 +599,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
                     $.when(calls.fire(&quot;call&quot;)).done(function(result) {
 
                     }.fail(function(error){
-    
+
                     }));
                     
 
@@ -649,7 +660,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
         trTypes = [&#x27;before&#x27;, &#x27;after&#x27;, &#x27;round&#x27;, &#x27;error&#x27;],
         defineProperty = Object.defineProperty;
 
-        /**
+    /**
             给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理
             目前有四种注入方式： 
             1. before，前置注入，在目标方法执行之前执行；
@@ -1049,13 +1060,13 @@ stDefine(&#x27;aop&#x27;, function(st) {
             fireHandler: function(name, args) {
                 return fire(name, args);
             },
-             /**
-                注册后置的事件方法
+            /**
+                注册[后置的]事件方法;注册后置和对象注入
                 @method on
                 @for attachTrigger
-                @param name [string] 目标方法或者属性名称
-                @param trName [string] 注册事件方法的名称
-                @param fn [function] 注册事件方法
+                @param name {string|object} 目标方法或者属性名称;[object]类型时为对象注入
+                @param trName {string} 注册事件方法的名称|属性名称；对象注入模式下，会自动拼接成trName-[名称|属性名]-[注入方式]
+                @param fn {function|object} 注册事件方法;对象注入模式下，[object]类型才会生效
                 @param [priority] [number] 权重设置，同PrmiseEvent 
                 @param [mode] [string] 加入的事件模式，同PrmiseEvent
                 @chainable
@@ -1124,9 +1135,54 @@ stDefine(&#x27;aop&#x27;, function(st) {
                         //停止方法，阻止赋值行为
                         e.stop();
                     })
+
+
+                    //对象注入例子
+                    var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //对象注入
+                    obj.on({
+                        //简单的注入后置方法
+                        test : function(e,name){
+                            result.push(&#x27;after&#x27;);
+                        },
+                        //注入前置&amp;注入参数设置
+                        &#x27;test before&#x27; : {
+                            //注入方法
+                            fn : function(e,name){
+                                result.push(&#x27;before&#x27;);
+                            },
+                            //注入权重
+                            priority : 100,
+                            //注入模式
+                            mode : &#x27;once&#x27;
+                        }
+                    },&quot;onObject&quot;);
+
+                    obj.test(&#x27;call&#x27;);
+                    expect(result.join(&#x27;,&#x27;)).toBe(&#x27;before,call,after&#x27;);
             */
             on: function(name, trName, fn, priority, mode) {
-                return bind(name, trName, fn, trTypes[1], priority, mode)
+                if (typeof name === &#x27;object&#x27;) {
+                    $.each(name, function(target, config) {
+                        var arr = target.split(&#x27; &#x27;),
+                            fnName = arr[0],
+                            type = arr[1] || trTypes[1],
+                            tName = trName + &#x27;-&#x27; + fnName + &#x27;-&#x27; + type;
+
+                        if ($.isFunction(config))
+                            bind(fnName, tName, config, type);
+                        else
+                            bind(fnName, tName, config.fn, type, config.priority, config.mode);
+                    })
+
+                } else
+                    bind(name, trName, fn, trTypes[1], priority, mode);
+                return this;
             },
             /**
                 注册前置的事件方法
@@ -1173,7 +1229,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
             onRound: function(name, trName, fn) {
                 return bind(name, trName, fn, trTypes[2])
             },
-             /**
+            /**
                 注册错误捕获事件，当执行reject的时候触发
                 @method onError
                 @for attachTrigger
@@ -1480,7 +1536,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
                         isDefined(result) &amp;&amp; (_result = result);
                         _stop ? done() : next();
                     },
-                     /**
+                    /**
                      * 拒绝契约同时设置流程状态为失败，结束流程
                      * @method reject
                      * @param {object} comment 拒绝的说明或参数
@@ -1525,7 +1581,7 @@ stDefine(&#x27;aop&#x27;, function(st) {
                      * @param  {array}   args   执行参数
                      */
                     changeArgs: getArgs,
-                     /**
+                    /**
                      * 恢复原始执行参数，下个流程中生效，与changeArgs方法对应
                      * @method recoverArgs
                      * @chainable

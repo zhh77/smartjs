@@ -28,7 +28,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
         </form>
     </div>
 </div>
@@ -53,6 +53,10 @@
                     
                         <li><a href="../modules/AOP.html">AOP</a></li>
                     
+                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                    
+                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                    
                         <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
                     
                         <li><a href="../modules/OOP.html">OOP</a></li>
@@ -65,6 +69,14 @@
                 <ul id="api-classes" class="nav nav-list">
                     
                         <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                    
+                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                    
+                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    
+                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                    
+                        <li><a href="../classes/dataServices.html">dataServices</a></li>
                     
                         <li><a href="../classes/EventArg.html">EventArg</a></li>
                     
@@ -244,8 +256,8 @@ stDefine(&#x27;filterBuilder&#x27;, function(st) {
 		/**
 		 * 生成过滤方法
 		 * @method buildFn
-		 * @param  {object} [params] 过滤的参数值
-		 * @param  {string|function|object} [mergeFilter] 需要合并的过滤条件
+		 * @param  [params] {object}  过滤的参数值
+		 * @param  [mergeFilter]  {string|function|object}需要合并的过滤条件
 		 * @return {function} 过滤方法
 		 * @example
 		 * 		//创建role的过滤器
@@ -516,7 +528,7 @@ stDefine(&#x27;filterBuilder&#x27;, function(st) {
 	var Operations = {
 		/**
 		 * 非判断，在判断操作符之前加入!,则将判断结果取非
-		 * @property {function} ! 
+		 * @property {operation} ! 
 		 * @example
 		 * 		//查询name不等于&#x27;roy&#x27;的数据
 		 * 		var filter = &quot;name != &#x27;roy&#x27;&quot;
@@ -524,59 +536,59 @@ stDefine(&#x27;filterBuilder&#x27;, function(st) {
 
 		/**
 		 * 等于判断
-		 * @property {function} = 
+		 * @property {operation} = 
 		 */
 		&quot;=&quot;: function(data, param) {
 			return data === param;
 		},
 		/**
 		 * 小于判断
-		 * @property {function} &lt; 
+		 * @property {operation} &lt; 
 		 */
 		&quot;&lt;&quot;: function(data, param) {
 			return data &lt; param;
 		},
 		/**
 		 * 小于等于判断
-		 * @property {function} &lt;=
+		 * @property {operation} &lt;=
 		 */
 		&quot;&lt;=&quot;: function(data, param) {
 			return data &lt;= param;
 		},
 		/**
 		 * 大于判断
-		 * @property {function} &gt;
+		 * @property {operation} &gt;
 		 */
 		&quot;&gt;&quot;: function(data, param) {
 			return data &gt; param;
 		},
 		/**
 		 * 大于等于判断
-		 * @property {function} &gt;= 
+		 * @property {operation} &gt;= 
 		 */
 		&quot;&gt;=&quot;: function(data, param) {
 			return data &gt;= param;
 		},
 		/**
 		 * 参数中包含数据
-		 * @property {function} in 
+		 * @property {operation} in 
 		 */
 		&quot;in&quot;: function(data, param) {
 			return getIndex(param, data);
 		},
 		/**
 		 * 数据中包含参数
-		 * @property {function} like 
+		 * @property {operation} like 
 		 */
 		&quot;like&quot;: getIndex,
 		/**
 		 * 以参数为开头
-		 * @property {function} startOf 
+		 * @property {operation} startOf 
 		 */
 		&quot;startOf&quot;: checkStartEnd,
 		/**
 		 * 以参数为结尾
-		 * @property {function} endOf 
+		 * @property {operation} endOf 
 		 * @example
 		 * 		//匹配以&#x27;es&#x27;结尾的name
 		 * 		var filter = &quot;name endOf &#x27;es&#x27;&quot;;

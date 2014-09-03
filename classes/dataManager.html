@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>util - smartjs</title>
+    <title>dataManager - smartjs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -140,23 +140,27 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>util <small>Class</small></h1>
+    <h1>dataManager <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
     
 
     
+        <div class="extends">
+            Extends Factory
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_util.js.html#l18"><code>src\core\util.js:18</code></a>
+            Defined in: <a href="../files/src_core_dataManager.js.html#l188"><code>src\core\dataManager.js:188</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Util.html">Util</a>
+            Module: <a href="../modules/DataManager.html">DataManager</a>
         
     
 
@@ -166,10 +170,77 @@
 
 
 <div class="well well-small">
-    <p>util常用公共方法</p>
+    <p>数据管理器工厂</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_dataManager" class="method item">
+    <h3 class="name">dataManager</h3>
+    <code>
+    dataManager
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_dataManager.js.html#l188"><code>src\core\dataManager.js:188</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+    </div>
 
 
 <div>
@@ -192,52 +263,80 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_copy" data-tablink="copy">copy</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_add" data-tablink="add">add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_build" data-tablink="build">build</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_callBase" data-tablink="callBase">callBase</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_callProto" data-tablink="callProto">callProto</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_getObj" data-tablink="getObj">getObj</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_create" data-tablink="create">create</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_injectFn" data-tablink="injectFn">injectFn</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_extend" data-tablink="extend">extend</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_mergeFn" data-tablink="mergeFn">mergeFn</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_find" data-tablink="find">find</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_mergeObj" data-tablink="mergeObj">mergeObj</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_fire" data-tablink="fire">fire</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_setObj" data-tablink="setObj">setObj</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_getBase" data-tablink="getBase">getBase</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_sliceArgs" data-tablink="sliceArgs">sliceArgs</a>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setDefault" data-tablink="setDefault">setDefault</a>
 
                                 
                                 
@@ -259,320 +358,13 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_copy" class="method item">
-    <h3 class="name">copy</h3>
+                    <div id="method_add" class="method item inherited">
+    <h3 class="name">add</h3>
     <code>
-    copy
+    add
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        deep
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        obj
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l54"><code>src\core\util.js:54</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>复制数据方法,支持对象字面量和数组的复制</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">deep</code>
-                       <td> <span class="type">Boolean</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否深度复制</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">obj</code>
-                       <td> <span class="type">Object | array</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>注入的方法名</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>返回复制之后的对象</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_getObj" class="method item">
-    <h3 class="name">getObj</h3>
-    <code>
-    getObj
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        target
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        ns
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [root]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l258"><code>src\core\util.js:258</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>获取对象的属性或方法，支持命名空间方式获取</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">target</code>
-                       <td> <span class="type">Object</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>目标对象</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">ns</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>属性名称或者相对于target的路径，使用"."进行分割</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[root]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否从根开始，默认从target子开始；从根开始则忽略ns的第一级</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>[object] 返回获取的属性或者方法</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//等同于user.project.name
-st.getObj(user,&#39;project.name&#39;);
-
-        //等同于user.name
-st.getObj(user,&#39;u.name&#39;,true);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_injectFn" class="method item">
-    <h3 class="name">injectFn</h3>
-    <code>
-    injectFn
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        target
-                    
-                </li>
             
                 <li class="arg">
                     
@@ -582,19 +374,13 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
             
                 <li class="arg">
                     
-                        fn
+                        item
                     
                 </li>
             
                 <li class="arg">
                     
-                        [before]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [stopOnFalse]
+                        [parent]
                     
                 </li>
             
@@ -603,6 +389,10 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
     
     </code>
 
+    
+        <span class="returns-inline">
+            <span class="type">Object | Klass</span>
+        </span>
     
 
     
@@ -620,15 +410,12 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_add">factory</a>:
             
         
         
-        <a href="../files/src_core_util.js.html#l70"><code>src\core\util.js:70</code></a>
+        <a href="../files/src_core_oop.js.html#l414"><code>src\core\oop.js:414</code></a>
         
         </p>
 
@@ -639,7 +426,7 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
     </div>
 
     <div class="description well well-small">
-        <p>在目标对象方法中注入方法，返回结果</p>
+        <p>添加产品方法，注册到factory中</p>
 
     </div>
 
@@ -649,23 +436,6 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
 
             <table class="table table-striped">
             <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">target</code>
-                       <td> <span class="type">Object</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>注入的目标对象</p>
-
-                    </div>
-
-                    
-                </tr>
             
                 <tr class="param">
                     
@@ -677,7 +447,7 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
                     
                     </td>
                     <td><div class="param-description">
-                        <p>注入的方法名</p>
+                        <p>产品名称</p>
 
                     </div>
 
@@ -686,585 +456,7 @@ st.getObj(user,&#39;u.name&#39;,true);</code></pre>
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">fn</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>注入方法</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[before]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否前置注入，默认后置</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[stopOnFalse]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否开启返回值为false停止后续执行</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [],
-    target = {
-        test: function(arr) {
-            arr.push("test");
-        }
-    };
-
-
-function fn(arr) {
-    arr.push("inject");
-}
-
-//向target注入方法fn
-st.injectFn(target, "test", fn);
-
-target.test(result);
-
-//结果执行注入函数fn
-expect(result + &#39;&#39;).toBe(&#39;test,inject&#39;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_mergeFn" class="method item">
-    <h3 class="name">mergeFn</h3>
-    <code>
-    mergeFn
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        mergeFn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [stopOnFalse]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l107"><code>src\core\util.js:107</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>合并方法，返回结果</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">fn</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>目标方法</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">mergeFn</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>合并方法，合并的方法始终在后执行</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[stopOnFalse]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否开启返回值为false停止后续执行</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>[function] 返回合并之后的新方法</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [],
-    fn1, fn2, fn3;
-
-//合并方法1
-fn1 = function(arr) {
-    arr.push("fn1");
-    return false;
-}
-//合并方法2
-fn2 = function(arr) {
-    arr.push("fn2");
-}
-
-//将fn1和fn2合并成一个新方法fn3，并开启stopOnFalse
-fn3 = st.mergeFn(fn1, fn2, true);
-
-fn3(result);
-//最终因为fn1执行返回false，fn2不执行，
-expect(result + &#39;&#39;).toBe(&#39;fn1&#39;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_mergeObj" class="method item">
-    <h3 class="name">mergeObj</h3>
-    <code>
-    mergeObj
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        [deep]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        obj
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        defObj
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [exclude]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l181"><code>src\core\util.js:181</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>合并默认数据方法,将obj中不空的内容从defObj中复制</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[deep]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否深度合并</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">obj</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>合并对象</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">defObj</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>默认对象</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[exclude]</code></td>
-                    <td><span class="type">Array | Function</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>排除合并的设置</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>[function] 返回合并之后的对象；如obj不为空时返回obj，否则返回新对象</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var person = {
-            name: "piter",
-            age: 10,
-            child: [{
-                name: &#39;lily&#39;
-            }]
-        };
-
-        var obj = {
-    name: &#39;a&#39;
-};
-
-//根据person的数据进行合并
-st.mergeObj(obj, person);
-
-//child被复制
-expect(obj.child).toBeDefined();
-
-//age被复制
-expect(obj.age).toBe(10);
-
-//name不为null，未被复制
-expect(obj.name).toBe(&#39;a&#39;);</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_setObj" class="method item">
-    <h3 class="name">setObj</h3>
-    <code>
-    setObj
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        target
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        ns
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        value
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [root]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_util.js.html#l284"><code>src\core\util.js:284</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>设置对象的属性或方法，支持命名空间方式设置</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">target</code>
+                       <td> <code class="param-name">item</code>
                        <td> <span class="type">Object</span>
                        <td>
                     
@@ -1272,41 +464,7 @@ expect(obj.name).toBe(&#39;a&#39;);</code></pre>
                     
                     </td>
                     <td><div class="param-description">
-                        <p>目标对象</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">ns</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>属性名称或者相对于target的路径，使用"."进行分割</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">value</code>
-                       <td> <span class="type">Object</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>设置的值</p>
+                        <p>产品特性</p>
 
                     </div>
 
@@ -1316,7 +474,7 @@ expect(obj.name).toBe(&#39;a&#39;);</code></pre>
                 <tr class="param">
                     
                     <td>
-                        <code class="param-name optional">[mode]</code></td>
+                        <code class="param-name optional">[parent]</code></td>
                     <td><span class="type">String</span></td>
                     <td><span class="flag optional" title="This parameter is optional.">optional</span>
                     
@@ -1324,25 +482,7 @@ expect(obj.name).toBe(&#39;a&#39;);</code></pre>
                     
                     </td>
                     <td><div class="param-description">
-                        <p>值设置的方式,目标对象和值都为object类型有效，默认为替换；"merge" : 合并默认值；"extend" : extend方式合并值；</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[root]</code></td>
-                    <td><span class="type">Boolean</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>是否从根开始，默认从target子开始；从根开始则忽略ns的第一级</p>
+                        <p>父类名称，注册到factory中产品名称</p>
 
                     </div>
 
@@ -1360,7 +500,9 @@ expect(obj.name).toBe(&#39;a&#39;);</code></pre>
             <div class="returns-description">
                 
                     
-                    <p>[object] 返回获取的属性或者方法</p>
+                        <span class="type">Object | Klass</span>:
+                    
+                    <p>返回创建的产品</p>
 
                 
             </div>
@@ -1372,38 +514,349 @@ expect(obj.name).toBe(&#39;a&#39;);</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>//等同于 user.name = &#39;roy&#39;
-st.setObj(user,&#39;name&#39;,&#39;roy&#39;);
-
-        //等同于 user.project.name = &#39;smartjs&#39;;
-st.setObj(user,&#39;project.name&#39;,&#39;smartjs&#39;);
-
-//等同于 st.mergeObj(user.project,{name:&#39;smartjs&#39;});
-st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
-
+                
             </div>
         </div>
     
 </div>
 
                 
-                    <div id="method_sliceArgs" class="method item">
-    <h3 class="name">sliceArgs</h3>
+                    <div id="method_build" class="method item inherited">
+    <h3 class="name">build</h3>
     <code>
-    sliceArgs
+    build
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        args
+                        name
                     
                 </li>
             
                 <li class="arg">
                     
-                        [start
+                        item
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [parent]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object | Klass</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_build">factory</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l393"><code>src\core\oop.js:393</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>使用工厂创建产品方法，但不注册到factory中</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">item</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品特性</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[parent]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>父类名称，注册到factory中产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object | Klass</span>:
+                    
+                    <p>返回创建的产品</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_callBase" class="method item inherited">
+    <h3 class="name">callBase</h3>
+    <code>
+    callBase
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        fnName
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [baseName]
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_callBase">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l60"><code>src\core\oop.js:60</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>调用基类的方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">fnName</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[baseName]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>基类名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法参数数组</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_callProto" class="method item inherited">
+    <h3 class="name">callProto</h3>
+    <code>
+    callProto
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
                     
                 </li>
             
@@ -1433,15 +886,12 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_callProto">klassBase</a>:
             
         
         
-        <a href="../files/src_core_util.js.html#l33"><code>src\core\util.js:33</code></a>
+        <a href="../files/src_core_oop.js.html#l24"><code>src\core\oop.js:24</code></a>
         
         </p>
 
@@ -1452,7 +902,7 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
     </div>
 
     <div class="description well well-small">
-        <p>将argument转换成array</p>
+        <p>调用原型链方法</p>
 
     </div>
 
@@ -1465,15 +915,15 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">args</code>
-                       <td> <span class="type">Function</span>
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>argument对象</p>
+                        <p>需要执行的原型链方法名</p>
 
                     </div>
 
@@ -1482,15 +932,16 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">[start</code>
-                       <td> <span class="type">Number</span>
-                       <td>
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>= 0]  开始位置</p>
+                        <p>执行参数</p>
 
                     </div>
 
@@ -1508,7 +959,364 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
             <div class="returns-description">
                 
                     
-                    <p>[array] 返回转换的数组</p>
+                    <p>[object] 返回执行结果</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_create" class="method item">
+    <h3 class="name">create</h3>
+    <code>
+    create
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        type
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        op
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">DataManager</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_core_dataManager.js.html#l200"><code>src\core\dataManager.js:200</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>创建数据管理器</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">type</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>数据管理器类型</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">op</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>数据管理参数设置</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">DataManager</span>:
+                    
+                    <p>数据管理对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_extend" class="method item inherited">
+    <h3 class="name">extend</h3>
+    <code>
+    extend
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        prop
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_extend">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l93"><code>src\core\oop.js:93</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>类扩展方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">prop</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>扩展的属性和方法对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_find" class="method item inherited">
+    <h3 class="name">find</h3>
+    <code>
+    find
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        defaultMode
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_find">factory</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l428"><code>src\core\oop.js:428</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>查找注册的产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">defaultMode</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>是否在找不到产品的时候返回默认产品</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>返回查找的产品</p>
 
                 
             </div>
@@ -1520,12 +1328,428 @@ st.setObj(user,&#39;project&#39;,{name:&#39;smartjs&#39;},"merge");</code></pre>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code> function test() {
-     //从第二个参数开发返回
-    return st.sliceArgs(arguments, 1);
-}
-expect(test(1, 2, 3, 4).join(&#39;,&#39;)).toBe(&#39;2,3,4&#39;);</code></pre>
+                
+            </div>
+        </div>
+    
+</div>
 
+                
+                    <div id="method_fire" class="method item inherited">
+    <h3 class="name">fire</h3>
+    <code>
+    fire
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [args]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_fire">factory</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l480"><code>src\core\oop.js:480</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>执行工厂中产品的方法</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>方法名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[args]</code></td>
+                    <td><span class="type">Array</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>执行参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getBase" class="method item inherited">
+    <h3 class="name">getBase</h3>
+    <code>
+    getBase
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [baseName]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/KlassBase.html#method_getBase">klassBase</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l36"><code>src\core\oop.js:36</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>获取基类对象</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[baseName]</code></td>
+                    <td><span class="type">String</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>基类名称,不设置则返回父类</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>[object] 返回基类</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_remove" class="method item inherited">
+    <h3 class="name">remove</h3>
+    <code>
+    remove
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_remove">factory</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l462"><code>src\core\oop.js:462</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>在工厂中移除注册的产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_setDefault" class="method item inherited">
+    <h3 class="name">setDefault</h3>
+    <code>
+    setDefault
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/Factory.html#method_setDefault">factory</a>:
+            
+        
+        
+        <a href="../files/src_core_oop.js.html#l449"><code>src\core\oop.js:449</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small">
+        <p>将注册的产品设置成默认产品</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-striped">
+            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>产品名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
             </div>
         </div>
     

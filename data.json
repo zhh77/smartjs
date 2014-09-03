@@ -26,10 +26,26 @@
             },
             "namespaces": {}
         },
+        "src\\core\\dataManager-table.js": {
+            "name": "src\\core\\dataManager-table.js",
+            "modules": {
+                "DataManager-Table": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\core\\dataManager.js": {
             "name": "src\\core\\dataManager.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "DataManager": 1
+            },
+            "classes": {
+                "dataServices": 1,
+                "baseDataService": 1,
+                "dataManager": 1,
+                "baseDataManager": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -98,8 +114,39 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\core\\aop.js",
-            "line": 1314,
+            "line": 1358,
             "description": "面向切面编程的辅助模块\n\nFeartures : \n    1. promiseEvent ：基于promise和event机制的回调管理\n    2. trigger ：对象触发器\n    3. flowController ：流程/生命周期控制器\n\nUpdate Note：\n    + 2014.8.06 ：将priorityList应用到promiseEvent中\n    + 2014.6.13 ：trigger添加属性变化监听支持\n    + 2014.6.11 ：promiseEvent添加非阻塞模式\n    + 2014.5 ：Created"
+        },
+        "DataManager": {
+            "name": "DataManager",
+            "submodules": {
+                "DataManager-Table": 1
+            },
+            "classes": {
+                "dataServices": 1,
+                "baseDataService": 1,
+                "dataManager": 1,
+                "baseDataManager": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\core\\dataManager.js",
+            "line": 215,
+            "description": "数据管理模块\n\nFeartures : \n    1. dataServices ：数据服务接口\n    2. dataManager ：基于策略的数据管理基类\n    3. dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    + 2014.7 ：Created"
+        },
+        "DataManager-Table": {
+            "name": "DataManager-Table",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "DataManager",
+            "namespace": "",
+            "file": "src\\core\\dataManager-table.js",
+            "line": 2,
+            "description": "针对于表类型的数据进行管理\n\nFeartures : \n    1. 提供CRUD接口\n    2. 内置状态控制\n\n\nUpdate Note：\n    + 2014.7 ：Created"
         },
         "FilterBuilder": {
             "name": "FilterBuilder",
@@ -157,7 +204,7 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 70,
+            "line": 69,
             "description": "基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；\n默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），\n直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回",
             "is_constructor": 1,
             "params": [
@@ -183,7 +230,7 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 230,
+            "line": 229,
             "description": "promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；\nEventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；"
         },
         "attachTrigger": {
@@ -197,7 +244,7 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 517,
+            "line": 516,
             "description": "给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理\n目前有四种注入方式： \n1. before，前置注入，在目标方法执行之前执行；\n2. after，后置执行，在目标方法执行之后执行；\n3. round，环绕，将目标方法包装，自定义控制；\n4. error，错误，捕获reject的事件；",
             "is_constructor": 1,
             "params": [
@@ -236,7 +283,7 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 697,
+            "line": 696,
             "description": "trigger下的事件参数，由EventArg扩展而来",
             "extends": "EventArg"
         },
@@ -251,7 +298,7 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 1167,
+            "line": 1211,
             "description": "流程或者生命周期管理器。控制流程的走向，流程扩展，注入控制等等；FlowController是基于trigger封装，具有所有trigger的特性；",
             "is_constructor": 1,
             "params": [
@@ -319,9 +366,75 @@
             "module": "AOP",
             "namespace": "",
             "file": "src\\core\\aop.js",
-            "line": 1314,
+            "line": 1358,
             "description": "flowController下的事件参数，由EventArg(trigger)扩展而来，具有EventArg(trigger)的所有特性;\n其中stop方法为结束当前流程节点；",
             "extends": "EventArg(trigger)"
+        },
+        "dataServices": {
+            "name": "dataServices",
+            "shortname": "dataServices",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DataManager",
+            "namespace": "",
+            "file": "src\\core\\dataManager.js",
+            "line": 30,
+            "description": "数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； \n数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；",
+            "is_constructor": 1,
+            "extends": "factory",
+            "example": [
+                "\n\t\t//注册cache的数据服务\n\t\t\tdataServices.add(\"cache\", {\n\t\t\t\t//实现search接口方法\n\t\t\t\tsearch: function(op) {\n\t\t\t\t\tvar result, filter = op.filter;\n\t\t\t\t\t//过滤数据\n\t\t\t\t\tresult = filter ? _cache.filter(filter) : _cache;\n\t\t\t\t\t\n\t\t\t\t\t//执行成功之后的方法\n\t\t\t\t\top.success && op.success(result);\n\t\t\t\t},\n\t\t\t\t//实现update接口方法\n\t\t\t\tupdate: function(op) {\n\t\t\t\t\tvar filter = op.filter,\n\t\t\t\t\t\tdata = getData(op.data);\n\n\t\t\t\t\tif (filter) {\n\t\t\t\t\t\t//测试使用，只更新第一条匹配数据\n\t\t\t\t\t\t$.each(_cache, function(i, item) {\n\t\t\t\t\t\t\tif (filter(item)) {\n\t\t\t\t\t\t\t\t_cache[i] = data;\n\t\t\t\t\t\t\t\treturn false;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t})\n\t\t\t\t\t} else {\n\t\t\t\t\t\t_cache = op.data || [];\n\t\t\t\t\t}\n\t\t\t\t\top.success && op.success(op.data);\n\t\t\t\t},\n\t\t\t\t//实现initOptions接口方法\n\t\t\t\tinitOptions: function(op) {\n\t\t\t\t\t//生成fitler，当filter为obj类型时，编译成fn\n\t\t\t\t\top.filter = buildFitler(op.filter || op.params);\n\t\t\t\t}\n\t\t\t});"
+            ]
+        },
+        "baseDataService": {
+            "name": "baseDataService",
+            "shortname": "baseDataService",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DataManager",
+            "namespace": "",
+            "file": "src\\core\\dataManager.js",
+            "line": 149,
+            "description": "数据服务基类"
+        },
+        "dataManager": {
+            "name": "dataManager",
+            "shortname": "dataManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DataManager",
+            "namespace": "",
+            "file": "src\\core\\dataManager.js",
+            "line": 188,
+            "description": "数据管理器工厂",
+            "is_constructor": 1,
+            "extends": "factory",
+            "example": [
+                "\n"
+            ]
+        },
+        "baseDataManager": {
+            "name": "baseDataManager",
+            "shortname": "baseDataManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DataManager",
+            "namespace": "",
+            "file": "src\\core\\dataManager.js",
+            "line": 215,
+            "description": "数据管理器基类"
         },
         "FilterBuilder": {
             "name": "FilterBuilder",
@@ -531,7 +644,7 @@
     "classitems": [
         {
             "file": "src\\core\\aop.js",
-            "line": 104,
+            "line": 103,
             "description": "清空所有事件回调",
             "itemtype": "method",
             "name": "clear",
@@ -544,7 +657,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 117,
+            "line": 116,
             "description": "添加事件回调方法",
             "itemtype": "method",
             "name": "add",
@@ -582,7 +695,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 184,
+            "line": 183,
             "description": "删除事件回调方法",
             "itemtype": "method",
             "name": "remove",
@@ -602,7 +715,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 204,
+            "line": 203,
             "description": "根据上下文对象执行回调;fire方法的增强",
             "itemtype": "method",
             "name": "fireWith",
@@ -636,7 +749,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 236,
+            "line": 235,
             "description": "停止所有后续事件执行",
             "itemtype": "method",
             "name": "stopPropagation",
@@ -649,7 +762,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 254,
+            "line": 253,
             "description": "完成契约",
             "itemtype": "method",
             "name": "resolve",
@@ -669,7 +782,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 282,
+            "line": 281,
             "description": "拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行",
             "itemtype": "method",
             "name": "resolve",
@@ -688,7 +801,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 307,
+            "line": 306,
             "description": "删除当前事件；与promiseEvent.add的'once'模式，不同在于可以手动进行控制",
             "itemtype": "method",
             "name": "remove",
@@ -701,7 +814,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 387,
+            "line": 386,
             "description": "判断是否存在事件回调",
             "itemtype": "method",
             "name": "has",
@@ -724,7 +837,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 415,
+            "line": 414,
             "description": "执行回调",
             "itemtype": "method",
             "name": "fire",
@@ -746,14 +859,14 @@
                 "type": "Object"
             },
             "example": [
-                "\n    //注册call1\n    calls.add('call1', function(e, text) {\n        alert(text);\n    })\n\n    //执行call1，返回called\n    calls.fire('called');\n    \n    //使用eventArg控制\n    calls.add(\"c1\", function(e) {\n        //阻止后续回调\n        e.stopPropagation();\n    })\n    .add(\"c2\", function() {\n    });\n\n    //只执行了c1\n    calls.fire();\n\n\n\n    //promise模式下\n    calls.add(\"c1\", function(e, name) {\n        setTimeout(function() {\n            e.resolve(name + '-c1');\n        }, 100);\n        return e.promise();\n    });\n    \n    //使用when来监控返回的result\n    $.when(calls.fire(\"call\")).done(function(result) {\n\n    }.fail(function(error){\n    \n    }));\n    \n\n\n    //noBlock模式的promiseEvents;\n    var noBlockCalls = st.promiseEvent(\"noBlock\");\n\n    //第一个回调延迟100\n    noBlockCalls.add(\"c1\", function(e) {\n        setTimeout(function() {\n            result.push('c1');\n            e.resolve();\n        }, 100);\n        return e.promise();\n    });\n\n    //第二个正常执行\n    noBlockCalls.add(\"c2\", function(e) {\n        result.push('c2');\n    });\n\n    //第三个回调延迟50\n    noBlockCalls.add(\"c3\", function(e) {\n        setTimeout(function() {\n            result.push('c3');\n            e.resolve();\n        }, 50);\n        return e.promise();\n    });\n\n    $.when(noBlockCalls.fire()).done(function(data) {\n        //最终执行顺序是c2-c3-c1\n        expect(result + '').toBe('c2,c3,c1');\n        testCall();\n    });"
+                "\n    //注册call1\n    calls.add('call1', function(e, text) {\n        alert(text);\n    })\n\n    //执行call1，返回called\n    calls.fire('called');\n    \n    //使用eventArg控制\n    calls.add(\"c1\", function(e) {\n        //阻止后续回调\n        e.stopPropagation();\n    })\n    .add(\"c2\", function() {\n    });\n\n    //只执行了c1\n    calls.fire();\n\n\n\n    //promise模式下\n    calls.add(\"c1\", function(e, name) {\n        setTimeout(function() {\n            e.resolve(name + '-c1');\n        }, 100);\n        return e.promise();\n    });\n    \n    //使用when来监控返回的result\n    $.when(calls.fire(\"call\")).done(function(result) {\n\n    }.fail(function(error){\n\n    }));\n    \n\n\n    //noBlock模式的promiseEvents;\n    var noBlockCalls = st.promiseEvent(\"noBlock\");\n\n    //第一个回调延迟100\n    noBlockCalls.add(\"c1\", function(e) {\n        setTimeout(function() {\n            result.push('c1');\n            e.resolve();\n        }, 100);\n        return e.promise();\n    });\n\n    //第二个正常执行\n    noBlockCalls.add(\"c2\", function(e) {\n        result.push('c2');\n    });\n\n    //第三个回调延迟50\n    noBlockCalls.add(\"c3\", function(e) {\n        setTimeout(function() {\n            result.push('c3');\n            e.resolve();\n        }, 50);\n        return e.promise();\n    });\n\n    $.when(noBlockCalls.fire()).done(function(data) {\n        //最终执行顺序是c2-c3-c1\n        expect(result + '').toBe('c2,c3,c1');\n        testCall();\n    });"
             ],
             "class": "promiseEvent",
             "module": "AOP"
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 702,
+            "line": 701,
             "description": "阻止默认的方法执行；",
             "itemtype": "method",
             "name": "preventDefault",
@@ -766,7 +879,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 736,
+            "line": 735,
             "description": "停止当前方法执行和后置所有事件；在属性监听时，则阻止赋值；",
             "itemtype": "method",
             "name": "stop",
@@ -779,7 +892,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 887,
+            "line": 886,
             "description": "注册手动的触发的Handler",
             "itemtype": "method",
             "name": "onHandler",
@@ -816,7 +929,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 904,
+            "line": 903,
             "description": "执行手动触发的Handler",
             "itemtype": "method",
             "name": "fireHandler",
@@ -841,22 +954,25 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 917,
-            "description": "注册后置的事件方法",
+            "line": 916,
+            "description": "注册[后置的]事件方法;注册后置和对象注入",
             "itemtype": "method",
             "name": "on",
             "params": [
                 {
                     "name": "name",
-                    "description": "[string] 目标方法或者属性名称"
+                    "description": "目标方法或者属性名称;[object]类型时为对象注入",
+                    "type": "String|object"
                 },
                 {
                     "name": "trName",
-                    "description": "[string] 注册事件方法的名称"
+                    "description": "注册事件方法的名称|属性名称；对象注入模式下，会自动拼接成trName-[名称|属性名]-[注入方式]",
+                    "type": "String"
                 },
                 {
                     "name": "fn",
-                    "description": "[function] 注册事件方法"
+                    "description": "注册事件方法;对象注入模式下，[object]类型才会生效",
+                    "type": "Function|object"
                 },
                 {
                     "name": "priority",
@@ -871,14 +987,14 @@
             ],
             "chainable": 1,
             "example": [
-                "\n    var result = [], obj = st.attachTrigger({\n        //方法\n        test: function(name) {\n            result.push(name);\n        },\n        //子对象\n        child : {\n            test : function(name){\n                result.push(name);\n            }\n        }，\n        //属性\n        prop : 1\n    });\n\n    //注册前置\n    obj.onBefore(\"test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    })\n    //注册后置\n    .on(\"test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //执行test方法\n    obj.test('bind');\n    //前后置正确触发\n    expect(result.join(',')).toBe(\"before-bind,bind,after-bind\");\n    \n\n    //支持子对象方法注册\n    obj.onBefore(\"child.test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    }).on(\"child.test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //属性监听只有before，after两种方法注入类型，不支持round环绕模式。\n    //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。\n    //after：在after则是无法干预值的变化，因此只是做监听使用；\n\n    \n    //注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue\n     obj.onBefore('prop', 'testBefore', function(e, value,oldValue) {\n        result.push(value + '-before-' + oldValue);\n    })\n    \n    obj.on('prop', 'testAfter', function(e, value,oldValue) {\n        result.push(value + '-after-' + oldValue);\n    })\n    \n    expect(obj.prop).toBe(1);\n\n    obj.prop = 2;\n    //输出前后置监听\n    expect(result.join(',')).toBe('2-before-1,2-after-1');\n    expect(obj.prop).toBe(2);\n    \n    //前置中干预赋值\n    obj.onBefore('prop', 'testBefore', function(e, value) {\n        result.push(value + '-before');\n        //停止方法，阻止赋值行为\n        e.stop();\n    })"
+                "\n    var result = [], obj = st.attachTrigger({\n        //方法\n        test: function(name) {\n            result.push(name);\n        },\n        //子对象\n        child : {\n            test : function(name){\n                result.push(name);\n            }\n        }，\n        //属性\n        prop : 1\n    });\n\n    //注册前置\n    obj.onBefore(\"test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    })\n    //注册后置\n    .on(\"test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //执行test方法\n    obj.test('bind');\n    //前后置正确触发\n    expect(result.join(',')).toBe(\"before-bind,bind,after-bind\");\n    \n\n    //支持子对象方法注册\n    obj.onBefore(\"child.test\", \"addBefore\", function(e, name) {\n        result.push('before-' + name)\n    }).on(\"child.test\", \"addAfter\", function(e, name) {\n        result.push('after-' + name)\n    });\n\n    //属性监听只有before，after两种方法注入类型，不支持round环绕模式。\n    //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。\n    //after：在after则是无法干预值的变化，因此只是做监听使用；\n\n    \n    //注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue\n     obj.onBefore('prop', 'testBefore', function(e, value,oldValue) {\n        result.push(value + '-before-' + oldValue);\n    })\n    \n    obj.on('prop', 'testAfter', function(e, value,oldValue) {\n        result.push(value + '-after-' + oldValue);\n    })\n    \n    expect(obj.prop).toBe(1);\n\n    obj.prop = 2;\n    //输出前后置监听\n    expect(result.join(',')).toBe('2-before-1,2-after-1');\n    expect(obj.prop).toBe(2);\n    \n    //前置中干预赋值\n    obj.onBefore('prop', 'testBefore', function(e, value) {\n        result.push(value + '-before');\n        //停止方法，阻止赋值行为\n        e.stop();\n    })\n\n\n    //对象注入例子\n    var obj = st.attachTrigger({\n        test: function(name) {\n            result.push(name);\n        }\n    });\n\n    //对象注入\n    obj.on({\n        //简单的注入后置方法\n        test : function(e,name){\n            result.push('after');\n        },\n        //注入前置&注入参数设置\n        'test before' : {\n            //注入方法\n            fn : function(e,name){\n                result.push('before');\n            },\n            //注入权重\n            priority : 100,\n            //注入模式\n            mode : 'once'\n        }\n    },\"onObject\");\n\n    obj.test('call');\n    expect(result.join(',')).toBe('before,call,after');"
             ],
             "class": "attachTrigger",
             "module": "AOP"
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 996,
+            "line": 1040,
             "description": "注册前置的事件方法",
             "itemtype": "method",
             "name": "onBefore",
@@ -915,7 +1031,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1012,
+            "line": 1056,
             "description": "注册环绕触发事件",
             "itemtype": "method",
             "name": "onRound",
@@ -942,7 +1058,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1041,
+            "line": 1085,
             "description": "注册错误捕获事件，当执行reject的时候触发",
             "itemtype": "method",
             "name": "onError",
@@ -974,7 +1090,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1072,
+            "line": 1116,
             "description": "注销注册的后置事件方法",
             "itemtype": "method",
             "name": "off",
@@ -998,7 +1114,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1095,
+            "line": 1139,
             "description": "注销注册的前置事件方法",
             "itemtype": "method",
             "name": "offBefore",
@@ -1022,7 +1138,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1123,
+            "line": 1167,
             "description": "扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）",
             "itemtype": "method",
             "name": "extend",
@@ -1041,7 +1157,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1291,
+            "line": 1335,
             "description": "已手动设定流程开始的节点启动流程",
             "itemtype": "method",
             "name": "bootWithStart",
@@ -1069,7 +1185,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1321,
+            "line": 1365,
             "description": "结束流程。无论是注册的事件方法还是流程方法全部结束",
             "itemtype": "method",
             "name": "end",
@@ -1082,7 +1198,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1348,
+            "line": 1392,
             "description": "拒绝契约同时设置流程状态为失败，结束流程",
             "itemtype": "method",
             "name": "reject",
@@ -1101,7 +1217,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1369,
+            "line": 1413,
             "description": "手动指定下一个流程，（指定的流程可以不在order配置中）",
             "itemtype": "method",
             "name": "next",
@@ -1128,7 +1244,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1387,
+            "line": 1431,
             "description": "改变后续流程的执行参数",
             "itemtype": "method",
             "name": "changeArgs",
@@ -1144,7 +1260,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1393,
+            "line": 1437,
             "description": "恢复原始执行参数，下个流程中生效，与changeArgs方法对应",
             "itemtype": "method",
             "name": "recoverArgs",
@@ -1154,7 +1270,7 @@
         },
         {
             "file": "src\\core\\aop.js",
-            "line": 1471,
+            "line": 1515,
             "description": "启动流程，",
             "itemtype": "method",
             "name": "boot",
@@ -1177,10 +1293,477 @@
         },
         {
             "file": "src\\core\\dataManager.js",
-            "line": 1,
-            "description": "NOTE: dataManager数据管理 \nFeatures：\n    1.dataServices ：数据服务接口\n    2.dataManager ：基于策略的数据管理基类；\n    2.dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util,aop,oop",
-            "class": "FilterBuilder",
-            "module": "AOP"
+            "line": 76,
+            "description": "数据服务通用操作方法；直接执行到具体的数据服务的方法上",
+            "itemtype": "method",
+            "name": "operate",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "操作类型；1. search; 2. update",
+                    "type": "String"
+                },
+                {
+                    "name": "op",
+                    "description": "参数；具体参数同数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dsType",
+                            "description": "数据服务类型",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "操作结果",
+                "type": "Object"
+            },
+            "example": [
+                "\n\t\t//执行查询cache的操作\n\t\tvar result = dataServices.operate('search',{\n\t\t\t//设置数据服务类型为cache\n\t\t\tdsType : 'cache',\n\t\t\t//过滤参数\n\t\t\tfitler : {name : 'roy'},\n\t\t\t//换成的key，cache类型数据服务特有属性参数\n\t\t\tcacheKey : 'test'\n\t\t});"
+            ],
+            "class": "dataServices",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 104,
+            "description": "执行数据服务search操作方法",
+            "itemtype": "method",
+            "name": "search",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数；具体参数同数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dsType",
+                            "description": "数据服务类型",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "操作结果",
+                "type": "Object"
+            },
+            "example": [
+                "\n\t\t//使用ajax进行查询\n\t\tdataServices.search({\n\t\t\t//设置数据服务为ajax类型\n\t\t\tdsType:'ajax',\n\t\t\t//服务地址\n\t\t\turl : 'xxxx',\n\t\t\t//查询参数\n\t\t\tparam : {name : 'roy'},\n\t\t\t//成功之后执行的方法\n\t\t\tsuccess : function(result){...}\n\t\t})"
+            ],
+            "class": "dataServices",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 126,
+            "description": "执行数据服务update操作方法",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数；具体参数同数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dsType",
+                            "description": "数据服务类型",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "操作结果",
+                "type": "Object"
+            },
+            "example": [
+                "\n\t\t//使用rest进行更新\n\t\tdataServices.update({\n\t\t\t//设置数据服务为ajax类型\n\t\t\tdsType:'rest',\n\t\t\t//rest服务地址\n\t\t\turl : 'user/update/{id}',\n\t\t\t//更新参数\n\t\t\tparam : {id : 1 ,name : 'roy'},\n\t\t\t//成功之后执行的方法\n\t\t\tsuccess : function(result){...}\n\t\t})"
+            ],
+            "class": "dataServices",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 154,
+            "description": "查询操作接口  **[接口方法]**",
+            "itemtype": "method",
+            "name": "search",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数；其他具体参数同见具体数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "filter",
+                            "description": "过滤器",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "success",
+                            "description": "成功之后执行的方法",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "error",
+                            "description": "失败之后执行的方法",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "操作结果",
+                "type": "Object"
+            },
+            "class": "baseDataService",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 164,
+            "description": "更新操作接口 **[接口方法]**",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数；其他具体参数同见具体数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "filter",
+                            "description": "过滤器",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "data",
+                            "description": "更新数据",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "success",
+                            "description": "成功之后执行的方法",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "error",
+                            "description": "失败之后执行的方法",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "操作结果",
+                "type": "Object"
+            },
+            "class": "baseDataService",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 175,
+            "description": "通用初始化参数接口 **[接口方法]**",
+            "itemtype": "method",
+            "name": "initOptions",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "参数；其他具体参数同见具体数据服务",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "filter",
+                            "description": "过滤器",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "success",
+                            "description": "成功之后执行的方法",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "error",
+                            "description": "失败之后执行的方法",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "参数",
+                "type": "Object"
+            },
+            "class": "baseDataService",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 200,
+            "description": "创建数据管理器",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "数据管理器类型",
+                    "type": "String"
+                },
+                {
+                    "name": "op",
+                    "description": "数据管理参数设置",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "数据管理对象",
+                "type": "DataManager"
+            },
+            "class": "dataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 220,
+            "description": "是否过滤模式",
+            "type": "{Boolean} _filterMode",
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 226,
+            "description": "数据管理对象的类初始化方法；",
+            "itemtype": "method",
+            "name": "klassInit",
+            "final": 1,
+            "params": [
+                {
+                    "name": "op",
+                    "description": "数据管理设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "初始化完成的数据管理对象",
+                "type": "DataManager"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 245,
+            "description": "数据管理对象的初始化接口方法 **[接口方法]**",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "op",
+                    "description": "数据管理设置参数",
+                    "type": "Object"
+                }
+            ],
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 251,
+            "description": "使用dataManager的数据通道进行获取数据",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "conf",
+                    "description": "获取设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "查询结果或者promise",
+                "type": "Object|promise"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 262,
+            "description": "使用dataManager的数据通道进行设置数据",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "conf",
+                    "description": "设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "设置结果或者promise",
+                "type": "Object|promise"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 273,
+            "description": "使用dataManager内置查询(即只在dataManager内部查询，不查询dataService)接口. **[接口方法]**",
+            "itemtype": "method",
+            "name": "_innerSearch",
+            "params": [
+                {
+                    "name": "conf",
+                    "description": "获取设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "查询结果",
+                "type": "Object"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 282,
+            "description": "使用dataManager内置更新(即只在dataManager内部更新，不更新到dataService)接口. **[接口方法]**",
+            "itemtype": "method",
+            "name": "_innerUpdate",
+            "params": [
+                {
+                    "name": "conf",
+                    "description": "设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "设置结果",
+                "type": "Object"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 291,
+            "description": "检查数据是否为空;数据策略的判断空数据会根据此方法的结果来判断;不同类型的数据管理的判断也不同。\n如：object判断是否为undefined;table判断数据的长度是否大于0",
+            "itemtype": "method",
+            "name": "checkEmpty",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "检查的数据",
+                    "type": "Object"
+                },
+                {
+                    "name": "conf",
+                    "description": "设置参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "判断是否为空",
+                "type": "[type]"
+            },
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 306,
+            "description": "清空数据管理内的数据的方法. **[接口方法]**",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 312,
+            "description": "设置dataService的参数,在每次使用数据通道时执行. **[接口方法]**",
+            "itemtype": "method",
+            "name": "setDataSerive",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "设置dataService的参数",
+                    "type": "Object"
+                }
+            ],
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 318,
+            "description": "初始化策略参数",
+            "itemtype": "method",
+            "name": "initPolicy",
+            "params": [
+                {
+                    "name": "policy",
+                    "description": "策略设置",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "操作类型. \n 1. get; \n 2. set;",
+                    "type": "Type"
+                }
+            ],
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 331,
+            "description": "生成传递的参数",
+            "itemtype": "method",
+            "name": "buildParam",
+            "params": [
+                {
+                    "name": "policy",
+                    "description": "策略设置",
+                    "type": "Object"
+                },
+                {
+                    "name": "defPolicy",
+                    "description": "默认的策略设置",
+                    "type": "Object"
+                }
+            ],
+            "class": "baseDataManager",
+            "module": "DataManager"
+        },
+        {
+            "file": "src\\core\\dataManager.js",
+            "line": 340,
+            "description": "生成策略，对策略参数进行初始化，生成传递参数，合并参数",
+            "itemtype": "method",
+            "name": "buildPolicy",
+            "params": [
+                {
+                    "name": "policy",
+                    "description": "策略设置",
+                    "type": "Object"
+                },
+                {
+                    "name": "defPolicy",
+                    "description": "默认的策略设置",
+                    "type": "Object"
+                }
+            ],
+            "class": "baseDataManager",
+            "module": "DataManager"
         },
         {
             "file": "src\\core\\filterBuilder.js",
@@ -1241,7 +1824,7 @@
             "description": "非判断，在判断操作符之前加入!,则将判断结果取非",
             "itemtype": "property",
             "name": "!",
-            "type": "Function",
+            "type": "Operation",
             "example": [
                 "\n\t\t//查询name不等于'roy'的数据\n\t\tvar filter = \"name != 'roy'\""
             ],
@@ -1254,7 +1837,7 @@
             "description": "等于判断",
             "itemtype": "property",
             "name": "=",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1264,7 +1847,7 @@
             "description": "小于判断",
             "itemtype": "property",
             "name": "<",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1274,7 +1857,7 @@
             "description": "小于等于判断",
             "itemtype": "property",
             "name": "<=",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1284,7 +1867,7 @@
             "description": "大于判断",
             "itemtype": "property",
             "name": ">",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1294,7 +1877,7 @@
             "description": "大于等于判断",
             "itemtype": "property",
             "name": ">=",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1304,7 +1887,7 @@
             "description": "参数中包含数据",
             "itemtype": "property",
             "name": "in",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1314,7 +1897,7 @@
             "description": "数据中包含参数",
             "itemtype": "property",
             "name": "like",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1324,7 +1907,7 @@
             "description": "以参数为开头",
             "itemtype": "property",
             "name": "startOf",
-            "type": "Function",
+            "type": "Operation",
             "class": "Operations",
             "module": "FilterBuilder"
         },
@@ -1334,7 +1917,7 @@
             "description": "以参数为结尾",
             "itemtype": "property",
             "name": "endOf",
-            "type": "Function",
+            "type": "Operation",
             "example": [
                 "\n\t\t//匹配以'es'结尾的name\n\t\tvar filter = \"name endOf 'es'\";"
             ],
@@ -1425,7 +2008,7 @@
                 {
                     "name": "baseName",
                     "description": "基类名称",
-                    "type": "[type]",
+                    "type": "String",
                     "optional": true
                 },
                 {
@@ -1451,7 +2034,7 @@
             "params": [
                 {
                     "name": "prop",
-                    "description": "[description]",
+                    "description": "扩展的属性和方法对象",
                     "type": "Object"
                 }
             ],
@@ -1990,8 +2573,8 @@
             "line": " src\\core\\oop.js:107"
         },
         {
-            "message": "Missing item type\nNOTE: dataManager数据管理 \nFeatures：\n    1.dataServices ：数据服务接口\n    2.dataManager ：基于策略的数据管理基类；\n    2.dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util,aop,oop",
-            "line": " src\\core\\dataManager.js:1"
+            "message": "Missing item type\n是否过滤模式",
+            "line": " src\\core\\dataManager.js:220"
         },
         {
             "message": "Missing item type\nNOTE: smartjs入口 \nFeatures：\n    1.smartjs模块定义方法，兼容requirejs和seajs\n    2.conf配置管理方法\n\nUpdate Note：\n    2014.6 ：Created\n\nNeeds：util",

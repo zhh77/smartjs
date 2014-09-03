@@ -7,6 +7,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "FilterBuilder",
         "Operations",
         "attachTrigger",
+        "baseDataManager",
+        "baseDataService",
+        "dataManager",
+        "dataServices",
         "factory",
         "flowController",
         "klass",
@@ -17,6 +21,8 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "modules": [
         "AOP",
+        "DataManager",
+        "DataManager-Table",
         "FilterBuilder",
         "OOP",
         "Util"
@@ -26,6 +32,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "AOP",
             "name": "AOP",
             "description": "面向切面编程的辅助模块\n\nFeartures : \n    1. promiseEvent ：基于promise和event机制的回调管理\n    2. trigger ：对象触发器\n    3. flowController ：流程/生命周期控制器\n\nUpdate Note：\n    + 2014.8.06 ：将priorityList应用到promiseEvent中\n    + 2014.6.13 ：trigger添加属性变化监听支持\n    + 2014.6.11 ：promiseEvent添加非阻塞模式\n    + 2014.5 ：Created"
+        },
+        {
+            "displayName": "DataManager",
+            "name": "DataManager",
+            "description": "数据管理模块\n\nFeartures : \n    1. dataServices ：数据服务接口\n    2. dataManager ：基于策略的数据管理基类\n    3. dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    + 2014.7 ：Created"
+        },
+        {
+            "displayName": "DataManager-Table",
+            "name": "DataManager-Table",
+            "description": "针对于表类型的数据进行管理\n\nFeartures : \n    1. 提供CRUD接口\n    2. 内置状态控制\n\n\nUpdate Note：\n    + 2014.7 ：Created"
         },
         {
             "displayName": "FilterBuilder",

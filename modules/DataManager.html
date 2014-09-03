@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Util - smartjs</title>
+    <title>DataManager - smartjs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -140,7 +140,7 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>Util <small>Module</small></h1>
+    <h1>DataManager <small>Module</small></h1>
 </div>
 
 <div class="clearfix well well-small">
@@ -150,7 +150,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_core_util.js.html#l330"><code>src\core\util.js:330</code></a>
+            Defined in: <a href="../files/src_core_dataManager.js.html#l215"><code>src\core\dataManager.js:215</code></a>
         </div>
     
 
@@ -160,13 +160,13 @@
 
 
 <div class="moduledesc well well-small">
-    <p>工具包模块</p>
+    <p>数据管理模块</p>
 <p>Feartures : </p>
-<pre class="code prettyprint"><code>1. 基础公共方法
-2. 基础公共对象</code></pre>
+<pre class="code prettyprint"><code>1. dataServices ：数据服务接口
+2. dataManager ：基于策略的数据管理基类
+3. dataPolicyManager ：数据策略管理器；</code></pre>
 <p>Update Note：</p>
-<pre class="code prettyprint"><code>+ 2014.8.06 加入priorityList
-+ 2014.5 ：Created</code></pre>
+<pre class="code prettyprint"><code>+ 2014.7 ：Created</code></pre>
 
 </div>
 
@@ -180,14 +180,26 @@
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="../classes/priorityList.html">
-                        priorityList
+                    <a href="../classes/baseDataManager.html">
+                        baseDataManager
                     </a>
                 </li>
             
                 <li class="module-class">
-                    <a href="../classes/util.html">
-                        util
+                    <a href="../classes/baseDataService.html">
+                        baseDataService
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/dataManager.html">
+                        dataManager
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/dataServices.html">
+                        dataServices
                     </a>
                 </li>
             
@@ -196,6 +208,30 @@
     </div>
 
     <div class="yui3-u-1-2">
+        
+            <p>This module is a rollup of the following modules:</p>
+
+            <ul class="module-submodules">
+            
+                <li class="module-submodule">
+                    <a href="../modules/DataManager-Table.html">
+                        DataManager-Table
+                    </a>
+
+                    <div class="module-submodule-description">
+                        针对于表类型的数据进行管理
+
+Feartures : 
+    1. 提供CRUD接口
+    2. 内置状态控制
+
+
+Update Note：
+    + 2014.7 ：Created
+                    </div>
+                </li>
+            
+            </ul>
         
     </div>
 </div>
