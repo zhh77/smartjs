@@ -1,4 +1,4 @@
-define(function() {
+(function() {
 
 
     describe('OOP Test', function() {
@@ -67,7 +67,7 @@ define(function() {
         })
 
         it("muilt heirht - callBase", function() {
-            var user = st.klass("user", {
+            var User = st.klass("user", {
                 klassInit: function(name) {
                     this.name = name;
                 },
@@ -80,7 +80,7 @@ define(function() {
                 say: function(text) {
                     return this.callBase('say', [text]) + "-lv2";
                 }
-            }, user);
+            }, User);
 
             var user3 = st.klass('user3', {
                 say: function(text) {
@@ -197,4 +197,4 @@ define(function() {
             expect(c.project.role).toBe("pm");
         });
     });
-})
+})();

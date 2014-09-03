@@ -1,4 +1,4 @@
-define(function() {
+(function() {
 	var dataServices = st.dataServices,
 		dataManager = st.dataManager,
 		_db = [],
@@ -646,4 +646,4 @@ define(function() {
 			})
 		})
 	});
-});
+})();

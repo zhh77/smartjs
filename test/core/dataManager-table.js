@@ -1,4 +1,4 @@
-define(function() {
+(function() {
 	var dataServices = st.dataServices,
 		dataManager = st.dataManager,
 		_db = [],
@@ -23,7 +23,7 @@ define(function() {
 		return $.isArray(data) ? data[0] : data;
 	}
 	//模拟服务端异步返回数据,只接受params
-	dataServices.add("server", {
+	dataServices.add("server1", {
 		search: function(op) {
 			setTimeout(function() {
 				var result, filter = op.filter;
@@ -59,7 +59,7 @@ define(function() {
 	});
 
 	//模拟客户端本地存储s
-	dataServices.add("cache", {
+	dataServices.add("cache1", {
 		search: function(op) {
 			var result, filter = op.filter;
 
@@ -103,7 +103,7 @@ define(function() {
 		var dt = dataManager.create("DataTable", {
 			key: "id",
 			dataServices: {
-				dsType: "server"
+				dsType: "server1"
 			}
 		});
 
@@ -361,7 +361,7 @@ define(function() {
 		}
 		var dt = dataManager.create("DataTable", {
 			dataServices: {
-				dsType: "server"
+				dsType: "server1"
 			}
 		});
 
@@ -411,4 +411,4 @@ define(function() {
 			})
 		})
 	})
-});
+})();

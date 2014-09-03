@@ -1,4 +1,4 @@
-define(function() {
+(function() {
 	var filter, result, datas = [{
 			name: "roy",
 			age: 30,
@@ -81,6 +81,12 @@ define(function() {
 				coder : 'coder',
 				project : "smartjs"
 			});
+
+		 	// console.log(JSON.stringify(filter.buildCondition({age : 20,
+				// sa : 'sa',
+				// coder : 'coder',
+				// project : "smartjs"})));
+
 			expect(result).toBe('roy,sa2');
 		})
 
@@ -263,4 +269,4 @@ define(function() {
 	// 		};
 	// }
 
-})
+})();

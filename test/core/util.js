@@ -1,4 +1,4 @@
-define(function() {
+(function() {
 
     describe('Util Test', function() {
         it("slice arguments", function() {
@@ -42,10 +42,14 @@ define(function() {
                 name: 'a'
             };
 
+            //根据person的数据进行合并
             st.mergeObj(obj, person);
 
+            //child被复制
             expect(obj.child).toBeDefined();
+            //age被复制
             expect(obj.age).toBe(10);
+            //name不为null，未被复制
             expect(obj.name).toBe('a');
         })
 
@@ -154,20 +158,23 @@ define(function() {
 
         it("merge function - stopOnFalse", function() {
             var result = [],
-                fn1, fn2, fn3, fn4;
+                fn1, fn2, fn3;
 
+            //合并方法1
             fn1 = function(arr) {
                 arr.push("fn1");
                 return false;
             }
-
+            //合并方法2
             fn2 = function(arr) {
                 arr.push("fn2");
             }
 
+            //将fn1和fn2合并成一个新方法fn3，并开启stopOnFalse
             fn3 = st.mergeFn(fn1, fn2, true);
 
             fn3(result);
+            //最终因为fn1执行返回false，fn2不执行，
             expect(result + '').toBe('fn1');
         })
 
@@ -184,9 +191,12 @@ define(function() {
                 arr.push("inject");
             }
 
+            //向target注入方法fn
             st.injectFn(target, "test", fn);
 
             target.test(result);
+
+            //结果执行注入函数fn
             expect(result + '').toBe('test,inject');
         })
 
@@ -250,10 +260,11 @@ define(function() {
 
             result = [];
 
-            //删除
+            //删除 item为1的项
             list.remove(function(item){
                 if(item === 1)
-                    return "break";
+                    //结束匹配
+                    return "done";
             })
 
             //按优先级小到大循环
@@ -264,4 +275,4 @@ define(function() {
             expect(result + '').toBe('-1,0,5,10');
         });
     })
-});
+})();
