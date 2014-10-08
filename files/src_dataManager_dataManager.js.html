@@ -32,10 +32,13 @@
                     <li><a href="https://github.com/zhh77/smartjs">Home</a>
                     </li>
                     
-                    <li><a href="/index.html">Document</a>
+                    <li><a href="http://zhh77.github.io/smartjs/">Document</a>
                     </li>
                     
-                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    <li><a href="http://www.cnblogs.com/zhh8077">Blog</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartDoc">SmartDoc</a>
                     </li>
                     
                 </ul>
@@ -309,71 +312,74 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		isFunction = $.isFunction;
 
 	/**
-	 * 数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
-	 * 数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
-	 * @class dataServices
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 * 		//注册cache的数据服务
-			st.dataServices.add(&quot;cache&quot;, {
-				//实现search接口方法
-				search: function(op) {
-					var result, filter = op.filter;
-					//过滤数据
-					result = filter ? _cache.filter(filter) : _cache;
-					
-					//执行成功之后的方法
-					op.success &amp;&amp; op.success(result);
-				},
-				//实现update接口方法
-				update: function(op) {
-					var filter = op.filter,
-						//测试使用，只更新第一条匹配数据
-						data = $.isArray(data) ? data[0] : data;
+	   数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
+	   数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
+	   @class dataServices
+	   @constructor
+	   @extends factory
+	   @example
+	   		//cache数组
+	  		var _cache = [];
 
-					if (filter) {
-						//查找数据进行更新
-						$.each(_cache, function(i, item) {
-							if (filter(item)) {
-								_cache[i] = data;
-								return false;
-							}
-						})
-					} else {
-						_cache = op.data || [];
-					}
-					op.success &amp;&amp; op.success(op.data);
-				}
-			});
+			//注册cache的数据服务
+	        st.dataServices.add(&quot;cache&quot;, {
+	            //实现search接口方法
+	            search: function(op) {
+	                var result, filter = op.filter;
+	                //过滤数据
+	                result = filter ? _cache.filter(filter) : _cache;
 
-			//更新cache的数据
-			st.dataServices.update({
-				dsType: &#x27;cache&#x27;,
-				data: [{
-					name: &#x27;user1&#x27;,
-					age: 20
-				}, {
-					name: &#x27;user2&#x27;,
-					age: 30
-				}],
-				success: function(result) {
-					expect(_db.length).toBe(2);
-				}
-			});
+	                //执行成功之后的方法
+	                op.success &amp;&amp; op.success(result);
+	            },
+	            //实现update接口方法
+	            update: function(op) {
+	                var filter = op.filter,
+	                    //测试使用，只更新第一条匹配数据
+	                    data = $.isArray(data) ? data[0] : data;
 
-			//查询server的数据
-			st.dataServices.search({
-				dsType: &#x27;server&#x27;,
-				params: {
-					name: &#x27;user1&#x27;
-				},
-				success: function(result) {
-					expect(result.length).toBe(1);
-					expect(result[0].age).toBe(20);
-					endTest()
-				}
-			});
+	                if (filter) {
+	                    //查找数据进行更新
+	                    $.each(_cache, function(i, item) {
+	                        if (filter(item)) {
+	                            _cache[i] = data;
+	                            return false;
+	                        }
+	                    })
+	                } else {
+	                    _cache = op.data || [];
+	                }
+	              
+	                op.success &amp;&amp; op.success(op.data);
+	            }
+	        });
+
+	        //更新cache的数据
+	        st.dataServices.update({
+	            dsType: &#x27;cache&#x27;,
+	            data: [{
+	                name: &#x27;user1&#x27;,
+	                age: 20
+	            }, {
+	                name: &#x27;user2&#x27;,
+	                age: 30
+	            }],
+	            success: function(result) {
+	                expect(_cache.length).toBe(2);
+	            }
+	        });
+
+	        //查询server的数据
+	        st.dataServices.search({
+	            dsType: &#x27;cache&#x27;,
+	            filter : function(data){
+					return data.name === &#x27;user1&#x27;
+	            },
+	            success: function(result) {
+	                expect(result.length).toBe(1);
+	                expect(result[0].age).toBe(20);
+	            }
+	        });
 	 */
 	dataServices = st.factory({
 		name: &quot;dataServices&quot;,

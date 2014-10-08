@@ -10,11 +10,15 @@
             },
             {
                 "name": "Document",
-                "url": "/index.html"
+                "url": "http://zhh77.github.io/smartjs/"
             },
             {
-                "name": "About",
-                "url": "https://github.com/zhh77/smartjs"
+                "name": "Blog",
+                "url": "http://www.cnblogs.com/zhh8077"
+            },
+            {
+                "name": "SmartDoc",
+                "url": "https://github.com/zhh77/smartDoc"
             }
         ]
     },
@@ -174,7 +178,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\dataManager\\dataManager.js",
-            "line": 282,
+            "line": 285,
             "description": "数据管理模块\n\nFeartures : \n    1. dataServices ：数据服务接口\n    2. dataManager ：基于策略的数据管理基类\n    3. dataPolicyManager ：数据策略管理器；\n\nUpdate Note：\n    + 2014.7 ：Created"
         },
         "DataManager-Table": {
@@ -560,7 +564,7 @@
             "is_constructor": 1,
             "extends": "factory",
             "example": [
-                "\n\t\t//注册cache的数据服务\n\t\t\tst.dataServices.add(\"cache\", {\n\t\t\t\t//实现search接口方法\n\t\t\t\tsearch: function(op) {\n\t\t\t\t\tvar result, filter = op.filter;\n\t\t\t\t\t//过滤数据\n\t\t\t\t\tresult = filter ? _cache.filter(filter) : _cache;\n\t\t\t\t\t\n\t\t\t\t\t//执行成功之后的方法\n\t\t\t\t\top.success && op.success(result);\n\t\t\t\t},\n\t\t\t\t//实现update接口方法\n\t\t\t\tupdate: function(op) {\n\t\t\t\t\tvar filter = op.filter,\n\t\t\t\t\t\t//测试使用，只更新第一条匹配数据\n\t\t\t\t\t\tdata = $.isArray(data) ? data[0] : data;\n\n\t\t\t\t\tif (filter) {\n\t\t\t\t\t\t//查找数据进行更新\n\t\t\t\t\t\t$.each(_cache, function(i, item) {\n\t\t\t\t\t\t\tif (filter(item)) {\n\t\t\t\t\t\t\t\t_cache[i] = data;\n\t\t\t\t\t\t\t\treturn false;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t})\n\t\t\t\t\t} else {\n\t\t\t\t\t\t_cache = op.data || [];\n\t\t\t\t\t}\n\t\t\t\t\top.success && op.success(op.data);\n\t\t\t\t}\n\t\t\t});\n\n\t\t\t//更新cache的数据\n\t\t\tst.dataServices.update({\n\t\t\t\tdsType: 'cache',\n\t\t\t\tdata: [{\n\t\t\t\t\tname: 'user1',\n\t\t\t\t\tage: 20\n\t\t\t\t}, {\n\t\t\t\t\tname: 'user2',\n\t\t\t\t\tage: 30\n\t\t\t\t}],\n\t\t\t\tsuccess: function(result) {\n\t\t\t\t\texpect(_db.length).toBe(2);\n\t\t\t\t}\n\t\t\t});\n\n\t\t\t//查询server的数据\n\t\t\tst.dataServices.search({\n\t\t\t\tdsType: 'server',\n\t\t\t\tparams: {\n\t\t\t\t\tname: 'user1'\n\t\t\t\t},\n\t\t\t\tsuccess: function(result) {\n\t\t\t\t\texpect(result.length).toBe(1);\n\t\t\t\t\texpect(result[0].age).toBe(20);\n\t\t\t\t\tendTest()\n\t\t\t\t}\n\t\t\t});"
+                "\n\t\t//cache数组\n\t  \t\tvar _cache = [];\n\n\t\t\t//注册cache的数据服务\n     st.dataServices.add(\"cache\", {\n         //实现search接口方法\n         search: function(op) {\n             var result, filter = op.filter;\n             //过滤数据\n             result = filter ? _cache.filter(filter) : _cache;\n\n             //执行成功之后的方法\n             op.success && op.success(result);\n         },\n         //实现update接口方法\n         update: function(op) {\n             var filter = op.filter,\n                 //测试使用，只更新第一条匹配数据\n                 data = $.isArray(data) ? data[0] : data;\n\n             if (filter) {\n                 //查找数据进行更新\n                 $.each(_cache, function(i, item) {\n                     if (filter(item)) {\n                         _cache[i] = data;\n                         return false;\n                     }\n                 })\n             } else {\n                 _cache = op.data || [];\n             }\n           \n             op.success && op.success(op.data);\n         }\n     });\n\n     //更新cache的数据\n     st.dataServices.update({\n         dsType: 'cache',\n         data: [{\n             name: 'user1',\n             age: 20\n         }, {\n             name: 'user2',\n             age: 30\n         }],\n         success: function(result) {\n             expect(_cache.length).toBe(2);\n         }\n     });\n\n     //查询server的数据\n     st.dataServices.search({\n         dsType: 'cache',\n         filter : function(data){\n\t\t\t\t\treturn data.name === 'user1'\n         },\n         success: function(result) {\n             expect(result.length).toBe(1);\n             expect(result[0].age).toBe(20);\n         }\n     });"
             ]
         },
         "baseDataService": {
@@ -574,7 +578,7 @@
             "module": "DataManager",
             "namespace": "",
             "file": "src\\dataManager\\dataManager.js",
-            "line": 138,
+            "line": 141,
             "description": "数据服务基类"
         },
         "dataManager": {
@@ -588,7 +592,7 @@
             "module": "DataManager",
             "namespace": "",
             "file": "src\\dataManager\\dataManager.js",
-            "line": 177,
+            "line": 180,
             "description": "数据管理器工厂； 更多数据管理的例子见smartjs其他数据管理项",
             "is_constructor": 1,
             "extends": "factory",
@@ -607,7 +611,7 @@
             "module": "DataManager",
             "namespace": "",
             "file": "src\\dataManager\\dataManager.js",
-            "line": 282,
+            "line": 285,
             "description": "数据管理器基类"
         },
         "FilterBuilder": {
@@ -1922,7 +1926,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 99,
+            "line": 102,
             "description": "数据服务通用操作方法；直接执行到具体的数据服务的方法上",
             "itemtype": "method",
             "name": "operate",
@@ -1954,7 +1958,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 117,
+            "line": 120,
             "description": "执行数据服务search操作方法",
             "itemtype": "method",
             "name": "search",
@@ -1981,7 +1985,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 127,
+            "line": 130,
             "description": "执行数据服务update操作方法",
             "itemtype": "method",
             "name": "update",
@@ -2008,7 +2012,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 143,
+            "line": 146,
             "description": "查询操作接口  **[接口方法]**",
             "itemtype": "method",
             "name": "search",
@@ -2045,7 +2049,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 153,
+            "line": 156,
             "description": "更新操作接口 **[接口方法]**",
             "itemtype": "method",
             "name": "update",
@@ -2087,7 +2091,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 164,
+            "line": 167,
             "description": "通用初始化参数接口 **[接口方法]**",
             "itemtype": "method",
             "name": "initOptions",
@@ -2124,7 +2128,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 267,
+            "line": 270,
             "description": "创建数据管理器",
             "itemtype": "method",
             "name": "create",
@@ -2149,7 +2153,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 287,
+            "line": 290,
             "description": "是否过滤模式; true时,使用filterBuilder组织过滤",
             "type": "{Boolean} _filterMode",
             "default": "true",
@@ -2158,7 +2162,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 294,
+            "line": 297,
             "description": "数据管理对象的类初始化方法；",
             "itemtype": "method",
             "name": "klassInit",
@@ -2179,7 +2183,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 313,
+            "line": 316,
             "description": "数据管理对象的初始化接口方法 **[接口方法]**",
             "itemtype": "method",
             "name": "init",
@@ -2195,7 +2199,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 319,
+            "line": 322,
             "description": "使用dataManager的数据通道进行获取数据",
             "itemtype": "method",
             "name": "get",
@@ -2215,7 +2219,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 330,
+            "line": 333,
             "description": "使用dataManager的数据通道进行设置数据",
             "itemtype": "method",
             "name": "set",
@@ -2235,7 +2239,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 341,
+            "line": 344,
             "description": "使用dataManager内置查询(即只在dataManager内部查询，不查询dataService)接口. **[接口方法]**",
             "itemtype": "method",
             "name": "_innerSearch",
@@ -2255,7 +2259,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 350,
+            "line": 353,
             "description": "使用dataManager内置更新(即只在dataManager内部更新，不更新到dataService)接口. **[接口方法]**",
             "itemtype": "method",
             "name": "_innerUpdate",
@@ -2275,7 +2279,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 359,
+            "line": 362,
             "description": "检查数据是否为空;数据策略的判断空数据会根据此方法的结果来判断;不同类型的数据管理的判断也不同。\n如：object判断是否为undefined;table判断数据的长度是否大于0",
             "itemtype": "method",
             "name": "checkEmpty",
@@ -2300,7 +2304,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 374,
+            "line": 377,
             "description": "清空数据管理内的数据的方法. **[接口方法]**",
             "itemtype": "method",
             "name": "clear",
@@ -2309,7 +2313,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 380,
+            "line": 383,
             "description": "设置dataService的参数,在每次使用数据通道时执行. **[接口方法]**",
             "itemtype": "method",
             "name": "setDataSerive",
@@ -2325,7 +2329,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 386,
+            "line": 389,
             "description": "初始化策略参数",
             "itemtype": "method",
             "name": "initPolicy",
@@ -2346,7 +2350,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 399,
+            "line": 402,
             "description": "生成传递的参数",
             "itemtype": "method",
             "name": "buildParam",
@@ -2367,7 +2371,7 @@
         },
         {
             "file": "src\\dataManager\\dataManager.js",
-            "line": 408,
+            "line": 411,
             "description": "生成策略，对策略参数进行初始化，生成传递参数，合并参数",
             "itemtype": "method",
             "name": "buildPolicy",
@@ -2581,7 +2585,7 @@
         },
         {
             "message": "Missing item type\n是否过滤模式; true时,使用filterBuilder组织过滤",
-            "line": " src\\dataManager\\dataManager.js:287"
+            "line": " src\\dataManager\\dataManager.js:290"
         }
     ]
 }

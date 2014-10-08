@@ -32,10 +32,13 @@
                     <li><a href="https://github.com/zhh77/smartjs">Home</a>
                     </li>
                     
-                    <li><a href="/index.html">Document</a>
+                    <li><a href="http://zhh77.github.io/smartjs/">Document</a>
                     </li>
                     
-                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    <li><a href="http://www.cnblogs.com/zhh8077">Blog</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartDoc">SmartDoc</a>
                     </li>
                     
                 </ul>
@@ -489,65 +492,68 @@
         <div class="example">
             <h4>Example:</h4>
             <div class="example-content">
-                <pre class="code prettyprint"><code>    //注册cache的数据服务
-        st.dataServices.add("cache", {
-            //实现search接口方法
-            search: function(op) {
-                var result, filter = op.filter;
-                //过滤数据
-                result = filter ? _cache.filter(filter) : _cache;
+                <pre class="code prettyprint"><code>    //cache数组
+          var _cache = [];
 
-                //执行成功之后的方法
-                op.success &amp;&amp; op.success(result);
-            },
-            //实现update接口方法
-            update: function(op) {
-                var filter = op.filter,
-                    //测试使用，只更新第一条匹配数据
-                    data = $.isArray(data) ? data[0] : data;
+        //注册cache的数据服务
+ st.dataServices.add("cache", {
+     //实现search接口方法
+     search: function(op) {
+         var result, filter = op.filter;
+         //过滤数据
+         result = filter ? _cache.filter(filter) : _cache;
 
-                if (filter) {
-                    //查找数据进行更新
-                    $.each(_cache, function(i, item) {
-                        if (filter(item)) {
-                            _cache[i] = data;
-                            return false;
-                        }
-                    })
-                } else {
-                    _cache = op.data || [];
-                }
-                op.success &amp;&amp; op.success(op.data);
-            }
-        });
+         //执行成功之后的方法
+         op.success &amp;&amp; op.success(result);
+     },
+     //实现update接口方法
+     update: function(op) {
+         var filter = op.filter,
+             //测试使用，只更新第一条匹配数据
+             data = $.isArray(data) ? data[0] : data;
 
-        //更新cache的数据
-        st.dataServices.update({
-            dsType: &#39;cache&#39;,
-            data: [{
-                name: &#39;user1&#39;,
-                age: 20
-            }, {
-                name: &#39;user2&#39;,
-                age: 30
-            }],
-            success: function(result) {
-                expect(_db.length).toBe(2);
-            }
-        });
+         if (filter) {
+             //查找数据进行更新
+             $.each(_cache, function(i, item) {
+                 if (filter(item)) {
+                     _cache[i] = data;
+                     return false;
+                 }
+             })
+         } else {
+             _cache = op.data || [];
+         }
 
-        //查询server的数据
-        st.dataServices.search({
-            dsType: &#39;server&#39;,
-            params: {
-                name: &#39;user1&#39;
-            },
-            success: function(result) {
-                expect(result.length).toBe(1);
-                expect(result[0].age).toBe(20);
-                endTest()
-            }
-        });</code></pre>
+         op.success &amp;&amp; op.success(op.data);
+     }
+ });
+
+ //更新cache的数据
+ st.dataServices.update({
+     dsType: &#39;cache&#39;,
+     data: [{
+         name: &#39;user1&#39;,
+         age: 20
+     }, {
+         name: &#39;user2&#39;,
+         age: 30
+     }],
+     success: function(result) {
+         expect(_cache.length).toBe(2);
+     }
+ });
+
+ //查询server的数据
+ st.dataServices.search({
+     dsType: &#39;cache&#39;,
+     filter : function(data){
+                return data.name === &#39;user1&#39;
+     },
+     success: function(result) {
+         expect(result.length).toBe(1);
+         expect(result[0].age).toBe(20);
+     }
+ });</code></pre>
 
             </div>
             <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
@@ -1893,7 +1899,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_dataManager_dataManager.js.html#l99"><code>src\dataManager\dataManager.js:99</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l102"><code>src\dataManager\dataManager.js:102</code></a>
         
         </p>
 
@@ -2135,7 +2141,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_dataManager_dataManager.js.html#l117"><code>src\dataManager\dataManager.js:117</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l120"><code>src\dataManager\dataManager.js:120</code></a>
         
         </p>
 
@@ -2397,7 +2403,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_dataManager_dataManager.js.html#l127"><code>src\dataManager\dataManager.js:127</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l130"><code>src\dataManager\dataManager.js:130</code></a>
         
         </p>
 
