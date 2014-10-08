@@ -3,11 +3,11 @@ define(function() {
         baseUrl: 'src/',
         paths: {
             lib: '../lib',
-            test: '../test',
+            test: '../test'
         }
     });
 
-    var libs = ["lib/jquery", '../dest/smart.min','../dest/smart-dataManager.min'],
+    var libs = ["lib/jquery", '../dest/smart','../dest/smart-dataManager'],
         res = ['base/util', 'base/aop', 'base/oop',
                 'dataManager/filterBuilder', 'dataManager/dataManager', 'dataManager/dataManager-table'
               ],
