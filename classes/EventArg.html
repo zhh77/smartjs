@@ -2,116 +2,251 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>EventArg - smartjs</title>
+    <title>EventArg - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
-        
-            smartjs
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
-                </p>
-            </li>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
-        </form>
-    </div>
-</div>
+    </nav>
 <div class="container">
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
-            <li><a href="#classes" data-toggle="tab">Classes</a></li>
-        </ul>
-
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="modules">
-                <ul id="api-modules" class="nav nav-list">
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/AOP.html">AOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/OOP.html">OOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/Util.html">Util</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                </ul>
-            </div>
-            <div class="tab-pane" id="classes">
-                <ul id="api-classes" class="nav nav-list">
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataServices.html">dataServices</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/factory.html">factory</a></li>
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
-                    
-                        <li><a href="../classes/flowController.html">flowController</a></li>
-                    
-                        <li><a href="../classes/klass.html">klass</a></li>
-                    
-                        <li><a href="../classes/klassBase.html">klassBase</a></li>
-                    
-                        <li><a href="../classes/Operations.html">Operations</a></li>
-                    
-                        <li><a href="../classes/priorityList.html">priorityList</a></li>
-                    
-                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
-                    
-                        <li><a href="../classes/util.html">util</a></li>
-                    
-                </ul>
-            </div>
-
-            
-        </div>
-    </div>
+                    </ul>
+                </dd>
+             
+        </dl>
 </div>
-
+   
         </div>
-        <div class="span9">
+        <div class="col-sm-9">
             <!--     <form id="options-form" class="form-inline pull-right">
         Show:
         <label for="api-show-inherited" class="checkbox">
@@ -142,43 +277,63 @@
                         <div class="page-header">
     <h1>EventArg <small>Class</small></h1>
 </div>
+ <div class="well well-small sign-left3">
+      <p>promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；
+EventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；</p>
 
-<div class="well well-small">
-    
+ </div>
 
+<div class="well well-small sign-left2" id="classesItems">
     
+        <div class="index-section methods">
+            <h3>Methods</h3>
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_core_aop.js.html#l229"><code>src\core\aop.js:229</code></a>
+            <ul class="index-list methods">
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_reject" data-tablink="reject">reject</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_stopPropagation" data-tablink="stopPropagation">stopPropagation</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
         </div>
     
 
     
-        
-            Module: <a href="../modules/AOP.html">AOP</a>
-        
+
     
 
     
 </div>
-
-
-
-<div class="well well-small">
-    <p>promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；
-EventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；</p>
-
-</div>
-
-
 
 <div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
-
+    <ul id="itemTab" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#class">Detail</a></li>
         
-            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+            <li><a data-toggle="tab" href="#method">Methods</a></li>
         
         
         
@@ -186,57 +341,153 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
     </ul>
 
     <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
+        <div id="class" class="tab-pane active">
+           <div class="well well-small classDetail sign-left1">
+            
 
             
-                <div class="index-section methods">
-                    <h3>Methods</h3>
 
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_stopPropagation" data-tablink="stopPropagation">stopPropagation</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
+            
+                <div class="foundat">
+                    Defined in: <a href="../files/src_base_aop.js.html#l337"><code>src\base\aop.js:337</code></a>
                 </div>
             
 
             
-
+                
+                    Module: <a href="../modules/AOP.html">AOP</a>
+                
             
 
             
         </div>
 
         
-            <div id="methods" class="tab-pane">
+            
+        </div>
+
+        
+            <div id="method" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_reject" class="method item">
+    <h3 class="name">reject</h3>
+    <code>
+    reject
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        err
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_aop.js.html#l397"><code>src\base\aop.js:397</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <p>拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">err</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>拒绝参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
+
+pCalls.add("c1", function(e, name) {
+    //延迟100ms
+    setTimeout(function() {
+        //拒绝promise,并返回结果
+        e.reject(name + &#39;,reject!&#39;);
+    }, 100);
+
+    //返回promise
+      return e.promise();
+});
+
+//使用when来监控promiseEvent的执行，使用fail捕获reject
+$.when(pCalls.fire("call")).fail(function(data) {
+    expect(data).toBe(&#39;call,reject!&#39;);
+});</code></pre>
+
+            </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+        </div>
+    
+</div>
 
                 
                     <div id="method_remove" class="method item">
@@ -275,7 +526,7 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
             
         
         
-        <a href="../files/src_core_aop.js.html#l306"><code>src\core\aop.js:306</code></a>
+        <a href="../files/src_base_aop.js.html#l423"><code>src\base\aop.js:423</code></a>
         
         </p>
 
@@ -285,7 +536,7 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>删除当前事件；与promiseEvent.add的&#39;once&#39;模式，不同在于可以手动进行控制</p>
 
     </div>
@@ -297,9 +548,10 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code> calls.add("onceTest", function(e) {
+                <pre class="code prettyprint"><code>var calls = st.promiseEvent();
+
+calls.add("onceTest", function(e) {
     //删除"onceTest"这个事件；
     e.remove();
 });
@@ -310,6 +562,8 @@ calls.fire();
 expect(calls.has("onceTest")).toBe(false);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -359,7 +613,7 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
             
         
         
-        <a href="../files/src_core_aop.js.html#l253"><code>src\core\aop.js:253</code></a>
+        <a href="../files/src_base_aop.js.html#l369"><code>src\base\aop.js:369</code></a>
         
         </p>
 
@@ -369,7 +623,7 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>完成契约</p>
 
     </div>
@@ -378,8 +632,8 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -408,7 +662,6 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
                 <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
 
@@ -428,123 +681,8 @@ $.when(pCalls.fire("call")).done(function(data) {
 });</code></pre>
 
             </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_resolve" class="method item">
-    <h3 class="name">resolve</h3>
-    <code>
-    resolve
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        err
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_core_aop.js.html#l281"><code>src\core\aop.js:281</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small">
-        <p>拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">err</code>
-                       <td> <span class="type">Object</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>拒绝参数</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>pCalls.add("c1", function(e, name) {
-    //延迟100ms
-    setTimeout(function() {
-        //拒绝promise,并返回结果
-        e.reject(name + &#39;,reject!&#39;);
-    }, 100);
-
-    //返回promise
-    return e.promise();
-});
-
-//使用when来监控promiseEvent的执行，使用fail捕获reject
-$.when(pCalls.fire("call")).fail(function(data) {
-    expect(data).toBe(&#39;call,reject!&#39;);
-    testCall();
-});</code></pre>
-
-            </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -586,7 +724,7 @@ $.when(pCalls.fire("call")).fail(function(data) {
             
         
         
-        <a href="../files/src_core_aop.js.html#l235"><code>src\core\aop.js:235</code></a>
+        <a href="../files/src_base_aop.js.html#l343"><code>src\base\aop.js:343</code></a>
         
         </p>
 
@@ -596,7 +734,7 @@ $.when(pCalls.fire("call")).fail(function(data) {
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>停止所有后续事件执行</p>
 
     </div>
@@ -608,18 +746,27 @@ $.when(pCalls.fire("call")).fail(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>calls.add("c1", function(e) {
+                <pre class="code prettyprint"><code>var events = st.promiseEvent(),
+    result = [];
+
+events.add("c1", function(e) {
     //阻止冒泡
     e.stopPropagation();
+    result.push("c1");
 })
-.add("c2", function() {});
+.add("c2", function() {
+    result.push("c2");
+});
 
 //只执行了c1
-calls.fire();</code></pre>
+events.fire();
+
+expect(result.join(&#39;-&#39;)).toBe(&#39;c1&#39;)</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -642,10 +789,13 @@ calls.fire();</code></pre>
         </div>
     </div>
 </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
 <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script src="../assets/js/yuidoc-bootstrap.js"></script>
-<script>prettyPrint();</script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
 </body>
 </html>

@@ -2,116 +2,251 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>EventArg(flowController) - smartjs</title>
+    <title>EventArg(flowController) - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
-        
-            smartjs
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
-                </p>
-            </li>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
-        </form>
-    </div>
-</div>
+    </nav>
 <div class="container">
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
-            <li><a href="#classes" data-toggle="tab">Classes</a></li>
-        </ul>
-
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="modules">
-                <ul id="api-modules" class="nav nav-list">
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/AOP.html">AOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/OOP.html">OOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/Util.html">Util</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                </ul>
-            </div>
-            <div class="tab-pane" id="classes">
-                <ul id="api-classes" class="nav nav-list">
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataServices.html">dataServices</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/factory.html">factory</a></li>
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
-                    
-                        <li><a href="../classes/flowController.html">flowController</a></li>
-                    
-                        <li><a href="../classes/klass.html">klass</a></li>
-                    
-                        <li><a href="../classes/klassBase.html">klassBase</a></li>
-                    
-                        <li><a href="../classes/Operations.html">Operations</a></li>
-                    
-                        <li><a href="../classes/priorityList.html">priorityList</a></li>
-                    
-                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
-                    
-                        <li><a href="../classes/util.html">util</a></li>
-                    
-                </ul>
-            </div>
-
-            
-        </div>
-    </div>
+                    </ul>
+                </dd>
+             
+        </dl>
 </div>
-
+   
         </div>
-        <div class="span9">
+        <div class="col-sm-9">
             <!--     <form id="options-form" class="form-inline pull-right">
         Show:
         <label for="api-show-inherited" class="checkbox">
@@ -142,47 +277,105 @@
                         <div class="page-header">
     <h1>EventArg(flowController) <small>Class</small></h1>
 </div>
-
-<div class="well well-small">
-    
-
-    
-        <div class="extends">
-            Extends <a href="../classes/EventArg(trigger).html" class="crosslink">EventArg(trigger)</a>
-        </div>
-    
-
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_core_aop.js.html#l1358"><code>src\core\aop.js:1358</code></a>
-        </div>
-    
-
-    
-        
-            Module: <a href="../modules/AOP.html">AOP</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="well well-small">
-    <p>flowController下的事件参数，由EventArg(trigger)扩展而来，具有EventArg(trigger)的所有特性;
+ <div class="well well-small sign-left3">
+      <p>flowController下的事件参数，由EventArg(trigger)扩展而来，具有EventArg(trigger)的所有特性;
 其中stop方法为结束当前流程节点；</p>
 
+ </div>
+
+<div class="well well-small sign-left2" id="classesItems">
+    
+        <div class="index-section methods">
+            <h3>Methods</h3>
+
+            <ul class="index-list methods extends">
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_changeArgs" data-tablink="changeArgs">changeArgs</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_end" data-tablink="end">end</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_next" data-tablink="next">next</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_preventDefault" data-tablink="preventDefault">preventDefault</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_recoverArgs" data-tablink="recoverArgs">recoverArgs</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_reject" data-tablink="reject">reject</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_stop" data-tablink="stop">stop</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method inherited">
+                        <a href="#" data-tabid="#method" data-anchor="#method_stopPropagation" data-tablink="stopPropagation">stopPropagation</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+    
+
+    
+
+    
 </div>
 
-
-
 <div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
-
+    <ul id="itemTab" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#class">Detail</a></li>
         
-            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+            <li><a data-toggle="tab" href="#method">Methods</a></li>
         
         
         
@@ -190,98 +383,37 @@
     </ul>
 
     <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
+        <div id="class" class="tab-pane active">
+           <div class="well well-small classDetail sign-left1">
+            
 
             
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods extends">
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_changeArgs" data-tablink="changeArgs">changeArgs</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_end" data-tablink="end">end</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_next" data-tablink="next">next</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_preventDefault" data-tablink="preventDefault">preventDefault</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_recoverArgs" data-tablink="recoverArgs">recoverArgs</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_reject" data-tablink="reject">reject</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_stop" data-tablink="stop">stop</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_stopPropagation" data-tablink="stopPropagation">stopPropagation</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
+                <div class="extends">
+                    Extends <a href="..\classes\EventArg(trigger).html" class="crosslink">EventArg(trigger)</a>
                 </div>
             
 
             
+                <div class="foundat">
+                    Defined in: <a href="../files/src_base_aop.js.html#l1650"><code>src\base\aop.js:1650</code></a>
+                </div>
+            
 
+            
+                
+                    Module: <a href="../modules/AOP.html">AOP</a>
+                
             
 
             
         </div>
 
         
-            <div id="methods" class="tab-pane">
+            
+        </div>
+
+        
+            <div id="method" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
                 
@@ -329,7 +461,7 @@
             
         
         
-        <a href="../files/src_core_aop.js.html#l1431"><code>src\core\aop.js:1431</code></a>
+        <a href="../files/src_base_aop.js.html#l1777"><code>src\base\aop.js:1777</code></a>
         
         </p>
 
@@ -339,7 +471,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>改变后续流程的执行参数</p>
 
     </div>
@@ -348,8 +480,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -374,6 +506,40 @@
 
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+            <div class="example-content">
+                <pre class="code prettyprint"><code>var result = [];
+
+ var flow = st.flowController({
+     flow: {
+         init: function(e, name) {
+             result.push(name,&#39;init&#39;);
+             //改变下个流程的方法参数
+             e.changeArgs([&#39;text&#39;]);
+         },
+         render: function(e,type) {
+             result.push(&#39;render&#39;,type);
+             //恢复原始参数
+             e.recoverArgs();
+         },
+         complete: function(e, name) {
+             result.push(&#39;complete&#39;,name);
+         }
+     },
+     //设定执行流程
+     order: ["init", "render", "complete"]
+ });
+
+ flow.boot("input");
+
+ expect(result + &#39;&#39;).toBe(&#39;input,init,render,text,complete,input&#39;);</code></pre>
+
+            </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+        </div>
     
 </div>
 
@@ -414,7 +580,7 @@
             
         
         
-        <a href="../files/src_core_aop.js.html#l1365"><code>src\core\aop.js:1365</code></a>
+        <a href="../files/src_base_aop.js.html#l1657"><code>src\base\aop.js:1657</code></a>
         
         </p>
 
@@ -424,7 +590,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>结束流程。无论是注册的事件方法还是流程方法全部结束</p>
 
     </div>
@@ -436,23 +602,47 @@
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code> triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
-                           setTimeout(function() {
-                               log(&#39;initBefore&#39;);
-                               //停止流程
-                               e.end().resolve();
-                           }, 100)
-                           return e.promise();
-                       }, "once");
+                <pre class="code prettyprint"><code> var result = [];
 
-                       $.when(triggerFlow.boot("div")).done(function() {
-                           //执行了注入事件initBefore后停止流程
-                           expect(arr + &#39;&#39;).toBe(&#39;initBefore&#39;);
-                       })</code></pre>
+ var triggerFlow = st.flowController({
+     flow: {
+         init: function(e, name, op) {
+             //模拟异步
+             setTimeout(function() {
+                 result.push(name, &#39;triggerInit&#39;);
+                 e.resolve();
+             }, 100);
+             return e.promise();
+         },
+         render: function(e, name, op) {
+             result.push(&#39;triggerRender&#39;);
+         },
+         complete: function(e, name, op) {
+             result.push(&#39;triggerComplete&#39;);
+         }
+     },
+     order: ["init", "render", "complete"],
+     trigger: true
+ });
+
+ triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
+     setTimeout(function() {
+         //停止流程
+         e.end().resolve();
+         result.push(&#39;initBefore&#39;);
+     }, 100);
+     return e.promise();
+ }, "once");
+
+ $.when(triggerFlow.boot("div")).done(function() {
+     //执行了注入事件initBefore后停止流程
+     expect(result + &#39;&#39;).toBe(&#39;initBefore&#39;);
+ })</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -516,7 +706,7 @@
             
         
         
-        <a href="../files/src_core_aop.js.html#l1413"><code>src\core\aop.js:1413</code></a>
+        <a href="../files/src_base_aop.js.html#l1715"><code>src\base\aop.js:1715</code></a>
         
         </p>
 
@@ -526,7 +716,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>手动指定下一个流程，（指定的流程可以不在order配置中）</p>
 
     </div>
@@ -535,8 +725,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -596,6 +786,57 @@
     
 
     
+        <div class="example">
+            <h4>Example:</h4>
+            <div class="example-content">
+                <p>   var result = [];</p>
+<pre class="code prettyprint"><code> //以widget简单的的生命周期为例
+ var flow = st.flowController({
+     flow: {
+         init: function(e, name, op) {
+             result.push(name,&#39;init&#39;);
+             //input的进入buildInput流程
+             if (name === &#39;input&#39;)
+                 //指定进入buildInput，同时指定的参数
+                 e.next("buildInput", [op.type]);
+             //进入cancel流程
+             else if (name === &#39;cancel&#39;)
+                 e.next(&#39;cancel&#39;);
+         },
+         buildInput: function(e, type) {
+             result.push(&#39;buildInput&#39;);
+             //返回传递结果
+             return type;
+         },
+         cancel: function(e) {
+             result.push(&#39;cancel&#39;);
+             e.end();
+         },
+         render: function(e, name, op) {
+             //判断是否存在传递结果
+             e.result &amp;&amp; result.push(e.result);
+             result.push(&#39;render&#39;);
+         },
+         complete: function(e, name, op) {
+             result.push(&#39;complete&#39;);
+         }
+     },
+     //设定执行流程
+     order: ["init", "render", "complete"]
+ });
+
+
+ flow.boot(&#39;input&#39;,{
+     type: &#39;text&#39;
+ });
+
+ expect(result + &#39;&#39;).toBe(&#39;input,init,buildInput,text,render,complete&#39;);</code></pre>
+
+            </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+        </div>
+    
 </div>
 
                 
@@ -628,11 +869,11 @@
         
             
                 <p>Inherited from
-                <a href="../classes/EventArg(trigger).html#method_preventDefault">EventArg(trigger)</a>:
+                <a href="..\classes\EventArg(trigger).html#method_preventDefault">EventArg(trigger)</a>:
             
         
         
-        <a href="../files/src_core_aop.js.html#l701"><code>src\core\aop.js:701</code></a>
+        <a href="../files/src_base_aop.js.html#l885"><code>src\base\aop.js:885</code></a>
         
         </p>
 
@@ -642,7 +883,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>阻止默认的方法执行；</p>
 
     </div>
@@ -654,9 +895,10 @@
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>var obj = st.attachTrigger({
+                <pre class="code prettyprint"><code>var result = [];
+
+var obj = st.attachTrigger({
     test: function(name) {
         result.push(name);
     }
@@ -666,21 +908,24 @@ obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
     result.push(name + &#39;-before1&#39;);
     //阻止前置后续的事件&amp;阻止默认方法
     e.stopPropagation().preventDefault();
-})
+});
 
 obj.onBefore(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
     result.push(name + &#39;-before2&#39;);
-})
+});
 
 obj.on(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
     result.push(name + &#39;-after&#39;);
-})
+});
 
 obj.test(&#39;call&#39;);
+
 //最终输出前置call-before1和后置
 expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -722,7 +967,7 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
             
         
         
-        <a href="../files/src_core_aop.js.html#l1437"><code>src\core\aop.js:1437</code></a>
+        <a href="../files/src_base_aop.js.html#l1809"><code>src\base\aop.js:1809</code></a>
         
         </p>
 
@@ -732,7 +977,7 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>恢复原始执行参数，下个流程中生效，与changeArgs方法对应</p>
 
     </div>
@@ -780,16 +1025,16 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="..\classes\EventArg.html#method_reject">
+                EventArg
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/src_core_aop.js.html#l1392"><code>src\core\aop.js:1392</code></a>
+        <a href="../files/src_base_aop.js.html#l1707"><code>src\base\aop.js:1707</code></a>
         
         </p>
 
@@ -799,7 +1044,7 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>拒绝契约同时设置流程状态为失败，结束流程</p>
 
     </div>
@@ -808,8 +1053,8 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -834,26 +1079,6 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
 
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code> flowReject.onBefore("init", "initBefore", function(e, name, op) {
-                           setTimeout(function() {
-                               //拒绝契约，结束流程
-                               e.reject("initBefore-reject");
-                           }, 100)
-                           return e.promise();
-                       });
-
-                       //使用fail来捕获
-                       $.when(flowReject.boot(&#39;boot&#39;)).fail(function(err) {
-                           expect(err).toBe(&#39;initBefore-reject&#39;);
-                       });</code></pre>
-
-            </div>
-        </div>
     
 </div>
 
@@ -887,11 +1112,11 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
         
             
                 <p>Inherited from
-                <a href="../classes/EventArg.html#method_remove">EventArg</a>:
+                <a href="..\classes\EventArg.html#method_remove">EventArg</a>:
             
         
         
-        <a href="../files/src_core_aop.js.html#l306"><code>src\core\aop.js:306</code></a>
+        <a href="../files/src_base_aop.js.html#l423"><code>src\base\aop.js:423</code></a>
         
         </p>
 
@@ -901,7 +1126,7 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>删除当前事件；与promiseEvent.add的&#39;once&#39;模式，不同在于可以手动进行控制</p>
 
     </div>
@@ -913,9 +1138,10 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-after&#39;);</code>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code> calls.add("onceTest", function(e) {
+                <pre class="code prettyprint"><code>var calls = st.promiseEvent();
+
+calls.add("onceTest", function(e) {
     //删除"onceTest"这个事件；
     e.remove();
 });
@@ -926,6 +1152,8 @@ calls.fire();
 expect(calls.has("onceTest")).toBe(false);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -966,16 +1194,13 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
 
     <div class="meta">
         
-            <p>Inherited from
-            <a href="../classes/EventArg.html#method_resolve">
-                EventArg
-            </a>
             
-            but overwritten in
+                <p>Inherited from
+                <a href="..\classes\EventArg.html#method_resolve">EventArg</a>:
             
         
         
-        <a href="../files/src_core_aop.js.html#l253"><code>src\core\aop.js:253</code></a>
+        <a href="../files/src_base_aop.js.html#l369"><code>src\base\aop.js:369</code></a>
         
         </p>
 
@@ -985,7 +1210,7 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>完成契约</p>
 
     </div>
@@ -994,8 +1219,8 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1024,7 +1249,6 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
                 <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
 
@@ -1044,6 +1268,8 @@ $.when(pCalls.fire("call")).done(function(data) {
 });</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -1078,11 +1304,11 @@ $.when(pCalls.fire("call")).done(function(data) {
         
             
                 <p>Inherited from
-                <a href="../classes/EventArg(trigger).html#method_stop">EventArg(trigger)</a>:
+                <a href="..\classes\EventArg(trigger).html#method_stop">EventArg(trigger)</a>:
             
         
         
-        <a href="../files/src_core_aop.js.html#l735"><code>src\core\aop.js:735</code></a>
+        <a href="../files/src_base_aop.js.html#l922"><code>src\base\aop.js:922</code></a>
         
         </p>
 
@@ -1092,7 +1318,7 @@ $.when(pCalls.fire("call")).done(function(data) {
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>停止当前方法执行和后置所有事件；在属性监听时，则阻止赋值；</p>
 
     </div>
@@ -1104,9 +1330,10 @@ $.when(pCalls.fire("call")).done(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>var obj = st.attachTrigger({
+                <pre class="code prettyprint"><code>var result = [];
+
+var obj = st.attachTrigger({
     test: function(name) {
         result.push(name);
     }
@@ -1116,15 +1343,15 @@ obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
     result.push(name + &#39;-before1&#39;);
     //停止执行
     e.stop();
-})
+});
 
 obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
     result.push(name + &#39;-before2&#39;);
-})
+});
 
 obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
     result.push(name + &#39;-after&#39;);
-})
+});
 
 obj.test(&#39;call&#39;);
 
@@ -1132,6 +1359,8 @@ obj.test(&#39;call&#39;);
 expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1&#39;);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -1166,11 +1395,11 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1&#39;);</code></pre>
         
             
                 <p>Inherited from
-                <a href="../classes/EventArg.html#method_stopPropagation">EventArg</a>:
+                <a href="..\classes\EventArg.html#method_stopPropagation">EventArg</a>:
             
         
         
-        <a href="../files/src_core_aop.js.html#l235"><code>src\core\aop.js:235</code></a>
+        <a href="../files/src_base_aop.js.html#l343"><code>src\base\aop.js:343</code></a>
         
         </p>
 
@@ -1180,7 +1409,7 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1&#39;);</code></pre>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>停止所有后续事件执行</p>
 
     </div>
@@ -1192,18 +1421,27 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1&#39;);</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>calls.add("c1", function(e) {
+                <pre class="code prettyprint"><code>var events = st.promiseEvent(),
+    result = [];
+
+events.add("c1", function(e) {
     //阻止冒泡
     e.stopPropagation();
+    result.push("c1");
 })
-.add("c2", function() {});
+.add("c2", function() {
+    result.push("c2");
+});
 
 //只执行了c1
-calls.fire();</code></pre>
+events.fire();
+
+expect(result.join(&#39;-&#39;)).toBe(&#39;c1&#39;)</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -1226,10 +1464,13 @@ calls.fire();</code></pre>
         </div>
     </div>
 </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
 <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script src="../assets/js/yuidoc-bootstrap.js"></script>
-<script>prettyPrint();</script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
 </body>
 </html>

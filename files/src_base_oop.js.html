@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\base\oop.js - SmartJs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+        </div>
+        <div class="col-sm-9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\base\oop.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+&quot;use strict&quot;;
+/**
+    面向对象思想的辅助实现模块;
+    
+    Feartures : 
+        1. klass ：类继承；实现执行指针，类常用方法，继承路径
+        2. factory ：对象/类工厂方法；
+
+    Update Note：
+        + 2014.6 ：Created
+
+    @module OOP
+*/
+stDefine(&#x27;oop&#x27;, function(st) {
+    //初始化扩展函数
+    var _onKlassInit = st.promiseEvent(),
+        /**
+         * klass的基类对象
+         * @class klassBase
+         * 
+         */
+        _klassBase = {
+            /**
+                调用原型链方法
+                @method callProto
+                @param name {string} 需要执行的原型链方法名
+                @param [args] {array} 执行参数
+                @return [object] 返回执行结果
+                @example
+                    var Animate = st.klass(&quot;Animate&quot;, {
+                        klassInit: function(name) {
+                            this.name = name;
+                        },
+                        say: function(text) {
+                            return this.name + &#x27;:&#x27; + text;
+                        }
+                    });
+
+                    var chicken = new Animate(&#x27;chicken&#x27;);
+                    chicken.say = function(text){
+                        //调用原型链方法
+                        return &#x27;[Bird]&#x27; + this.callProto(&#x27;say&#x27;,[text]);
+                    };
+
+                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
+            */
+            callProto : function(name,args){
+                var fn = this._$fn[name];
+                if(fn)
+                    return fn.apply(this,args);
+            },
+            /**
+                获取基类对象
+                @method getBase
+                @param [baseName] {string} 基类名称,不设置则返回父类
+                @return [object] 返回基类 
+                @example
+                    var Animate = st.klass(&quot;Animate&quot;, {
+                            klassInit: function(name) {
+                                this.name = name;
+                            },
+                            say: function(text) {
+                                return this.name + &#x27;:&#x27; + text;
+                            }
+                        });
+                    
+                    //继承user
+                    var Bird = st.klass(&quot;Bird&quot;, {
+                        //重写say方法
+                        say: function(text) {
+                            //根据名称向上找到父类原型
+                            var parent =  this.getBase(&#x27;Animate&#x27;);
+                            
+                            //调用原型链方法
+                            return &#x27;[Bird]&#x27; + parent.say.call(this,text);
+                        }
+                    }, Animate);
+                    
+                    var chicken = new Bird(&#x27;chicken&#x27;);
+                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
+
+            */
+            getBase: function(baseName) {
+                var self = this,
+                    parent = self._$super;
+
+                if (baseName &amp;&amp; typeof baseName == &#x27;number&#x27;)
+                    baseName = self._$inheirts[baseName];
+
+                if (parent) {
+                    if (baseName) {
+                        while (parent &amp;&amp; parent._$kName != baseName) {
+                            parent = parent._$super;
+                        }
+                    } else if (parent._$kName == self._$kName) {
+                        return null;
+                    }
+                }
+                return parent;
+            },
+            /**
+               调用基类的方法
+               @method  callBase
+               @param  {string} fnName   方法名称
+               @param  {string} [baseName] 基类名称
+               @param  {array} [args]    方法参数数组
+               @return {object}  执行结果   
+               @example
+                    var Animate = st.klass(&quot;Animate&quot;, {
+                            klassInit: function(name) {
+                                this.name = name;
+                            },
+                            say: function(text) {
+                                return this.name + &#x27;:&#x27; + text;
+                            }
+                        });
+                    
+                    //继承user
+                    var Bird = st.klass(&quot;Bird&quot;, {
+                        //重写say方法
+                        say: function(text) {
+                             //调用基类方法
+                             return &#x27;[Bird]&#x27; + this.callBase(&#x27;say&#x27;,[text]);
+                        }
+                    }, Animate);
+                    
+                    var chicken = new Bird(&#x27;chicken&#x27;);
+                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
+
+             */
+            callBase: function(fnName, baseName, args) {
+                var self = this,
+                    base = self._$super,
+                    fn, result, current, indicator = self._$indicator;
+
+                if (!base)
+                    return;
+
+                if (arguments.length &lt; 3) {
+                    args = baseName;
+                    baseName = null;
+                }
+
+                if (baseName)
+                    base = self.getBase(baseName);
+                else if (current = indicator[fnName])
+                    base = current._$super || current.fn._$super || current;
+
+                if (base &amp;&amp; (fn = base[fnName])) {
+                    indicator[fnName] = base;
+                    result = fn.apply(this, args);
+                    indicator[fnName] = null;
+                }
+                return result;
+            },
+            /**
+               类扩展方法
+               @method extend
+               @param  {object} prop 扩展的属性和方法对象
+               @chainable
+               @example
+                    var Animate = st.klass(&quot;Animate&quot;, {
+                        klassInit: function(name) {
+                            this.name = name;
+                        },
+                        say: function(text) {
+                            return this.name + &#x27;:&#x27; + text;
+                        }
+                    });
+
+                    var chicken = new Animate(&#x27;chicken&#x27;);
+
+                    //扩展等同于 chicken.say = xxx
+                    chicken.extend({
+                        say : function(text){
+                            return &#x27;hello&#x27;;
+                        }
+                    });
+
+                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;hello&#x27;);
+             */
+            extend: function(prop) {
+                $.extend(this, prop);
+                return this;
+            }
+        };
+
+    st.conf(&#x27;oop-KlassBase&#x27;,_klassBase);
+
+    /**
+        js类创建，具有执行指针功能(解决了多级继承域对象的问题)
+
+        此外提供两种全局扩展方式： 
+            1. 基于原形链的基类扩展，使用st.conf(&#x27;oop-KlassBase&#x27;)，可以取到基类对象进行扩展
+            2. 在类初始化时，对实例化的对象进行扩展，可以使用st.onKlassInit对象进行添加扩展方法。st.onKlassInit 是promiseEvent对象，st.onKlassInit(obj,config);
+
+        @class klass
+        @constructor
+        @extend klassBase
+        @param {string} name 类名称
+        @param {object} prop 类的属性和方法
+        @param {klass|object|function} [parent] 父类
+        @param {object} [config] 扩展参数
+        @return {klass} 返回类
+        @example
+            //创建一个class
+            var User = st.klass(&#x27;user&#x27;,{
+                klassInit:function(name){
+                    this.name = name;
+                },
+                say: function(text) {
+                    return this.name + &#x27;,&#x27; + text;
+                }
+            });
+
+            //实例化一个User
+            var xiaoming = new User(&#x27;小明&#x27;);
+            
+            //方法实例化
+            var xiaozhang = User(&#x27;小张&#x27;);
+
+
+
+            
+            //多级继承例子。在多级继承中有一种场景每个子类方法都会调用父类的方法，而方法中又会使用到当前对象的属性，则问题就来了；
+            //如果是采用的parent.xxx然后传递this下的属性值过去，则没太大的问题。backbone就采用的这种。
+            //另外像base.js直接改写原始方法，将父对象封入闭包中，也无问题。只是这种限制比较大，只能调用父类的同名方法。
+            //而dojo采用的是this.parent.xxx.call(this)的方式，则就会悲剧了，死循环就来了。
+            //导致这样的原因就是将this带入parent方法后，父类又执行this.parent。而这是this则是子类的对象，那么方法就只会不停的调用parent的方法。
+            //在smartjs中klass调用父类方法由callBae这个方法来代理，同时使用指针来记录方法的执行轨迹，这样保证了从子到根的各级调用
+
+            var user2 = st.klass(&#x27;user2&#x27;, {
+                say: function(text) {
+                    //调用父类
+                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv2&quot;;
+                }
+            }, User);
+
+            var user3 = st.klass(&#x27;user3&#x27;, {
+                say: function(text) {
+                    //调用父类
+                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv3&quot;;
+                }
+            }, user2);
+
+            var user4 = st.klass(&#x27;user4&#x27;, {
+                say: function(text) {
+                    //调用父类
+                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv4&quot;;
+                }
+            }, user3);
+
+            var roy = new user4(&#x27;roy&#x27;);
+            
+            //继承路径
+            expect(roy._$inheirts + &#x27;&#x27;).toBe(&#x27;user4,user3,user2,user&#x27;);
+
+            //依次执行到根，正确将当前的this对象的值输出
+            expect(roy.say(&#x27;hello&#x27;)).toBe(&#x27;roy,hello-lv2-lv3-lv4&#x27;);
+
+            //从3级开始执行
+            expect(roy.callBase(&#x27;say&#x27;, [&#x27;hello&#x27;])).toBe(&quot;roy,hello-lv2-lv3&quot;);
+
+            //指定从user开始执行
+            expect(roy.callBase(&#x27;say&#x27;, &#x27;user&#x27;, [&#x27;hello&#x27;])).toBe(&quot;roy,hello&quot;);
+
+            //上向略过2级执行
+            expect(roy.callBase(&#x27;say&#x27;, 2, [&#x27;hello&#x27;])).toBe(&quot;roy,hello-lv2&quot;);
+    */
+    function klass(name, prop, parent, config) {
+        var _super, _proto, _prop = prop,
+            _inheirts = [name],
+            _obj = function() {
+                var self = this,
+                    args = arguments,
+                    len = args.length;
+
+                //自执行初始化判断
+                if (!(self instanceof _obj)) {
+                    if (len === 0)
+                        return new _obj();
+                    if (len &lt; 4)
+                        return new _obj(args[0], args[1], args[2]);
+                    else if (len &lt; 7)
+                        return new _obj(args[0], args[1], args[2], args[3], args[4], args[5]);
+                    else
+                        return new _obj(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                }
+                //设置指针对象
+                self._$indicator = {};
+                //设置原型链
+                self._$fn = _proto;
+                //执行扩展方法
+                _onKlassInit.fireWith(self,config);
+                //klassInit默认初始化
+                self.klassInit &amp;&amp; self.klassInit.apply(self, args);
+            }
+
+        if (parent) {
+            _super = parent.prototype || parent;
+            _proto = _obj.prototype = Object.create(_super);
+            _proto._$super = _super;
+            _proto.constructor = parent;
+            //添加父的继承路径
+            if (_super._$inheirts)
+                _inheirts = _inheirts.concat(_super._$inheirts);
+            else
+                _inheirts.push(parent.name);
+        } else
+            _proto = $.extend(_obj.prototype, _klassBase);
+
+        _obj.fn = _proto;
+        $.extend(_proto, _prop, {
+            //类标示
+            _$klass: true,
+            //类名
+            _$kName: name,
+            //继承链
+            _$inheirts: _inheirts
+        });
+        return _obj;
+    }
+
+    // _onKlassInit.add(&#x27;attachTrigger&#x27;, function(config) {
+    //     var trigger = config.trigger;
+    //     trigger &amp;&amp; st.attachTrigger(this, trigger.iFace, trigger.mode);
+    // })
+    
+    /**
+     * factory并不只是指的是工厂模式。在factory要求定义一个基础对象，这个对象可以是基类，也可以是模板对象或者是接口。然后factory就已此基础对象为基础，其他添加或者创建的对象，继承或者是复制基础对象的属性和方法。factory在提供一系列方法来对这些对象做控制。
+        factory经过简单的处理可以实现工厂、外观、模板等设计模式。
+     * @class factory
+     * @constructor
+     * @extends klass
+     * @param  {string} name        工厂名称
+     * @param  {object} base        基类对象，所有在工厂中添加的对象都以base为基础
+     * @param  {object} [proto]     工厂的扩展属性和方法对象
+     * @param  {string} [type]      工厂的类型； 
+     * 1. 默认:类实例化后的对象；
+     * 2. class：类对象，未实例化；
+     * 3. merge：对象复制合并
+     * @param  {boolean} [initDefault] 是否将base设置成为默认的对象；当使用factory.get找不到对象时返回默认对象
+     * @return {factory}  返回创建的工厂对象
+     * @example
+           //widget基类
+            var baseWidget = {
+                //widget类型
+                type: &#x27;&#x27;,
+                //widget的渲染方法
+                render: function(id) {
+                    return this.type + &#x27;:&#x27; + id;
+                }
+            };
+
+            //一个widget工厂
+            var widgetFactory = st.factory(&#x27;wdigetfactory&#x27;, baseWidget);
+
+            //添加一个input
+            widgetFactory.add(&#x27;input&#x27;, {
+                type: &#x27;input&#x27;
+            })
+
+            //找到添加的input
+            var input = widgetFactory.find(&#x27;input&#x27;);
+            
+            //_$fType为注册的类型名
+            expect(input._$fType).toBe(&#x27;input&#x27;);
+
+            //输出
+            expect(input.render(&#x27;txt&#x27;)).toBe(&quot;input:txt&quot;);
+
+
+            //添加一个number类型的input
+            var num = widgetFactory.add(&#x27;number&#x27;, {
+                type: &#x27;input[number]&#x27;
+                //指定父类为input
+            }, &#x27;input&#x27;)
+
+            //输出
+            expect(num.render(&#x27;txtNum&#x27;)).toBe(&quot;input[number]:txtNum&quot;);
+
+
+
+            // 类模式，注册的对象都是类的方式，使用需要初始化
+            var f1 = st.factory({
+                name: &#x27;classMode&#x27;,
+                //设置class类型
+                type: &#x27;class&#x27;,
+                base: {
+                    klassInit: function(name) {
+                        this.name = name;
+                    }
+
+                }
+            });
+
+            var c1 = f1.add(&#x27;c1&#x27;, {
+                type: &#x27;c1&#x27;
+            });
+
+            expect(c1.fn).toBeDefined();
+
+            //需要初始化
+            var c = new c1(&#x27;class1&#x27;);
+            expect(c.type).toBe(&quot;c1&quot;);
+            expect(c.name).toBe(&quot;class1&quot;);
+
+
+
+            //merget mode
+             var f2 = st.factory({
+                name: &#x27;copyMode&#x27;,
+                //设置merge类型
+                type: 　&#x27;merge&#x27;,
+                //设置默认模式
+                initDefault: true,
+                base: {
+                    name: &#x27;copy&#x27;,
+                    project: {
+                        name: &#x27;smartjs&#x27;
+                    }
+                }
+            })
+
+            var c = f2.add(&#x27;c1&#x27;, {
+                name: &#x27;c1&#x27;,
+                project: {
+                    role: &#x27;pm&#x27;
+                }
+            });
+            
+            expect(f2.find().name).toBe(&quot;copy&quot;);
+            expect(c.name).toBe(&quot;c1&quot;);
+            expect(c.project.name).toBe(&quot;smartjs&quot;);
+            expect(c.project.role).toBe(&quot;pm&quot;);
+
+     */
+    function factory(name, base, proto, type, initDefault) {
+        var _store = {}, _base = base,
+            _proto, _type, _initDefault,
+            args = arguments,
+            argsLen = args.length,
+            argType,arg, i = 2,
+            mergeMode, klassMode, needInit, _defaultItem;
+
+
+        if(argsLen === 1 &amp;&amp; typeof name === &#x27;object&#x27;){
+            _base = name.base;
+            _proto = name.proto;
+            _type = name.type;
+            _initDefault  = name.initDefault;
+            name = name.name;
+        }
+        else if (argsLen &gt; i) {
+            for (; i &lt; argsLen; i++) {
+                if (arg = args[i]) {
+                    argType = typeof arg;
+                    if (argType === &#x27;object&#x27;)
+                        _proto = arg;
+                    else if (argType === &#x27;string&#x27;)
+                        _type = arg;
+                    else if (argType === &#x27;boolean&#x27;)
+                        _initDefault = arg;
+                }
+            }
+        }
+
+        if (_type === &#x27;merge&#x27;)
+            mergeMode = true;
+        else if (_type === &#x27;class&#x27;)
+            klassMode = true;
+        else
+            needInit = true;
+
+        mergeMode || (_base = klass(name + &#x27;_base&#x27;,_base));
+
+        //设置默认项
+        _initDefault &amp;&amp; (_defaultItem = needInit ? new _base : _base);
+
+        /**
+           使用工厂创建产品方法，但不注册到factory中
+           @method build
+           @param  {string} name   产品名称
+           @param  {object} item   产品特性
+           @param  {string} [parent] 父类名称，注册到factory中产品名称
+           @return {object|klass}  返回创建的产品
+           @example
+                //一个widget工厂
+                var widgetFactory = st.factory(&#x27;wdigetfactory&#x27;, {
+                    //widget类型
+                    type: &#x27;&#x27;,
+                    //widget的渲染方法
+                    render: function(id) {
+                        return this.type + &#x27;:&#x27; + id;
+                    }
+                },&#x27;class&#x27;);
+
+                var Tab = widgetFactory.build(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
+
+                expect(widgetFactory.find(&#x27;Tab&#x27;)).toBeUndefined();
+                
+                var tab1 = new Tab();
+
+                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Tab:tab1&#x27;);
+
+         */
+        function build(name, item, parent) {
+            parent = parent ? find(parent) || _base : _base;
+
+            item._$fType = name;
+
+            if (mergeMode)
+                return st.mix(true, item, parent);
+            else {
+                item = klass(name, item, parent);
+                return klassMode ? item : new item;
+            }
+        }
+
+        /**
+           添加产品方法，注册到factory中
+           @method add
+           @param  {string} name   产品名称
+           @param  {object} item   产品特性
+           @param  {string} [parent] 父类名称，注册到factory中产品名称
+           @return {object|klass}  返回创建的产品
+           @example
+                //一个widget工厂
+                var widgetFactory = st.factory({
+                    //工厂名
+                    name : &#x27;wdigetfactory&#x27;,
+                    //工厂类型
+                    type: &#x27;class&#x27;,
+                    //基类对象  
+                    base : {
+                        //widget类型
+                        type: &#x27;&#x27;,
+                        //widget的渲染方法
+                        render: function(id) {
+                            return this.type + &#x27;:&#x27; + id;
+                        }
+                    } 
+                });
+
+                var Tab = widgetFactory.add(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
+
+                expect(widgetFactory.find(&#x27;Tab&#x27;)).toBeDefined();
+                
+                var tab1 = new Tab();
+
+                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Tab:tab1&#x27;);
+
+         */
+        function add(name, item, parent) {
+            return (_store[name] = build(name, item, parent));
+        }
+
+        /**
+           查找注册的产品
+           @method find
+           @param  {string} name   产品名称
+           @param  {object} defaultMode   是否在找不到产品的时候返回默认产品
+           @return {object} 返回查找的产品
+         */
+        function find(name, defaultMode) {
+            var obj;
+            if (arguments.length === 0)
+                return _defaultItem;
+
+            if (name &amp;&amp; (obj = _store[name])) {
+                return obj;
+            }
+            return defaultMode ? _defaultItem : undefined;
+        }
+
+        /**
+           将注册的产品设置成默认产品
+           @method setDefault
+           @param  {string} name   产品名称
+           @chainable
+           @example
+               
+                //一个widget工厂
+                var widgetFactory = st.factory({
+                    //工厂名
+                    name : &#x27;wdigetfactory&#x27;,
+                    //工厂类型
+                    type: &#x27;class&#x27;,
+                    //基类对象  
+                    base : {
+                        //widget类型
+                        type: &#x27;&#x27;,
+                        //widget的渲染方法
+                        render: function(id) {
+                            return this.type + &#x27;:&#x27; + id;
+                        }
+                    } 
+                });
+
+                widgetFactory.add(&#x27;Panel&#x27;,{type : &#x27;Panel&#x27;});
+
+                //将Panel设置成默认项
+                widgetFactory.setDefault(&#x27;Panel&#x27;)
+                
+                //Tab未注册，但参数中设置了返回默认，则会返回Panel
+                var Tab = widgetFactory.find(&#x27;Tab&#x27;,true);
+
+                var tab1 = new Tab();
+                
+                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Panel:tab1&#x27;);
+
+         */
+        function setDefault(name) {
+            _defaultItem = get(name, true);
+            return this;
+        }
+
+         /**
+           在工厂中移除注册的产品
+           @method remove
+           @param  {string} name   产品名称
+           @chainable
+         */
+        function remove(name) {
+            delete _store[name];
+        }
+
+        proto = $.extend({
+            build: build,
+            add: add,
+            find: find,
+            remove: remove,
+            setDefault: setDefault,
+            /**
+               执行工厂中产品的方法,不会返回结果;当工厂类型为class时，则执行的则是原型链上的方法
+               @method fire
+               @param  {string} name 方法名称
+               @param  {array} [args] 执行参数
+               @param  {function} [handler] 处理方法
+               @example
+                    
+                    //一个widget工厂
+                    var widgetFactory = st.factory({
+                        //工厂名
+                        name : &#x27;wdigetfactory&#x27;,
+                        //工厂类型
+                        type: &#x27;class&#x27;,
+                        //基类对象  
+                        base : {
+                            //widget类型
+                            type: &#x27;&#x27;,
+                            //widget的渲染方法
+                            render: function(id) {
+                                return this.type + &#x27;:&#x27; + id;
+                            }
+                        } 
+                    });
+
+                    widgetFactory.add(&#x27;Panel&#x27;,{type : &#x27;Panel&#x27;});
+                    widgetFactory.add(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
+                    
+                    var ret = &#x27;&#x27;;
+                    //执行每个widget的render方法；
+                    widgetFactory.fire(&#x27;render&#x27;,[&#x27;id&#x27;],function(item,result){
+                        //this为widgetFactory；item为产品；result为render执行结果
+                        ret += result + &#x27;-&#x27;;
+                    })
+
+                    expect(ret).toBe(&#x27;Panel:id-Tab:id-&#x27;);
+             */
+            fire : function(name,args,handler){
+                var fn,result,self = this;
+                $.each(_store,function(n,item){
+                    if(item){
+                        item.fn &amp;&amp; (item = item.fn);
+                        if(fn = item[name])
+                        {
+                            result = fn.apply(item,args);
+                            handler &amp;&amp; handler.call(self,item,result);
+                        }
+                    }
+                })
+            }
+        }, _proto);
+
+        return klass(name, proto, null, {
+            trigger: true
+        })();
+    }
+
+    return {
+        klass: klass,
+        onKlassInit : _onKlassInit,
+        factory: factory
+    };
+})
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

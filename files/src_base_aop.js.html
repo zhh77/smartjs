@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\base\aop.js - SmartJs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+        </div>
+        <div class="col-sm-9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\base\aop.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+&quot;use strict&quot;;
+/**
+    面向切面编程的辅助模块
+    
+    Feartures : 
+        1. promiseEvent ：基于promise和event机制的回调管理
+        2. trigger ：对象触发器
+        3. flowController ：流程/生命周期控制器
+
+    Update Note：
+        + 2014.8.06 ：将priorityList应用到promiseEvent中
+        + 2014.6.13 ：trigger添加属性变化监听支持
+        + 2014.6.11 ：promiseEvent添加非阻塞模式
+        + 2014.5 ：Created
+
+    @module AOP
+*/
+stDefine(&#x27;aop&#x27;, function(st) {
+    var sliceArgs = st.sliceArgs;
+
+    //设置默认权重
+    st.conf(&quot;aop-Priority&quot;, 0);
+
+    function isDefined(data) {
+        return data !== undefined;
+    }
+
+    function PromiseSign(mode) {
+        this.mode = mode;
+    }
+
+    //promise参数对象
+    function PromiseArg(prop) {
+        $.extend(this, prop);
+        this.promise = function(mode) {
+            return new PromiseSign(mode);
+        }
+    }
+
+    function buildPromiseArg(prop) {
+        return new PromiseArg(prop);
+    }
+
+    //判断是否promise
+    function isPromise(result) {
+        return result ? result instanceof PromiseSign : false;
+    }
+
+
+    //判断是否promise参数
+    function isPromiseArg(d) {
+        if (d &amp;&amp; typeof d === &#x27;object&#x27;) {
+            return d instanceof PromiseArg;
+        }
+        return false;
+    }
+
+    function openPromise(defer, _err) {
+        if (_err) {
+            setTimeout(function() {
+                defer.reject(_err);
+            }, 0);
+        }
+        return defer.promise();
+    }
+
+    /**
+        基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
+        默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），
+        直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回
+        @class promiseEvent
+        @constructor
+        @param [mode] {string} promiseEvent的模式，可以混用；
+            1. 默认；event模式，所有的注册的事件，执行时，第一个事件参数为e（详细说明见promiseEvent-EventArg）
+            2. &#x27;callback&#x27; : 回调模式; 与event模式对立，执行时不会添加事件参数e
+            2. &#x27;none&#x27; : 全部事件执行一次，即有执行动作就销毁
+            3. &#x27;noBlock&#x27; : 非阻塞模式；
+        @example
+
+            //使用once模式创建promiseEvent
+            var events = st.promiseEvent(&quot;once&quot;);
+
+            //添加回调
+            events.add(&#x27;call1&#x27;, function(e, text) {
+                return text;
+            });
+            
+            //执行事件
+            expect(events.fire(&#x27;called&#x27;)).toBe(&#x27;called&#x27;);
+            
+            var result = [];
+
+            //创建一个noBlock模式的promiseEvents;
+            var noBlockEvents = st.promiseEvent(&quot;noBlock&quot;);
+
+            //第一个回调延迟100
+            noBlockEvents.add(&quot;c1&quot;, function(e) {
+                //异步的promise处理
+                setTimeout(function() {
+                    result.push(&#x27;c1&#x27;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            });
+
+            //第二个正常执行
+            noBlockEvents.add(&quot;c2&quot;, function(e) {
+                result.push(&#x27;c2&#x27;);
+            });
+
+            //第三个回调延迟50
+            noBlockEvents.add(&quot;c3&quot;, function(e) {
+                setTimeout(function() {
+                    result.push(&#x27;c3&#x27;);
+                    e.resolve();
+                }, 50);
+                return e.promise();
+            });
+
+            $.when(noBlockEvents.fire()).done(function(data) {
+                //最终执行顺序是c2-c3-c1
+                expect(result + &#x27;&#x27;).toBe(&#x27;c2,c3,c1&#x27;);
+            });
+    */
+    function promiseEvent(mode) {
+        var _mode, _callbackMode, _noBlock,
+            _onceMode,
+            _list = st.priorityList(&quot;self&quot;, st.conf(&quot;aop-Priority&quot;));
+
+        if (mode) {
+            _mode = mode.split(&#x27; &#x27;);
+            _onceMode = checkMode(&#x27;once&#x27;);
+            _callbackMode = checkMode(&#x27;callback&#x27;);
+            //非阻塞模式
+            _noBlock = checkMode(&#x27;noBlock&#x27;);
+            _mode = null;
+        }
+
+        function checkMode(m) {
+            return _mode.indexOf(m) &gt; -1;
+        }
+
+        /**
+            清空所有事件回调
+            @method clear 
+            @chainable
+            @example
+                var events = st.promiseEvent();
+
+                //添加回调
+                events.add(&#x27;call1&#x27;, function(e, text) {});
+                events.add(&#x27;call2&#x27;, function(e, text) {});
+                
+                //回调事件总数为2
+                expect(events.len()).toBe(2);
+
+                //清除events下面注册的事件
+                events.clear();
+                
+                //回调事件总数为0
+                expect(events.len()).toBe(0);
+
+        */
+        function clear() {
+            _list.clear();
+            return this;
+        }
+
+        /**
+            添加事件回调方法
+            @method add 
+            @param name {string} 事件回调名
+            @param fn {string} 事件回调方法
+            @param [priority=0] {number} 权重;预设为0，可以通过配置调整
+            @param [mode] {string} 回调模式：&quot;once&quot;:执行一次
+            @chainable
+            @example
+
+                //callbak 模式下添加事件
+                var calls = st.promiseEvent(&quot;callback&quot;),
+                    ret = [];
+
+                //没有eventArg参数
+                calls.add(&quot;c1&quot;, function(name) {
+                    ret.push(name + &#x27;-c1&#x27;);
+                }).add(&quot;c2&quot;, function(name) {
+                    ret.push(name + &#x27;-c2&#x27;);
+                });
+                calls.fire(&#x27;test&#x27;);
+                expect(ret.join(&#x27;;&#x27;)).toBe(&#x27;test-c1;test-c2&#x27;);
+
+                
+                //标准模式
+                var events = st.promiseEvent(),
+                    result = [];
+
+                //注册事件
+                events.add(&#x27;call1&#x27;, function(e, text) {
+                    result.push(&#x27;call1&#x27;);
+                });
+
+                //自定义priority注册事件
+                events.add(&#x27;call2&#x27;, function(e, text) {
+                    result.push(&#x27;call2&#x27;);
+                },100);
+
+                //单once模式注册
+                events.add(&#x27;call3&#x27;, function(e, text) {
+                    result.push(&#x27;call3&#x27;);
+                },&#x27;once&#x27;);
+
+                //所有设置
+                events.add(&#x27;call4&#x27;, function(e, text) {
+                    result.push(&#x27;call4&#x27;);
+                },50,&#x27;once&#x27;);
+                
+                //返回promise
+                events.add(&quot;promiseCall&quot;, function(e, text) {
+                    //异步的方法
+                    setTimeout(function() {
+                        result.push(&#x27;promiseCall&#x27;);
+                        e.resolve();
+                    },0);
+                    return e.promise();
+                },20);
+                
+                //回调中如果存在promise需要,$.when来获取结果
+                $.when(events.fire(&#x27;test&#x27;)).done(function(){
+                    expect(result.join(&#x27;-&#x27;)).toBe(&#x27;call2-call4-promiseCall-call1-call3&#x27;);
+                });
+                
+
+                //result传递
+                var resultEvents = st.promiseEvent();
+                resultEvents.add(&quot;c1&quot;, function(e) {
+                    //使用return传递结果
+                    return &quot;c1&quot;;
+                }).add(&quot;c2&quot;, function(e) {
+                    //e.result是由c1返回过来的值; 使用事件参数e的resolve传递
+                    setTimeout(function() {
+                        e.resolve(e.result + &quot;-c2&quot;);
+                    },0);
+                    return e.promise();
+
+                }).add(&quot;c3&quot;, function(e) {
+                    //e.result是由c1返回过来的值
+                    return e.result + &quot;-c3&quot;;
+                });
+                
+                $.when(resultEvents.fire()).done(function(ret){
+                    expect(ret).toBe(&#x27;c1-c2-c3&#x27;);
+                })
+        */
+        function add(name, fn, priority, mode) {
+            if (!name &amp;&amp; typeof name !== &#x27;string&#x27; &amp;&amp; !fn)
+                return;
+
+            if(typeof (priority) === &#x27;string&#x27;) {
+                mode = priority;
+                priority = null;
+            }
+
+            _list.add({
+                name: name,
+                fn: fn,
+                priority: priority,
+                mode: mode
+            });
+            return this;
+        }
+
+        /**
+            删除事件回调方法
+            @method remove 
+            @param name {string} 事件回调名
+            @chainable
+            @example
+                var events = st.promiseEvent();
+
+                //注册事件
+                events.add(&#x27;call1&#x27;, function(e, text) {});
+
+                //删除事件
+                events.remove(&#x27;call1&#x27;);
+
+                expect(events.len()).toBe(0);
+                
+        */
+        function remove(name) {
+            _list.remove(function(item) {
+                return item.name === name;
+            })
+            return this;
+        }
+
+        /**
+            根据上下文对象执行回调;fire方法的增强
+            @method fireWith 
+            @param context {object} 上下文对象
+            @param args {array} 执行参数
+            @param [argHandle] {function} 参数处理方法，可以对eventarg进行修改；例如：argHandle(e)
+            @return {object|promise} 返回执行结果
+            @example
+                var events = st.promiseEvent(),
+                target = {
+                    name : &#x27;target&#x27;
+                };
+
+                 //注册事件
+                 events.add(&#x27;call1&#x27;, function(e, text) {
+                    return this.name + &#x27;-&#x27; + text + &#x27;-&#x27; + e.extend();
+                 });
+
+                 //使用fireWith执行
+                 var result = events.fireWith(target,[&#x27;test&#x27;],function(e){
+                    //扩展事件参数；只会在这一次的fire中生效
+                    e.extend = function(){
+                        return &#x27;extend&#x27;;
+                    }
+                 });
+
+                 expect(result).toBe(&#x27;target-test-extend&#x27;);
+        */
+        function fireWith(context, args, argHandle) {
+            var i = 0,
+                fireCount = 0,
+                itemNoBlock,
+                len = _list.len(),
+                item, defer, _result, _err, d, _stop, _done;
+
+            if (!len)
+                return;
+
+            if (typeof argHandle !== &#x27;function&#x27;)
+                argHandle = null;
+
+            /**
+                promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；
+                EventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；
+                @class EventArg
+            */
+            d = buildPromiseArg({
+                /**
+                    停止所有后续事件执行
+                    @method stopPropagation 
+                    @chainable
+                    @example
+                        var events = st.promiseEvent(),
+                            result = [];
+
+                        events.add(&quot;c1&quot;, function(e) {
+                            //阻止冒泡
+                            e.stopPropagation();
+                            result.push(&quot;c1&quot;);
+                        })
+                        .add(&quot;c2&quot;, function() {
+                            result.push(&quot;c2&quot;);
+                        });
+
+                        //只执行了c1
+                        events.fire();
+
+                        expect(result.join(&#x27;-&#x27;)).toBe(&#x27;c1&#x27;)
+                */
+                stopPropagation: function() {
+                    _stop = true;
+                    return this;
+                },
+                /**
+                    完成契约
+                    @method resolve 
+                    @param [result] {object} 返回结果
+                    @example
+                        var pCalls = st.promiseEvent();
+
+                        pCalls.add(&quot;c1&quot;, function(e, name) {
+                            //延迟100ms
+                            setTimeout(function() {
+                                //完成promise,并返回结果
+                                e.resolve(name + &#x27;,resolve!&#x27;);
+                            }, 100);
+                            //返回promise
+                            return e.promise();
+                        });
+                        
+                        //使用when来监控promiseEvent的执行，使用done来处理执行完毕的方法
+                        $.when(pCalls.fire(&quot;call&quot;)).done(function(data) {
+                            expect(data).toBe(&#x27;call,resolve!&#x27;);
+                        });
+
+                */
+                resolve: function(result) {
+                    fireCount++;
+                    isDefined(result) &amp;&amp; (_result = result);
+                    _stop ? done() : fireItem();
+                },
+                /**
+                    拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行
+                    @method reject 
+                    @param err {object} 拒绝参数
+                    @example
+                        var pCalls = st.promiseEvent();
+
+                        pCalls.add(&quot;c1&quot;, function(e, name) {
+                            //延迟100ms
+                            setTimeout(function() {
+                                //拒绝promise,并返回结果
+                                e.reject(name + &#x27;,reject!&#x27;);
+                            }, 100);
+
+                            //返回promise
+                              return e.promise();
+                        });
+
+                        //使用when来监控promiseEvent的执行，使用fail捕获reject
+                        $.when(pCalls.fire(&quot;call&quot;)).fail(function(data) {
+                            expect(data).toBe(&#x27;call,reject!&#x27;);
+                        });
+                */
+                reject: function(err) {
+                    fail(err);
+                },
+                /**
+                    删除当前事件；与promiseEvent.add的&#x27;once&#x27;模式，不同在于可以手动进行控制
+                    @method remove 
+                    @chainable
+                    @example
+                        var calls = st.promiseEvent();
+                        
+                        calls.add(&quot;onceTest&quot;, function(e) {
+                            //删除&quot;onceTest&quot;这个事件；
+                            e.remove();
+                        });
+                        //执行后才会触发删除
+                        calls.fire();
+
+                        //&quot;onceTest&quot;已经不在calls中
+                        expect(calls.has(&quot;onceTest&quot;)).toBe(false);
+                */
+                remove: function() {
+                    _list.remove(--i);
+                    len--;
+                    return this;
+                }
+            });
+
+            //callback模式下不用添加事件参数
+            if (!_callbackMode) {
+                args = args ? [d].concat(args) : [d];
+                argHandle &amp;&amp; argHandle(d);
+            }
+
+            function done() {
+                _onceMode &amp;&amp; clear();
+                _done = true;
+                defer &amp;&amp; defer.resolve(_result);
+            }
+
+            function fail(err) {
+                _err = err
+                defer &amp;&amp; defer.reject(err);
+            }
+
+            function fireItem(noblock) {
+                var result;
+
+                isDefined(_result) &amp;&amp; (d.result = _result);
+
+                if (i &lt; len) {
+                    if (item = _list.at(i++)) {
+
+                        item.mode === &#x27;once&#x27; &amp;&amp; d.remove();
+
+                        result = item.fn.apply(context, args);
+
+                        if (isPromise(result)) {
+                            if (_noBlock)
+                                fireItem();
+                            //单项noBlock模式
+                            else if (result.mode === &quot;noBlock&quot;) {
+                                itemNoBlock = true;
+                                fireItem();
+                            }
+                        } else
+                            d.resolve(result);
+                    }
+                } else {
+                    //noblock模式下，判断执行数
+                    if (!(itemNoBlock || _noBlock) || fireCount === len)
+                        done();
+                }
+            }
+
+            fireItem();
+
+            if (_done) {
+                return _result;
+            }
+
+            defer = $.Deferred();
+
+            return openPromise(defer, _err);
+        }
+
+        /**
+            判断是否存在事件回调
+            @method has 
+            @for promiseEvent
+            @param name {string} 事件回调名
+            @return {boolean} 是否存在
+            @example 
+                 var calls = st.promiseEvent();
+                        
+                calls.add(&quot;call1&quot;, function(e) {});
+
+                //判断是否注册了&quot;call1&quot;的event
+                expect(calls.has(&quot;call1&quot;)).toBeTruthy();
+        */
+        function has(name) {
+            var result = false;
+            _list.each(function(item) {
+                if (item.name === name) {
+                    result = true;
+                    return false;
+                }
+
+            })
+            return result;
+        }
+
+
+        return {
+            add: add,
+            has: has,
+            /**
+             * 获取注册的事件长度/数
+             * @method len
+             * @return {number} 注册的事件长度/数
+             */
+            len : function(){
+                return _list.len();
+            },
+            remove: remove,
+            /**
+                执行回调
+                @method fire 
+                @for promiseEvent
+                @param args {array} 执行参数
+                @param [argHandle] {function} 参数处理方法，可以对eventarg进行修改；例如：argHandle(e)
+                @return {object} 返回执行结果
+                @example
+                    //once模式创建
+                    var calls = st.promiseEvent(&quot;once&quot;);
+
+                    //注册call1
+                    calls.add(&#x27;call1&#x27;, function(e, text) {
+                        return text;
+                    })
+
+                    //执行call1，返回called
+                    expect(calls.fire(&#x27;called&#x27;)).toBe(&#x27;called&#x27;);
+                    
+                    var result = &#x27;&#x27;;
+
+                    //使用eventArg控制
+                    calls.add(&quot;c1&quot;, function(e) {
+                        //阻止后续回调
+                        e.stopPropagation();
+                        result += &quot;c1&quot;;
+                    })
+                    .add(&quot;c2&quot;, function() {
+                        result += &quot;c2&quot;;
+                    });
+
+                    //只执行了c1
+                    calls.fire();
+                    expect(result).toBe(&#x27;c1&#x27;);
+
+
+                    //promise模式下
+                    calls.add(&quot;c1&quot;, function(e, name) {
+                        setTimeout(function() {
+                            e.resolve(name + &#x27;-c1&#x27;);
+                        }, 100);
+                        return e.promise();
+                    });
+                    
+                    //使用when来监控返回的result
+                    $.when(calls.fire(&quot;call&quot;)).done(function(ret) {
+                        expcet(ret).toBe(&#x27;call-c1&#x27;);
+                    }.fail(function(error){
+
+                    }));
+            */
+            fire: function() {
+                return fireWith(null, sliceArgs(arguments));
+            },
+            fireWith: fireWith,
+            clear: clear
+        }
+    }
+
+    //trigger的接口设置
+    var _interface = {
+            onHandler: &quot;onHandler&quot;,
+            fireHandler: &quot;fireHandler&quot;,
+            on: &quot;on&quot;,
+            onBefore: &quot;onBefore&quot;,
+            onRound: &quot;onRound&quot;,
+            onError: &quot;onError&quot;,
+            off: &quot;off&quot;,
+            offBefore: &quot;offBefore&quot;,
+            extend: &quot;extend&quot;
+        },
+        //注入类型
+        trTypes = [&#x27;before&#x27;, &#x27;after&#x27;, &#x27;round&#x27;, &#x27;error&#x27;],
+        defineProperty = Object.defineProperty;
+
+    /**
+            给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理
+            目前有四种注入方式： 
+            1. before，前置注入，在目标方法执行之前执行；
+            2. after，后置执行，在目标方法执行之后执行；
+            3. round，环绕，将目标方法包装，自定义控制；
+            4. error，错误，捕获reject的事件；
+            
+            @class attachTrigger
+            @constructor
+            @param target [object] 目标对象
+            @param [mode] [string] 注入前置和后置所采用的promiseEvent的模式，具体见promsieEvent的add
+            @param [fnInterface] {object} ；自定义接口方法；在使用attachTrigger方法后，会在target上附加一些控制方法，为了避免重名和控制对外的方法，使用fnInterface来自定义
+            @return {trigger} 返回附加上了trigger的对象;
+            @example
+                var result = [];
+
+                var obj1 = {
+                    test: function(name) {
+                        result.push(name);
+                    }
+                };
+
+                function injectCall(e,name){
+                    result.push(name + &#x27;-after&#x27;);
+                }
+
+                //给obj1对象附上触发器功能
+                st.attachTrigger(obj1);
+                
+
+                //注册前置触发方法
+                obj1.onBefore(&#x27;test&#x27;,&#x27;beforeCall&#x27;,function(e,name){
+                    result.push(name + &#x27;-before&#x27;);
+                });
+
+
+                //注册后置触发方法
+                obj1.on(&#x27;test&#x27;,&#x27;afterCall&#x27;,injectCall);
+
+                obj1.test(&#x27;test&#x27;);
+
+                expect(result.join(&#x27;;&#x27;)).toBe(&#x27;test-before;test;test-after&#x27;);
+                
+
+                //清空结果
+                result = [];
+
+                //直接初始化成trigger对象
+                var obj2 = st.attachTrigger({
+                    child : {
+                        test : function(name){
+                            result.push(name);
+                        }
+                    }
+                });
+                
+                //注册后置触发方法到子对象方法
+                obj2.on(&#x27;child.test&#x27;,&#x27;afterCall&#x27;,injectCall);
+                
+                obj2.child.test(&#x27;test2&#x27;);
+
+                expect(result.join(&#x27;;&#x27;)).toBe(&#x27;test2;test2-after&#x27;);
+
+                
+                //定制trigger的接口方法
+                 var obj3 = st.attachTrigger({
+                    test: function(name) {
+                        return name;
+                    }
+                }, {
+                    //将trigger的onBebefore方法名改成bind
+                    on: &quot;bind&quot;,
+                    //屏蔽trigger的onBefore方法
+                    onBefore: null
+                });
+                
+                //使用自定义的bind接口注册前置触发方法
+                obj3.bind(&#x27;test&#x27;,&#x27;afterCall&#x27;,function(e,name){
+                    //将原方法的结果改变，然后返回
+                    return e.result + &#x27;-after&#x27;;
+                });
+                
+                expect(obj3.test(&#x27;test3&#x27;)).toBe(&#x27;test3-after&#x27;);
+                
+
+                result = [];
+
+                //全promise模式
+                var objPromise = st.attachTrigger({
+                    test: function(name) {
+                        //在原始方法中使用jquery的deferred
+                        var e = $.Deferred();
+                        setTimeout(function() {
+                            result.push(name);
+                            e.resolve();
+                        }, 100);
+                        return e.promise();
+                    }
+                });
+
+                //前置promise
+                objPromise.onBefore(&#x27;test&#x27;, &#x27;testBefore&#x27;, function(e, name) {
+                    setTimeout(function() {
+                        result.push(name + &#x27;-before&#x27;);
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                });
+
+                //后置promise
+                objPromise.on(&#x27;test&#x27;, &#x27;testAfter&#x27;, function(e, name) {
+                    setTimeout(function() {
+                        result.push(name + &#x27;-after&#x27;);
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                });
+
+                $.when(objPromise.test(&#x27;call&#x27;)).done(function() {
+                    expect(result.join(&#x27;,&#x27;)).toBe(&#x27;call-before,call,call-after&#x27;);
+                });
+
+    */
+    function attachTrigger(target, mode, fnInterface) {
+        if (!target &amp;&amp; typeof target !== &#x27;object&#x27;)
+            return;
+
+        var _trMap = {},
+            _fnMap = {},
+            _mode, _eventMode,
+            _target = target;
+
+
+        if (typeof mode === &#x27;object&#x27;)
+            fnInterface = mode;
+        else
+            _mode = mode;
+
+        function getMap(name, create) {
+            var map = _trMap[name];
+            if (!map &amp;&amp; create)
+                map = _trMap[name] = {};
+            return map;
+        }
+
+        function find(name, type, create) {
+            var map = getMap(name, create),
+                tr;
+
+            if (!type)
+                type = &quot;after&quot;;
+
+            if (map) {
+                tr = map[type];
+                if (!tr &amp;&amp; create)
+                    tr = map[type] = promiseEvent(type === trTypes[3] ? &quot;callback&quot; : _mode);
+            }
+            return tr;
+        }
+
+        function remove(name, type, trName) {
+            var tr = find(name, type);
+            if (tr) {
+                if (trName) {
+                    if ($.isArray(trName)) {
+                        $.each(trName, function(i, n) {
+                            tr.remove(n)
+                        })
+                    } else
+                        tr.remove(trName)
+                } else
+                    tr.clear();
+            }
+        }
+
+        function bind(name, trName, fn, type, priority, mode) {
+            var args = arguments,
+                argsLen = args.length,
+                baseFn = _fnMap[name],
+                _name = name,
+                _fn = fn,
+                _type, _priority, _mode,
+                roundMode, _targetFn, i = 3,
+                arg, argType, bindFn, isProp;
+
+            if (argsLen &lt; i)
+                return;
+
+            if (typeof name !== &#x27;string&#x27; || typeof trName !== &#x27;string&#x27; || typeof fn !== &#x27;function&#x27;)
+                return;
+
+            //判断参数type, priority, mode的重载
+            if (argsLen &gt; i) {
+                for (; i &lt; argsLen; i++) {
+                    arg = args[i];
+                    argType = typeof arg;
+
+                    if (argType === &#x27;boolean&#x27;)
+                        _type = arg;
+                    if (argType === &#x27;number&#x27;)
+                        _priority = arg;
+                    else if (argType === &#x27;string&#x27;) {
+                        if (trTypes.indexOf(arg) &gt; -1)
+                            _type = arg;
+                        else
+                            _mode = arg;
+                    }
+                }
+                roundMode = _type === trTypes[2];
+            }
+
+            if (!baseFn) {
+                baseFn = _fnMap[_name] = st.getObj(_target, _name);
+                if (!baseFn)
+                    return;
+
+                //是否为属性绑定
+                isProp = typeof baseFn !== &#x27;function&#x27;;
+
+                if (isProp) {
+
+                    //判断是否roundMode,支持属性定义
+                    if (roundMode || !defineProperty)
+                        return;
+
+                    baseFn = function(value) {
+                        return _fnMap[_name] = value;
+                    }
+                }
+
+                bindFn = function() {
+                    var _result, d, dTrans, _err, _done, defer, callArgs, args = callArgs = sliceArgs(arguments),
+                        _stop, _preventDefault, dTransResolve, oldValue;
+
+                    //属性模式取出原来的值
+                    isProp &amp;&amp; (oldValue = _fnMap[_name]);
+
+                    function done() {
+                        _done = true;
+                        //恢复传递的事件resolve方法
+                        dTrans &amp;&amp; dTransResolve &amp;&amp; (dTrans.resolve = dTransResolve);
+                        defer &amp;&amp; defer.resolve(_result);
+                    }
+
+                    function fail(err) {
+                        _err = err;
+                        defer &amp;&amp; defer.reject(err);
+                        fire(_name, [err].concat(args), null, trTypes[3])
+                    }
+
+                    function setResult(result) {
+                        isDefined(result) &amp;&amp; (_result = result);
+                    }
+
+                    function whenFire(fireResult, success) {
+                        $.when(fireResult).then(function(result) {
+                            success(result);
+                        }, fail);
+                    }
+
+                    /**
+                        trigger下的事件参数，由EventArg扩展而来
+                        @class EventArg(trigger)
+                        @extends EventArg
+                    */
+                    /**
+                        阻止默认的方法执行；
+                        @method preventDefault
+                        @chainable
+                        @example
+                            var result = [];
+
+                            var obj = st.attachTrigger({
+                                test: function(name) {
+                                    result.push(name);
+                                }
+                            });
+
+                            obj.onBefore(&#x27;test&#x27;, &#x27;testBefore&#x27;, function(e, name) {
+                                result.push(name + &#x27;-before1&#x27;);
+                                //阻止前置后续的事件&amp;阻止默认方法
+                                e.stopPropagation().preventDefault();
+                            });
+
+                            obj.onBefore(&#x27;test&#x27;, &#x27;testAfter&#x27;, function(e, name) {
+                                result.push(name + &#x27;-before2&#x27;);
+                            });
+
+                            obj.on(&#x27;test&#x27;, &#x27;testBefore2&#x27;, function(e, name) {
+                                result.push(name + &#x27;-after&#x27;);
+                            });
+
+                            obj.test(&#x27;call&#x27;);
+
+                            //最终输出前置call-before1和后置
+                            expect(result.join(&#x27;,&#x27;)).toBe(&#x27;call-before1,call-after&#x27;);
+                    */
+                    function preventDefault() {
+                        _preventDefault = true;
+                        return this;
+                    }
+
+                    /**
+                        停止当前方法执行和后置所有事件；在属性监听时，则阻止赋值；
+                        @method stop
+                        @chainable
+                        @example
+                            var result = [];
+
+                            var obj = st.attachTrigger({
+                                test: function(name) {
+                                    result.push(name);
+                                }
+                            });
+
+                            obj.onBefore(&#x27;test&#x27;, &#x27;testBefore&#x27;, function(e, name) {
+                                result.push(name + &#x27;-before1&#x27;);
+                                //停止执行
+                                e.stop();
+                            });
+
+                            obj.onBefore(&#x27;test&#x27;, &#x27;testBefore2&#x27;, function(e, name) {
+                                result.push(name + &#x27;-before2&#x27;);
+                            });
+
+                            obj.on(&#x27;test&#x27;, &#x27;testAfter&#x27;, function(e, name) {
+                                result.push(name + &#x27;-after&#x27;);
+                            });
+
+                            obj.test(&#x27;call&#x27;);
+
+                            //最终只输入前置call-before1
+                            expect(result.join(&#x27;,&#x27;)).toBe(&#x27;call-before1&#x27;);
+                    */
+                    function stopFn() {
+                        _preventDefault = _stop = true;
+                        return this;
+                    }
+
+                    //处理传递的时间参数
+                    if (args.length &amp;&amp; isPromiseArg(args[0])) {
+                        dTrans = args[0];
+                        dTransResolve = dTrans.resolve;
+                        //替换resolve方法
+                        dTrans.resolve = function(result) {
+                            dTrans.resolve = dTransResolve;
+                            dTransResolve = null;
+
+                            setResult(result);
+                            fireAfter();
+                        }
+                        //清除事件回调中传递的事件参数
+                        callArgs = [].concat(args);
+                        callArgs.shift();
+                    }
+
+                    /*合并事件回调参数*/
+                    function mergeArg(d) {
+                        isDefined(_result) &amp;&amp; (d.result = _result);
+
+                        d.preventDefault = preventDefault;
+                        d.stop = st.mergeFn(d.stopPropagation, stopFn);
+                        dTrans &amp;&amp; dTrans.__mergePArg &amp;&amp; dTrans.__mergePArg(d);
+                    }
+
+                    /*判断传递的属性值*/
+                    function checkPropValue(args) {
+                        if (isProp) {
+                            if (isDefined(_result))
+                                return [_result, oldValue];
+                            else
+                                args.push(oldValue);
+                        }
+                        return args;
+                    }
+
+                    /*执行后置注入方法*/
+                    function fireAfter() {
+                        if (_stop) {
+                            done();
+                            return;
+                        }
+
+                        whenFire(fire.call(_target, _name, checkPropValue(callArgs), mergeArg), function(result) {
+                            setResult(result);
+                            done();
+                        })
+                    }
+
+                    //执行前置注入方法
+                    whenFire(fire.call(_target, _name, checkPropValue(callArgs), mergeArg, trTypes[0]), function(result) {
+                        setResult(result);
+                        if (_preventDefault) {
+                            fireAfter();
+                            return;
+                        }
+                        //传递参数赋值
+                        dTrans &amp;&amp; isDefined(_result) &amp;&amp; (dTrans.result = _result);
+
+                        //执行当前方法
+                        whenFire(baseFn.apply(_target, checkPropValue(args)), function(result) {
+                            if (dTrans &amp;&amp; isPromise(result))
+                                return;
+
+                            setResult(result);
+                            fireAfter();
+                        })
+                    })
+
+                    if (_done)
+                        return _result;
+
+                    defer = $.Deferred();
+
+                    return openPromise(defer, _err);
+                }
+
+                //处理属性绑定
+                if (isProp) {
+                    var index = name.lastIndexOf(&quot;.&quot;),
+                        propName = index &gt; 0 ? name.substring(index + 1) : name,
+                        propObj = index &gt; 0 ? st.getObj(_target, name.substring(0, index)) : _target;
+
+                    //属性绑定
+                    defineProperty(propObj, propName, {
+                        get: function() {
+                            return _fnMap[name];
+                        },
+                        set: bindFn
+                    });
+                } else //方法绑定
+                    st.setObj(_target,_name,bindFn);
+            }
+
+            if (roundMode) {
+                //加入环绕方法，将原方法置入第一个参数
+                _targetFn = _target[_name];
+                _target[_name] = function() {
+                    var args = sliceArgs(arguments);
+                    args.unshift(_targetFn);
+                    _fn.apply(self, args);
+                }
+            } else //非环绕模式下添加触发回调
+                find(_name, _type, true).add(trName, _fn, _priority, _mode);
+
+            return _target;
+        }
+
+        function fire(name, args, argHandle, type) {
+            var tr = find(name, type);
+            if (tr)
+                return tr.fireWith(this, args, argHandle);
+        }
+
+        var prop = {
+            /**
+                注册手动的触发的Handler
+                @method onHandler
+                @for attachTrigger
+                @param name [string] 手动触发器名称
+                @param trName [string] 注册事件方法的名称
+                @param fn [function] 注册事件方法
+                @param [priority] [number] 权重设置，同PrmiseEvent 
+                @param [mode] [string] 加入的事件模式，同PrmiseEvent
+                @chainable
+                @example
+                    var obj = st.attachTrigger({
+                        test: function(text) {
+                            //手动执行handler
+                            return this.fireHandler(&#x27;handler&#x27;, [text, &quot;run&quot;]);
+                        }
+                    });
+
+                    //注册handler1
+                    obj.onHandler(&#x27;handler&#x27;, &#x27;handler1&#x27;, function(e, text, state) {
+                        //返回结果
+                        return text + &#x27;-&#x27; + state + &#x27;-&#x27; + &#x27;handler1&#x27;;
+                    })
+
+                    //注册handler2
+                    obj.onHandler(&#x27;handler&#x27;, &#x27;handler2&#x27;, function(e, text, state) {
+                        //接受handler1结果
+                        return e.result + &#x27;-&#x27; + &#x27;handler2&#x27;;
+                    })
+
+                    expect(obj.test(&#x27;test&#x27;)).toBe(&#x27;test-run-handler1-handler2&#x27;);
+            */
+            onHandler: function(name, trName, fn, priority, mode) {
+                find(name, null, true).add(trName, fn, priority, mode);
+                return this;
+            },
+            /**
+                执行手动触发的Handler
+                @method fireHandler
+                @for attachTrigger
+                @param name [string] 手动触发器名称
+                @param args [array] 执行参数数组
+                @return [object] 执行结果
+            */
+            fireHandler: function(name, args) {
+                return fire(name, args);
+            },
+            /**
+                注册[后置的]事件方法;注册后置和对象注入
+                @method on
+                @for attachTrigger
+                @param name {string|object} 目标方法或者属性名称;[object]类型时为对象注入
+                @param trName {string} 注册事件方法的名称|属性名称；对象注入模式下，会自动拼接成trName-[名称|属性名]-[注入方式]
+                @param fn {function|object} 注册事件方法;对象注入模式下，[object]类型才会生效
+                @param [priority] [number] 权重设置，同PrmiseEvent 
+                @param [mode] [string] 加入的事件模式，同PrmiseEvent
+                @chainable
+                @example
+                    var result = [], obj = st.attachTrigger({
+                        //方法
+                        test: function(name) {
+                            result.push(name);
+                        },
+                        //子对象
+                        child : {
+                            test : function(name){
+                                result.push(name);
+                            }
+                        },
+                        //属性
+                        prop : 1
+                    });
+
+                    //注册前置
+                    obj.onBefore(&quot;test&quot;, &quot;addBefore&quot;, function(e, name) {
+                        result.push(&#x27;before-&#x27; + name);
+                    })
+                    //注册后置
+                    .on(&quot;test&quot;, &quot;addAfter&quot;, function(e, name) {
+                        result.push(&#x27;after-&#x27; + name);
+                    });
+
+                    //执行test方法
+                    obj.test(&#x27;bind&#x27;);
+                    //前后置正确触发
+                    expect(result.join(&#x27;,&#x27;)).toBe(&quot;before-bind,bind,after-bind&quot;);
+                    
+                    result = [];
+
+
+                    //支持子对象方法注册
+                    obj.onBefore(&quot;child.test&quot;, &quot;addBefore&quot;, function(e, name) {
+                        result.push(&#x27;before-&#x27; + name);
+                    }).on(&quot;child.test&quot;, &quot;addAfter&quot;, function(e, name) {
+                        result.push(&#x27;after-&#x27; + name);
+                    });
+
+
+                    //属性监听只有before，after两种方法注入类型，不支持round环绕模式。
+                    //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
+                    //after：在after则是无法干预值的变化，因此只是做监听使用；
+
+                    
+                    //注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
+                     obj.onBefore(&#x27;prop&#x27;, &#x27;testBefore&#x27;, function(e, value,oldValue) {
+                        result.push(value + &#x27;-before-&#x27; + oldValue);
+                    });
+                    
+                    obj.on(&#x27;prop&#x27;, &#x27;testAfter&#x27;, function(e, value,oldValue) {
+                        result.push(value + &#x27;-after-&#x27; + oldValue);
+                    });
+                    
+                    expect(obj.prop).toBe(1);
+
+                    //属性赋值
+                    obj.prop = 2;
+
+                    //输出前后置监听
+                    expect(result.join(&#x27;,&#x27;)).toBe(&#x27;2-before-1,2-after-1&#x27;);
+                    expect(obj.prop).toBe(2);
+                    
+
+                    //前置中干预赋值
+                    obj.onBefore(&#x27;prop&#x27;, &#x27;testBefore&#x27;, function(e, value) {
+                        //停止方法，阻止赋值行为
+                        e.stop();
+                    });
+
+                    obj.prop = 4;
+                    //结果未变化
+                    expect(obj.prop).toBe(2);
+
+
+                    result = [];
+
+                    //对象注入例子
+                    var objInject = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //对象注入
+                    objInject.on({
+                        //简单的注入后置方法
+                        test : function(e,name){
+                            result.push(&#x27;after&#x27;);
+                        },
+                        //注入前置&amp;注入参数设置
+                        &#x27;test before&#x27; : {
+                            //注入方法
+                            fn : function(e,name){
+                                result.push(&#x27;before&#x27;);
+                            },
+                            //注入权重
+                            priority : 100,
+                            //注入模式
+                            mode : &#x27;once&#x27;
+                        }
+                    },&quot;onObject&quot;);
+
+                    objInject.test(&#x27;call&#x27;);
+                    expect(result.join(&#x27;,&#x27;)).toBe(&#x27;before,call,after&#x27;);
+            */
+            on: function(name, trName, fn, priority, mode) {
+                if (typeof name === &#x27;object&#x27;) {
+                    $.each(name, function(target, config) {
+                        var arr = target.split(&#x27; &#x27;),
+                            fnName = arr[0],
+                            type = arr[1] || trTypes[1],
+                            tName = trName + &#x27;-&#x27; + fnName + &#x27;-&#x27; + type;
+
+                        if ($.isFunction(config))
+                            bind(fnName, tName, config, type);
+                        else
+                            bind(fnName, tName, config.fn, type, config.priority, config.mode);
+                    })
+
+                } else
+                    bind(name, trName, fn, trTypes[1], priority, mode);
+                return this;
+            },
+            /**
+                注册前置的事件方法
+                @method onBefore
+                @for attachTrigger
+                @param name [string] 目标方法或者属性名称
+                @param trName [string] 注册事件方法的名称
+                @param fn [function] 注册事件方法
+                @param [priority] [number] 权重设置，同PrmiseEvent 
+                @param [mode] [string] 加入的事件模式，同PrmiseEvent
+                @chainable
+                @example
+                    //见on方法
+            */
+            onBefore: function(name, trName, fn, priority, mode) {
+                return bind(name, trName, fn, trTypes[0], priority, mode)
+            },
+            /**
+                注册环绕触发事件
+                @method onRound
+                @for attachTrigger
+                @param name [string] 目标方法或者属性名称
+                @param trName [string] 注册事件方法的名称
+                @param fn [function] 注册事件方法
+                @chainable
+                @example
+                    var result = [];
+
+                     var obj3 = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //注册环绕事件，事件方法参数第一为fn为原方法，后面的为执行参数
+                    obj3.onRound(&quot;test&quot;, &quot;roundTest&quot;, function(fn, name) {
+                        result.push(&#x27;before&#x27;);
+                        //执行原有方法
+                        fn(name);
+                        result.push(&#x27;after&#x27;);
+                    });
+
+                    obj3.test(&#x27;round&#x27;);
+                    expect(result.join(&#x27;,&#x27;)).toBe(&quot;before,round,after&quot;);
+            */
+            onRound: function(name, trName, fn) {
+                return bind(name, trName, fn, trTypes[2])
+            },
+            /**
+                注册错误捕获事件，当执行reject的时候触发
+                @method onError
+                @for attachTrigger
+                @param name [string] 目标方法或者属性名称
+                @param trName [string] 注册事件方法的名称
+                @param fn [function] 注册事件方法
+                @param [mode] [string] 加入的事件模式，同PrmiseEvent
+                @chainable
+                @example
+                    var testError = st.attachTrigger({
+                        test: function(name) {
+                            var e = $.Deferred();
+                            setTimeout(function() {
+                                //拒绝契约
+                                 e.reject(&#x27;reject&#x27;);
+                            }, 100);
+                            return e.promise();
+                        }
+                    });
+                    //注册错误捕获事件
+                    testError.onError(&quot;test&quot;,&quot;triggerError&quot;,function(err,name){
+                          expect(err).toBe(&#x27;reject&#x27;);
+                          expect(name).toBe(&#x27;call&#x27;);
+                    });
+
+                    testError.test(&#x27;call&#x27;);
+            */
+            onError: function(name, trName, fn, mode) {
+                return bind(name, trName, fn, trTypes[3], mode)
+            },
+            /**
+                注销注册的后置事件方法
+                @method off
+                @for attachTrigger
+                @param name [string] 目标方法或者属性名称
+                @param [trName] [string|array] 注册事件方法的名称：
+                        1. 空为清除所有
+                        2. 字符串为单个
+                        3. 数组为多个
+                @chainable
+                @example
+                    var result = [];
+
+                    var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //注册后置testAfter1
+                    obj.on(&#x27;test&#x27;, &#x27;testAfter1&#x27;, function(e, name) {
+                        result.push(&#x27;after1&#x27;);
+                    });
+
+                    //注册后置testAfter2
+                    obj.on(&#x27;test&#x27;, &#x27;testAfter2&#x27;, function(e, name) {
+                        result.push(&#x27;after2&#x27;);
+                    });
+
+                    //注销单个后置
+                    obj.off(&#x27;test&#x27;, &#x27;testAfter1&#x27;);
+
+                    obj.test(&#x27;test&#x27;);
+
+                    expect(result.join(&#x27;-&#x27;)).toBe(&#x27;test-after2&#x27;);
+            */
+            off: function(name, trName) {
+                remove(name, trTypes[1], trName);
+                return _target;
+            },
+            /**
+                注销注册的前置事件方法
+                @method offBefore
+                @for attachTrigger
+                @param name [string] 目标方法或者属性名称
+                @param [trName] [string|array] 注册事件方法的名称：
+                        1. 空为清除所有
+                        2. 字符串为单个
+                        3. 数组为多个
+                @chainable
+                @example
+                    var result = [];
+
+                    var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //注册前置testBefore
+                    obj.onBefore(&#x27;test&#x27;, &#x27;testBefore&#x27;, function(e, name) {
+                        result.push(&#x27;before1&#x27;);
+                    });
+
+                    //注册前置testBefore2
+                    obj.onBefore(&#x27;test&#x27;, &#x27;testBefore2&#x27;, function(e, name) {
+                        result.push(&#x27;before2&#x27;);
+                    });
+
+                    //注销多个前置
+                    obj.offBefore(&#x27;test&#x27;, [&#x27;testBefore&#x27;, &#x27;testBefore2&#x27;]);
+
+                    obj.test(&#x27;test&#x27;);
+
+                    expect(result.join(&#x27;-&#x27;)).toBe(&#x27;test&#x27;);
+            */
+            offBefore: function(name, trName) {
+                remove(name, trTypes[0], trName);
+                return _target;
+            },
+            /**
+                扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）
+                @method extend
+                @for attachTrigger
+                @param prop [object] 目标方法或者属性名称
+                @chainable
+                @example
+                     var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //注册后置testAfter
+                    obj.on(&#x27;test&#x27;, &#x27;testAfter&#x27;, function(e, name) {
+                        result.push(&#x27;after&#x27;);
+                    });
+
+                    //扩展替换test
+                    obj.extend({
+                        test : function(name){
+                            result.push(name + &#x27;:extend&#x27;)
+                        }
+                    });
+    
+                    obj.test(&#x27;test&#x27;);
+
+                    expect(result.join(&#x27;-&#x27;)).toBe(&#x27;test:extend-after2&#x27;);
+            */
+            extend: function(prop) {
+                var fn;
+                $.each(prop, function(n, p) {
+                    ((fn = _fnMap[n]) ? _fnMap : _target)[name] = fn;
+                })
+                return _target;
+            }
+        };
+
+        applyInterface(target, fnInterface, prop);
+        return target;
+    }
+
+    /* 应用接口 */
+    function applyInterface(target, fnInterface, prop) {
+        var fn;
+
+        fnInterface = fnInterface ? $.extend({}, _interface, fnInterface) : _interface;
+
+        $.each(fnInterface, function(i, n) {
+            if (n &amp;&amp; (fn = prop[i])) {
+                target[n] = fn;
+            }
+        })
+    }
+
+    /**
+        流程或者生命周期管理器。控制流程的走向，流程扩展，注入控制等等；FlowController是基于trigger封装，具有所有trigger的特性；
+        @class flowController
+        @constructor
+        @param op {object} 参数设置 ： 
+            @param op.flow {object} 流程对象
+            @param [op.order] {array} 流程顺序
+            @param [op.trigger] {bool|object} trigger设置
+                @param [op.trigger.mode] {object} trigger的mode设置
+                @param [op.trigger.iFace] {object} trigger的接口方法设置
+            @param [op.mode] {object} 流程的模式， 
+            1. 默认为EventArg模式
+            2. &#x27;simple&#x27;, 简单模式不带流程中不带EventArg参数
+
+        @return {flowController} 返回流程控制器
+        @example
+            var result = [];
+
+            //以widget简单的的生命周期为例
+            var flow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        result.push(name,&#x27;init&#x27;);
+                        //input的进入buildInput流程
+                        if (name === &#x27;input&#x27;)
+                            //指定进入buildInput，同时指定的参数
+                            e.next(&quot;buildInput&quot;, [op.type]);
+                        //进入cancel流程
+                        else if (name === &#x27;cancel&#x27;)
+                            e.next(&#x27;cancel&#x27;);
+                    },
+                    buildInput: function(e, type) {
+                        result.push(&#x27;buildInput&#x27;);
+                        //返回传递结果
+                        return type;
+                    },
+                    cancel: function(e) {
+                        result.push(&#x27;cancel&#x27;);
+                        e.end();
+                    },
+                    render: function(e, name, op) {
+                        //判断是否存在传递结果
+                        e.result &amp;&amp; result.push(e.result);
+                        result.push(&#x27;render&#x27;);
+                    },
+                    complete: function(e, name, op) {
+                        result.push(&#x27;complete&#x27;);
+                    }
+                },
+                //设定执行流程
+                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;]
+            });
+
+            
+            flow.boot(&#x27;div&#x27;);
+            expect(result + &#x27;&#x27;).toBe(&#x27;div,init,render,complete&#x27;);
+
+            //简单流程，流程中不带事件参数EventArg
+            var simpleFlow = st.flowController({
+                flow: {
+                    init: function(name, op) {
+                        result.push(name, &#x27;simpleInit&#x27;);
+                    },
+                    render: function(name, op) {
+                        result.push(&#x27;simpleRender&#x27;);
+                    },
+                    complete: function(name, op) {
+                        result.push(&#x27;simpleComplete&#x27;);
+                    }
+                },
+                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;],
+                //简单模式
+                mode: &quot;simple&quot;
+            });
+
+            result = [];
+
+            simpleFlow.boot(&#x27;div&#x27;);
+            expect(result + &#x27;&#x27;).toBe(&#x27;div,simpleInit,simpleRender,simpleComplete&#x27;);
+
+
+            //异步的流程,开启trigger
+            var triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, &#x27;triggerInit&#x27;);
+                            e.resolve();
+                        }, 100);
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push(&#x27;triggerRender&#x27;);
+                    },
+                    complete: function(e, name, op) {
+                        result.push(&#x27;triggerComplete&#x27;);
+                    }
+                },
+                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;],
+                trigger: true
+            });
+
+            //在init之前注入
+            triggerFlow.onBefore(&quot;init&quot;, &quot;initBefore&quot;, function(e, name, op) {
+                result.push(&#x27;triggerInitBefore&#x27;);
+            }, &quot;once&quot;);
+
+            //在init之后注入异步
+            triggerFlow.on(&quot;init&quot;, &quot;initAfter&quot;, function(e, name, op) {
+                setTimeout(function() {
+                    result.push(&#x27;triggerInitAfter&#x27;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            }, &quot;once&quot;);
+
+            result = [];
+
+            //使用when来捕获异步的流程执行结果
+            $.when(triggerFlow.boot(&quot;div&quot;)).done(function() {
+                expect(result + &#x27;&#x27;).toBe(&#x27;triggerInitBefore,div,triggerInit,triggerInitAfter,triggerRender,triggerComplete&#x27;);
+            });
+    */
+    function flowController(op) {
+        var flow, order, trigger, mode;
+        if (!op)
+            return;
+
+        flow = op.flow;
+        order = op.order;
+        trigger = op.trigger;
+        mode = op.mode;
+
+        trigger &amp;&amp; attachTrigger(flow, trigger.mode, trigger.iFace);
+
+        /**
+         * 已手动设定流程开始的节点启动流程
+         * @method bootWithStart
+         * @for flowController
+         * @param  {string} start 流程开始的节点
+         * @param  {array} args  执行参数
+         * @return {object|promise} 返回执行结果或者promise（异步）
+           @example
+          
+                var result = [];
+
+                var flow = st.flowController({
+                    flow: {
+                        init: function(e, name, op) {
+                            result.push(name,&#x27;init&#x27;);
+                        },
+                        render: function(e, name, op) {
+                            //判断是否存在传递结果
+                            e.result &amp;&amp; result.push(e.result);
+                            result.push(&#x27;render&#x27;);
+                        },
+                        complete: function(e, name, op) {
+                            result.push(&#x27;complete&#x27;);
+                        }
+                    },
+                    //设定执行流程
+                    order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;]
+                });
+
+                //从render阶段开始构建div
+                flow.bootWithStart(&#x27;render&#x27;, [&quot;div&quot;]);
+
+                //略过了render阶段
+                expect(result + &#x27;&#x27;).toBe(&#x27;render,complete&#x27;);
+         */
+        function bootWithStart(start, args) {
+            var _next = start,
+                _nextArgs, _done,
+                i = -1,
+                _result,
+                d, _args, originalArgs,
+                _stop, defer, _err;
+
+            if (mode !== &quot;simple&quot;) {
+                /**
+                    flowController下的事件参数，由EventArg(trigger)扩展而来，具有EventArg(trigger)的所有特性;
+                    其中stop方法为结束当前流程节点；
+                    @class EventArg(flowController)
+                    @extends EventArg(trigger)
+                */
+                d = buildPromiseArg({
+                    /**
+                       结束流程。无论是注册的事件方法还是流程方法全部结束
+                       @method end
+                       @chainable
+                       @example
+                            var result = [];
+                            
+                            var triggerFlow = st.flowController({
+                                flow: {
+                                    init: function(e, name, op) {
+                                        //模拟异步
+                                        setTimeout(function() {
+                                            result.push(name, &#x27;triggerInit&#x27;);
+                                            e.resolve();
+                                        }, 100);
+                                        return e.promise();
+                                    },
+                                    render: function(e, name, op) {
+                                        result.push(&#x27;triggerRender&#x27;);
+                                    },
+                                    complete: function(e, name, op) {
+                                        result.push(&#x27;triggerComplete&#x27;);
+                                    }
+                                },
+                                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;],
+                                trigger: true
+                            });
+
+                            triggerFlow.onBefore(&quot;init&quot;, &quot;initBefore&quot;, function(e, name, op) {
+                                setTimeout(function() {
+                                    //停止流程
+                                    e.end().resolve();
+                                    result.push(&#x27;initBefore&#x27;);
+                                }, 100);
+                                return e.promise();
+                            }, &quot;once&quot;);
+
+                            $.when(triggerFlow.boot(&quot;div&quot;)).done(function() {
+                                //执行了注入事件initBefore后停止流程
+                                expect(result + &#x27;&#x27;).toBe(&#x27;initBefore&#x27;);
+                            })
+                     */
+                    end: function() {
+                        _stop = true;
+                        return this;
+                    },
+                    resolve: function(result) {
+                        isDefined(result) &amp;&amp; (_result = result);
+                        _stop ? done() : next();
+                    },
+                    /**
+                     * 拒绝契约同时设置流程状态为失败，结束流程
+                     * @method reject
+                     * @param {object} comment 拒绝的说明或参数
+                     */
+                    reject: function(comment) {
+                        fail(comment);
+                    },
+                    /**
+                       手动指定下一个流程，（指定的流程可以不在order配置中）
+                       @method next
+                       @param  {string}   nextNode 下一个流程名称
+                       @param  {number}   pass     下个流程执行完毕略过的流程数（相对于order）
+                       @param  {array}   args     下个流程的参数，只在该流程节点有效，在之后就会恢复成原始参数，如想改变后续参数，请使用changeArgs方法
+                       @chainable
+                       @example
+                          var result = [];
+
+                            //以widget简单的的生命周期为例
+                            var flow = st.flowController({
+                                flow: {
+                                    init: function(e, name, op) {
+                                        result.push(name,&#x27;init&#x27;);
+                                        //input的进入buildInput流程
+                                        if (name === &#x27;input&#x27;)
+                                            //指定进入buildInput，同时指定的参数
+                                            e.next(&quot;buildInput&quot;, [op.type]);
+                                        //进入cancel流程
+                                        else if (name === &#x27;cancel&#x27;)
+                                            e.next(&#x27;cancel&#x27;);
+                                    },
+                                    buildInput: function(e, type) {
+                                        result.push(&#x27;buildInput&#x27;);
+                                        //返回传递结果
+                                        return type;
+                                    },
+                                    cancel: function(e) {
+                                        result.push(&#x27;cancel&#x27;);
+                                        e.end();
+                                    },
+                                    render: function(e, name, op) {
+                                        //判断是否存在传递结果
+                                        e.result &amp;&amp; result.push(e.result);
+                                        result.push(&#x27;render&#x27;);
+                                    },
+                                    complete: function(e, name, op) {
+                                        result.push(&#x27;complete&#x27;);
+                                    }
+                                },
+                                //设定执行流程
+                                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;]
+                            });
+
+                            
+                            flow.boot(&#x27;input&#x27;,{
+                                type: &#x27;text&#x27;
+                            });
+
+                            expect(result + &#x27;&#x27;).toBe(&#x27;input,init,buildInput,text,render,complete&#x27;);
+                     */
+                    next: function(nextNode, pass, args) {
+                        _next = nextNode;
+                        if (typeof pass !== &quot;number&quot;)
+                            args = pass;
+                        else
+                            i += pass;
+
+                        args &amp;&amp; (_nextArgs = [d].concat(args));
+                        return this;
+                    },
+                    /**
+                       改变后续流程的执行参数
+                       @method changeArgs
+                       @param  {array}   args   执行参数
+                       @example
+                           var result = [];
+
+                            var flow = st.flowController({
+                                flow: {
+                                    init: function(e, name) {
+                                        result.push(name,&#x27;init&#x27;);
+                                        //改变下个流程的方法参数
+                                        e.changeArgs([&#x27;text&#x27;]);
+                                    },
+                                    render: function(e,type) {
+                                        result.push(&#x27;render&#x27;,type);
+                                        //恢复原始参数
+                                        e.recoverArgs();
+                                    },
+                                    complete: function(e, name) {
+                                        result.push(&#x27;complete&#x27;,name);
+                                    }
+                                },
+                                //设定执行流程
+                                order: [&quot;init&quot;, &quot;render&quot;, &quot;complete&quot;]
+                            });
+
+                            flow.boot(&quot;input&quot;);
+
+                            expect(result + &#x27;&#x27;).toBe(&#x27;input,init,render,text,complete,input&#x27;);
+                     */
+                    changeArgs: getArgs,
+                    /**
+                     * 恢复原始执行参数，下个流程中生效，与changeArgs方法对应
+                     * @method recoverArgs
+                     * @chainable
+                     */
+                    recoverArgs: function() {
+                        _args = originalArgs;
+                        return this;
+                    },
+                    __mergePArg: function(arg) {
+                        st.mix(arg, d);
+                        arg.end = st.mergeFn(arg.stop, arg.end);
+                    }
+                });
+            }
+
+            function getArgs(args, addPromiseArg) {
+                _args = d &amp;&amp; addPromiseArg !== false ? (args ? [d].concat(args) : [d]) : args;
+                return _args;
+            }
+
+            originalArgs = getArgs(args);
+
+            function done() {
+                _done = true;
+                defer &amp;&amp; defer.resolve(_result);
+            }
+
+            function fail(err) {
+                _err = err;
+                defer &amp;&amp; defer.reject(err);
+            }
+
+            function setResult(result) {
+                isDefined(result) &amp;&amp; (_result = result);
+            }
+
+            function next() {
+                var index, fnNode, fireArgs;
+                if (_stop) {
+                    done();
+                    return;
+                }
+
+                if (_next) {
+                    var index = order.indexOf(_next);
+                    if (index &gt; -1)
+                        i = index;
+                } else
+                    _next = order[++i];
+
+                isDefined(_result) &amp;&amp; (d.result = _result);
+
+                if (_next &amp;&amp; (fnNode = flow[_next])) {
+                    fireArgs = _nextArgs || _args;
+                    _next = _nextArgs = null;
+                    $.when(fnNode.apply(flow, fireArgs)).then(function(result) {
+                        if (!isPromise(result)) {
+                            isDefined(result) &amp;&amp; (_result = result);
+                            next();
+                        }
+
+                    }, fail);
+                } else {
+                    done();
+                    return;
+                }
+            }
+
+            next();
+
+            if (_done)
+                return _result;
+
+            defer = $.Deferred();
+            return openPromise(defer, _err);
+        }
+
+        /**
+         * 启动流程，
+         * @method boot
+         * @for flowController
+         * @param {argument} 流程参数
+         * @return {object|promise} 返回执行结果或者promise（异步）
+         */
+        flow.boot = function() {
+            return bootWithStart(null, sliceArgs(arguments));
+        }
+
+        flow.bootWithStart = bootWithStart;
+        return flow;
+    }
+
+    return {
+        promiseEvent: promiseEvent,
+        attachTrigger: attachTrigger,
+        flowController: flowController
+    };
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

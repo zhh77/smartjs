@@ -2,116 +2,251 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>promiseEvent - smartjs</title>
+    <title>promiseEvent - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
-        
-            smartjs
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
-                </p>
-            </li>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
-        </form>
-    </div>
-</div>
+    </nav>
 <div class="container">
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
-            <li><a href="#classes" data-toggle="tab">Classes</a></li>
-        </ul>
-
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="modules">
-                <ul id="api-modules" class="nav nav-list">
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/AOP.html">AOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/OOP.html">OOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/Util.html">Util</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                </ul>
-            </div>
-            <div class="tab-pane" id="classes">
-                <ul id="api-classes" class="nav nav-list">
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataServices.html">dataServices</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/factory.html">factory</a></li>
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
-                    
-                        <li><a href="../classes/flowController.html">flowController</a></li>
-                    
-                        <li><a href="../classes/klass.html">klass</a></li>
-                    
-                        <li><a href="../classes/klassBase.html">klassBase</a></li>
-                    
-                        <li><a href="../classes/Operations.html">Operations</a></li>
-                    
-                        <li><a href="../classes/priorityList.html">priorityList</a></li>
-                    
-                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
-                    
-                        <li><a href="../classes/util.html">util</a></li>
-                    
-                </ul>
-            </div>
-
-            
-        </div>
-    </div>
+                    </ul>
+                </dd>
+             
+        </dl>
 </div>
-
+   
         </div>
-        <div class="span9">
+        <div class="col-sm-9">
             <!--     <form id="options-form" class="form-inline pull-right">
         Show:
         <label for="api-show-inherited" class="checkbox">
@@ -142,40 +277,118 @@
                         <div class="page-header">
     <h1>promiseEvent <small>Class</small></h1>
 </div>
+ <div class="well well-small sign-left3">
+      <p>基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
+默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），
+直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回</p>
 
-<div class="well well-small">
-    
+ </div>
 
+<div class="well well-small sign-left2" id="classesItems">
     
+        <div class="index-section methods">
+            <h3>Methods</h3>
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_core_aop.js.html#l69"><code>src\core\aop.js:69</code></a>
+            <ul class="index-list methods">
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_add" data-tablink="add">add</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_clear" data-tablink="clear">clear</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_fire" data-tablink="fire">fire</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_fireWith" data-tablink="fireWith">fireWith</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_has" data-tablink="has">has</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_len" data-tablink="len">len</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
         </div>
     
 
     
-        
-            Module: <a href="../modules/AOP.html">AOP</a>
-        
+
     
 
     
 </div>
 
+<div>
+    <ul id="itemTab" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#class">Detail</a></li>
+        
+            <li><a data-toggle="tab" href="#method">Methods</a></li>
+        
+        
+        
+        
+    </ul>
 
+    <div class="tab-content">
+        <div id="class" class="tab-pane active">
+           <div class="well well-small classDetail sign-left1">
+            
 
-<div class="well well-small">
-    <p>基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
-默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），
-直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回</p>
+            
 
-</div>
+            
+                <div class="foundat">
+                    Defined in: <a href="../files/src_base_aop.js.html#l67"><code>src\base\aop.js:67</code></a>
+                </div>
+            
 
+            
+                
+                    Module: <a href="../modules/AOP.html">AOP</a>
+                
+            
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_promiseEvent" class="method item">
+            
+        </div>
+
+        
+            
+                <div class="constructor">
+                    <h2>Constructor</h2>
+                    <div id="method_promiseEvent" class="method item">
     <h3 class="name">promiseEvent</h3>
     <code>
     promiseEvent
@@ -219,7 +432,7 @@
             
         
         
-        <a href="../files/src_core_aop.js.html#l69"><code>src\core\aop.js:69</code></a>
+        <a href="../files/src_base_aop.js.html#l67"><code>src\base\aop.js:67</code></a>
         
         </p>
 
@@ -229,7 +442,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         
     </div>
 
@@ -237,8 +450,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -271,96 +484,65 @@
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//使用once和callback模式创建promiseEvent
-var calls = st.promiseEvent("once callback")</code></pre>
+                <pre class="code prettyprint"><code>//使用once模式创建promiseEvent
+var events = st.promiseEvent("once");
+
+//添加回调
+events.add(&#39;call1&#39;, function(e, text) {
+    return text;
+});
+
+//执行事件
+expect(events.fire(&#39;called&#39;)).toBe(&#39;called&#39;);
+
+var result = [];
+
+//创建一个noBlock模式的promiseEvents;
+var noBlockEvents = st.promiseEvent("noBlock");
+
+//第一个回调延迟100
+noBlockEvents.add("c1", function(e) {
+    //异步的promise处理
+    setTimeout(function() {
+        result.push(&#39;c1&#39;);
+        e.resolve();
+    }, 100);
+    return e.promise();
+});
+
+//第二个正常执行
+noBlockEvents.add("c2", function(e) {
+    result.push(&#39;c2&#39;);
+});
+
+//第三个回调延迟50
+noBlockEvents.add("c3", function(e) {
+    setTimeout(function() {
+        result.push(&#39;c3&#39;);
+        e.resolve();
+    }, 50);
+    return e.promise();
+});
+
+$.when(noBlockEvents.fire()).done(function(data) {
+    //最终执行顺序是c2-c3-c1
+    expect(result + &#39;&#39;).toBe(&#39;c2,c3,c1&#39;);
+});</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
 
-    </div>
-
-
-<div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
-
-        
-            <li><a data-toggle="tab" href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
-
-    <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_add" data-tablink="add">add</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_clear" data-tablink="clear">clear</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_fire" data-tablink="fire">fire</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_fireWith" data-tablink="fireWith">fireWith</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_has" data-tablink="has">has</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
                 </div>
-            
-
-            
-
-            
-
             
         </div>
 
         
-            <div id="methods" class="tab-pane">
+            <div id="method" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
                 
@@ -428,7 +610,7 @@ var calls = st.promiseEvent("once callback")</code></pre>
             
         
         
-        <a href="../files/src_core_aop.js.html#l116"><code>src\core\aop.js:116</code></a>
+        <a href="../files/src_base_aop.js.html#l169"><code>src\base\aop.js:169</code></a>
         
         </p>
 
@@ -438,7 +620,7 @@ var calls = st.promiseEvent("once callback")</code></pre>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>添加事件回调方法</p>
 
     </div>
@@ -447,8 +629,8 @@ var calls = st.promiseEvent("once callback")</code></pre>
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -495,7 +677,7 @@ var calls = st.promiseEvent("once callback")</code></pre>
                     
                     </td>
                     <td><div class="param-description">
-                        <p>权重</p>
+                        <p>权重;预设为0，可以通过配置调整</p>
 
                     </div>
 
@@ -529,53 +711,85 @@ var calls = st.promiseEvent("once callback")</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//注册事件
-calls.add(&#39;call1&#39;, function(e, text) {})
+                <pre class="code prettyprint"><code>//callbak 模式下添加事件
+var calls = st.promiseEvent("callback"),
+    ret = [];
 
-//自定义priority注册事件
-calls.add(&#39;call2&#39;, function(e, text) {},100)
+//没有eventArg参数
+calls.add("c1", function(name) {
+    ret.push(name + &#39;-c1&#39;);
+}).add("c2", function(name) {
+    ret.push(name + &#39;-c2&#39;);
+});
+calls.fire(&#39;test&#39;);
+expect(ret.join(&#39;;&#39;)).toBe(&#39;test-c1;test-c2&#39;);
 
-//单once模式注册
-calls.add(&#39;call3&#39;, function(e, text) {},&#39;mode&#39;)
 
-//所有设置
-calls.add(&#39;call4&#39;, function(e, text) {},50,&#39;mode&#39;)
+//标准模式
+var events = st.promiseEvent(),
+    result = [];
 
-
-
-//返回promise
-call.add("promiseCall", function(e, name) {
-    //异步的方法
-    async(function() {
-        e.resolve();
-    });
-    return e.promise();
+//注册事件
+events.add(&#39;call1&#39;, function(e, text) {
+    result.push(&#39;call1&#39;);
 });
 
+//自定义priority注册事件
+events.add(&#39;call2&#39;, function(e, text) {
+    result.push(&#39;call2&#39;);
+},100);
+
+//单once模式注册
+events.add(&#39;call3&#39;, function(e, text) {
+    result.push(&#39;call3&#39;);
+},&#39;once&#39;);
+
+//所有设置
+events.add(&#39;call4&#39;, function(e, text) {
+    result.push(&#39;call4&#39;);
+},50,&#39;once&#39;);
+
+//返回promise
+events.add("promiseCall", function(e, text) {
+    //异步的方法
+    setTimeout(function() {
+        result.push(&#39;promiseCall&#39;);
+        e.resolve();
+    },0);
+    return e.promise();
+},20);
+
+//回调中如果存在promise需要,$.when来获取结果
+$.when(events.fire(&#39;test&#39;)).done(function(){
+    expect(result.join(&#39;-&#39;)).toBe(&#39;call2-call4-promiseCall-call1-call3&#39;);
+});
 
 
 //result传递
-var resultCalls = st.promiseEvent();
-resultCalls.add("c1", function(e) {
-    //传递结果（promise下的resolve与return效果相同）
+var resultEvents = st.promiseEvent();
+resultEvents.add("c1", function(e) {
+    //使用return传递结果
     return "c1";
 }).add("c2", function(e) {
+    //e.result是由c1返回过来的值; 使用事件参数e的resolve传递
+    setTimeout(function() {
+        e.resolve(e.result + "-c2");
+    },0);
+    return e.promise();
+
+}).add("c3", function(e) {
     //e.result是由c1返回过来的值
-    return e.result + ",c2";
+    return e.result + "-c3";
 });
 
-
-
-//callbak 模式下添加事件
-var calls1 = st.promiseEvent("callback");
-
-//没有eventArg参数
-calls1.add("c1", function(name) {
-});</code></pre>
+$.when(resultEvents.fire()).done(function(ret){
+    expect(ret).toBe(&#39;c1-c2-c3&#39;);
+})</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -617,7 +831,7 @@ calls1.add("c1", function(name) {
             
         
         
-        <a href="../files/src_core_aop.js.html#l103"><code>src\core\aop.js:103</code></a>
+        <a href="../files/src_base_aop.js.html#l143"><code>src\base\aop.js:143</code></a>
         
         </p>
 
@@ -627,7 +841,7 @@ calls1.add("c1", function(name) {
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>清空所有事件回调</p>
 
     </div>
@@ -639,12 +853,25 @@ calls1.add("c1", function(name) {
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//清除calls下面注册的事件
-calls.clear();</code></pre>
+                <pre class="code prettyprint"><code>var events = st.promiseEvent();
+
+//添加回调
+events.add(&#39;call1&#39;, function(e, text) {});
+events.add(&#39;call2&#39;, function(e, text) {});
+
+//回调事件总数为2
+expect(events.len()).toBe(2);
+
+//清除events下面注册的事件
+events.clear();
+
+//回调事件总数为0
+expect(events.len()).toBe(0);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -704,7 +931,7 @@ calls.clear();</code></pre>
             
         
         
-        <a href="../files/src_core_aop.js.html#l414"><code>src\core\aop.js:414</code></a>
+        <a href="../files/src_base_aop.js.html#l544"><code>src\base\aop.js:544</code></a>
         
         </p>
 
@@ -714,7 +941,7 @@ calls.clear();</code></pre>
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>执行回调</p>
 
     </div>
@@ -723,8 +950,8 @@ calls.clear();</code></pre>
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -772,7 +999,7 @@ calls.clear();</code></pre>
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        [<span class="type">Object</span>]
                     
                     <p>返回执行结果</p>
 
@@ -784,27 +1011,33 @@ calls.clear();</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//注册call1
+                <pre class="code prettyprint"><code>//once模式创建
+var calls = st.promiseEvent("once");
+
+//注册call1
 calls.add(&#39;call1&#39;, function(e, text) {
-    alert(text);
+    return text;
 })
 
 //执行call1，返回called
-calls.fire(&#39;called&#39;);
+expect(calls.fire(&#39;called&#39;)).toBe(&#39;called&#39;);
+
+var result = &#39;&#39;;
 
 //使用eventArg控制
 calls.add("c1", function(e) {
     //阻止后续回调
     e.stopPropagation();
+    result += "c1";
 })
 .add("c2", function() {
+    result += "c2";
 });
 
 //只执行了c1
 calls.fire();
-
+expect(result).toBe(&#39;c1&#39;);
 
 
 //promise模式下
@@ -816,47 +1049,15 @@ calls.add("c1", function(e, name) {
 });
 
 //使用when来监控返回的result
-$.when(calls.fire("call")).done(function(result) {
-
+$.when(calls.fire("call")).done(function(ret) {
+    expcet(ret).toBe(&#39;call-c1&#39;);
 }.fail(function(error){
 
-}));
-
-
-
-//noBlock模式的promiseEvents;
-var noBlockCalls = st.promiseEvent("noBlock");
-
-//第一个回调延迟100
-noBlockCalls.add("c1", function(e) {
-    setTimeout(function() {
-        result.push(&#39;c1&#39;);
-        e.resolve();
-    }, 100);
-    return e.promise();
-});
-
-//第二个正常执行
-noBlockCalls.add("c2", function(e) {
-    result.push(&#39;c2&#39;);
-});
-
-//第三个回调延迟50
-noBlockCalls.add("c3", function(e) {
-    setTimeout(function() {
-        result.push(&#39;c3&#39;);
-        e.resolve();
-    }, 50);
-    return e.promise();
-});
-
-$.when(noBlockCalls.fire()).done(function(data) {
-    //最终执行顺序是c2-c3-c1
-    expect(result + &#39;&#39;).toBe(&#39;c2,c3,c1&#39;);
-    testCall();
-});</code></pre>
+}));</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -922,7 +1123,7 @@ $.when(noBlockCalls.fire()).done(function(data) {
             
         
         
-        <a href="../files/src_core_aop.js.html#l203"><code>src\core\aop.js:203</code></a>
+        <a href="../files/src_base_aop.js.html#l296"><code>src\base\aop.js:296</code></a>
         
         </p>
 
@@ -932,7 +1133,7 @@ $.when(noBlockCalls.fire()).done(function(data) {
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>根据上下文对象执行回调;fire方法的增强</p>
 
     </div>
@@ -941,8 +1142,8 @@ $.when(noBlockCalls.fire()).done(function(data) {
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1007,7 +1208,7 @@ $.when(noBlockCalls.fire()).done(function(data) {
             <div class="returns-description">
                 
                     
-                        <span class="type">Object | Promise</span>:
+                        [<span class="type">Object | Promise</span>]
                     
                     <p>返回执行结果</p>
 
@@ -1019,14 +1220,30 @@ $.when(noBlockCalls.fire()).done(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//使用context上下执行
-calls.fireWith(context,[param1,param2],function(e){
-    //此处在e(EventArg)初始化时，进行扩展
-})</code></pre>
+                <pre class="code prettyprint"><code>var events = st.promiseEvent(),
+target = {
+    name : &#39;target&#39;
+};
+
+ //注册事件
+ events.add(&#39;call1&#39;, function(e, text) {
+    return this.name + &#39;-&#39; + text + &#39;-&#39; + e.extend();
+ });
+
+ //使用fireWith执行
+ var result = events.fireWith(target,[&#39;test&#39;],function(e){
+    //扩展事件参数；只会在这一次的fire中生效
+    e.extend = function(){
+        return &#39;extend&#39;;
+    }
+ });
+
+ expect(result).toBe(&#39;target-test-extend&#39;);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -1080,7 +1297,7 @@ calls.fireWith(context,[param1,param2],function(e){
             
         
         
-        <a href="../files/src_core_aop.js.html#l386"><code>src\core\aop.js:386</code></a>
+        <a href="../files/src_base_aop.js.html#l505"><code>src\base\aop.js:505</code></a>
         
         </p>
 
@@ -1090,7 +1307,7 @@ calls.fireWith(context,[param1,param2],function(e){
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>判断是否存在事件回调</p>
 
     </div>
@@ -1099,8 +1316,8 @@ calls.fireWith(context,[param1,param2],function(e){
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1130,7 +1347,7 @@ calls.fireWith(context,[param1,param2],function(e){
             <div class="returns-description">
                 
                     
-                        <span class="type">Boolean</span>:
+                        [<span class="type">Boolean</span>]
                     
                     <p>是否存在</p>
 
@@ -1142,14 +1359,93 @@ calls.fireWith(context,[param1,param2],function(e){
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//判断是否注册了"call1"的event
-if(calls.has("call1"))
-    .........</code></pre>
+                <pre class="code prettyprint"><code> var calls = st.promiseEvent();
+
+calls.add("call1", function(e) {});
+
+//判断是否注册了"call1"的event
+expect(calls.has("call1")).toBeTruthy();</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
+    
+</div>
+
+                
+                    <div id="method_len" class="method item">
+    <h3 class="name">len</h3>
+    <code>
+    len
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_aop.js.html#l535"><code>src\base\aop.js:535</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <p>获取注册的事件长度/数</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Number</span>]
+                    
+                    <p>注册的事件长度/数</p>
+
+                
+            </div>
+        </div>
+    
+
     
 </div>
 
@@ -1200,7 +1496,7 @@ if(calls.has("call1"))
             
         
         
-        <a href="../files/src_core_aop.js.html#l183"><code>src\core\aop.js:183</code></a>
+        <a href="../files/src_base_aop.js.html#l272"><code>src\base\aop.js:272</code></a>
         
         </p>
 
@@ -1210,7 +1506,7 @@ if(calls.has("call1"))
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>删除事件回调方法</p>
 
     </div>
@@ -1219,8 +1515,8 @@ if(calls.has("call1"))
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1248,15 +1544,20 @@ if(calls.has("call1"))
     
         <div class="example">
             <h4>Example:</h4>
-
             <div class="example-content">
-                <pre class="code prettyprint"><code>//注册事件
-calls.add(&#39;call1&#39;, function(e, text) {})
+                <pre class="code prettyprint"><code>var events = st.promiseEvent();
+
+//注册事件
+events.add(&#39;call1&#39;, function(e, text) {});
 
 //删除事件
-calls.remove(&#39;call1&#39;);</code></pre>
+events.remove(&#39;call1&#39;);
+
+expect(events.len()).toBe(0);</code></pre>
 
             </div>
+            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
+            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
         </div>
     
 </div>
@@ -1279,10 +1580,13 @@ calls.remove(&#39;call1&#39;);</code></pre>
         </div>
     </div>
 </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
 <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script src="../assets/js/yuidoc-bootstrap.js"></script>
-<script>prettyPrint();</script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
 </body>
 </html>

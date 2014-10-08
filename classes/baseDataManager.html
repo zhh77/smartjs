@@ -2,116 +2,251 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>baseDataManager - smartjs</title>
+    <title>baseDataManager - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="smartjs" src="../assets/css/logo.png" style="max-height: 65%;" title="smartjs">
-        
-            smartjs
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
-                </p>
-            </li>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/attachTrigger", "classes/baseDataManager", "classes/baseDataService", "classes/dataManager", "classes/dataServices", "classes/EventArg", "classes/EventArg(flowController)", "classes/EventArg(trigger)", "classes/factory", "classes/FilterBuilder", "classes/flowController", "classes/klass", "classes/klassBase", "classes/Operations", "classes/priorityList", "classes/promiseEvent", "classes/util", "modules/AOP", "modules/DataManager", "modules/DataManager-Table", "modules/FilterBuilder", "modules/OOP", "modules/Util"]'>
-        </form>
-    </div>
-</div>
+    </nav>
 <div class="container">
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#modules" data-toggle="tab">Modules</a></li>
-            <li><a href="#classes" data-toggle="tab">Classes</a></li>
-        </ul>
-
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="modules">
-                <ul id="api-modules" class="nav nav-list">
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/AOP.html">AOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager.html">DataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/DataManager-Table.html">DataManager-Table</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/FilterBuilder.html">FilterBuilder</a></li>
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/OOP.html">OOP</a></li>
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../modules/Util.html">Util</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                </ul>
-            </div>
-            <div class="tab-pane" id="classes">
-                <ul id="api-classes" class="nav nav-list">
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/attachTrigger.html">attachTrigger</a></li>
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataManager.html">baseDataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/baseDataService.html">baseDataService</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataManager.html">dataManager</a></li>
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/dataServices.html">dataServices</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg.html">EventArg</a></li>
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(flowController).html">EventArg(flowController)</a></li>
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/EventArg(trigger).html">EventArg(trigger)</a></li>
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/factory.html">factory</a></li>
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
                     
-                        <li><a href="../classes/FilterBuilder.html">FilterBuilder</a></li>
-                    
-                        <li><a href="../classes/flowController.html">flowController</a></li>
-                    
-                        <li><a href="../classes/klass.html">klass</a></li>
-                    
-                        <li><a href="../classes/klassBase.html">klassBase</a></li>
-                    
-                        <li><a href="../classes/Operations.html">Operations</a></li>
-                    
-                        <li><a href="../classes/priorityList.html">priorityList</a></li>
-                    
-                        <li><a href="../classes/promiseEvent.html">promiseEvent</a></li>
-                    
-                        <li><a href="../classes/util.html">util</a></li>
-                    
-                </ul>
-            </div>
-
-            
-        </div>
-    </div>
+                    </ul>
+                </dd>
+             
+        </dl>
 </div>
-
+   
         </div>
-        <div class="span9">
+        <div class="col-sm-9">
             <!--     <form id="options-form" class="form-inline pull-right">
         Show:
         <label for="api-show-inherited" class="checkbox">
@@ -142,42 +277,118 @@
                         <div class="page-header">
     <h1>baseDataManager <small>Class</small></h1>
 </div>
+ <div class="well well-small sign-left3">
+      <p>数据管理器基类</p>
 
-<div class="well well-small">
-    
+ </div>
 
+<div class="well well-small sign-left2" id="classesItems">
     
+        <div class="index-section methods">
+            <h3>Methods</h3>
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_core_dataManager.js.html#l215"><code>src\core\dataManager.js:215</code></a>
+            <ul class="index-list methods">
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method__innerSearch" data-tablink="_innerSearch">_innerSearch</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method__innerUpdate" data-tablink="_innerUpdate">_innerUpdate</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_buildParam" data-tablink="buildParam">buildParam</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_buildPolicy" data-tablink="buildPolicy">buildPolicy</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_checkEmpty" data-tablink="checkEmpty">checkEmpty</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_clear" data-tablink="clear">clear</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_get" data-tablink="get">get</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_init" data-tablink="init">init</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_initPolicy" data-tablink="initPolicy">initPolicy</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_klassInit" data-tablink="klassInit">klassInit</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_set" data-tablink="set">set</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_setDataSerive" data-tablink="setDataSerive">setDataSerive</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
         </div>
     
 
     
-        
-            Module: <a href="../modules/DataManager.html">DataManager</a>
-        
+
     
 
     
 </div>
-
-
-
-<div class="well well-small">
-    <p>数据管理器基类</p>
-
-</div>
-
-
 
 <div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
-
+    <ul id="itemTab" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#class">Detail</a></li>
         
-            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+            <li><a data-toggle="tab" href="#method">Methods</a></li>
         
         
         
@@ -185,112 +396,33 @@
     </ul>
 
     <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
+        <div id="class" class="tab-pane active">
+           <div class="well well-small classDetail sign-left1">
+            
 
             
-                <div class="index-section methods">
-                    <h3>Methods</h3>
 
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__innerSearch" data-tablink="_innerSearch">_innerSearch</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__innerUpdate" data-tablink="_innerUpdate">_innerUpdate</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_buildParam" data-tablink="buildParam">buildParam</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_buildPolicy" data-tablink="buildPolicy">buildPolicy</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_checkEmpty" data-tablink="checkEmpty">checkEmpty</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_clear" data-tablink="clear">clear</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_get" data-tablink="get">get</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_init" data-tablink="init">init</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_initPolicy" data-tablink="initPolicy">initPolicy</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_klassInit" data-tablink="klassInit">klassInit</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_set" data-tablink="set">set</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_setDataSerive" data-tablink="setDataSerive">setDataSerive</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
+            
+                <div class="foundat">
+                    Defined in: <a href="../files/src_dataManager_dataManager.js.html#l282"><code>src\dataManager\dataManager.js:282</code></a>
                 </div>
             
 
             
-
+                
+                    Module: <a href="../modules/DataManager.html">DataManager</a>
+                
             
 
             
         </div>
 
         
-            <div id="methods" class="tab-pane">
+            
+        </div>
+
+        
+            <div id="method" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
                 
@@ -342,7 +474,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l273"><code>src\core\dataManager.js:273</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l341"><code>src\dataManager\dataManager.js:341</code></a>
         
         </p>
 
@@ -352,7 +484,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>使用dataManager内置查询(即只在dataManager内部查询，不查询dataService)接口. <strong>[接口方法]</strong></p>
 
     </div>
@@ -361,8 +493,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -392,7 +524,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        [<span class="type">Object</span>]
                     
                     <p>查询结果</p>
 
@@ -453,7 +585,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l282"><code>src\core\dataManager.js:282</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l350"><code>src\dataManager\dataManager.js:350</code></a>
         
         </p>
 
@@ -463,7 +595,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>使用dataManager内置更新(即只在dataManager内部更新，不更新到dataService)接口. <strong>[接口方法]</strong></p>
 
     </div>
@@ -472,8 +604,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -503,7 +635,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        [<span class="type">Object</span>]
                     
                     <p>设置结果</p>
 
@@ -566,7 +698,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l331"><code>src\core\dataManager.js:331</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l399"><code>src\dataManager\dataManager.js:399</code></a>
         
         </p>
 
@@ -576,7 +708,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>生成传递的参数</p>
 
     </div>
@@ -585,8 +717,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -682,7 +814,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l340"><code>src\core\dataManager.js:340</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l408"><code>src\dataManager\dataManager.js:408</code></a>
         
         </p>
 
@@ -692,7 +824,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>生成策略，对策略参数进行初始化，生成传递参数，合并参数</p>
 
     </div>
@@ -701,8 +833,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -802,7 +934,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l291"><code>src\core\dataManager.js:291</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l359"><code>src\dataManager\dataManager.js:359</code></a>
         
         </p>
 
@@ -812,7 +944,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>检查数据是否为空;数据策略的判断空数据会根据此方法的结果来判断;不同类型的数据管理的判断也不同。
 如：object判断是否为undefined;table判断数据的长度是否大于0</p>
 
@@ -822,8 +954,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -870,7 +1002,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">type</span>:
+                        [<span class="type">type</span>]
                     
                     <p>判断是否为空</p>
 
@@ -917,7 +1049,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l306"><code>src\core\dataManager.js:306</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l374"><code>src\dataManager\dataManager.js:374</code></a>
         
         </p>
 
@@ -927,7 +1059,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>清空数据管理内的数据的方法. <strong>[接口方法]</strong></p>
 
     </div>
@@ -988,7 +1120,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l251"><code>src\core\dataManager.js:251</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l319"><code>src\dataManager\dataManager.js:319</code></a>
         
         </p>
 
@@ -998,7 +1130,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>使用dataManager的数据通道进行获取数据</p>
 
     </div>
@@ -1007,8 +1139,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1038,7 +1170,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Object | Promise</span>:
+                        [<span class="type">Object | Promise</span>]
                     
                     <p>查询结果或者promise</p>
 
@@ -1095,7 +1227,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l245"><code>src\core\dataManager.js:245</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l313"><code>src\dataManager\dataManager.js:313</code></a>
         
         </p>
 
@@ -1105,7 +1237,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>数据管理对象的初始化接口方法 <strong>[接口方法]</strong></p>
 
     </div>
@@ -1114,8 +1246,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1194,7 +1326,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l318"><code>src\core\dataManager.js:318</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l386"><code>src\dataManager\dataManager.js:386</code></a>
         
         </p>
 
@@ -1204,7 +1336,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>初始化策略参数</p>
 
     </div>
@@ -1213,8 +1345,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1314,7 +1446,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l226"><code>src\core\dataManager.js:226</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l294"><code>src\dataManager\dataManager.js:294</code></a>
         
         </p>
 
@@ -1324,7 +1456,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>数据管理对象的类初始化方法；</p>
 
     </div>
@@ -1333,8 +1465,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1364,7 +1496,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">DataManager</span>:
+                        [<span class="type">DataManager</span>]
                     
                     <p>初始化完成的数据管理对象</p>
 
@@ -1425,7 +1557,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l262"><code>src\core\dataManager.js:262</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l330"><code>src\dataManager\dataManager.js:330</code></a>
         
         </p>
 
@@ -1435,7 +1567,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>使用dataManager的数据通道进行设置数据</p>
 
     </div>
@@ -1444,8 +1576,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1475,7 +1607,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Object | Promise</span>:
+                        [<span class="type">Object | Promise</span>]
                     
                     <p>设置结果或者promise</p>
 
@@ -1532,7 +1664,7 @@
             
         
         
-        <a href="../files/src_core_dataManager.js.html#l312"><code>src\core\dataManager.js:312</code></a>
+        <a href="../files/src_dataManager_dataManager.js.html#l380"><code>src\dataManager\dataManager.js:380</code></a>
         
         </p>
 
@@ -1542,7 +1674,7 @@
         
     </div>
 
-    <div class="description well well-small">
+    <div class="description well well-small sign-left3">
         <p>设置dataService的参数,在每次使用数据通道时执行. <strong>[接口方法]</strong></p>
 
     </div>
@@ -1551,8 +1683,8 @@
         <div class="params">
             <h4>Parameters:</h4>
 
-            <table class="table table-striped">
-            <tr><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
                 <tr class="param">
                     
@@ -1598,10 +1730,13 @@
         </div>
     </div>
 </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
 <script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script src="../assets/js/yuidoc-bootstrap.js"></script>
-<script>prettyPrint();</script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
 </body>
 </html>

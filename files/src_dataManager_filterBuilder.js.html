@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\dataManager\filterBuilder.js - SmartJs</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartjs">
+             
+            <img alt="SmartJs" src="../assets/css/logo.png" title="SmartJs">
+            
+                SmartJs
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">Home</a>
+                    </li>
+                    
+                    <li><a href="/index.html">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartjs">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+	    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/AOP.html">AOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/promiseEvent.html">promiseEvent</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg.html">EventArg</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/attachTrigger.html">attachTrigger</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(trigger).html">EventArg(trigger)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/flowController.html">flowController</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/EventArg(flowController).html">EventArg(flowController)</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/DataManager.html">DataManager</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/dataServices.html">dataServices</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataService.html">baseDataService</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/dataManager.html">dataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/baseDataManager.html">baseDataManager</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/FilterBuilder.html">FilterBuilder</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Operations.html">Operations</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/OOP.html">OOP</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/klassBase.html">klassBase</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/klass.html">klass</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/factory.html">factory</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <a href="../modules/Util.html">Util</a>
+                </dt>
+                <dd class="hide">
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/util.html">util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+        </div>
+        <div class="col-sm-9">
+            <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src\dataManager\filterBuilder.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+&#x27;use strict&#x27;;
+/**
+    过滤器生成器
+    
+    Feartures : 
+        1. 编译字符串过滤，“name = @name and (age &gt; @age and type = @type)”，生产过滤条件参数或者过滤方法
+        2. 参数过滤，以参数的方式全部构建&quot;=&quot;的方式构建查询方法
+        3. 方法过滤
+        4. 忽略null的条件
+        5. 自定义扩展过滤操作符
+        6. 条件&amp;参数合并
+
+    Update Note：
+        + 2014.7 ：Created
+
+    @module FilterBuilder
+*/
+stDefine(&#x27;filterBuilder&#x27;, function(st) {
+	//空值忽略条件标示符
+	var NullIgnoreSign = [&quot;{&quot;, &quot;}&quot;],
+		//关系字符
+		Relations = [&quot;and&quot;, &quot;or&quot;],
+		isArray = $.isArray;
+
+	/**
+	   过滤生成器对象；可以使用：条件字符串；参数；方法来构建； 
+	   条件字符串的过滤操作见[Operations](Operations.html)
+	   @class FilterBuilder
+	   @constructor
+	   @param {string|function|object} filter 三种类型： 
+	   1. {string}, 查询字符串
+	   2. {object}, 参数对象
+	   3. {function}, 过滤方法
+	   @return {FilterBuilder} 返回过滤生成器对象
+	   @example
+	   		//定义数据
+			var data = [
+					{name: &quot;roy&quot;,age: 30,role: &quot;sa&quot;,project: &quot;smartjs&quot;},
+					{name: &quot;roy&quot;,age: 30,role: &quot;coder&quot;,project: &quot;smartdoc&quot;},
+			 		{name: &quot;coder1&quot;, age: 20, role: &quot;coder&quot;, project: &quot;smartjs&quot;}
+			];
+	   
+	   		//查询字符串,{age &gt; @age}用{}包含的条件表示当@age为null的时候，忽略此条件
+	   		var str = &quot;{age &gt; @age} and (role = @sa or role = @coder) and {project = @project}&quot;;
+			
+			//创建字符串过滤器
+			var strFilter = st.filterBuilder(str);
+			
+			//生成过滤方法
+			var fnFilterCoder = strFilter.buildFn({
+				coder : &#x27;coder&#x27;,
+			});
+
+			//过滤所有coder
+			var coders = data.filter(fnFilterCoder);
+
+			expect(coders.length).toBe(2);
+			expect(coders[0].name).toBe(&#x27;roy&#x27;);
+			expect(coders[1].name).toBe(&#x27;coder1&#x27;);
+
+			//再次生成smartjs项目年纪大于20的coder或sa
+			var filterFn = strFilter.buildFn({
+				age : 20,
+				coder : &#x27;coder&#x27;,
+				sa : &#x27;sa&#x27;,
+				project : &#x27;smartjs&#x27;
+			});
+			
+			var member = data.filter(filterFn);
+			expect(member.length).toBe(1);
+			expect(member[0].name).toBe(&#x27;roy&#x27;);
+			
+			
+			//创建过滤器
+			var paramFilter = st.filterBuilder();
+
+			//根据参数创建过滤方法
+			var filterFn2 = paramFilter.buildFn({
+				name : &#x27;coder1&#x27;
+			});
+
+			var coder1 = data.filter(filterFn2);
+
+			expect(coder1.length).toBe(1);
+			expect(coder1[0].name).toBe(&#x27;coder1&#x27;);
+			
+	 */
+	function FilterBuilder(filter) {
+		if (filter) {
+			switch (typeof filter) {
+				//查询字符串
+				case &quot;string&quot;:
+					this._conditions = compileStringCondition(filter);
+					break;
+				//过滤方法
+				case &quot;function&quot;:
+					this._filter = filter;
+					break;
+				//参数过滤
+				case &quot;object&quot;:
+					this._params = filter;
+					break;
+			}
+		}
+	}
+
+	FilterBuilder.prototype = {
+		/**
+		 * 生成条件参数,当使用查询字符串进行构建过滤器时，根据传入的参数值生产最终的带关系和操作过滤参数
+		 * @method buildCondition
+		 * @param  {object} params 过滤的参数值
+		 * @return {object}   条件参数
+		 * @example
+		   		var str = &quot;age &gt; @age and (role = @sa or role = @coder) and project = @project&quot;;
+				var filter = st.filterBuilder(str);
+		  
+		   		//生成条件
+		   		var conditions = filter.buildCondition({
+		   			age : 20,
+					sa : &#x27;sa&#x27;,
+					coder : &#x27;coder&#x27;,
+					project : &quot;smartjs&quot;
+				})
+
+				log(conditions);
+
+		   		// 生成的conditions对象
+		   		// {&quot;and&quot;:[
+		   		// 	 {&quot;field&quot;:&quot;age&quot;,&quot;operation&quot;:&quot;&gt;&quot;,&quot;param&quot;:20},
+	   			// 	 {&quot;or&quot;:[
+	   			// 		{&quot;field&quot;:&quot;role&quot;,&quot;operation&quot;:&quot;=&quot;,&quot;param&quot;:&quot;sa&quot;},
+	   			// 		{&quot;field&quot;:&quot;role&quot;,&quot;operation&quot;:&quot;=&quot;,&quot;param&quot;:&quot;coder&quot;}
+	   			// 	 ]},
+		   		// 	 {&quot;field&quot;:&quot;project&quot;,&quot;operation&quot;:&quot;=&quot;,&quot;param&quot;:&quot;smartjs&quot;}
+		   		// ]}
+		 */
+		buildCondition: function(params) {
+			if (this._conditions)
+				return buildConditions(this._conditions, params);
+		},
+		/**
+		 * 生成过滤方法
+		 * @method buildFn
+		 * @param  [params] {object}  过滤的参数值
+		 * @param  [mergeFilter]  {string|function|object} 需要合并的过滤条件;合并全部都为and
+		 * @return {function} 过滤方法
+		 * @example
+		 * 		var data = [
+		 * 			{name : &#x27;sa1&#x27;, role : &#x27;sa&#x27;, age : 33},
+		 * 			{name : &#x27;sa2&#x27;, role : &#x27;sa&#x27;, age : 25}
+		 * 		];
+		 * 		
+		 * 		//创建role的过滤器
+		 * 		var filter = st.filterBuilder(&quot;role = @role&quot;);
+		 *
+		 * 		//传入条件参数，并追加age的过滤
+		 * 		var filterFn = filter.buildFn({role:&quot;sa&quot;,age:30},&quot;age &gt; @age&quot;);
+		 *
+		 * 		var sa = data.filter(filterFn);
+		 * 		expect(sa.length).toBe(1);
+		 * 		expect(sa[0].name).toBe(&#x27;sa1&#x27;)
+		 * 		
+		 */
+		buildFn: function(params, mergeFilter) {
+			var self = this,filterType,
+				conditions, fnFilter, mergeFilterFn;
+
+			//过滤方法模式
+			if (self._filter)
+				fnFilter = self._filter;
+			//条件生成模式
+			else if (self._conditions) {
+				conditions = this.buildCondition(params);
+				if (conditions)
+					fnFilter = buildFn(conditions)
+			} else if(!mergeFilter)
+				//参数过滤非合并参数模式下，根据参数创建过滤方法
+				fnFilter = compileObjectCondition(st.mix(params, self._params));
+
+			//存在合并过滤情况下，生成合并过滤方法
+			if (mergeFilter) {
+				filterType = typeof(mergeFilter);
+				if (filterType === &#x27;string&#x27;)
+					mergeFilterFn = (new FilterBuilder(mergeFilter)).buildFn(params);
+				else if(filterType === &#x27;function&#x27;)
+					mergeFilterFn = mergeFilter;
+			}
+			//合并过滤条件
+			return st.mergeFn(fnFilter, mergeFilterFn,true);
+		}
+	}
+
+	//将对象参数编译成过滤方法
+	function compileObjectCondition(obj) {
+		return function(item) {
+			var check = true;
+			$.each(obj, function(name, value) {
+				if (item[name] !== value) {
+					check = false;
+					return check;
+				}
+			})
+			return check;
+		}
+	}
+
+	//将过滤字符串编译成过滤条件对象
+	function compileStringCondition(filter) {
+		var groups = [],
+			deep = 0,
+			//条件关系链
+			chain = [groups];
+
+		filter.split(&#x27;(&#x27;).forEach(function(part, i) {
+			if (i === 0) {
+				compileGroup(chain, deep, part)
+			} else {
+				part.split(&#x27;)&#x27;).forEach(function(exp, i) {
+					i &gt; 0 ? deep-- : deep++;
+
+					compileGroup(chain, deep, exp);
+				})
+			}
+		})
+		return groups.length ? groups : null;
+		//console.log(groups);
+	}
+
+	//编译查询条件组
+	function compileGroup(chain, deep, part) {
+		var group, arr, condition, len = chain.length - 1;
+
+		arr = part.split(/\s(or|and)\s/g);
+		//判断开始是否存在关系表达式
+		if (arr[0].length === 0 &amp;&amp; Relations.indexOf(arr[1]) &gt; -1) {
+			arr.shift();
+			chain[len].or = arr.shift() === Relations[1];
+		}
+
+		//深度大于关系链时，扩展关系链
+		if (deep &gt; len)
+			group = chain[deep] = [];
+		else {
+			group = chain[deep];
+			//深度小于关系链时，将关系链最后一项清除，添加到当前group中
+			deep &lt; len &amp;&amp; group.push(chain.pop());
+		} 
+
+		arr.forEach(function(item, i) {
+			if (item) {
+				//判断为关系参数时，设置条件关系
+				if (Relations.indexOf(item) &gt; -1) {
+					condition.or = item === Relations[1];
+				} else {
+					condition = compileConditionStr(item);
+					group.push(condition);
+				}
+			}
+		})
+	}
+
+	//编译查询条件字符串
+	function compileConditionStr(condition) {
+		var arr, ignoreNull = false,
+			index;
+
+		//判断是否空忽略
+		if (condition.charAt(0) === NullIgnoreSign[0]) {
+			index = condition.lastIndexOf(NullIgnoreSign[1]);
+			if (index &gt; 1) {
+				condition = condition.substring(1, index);
+				ignoreNull = true;
+			} else {
+				condition = condition.substring(1);
+			}
+		}
+
+		arr = condition.split(&#x27; &#x27;).filter(function(item) {
+			return item.length &gt; 0;
+		});
+
+		return {
+			ignoreNull: ignoreNull,
+			field: arr[0],
+			operation: arr[1],
+			param: arr[2]
+		};
+	}
+
+	//根据过滤条件组生成过滤条件
+	function buildConditions(conditions, params) {
+		var unit, orGroup, lastOr, or, pass, newGroup,param, len = conditions.length - 1,
+			group = [],
+			chain = [group];
+
+		conditions.forEach(function(condition, i) {
+			//判断是否pass模式
+			if (pass) {
+				pass = false;
+				lastOr = condition.or;
+				return;
+			}
+
+			or = condition.or;
+			//判断是否为过滤条件组
+			if (isArray(condition)) {
+				unit = buildConditions(condition, params);
+			} else {
+				param = condition.param;
+				//判断为过滤参数还是过滤值
+				if (param.charAt(0) === &#x27;@&#x27;)
+					param = st.getObj(params, param.substr(1));
+
+				//判断是否空忽略
+				if (condition.ignoreNull &amp;&amp; param == null) {
+					or &amp;&amp; (pass = true);
+					unit = null;
+				} else {
+					unit = {
+						field: condition.field,
+						operation: condition.operation,
+						param: param
+					};
+				}
+			}
+			if (unit) {
+				if (i === len) {
+					//最后一个条件和or关系下，将group设置到关系链开始
+					if (or)
+						group = chain[0];
+				} 
+				//在上一个和当前关系不一致时
+				else if (i &gt; 0 &amp;&amp; !lastOr !== !or) {
+					//当前关系为or时，提升or级别，将原有and关系组置于or关系组下
+					if (or) {
+						//如果存在关系链，在加深一级，否则创建关系链
+						if (chain.length &gt; 1) {
+							group = chain[0];
+							chain = [group];
+						} else {
+							chain[0] = group = [{
+								and: group
+							}];
+						}
+					} else {
+						//当前为and时，创建新组，添加到前一个or关系组
+						newGroup = [];
+						chain.push(newGroup);
+						group.push({
+							and: newGroup
+						});
+						group = newGroup;
+					}
+				}
+				group.push(unit);
+			}
+			if (or)
+				orGroup = true;
+
+			lastOr = or;
+		})
+		group = chain[0];
+		if (group.length)
+			return orGroup ? {
+				or: group
+			} : {
+				and: group
+			};
+	}
+	//根据条件关系生成过滤方法
+	function buildFn(conditions) {
+		return function(data) {
+			var result = true,
+				isOr;
+			$.each(conditions, function(relation, condition) {
+				if (!checkGroup(data, condition, relation === &#x27;or&#x27;)) {
+					result = false;
+				}
+			})
+			return result;
+		}
+	}
+
+	//验证关系组条件是否匹配
+	function checkGroup(data, condistions, isOr) {
+		var group, result;
+		condistions.some(function(condition, i) {
+			if (condition.field) {
+				result = compare(data, condition);
+			} else {
+				if (group = condition.or)
+					result = checkGroup(data, group, true);
+				else if (group = condition.and)
+					result = checkGroup(data, group, false);
+			}
+			if(isOr &amp;&amp; result)
+				return true;
+			else if (!isOr &amp;&amp; !result)
+				return true;
+		})
+		return result;
+	}
+
+	function getIndex(datas, data) {
+		if (data &amp;&amp; datas &amp;&amp; datas.length &amp;&amp; datas.indexOf)
+			return datas.indexOf(String(data)) &gt; -1;
+
+		return false;
+	}
+
+	function checkStartEnd(datas, data, endOf) {
+		if (data &amp;&amp; datas &amp;&amp; datas.length &amp;&amp; datas.substr) {
+			data = String(data);
+			return (endOf ? datas.substr(datas.length - data.length) : datas.substr(0, data.length)) === data;
+		}
+		return false;
+	}
+
+	/**
+	 * 针对过滤器条件字符串的条件过滤操作；预设了基础操作；另外可以通过&lt;code&gt;st.extendOperation(operation,checkFn)&lt;/code&gt;进行扩展和重写
+	 * @class Operations
+	 */
+	var Operations = {
+		/**
+		 * 非判断，在判断操作符之前加入!,则将判断结果取非
+		 * @property {operation} ! 
+		 * @example
+		 * 		//查询name不等于&#x27;roy&#x27;的数据
+		 * 		var filter = &quot;name != &#x27;roy&#x27;&quot;
+		 */
+
+		/**
+		 * 等于判断
+		 * @property {operation} = 
+		 */
+		&quot;=&quot;: function(data, param) {
+			return data === param;
+		},
+		/**
+		 * 小于判断
+		 * @property {operation} &lt; 
+		 */
+		&quot;&lt;&quot;: function(data, param) {
+			return data &lt; param;
+		},
+		/**
+		 * 小于等于判断
+		 * @property {operation} &lt;=
+		 */
+		&quot;&lt;=&quot;: function(data, param) {
+			return data &lt;= param;
+		},
+		/**
+		 * 大于判断
+		 * @property {operation} &gt;
+		 */
+		&quot;&gt;&quot;: function(data, param) {
+			return data &gt; param;
+		},
+		/**
+		 * 大于等于判断
+		 * @property {operation} &gt;= 
+		 */
+		&quot;&gt;=&quot;: function(data, param) {
+			return data &gt;= param;
+		},
+		/**
+		 * 参数中包含数据
+		 * @property {operation} in 
+		 */
+		&quot;in&quot;: function(data, param) {
+			return getIndex(param, data);
+		},
+		/**
+		 * 数据中包含参数
+		 * @property {operation} like 
+		 */
+		&quot;like&quot;: getIndex,
+		/**
+		 * 以参数为开头
+		 * @property {operation} startOf 
+		 */
+		&quot;startOf&quot;: checkStartEnd,
+		/**
+		 * 以参数为结尾
+		 * @property {operation} endOf 
+		 * @example
+		 * 		//匹配以&#x27;es&#x27;结尾的name
+		 * 		var filter = &quot;name endOf &#x27;es&#x27;&quot;;
+		 */
+		&quot;endOf&quot;: function(data, param) {
+			return checkStartEnd(data, param, true);
+		}
+	};
+
+	function compare(data, condition) {
+		var operation = condition.operation,check,not,result;
+
+		//判断是否为非
+		if(operation.charAt(0) === &#x27;!&#x27;){
+			not = 1;
+			operation = operation.substring(1);
+		}
+
+		result = (check = Operations[operation]) ? check(st.getObj(data, condition.field), condition.param) : false;
+
+		return not ? !result : result;
+	}
+
+	return {
+		filterBuilder: function(filter) {
+			return new FilterBuilder(filter);
+		},
+		/**
+		   扩展判断操作符,如：&#x27;=&#x27;比较操作符,name = @name
+		   @method extendOperation
+		   @param  {string} operation 操作名称
+		   @param  {function} checkFn   判断方法
+		   @example
+		   		//添加大于操作符&#x27;&gt;&#x27;
+		   		st.extendOperation(&#x27;&gt;&#x27;,function(data, param) {
+		   			//data为数据，param为条件参数
+					return data &gt; param;
+				});
+		 */
+		extendOperation : function(operation,checkFn){
+			Operations[operation] = checkFn;
+		}
+	};
+})
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>
