@@ -3,7 +3,7 @@ define(function() {
         baseUrl: 'src/',
         paths: {
             lib: '../lib',
-            test: '../test'
+            test: '../test',
         }
     });
 

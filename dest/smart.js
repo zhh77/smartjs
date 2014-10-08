@@ -1,3 +1,4 @@
+'use strict';
 /************************************* Smart JS **************************
 NOTE: smartjs入口 
 Features：
@@ -34,8 +35,7 @@ Needs：util
 		})
 	}
 	return st;
-})(window);;
-/**
+})(window);;/**
 	工具包模块
 
 	Feartures : 
@@ -49,8 +49,6 @@ Needs：util
 	@module Util
 */
 stDefine('util', function(st) {
-	"use strict"
-
 	/**
         util常用公共方法
         @class util
@@ -60,7 +58,7 @@ stDefine('util', function(st) {
 		copy: copy,
 		injectFn: injectFn,
 		mergeFn: mergeFn,
-		mergeObj: mergeObj,
+		mix: mix,
 		getObj: getObj,
 		setObj: setObj,
 		priorityList: priorityList
@@ -87,7 +85,7 @@ stDefine('util', function(st) {
 		return $.isPlainObject(obj);
 	}
 
-	/**
+	/*
         复制数据方法,支持对象字面量和数组的复制
         @method copy
         @todo：st内部对象的复制功能
@@ -216,7 +214,7 @@ stDefine('util', function(st) {
 
 	/**
         合并默认数据方法,将obj中不空的内容从defObj中复制
-        @method mergeObj
+        @method mix
         @param [deep] {Number} 是否深度合并
         @param obj {function} 合并对象
         @param defObj {function} 默认对象
@@ -236,7 +234,7 @@ stDefine('util', function(st) {
             };
 
             //根据person的数据进行合并
-            st.mergeObj(obj, person);
+            st.mix(obj, person);
 
             //child被复制
             expect(obj.child).toBeDefined();
@@ -247,7 +245,7 @@ stDefine('util', function(st) {
             //name不为null，未被复制
             expect(obj.name).toBe('a');
     */
-	function mergeObj(deep, obj, defObj, exclude) {
+	function mix(deep, obj, defObj, exclude) {
 		var fnCheck;
 		if (typeof deep !== 'boolean') {
 			exclude = defObj;
@@ -299,12 +297,18 @@ stDefine('util', function(st) {
         @param [root] {boolean} 是否从根开始，默认从target子开始；从根开始则忽略ns的第一级
         @return [object] 返回获取的属性或者方法
         @example
-        	//等同于user.project.name
-        	st.getObj(user,'project.name');
-			
-			//等同于user.name
-        	st.getObj(user,'u.name',true);
+			var user = {
+				name : "tony",
+				project : {
+					name : "SmartJS"
+				}
+			};
 
+        	//等同于user.project.name
+        	expect(st.getObj(user,'project.name')).toBe("SmartJS");
+			
+			//等同于user.name；"u."回被忽略
+			expect(st.getObj(user,'u.name',true)).toBe("tony");
     */
 	function getObj(target, ns, root) {
 		var obj = target,
@@ -327,16 +331,31 @@ stDefine('util', function(st) {
         @param [root] {boolean} 是否从根开始，默认从target子开始；从根开始则忽略ns的第一级
         @return [object] 返回获取的属性或者方法
         @example
-
+			var user = {};
         	//等同于 user.name = 'roy'
         	st.setObj(user,'name','roy');
 
 			//等同于 user.project.name = 'smartjs';
         	st.setObj(user,'project.name','smartjs');
 
-        	//等同于 st.mergeObj(user.project,{name:'smartjs'});
+        	//根模式，等同于 st.mix(user.project,{name:'smartjs'});
         	st.setObj(user,'project',{name:'smartjs'},"merge");
+			
+			//混入模式
+			st.setObj(user, "project1", {
+                name: "tony",
+                status: 'coding'
+            }, 'mix');
 
+			log(user);
+
+			//合并模式
+			st.setObj(user, "project1", {
+                name: "amy",
+                status: 'testing'
+            }, 'merge');
+
+			log(user);
     */
 	function setObj(target, ns, value, mode, root) {
 		var obj = target,
@@ -353,7 +372,7 @@ stDefine('util', function(st) {
 			_prop = obj[name];
 			if (i === len - 1) {
 				if (mode && isPlainObject(_prop))
-					mode === 'merge' ? mergeObj(true, _prop, value) : $.extend(true, _prop, value);
+					mode === 'merge' ? $.extend(true, _prop, value) : mix(true, _prop, value);
 				else
 					obj[name] = value;
 			} else {
@@ -373,7 +392,22 @@ stDefine('util', function(st) {
 		@param [mode] {string} item模式 
 		@param [defaultPriority=0] {number} item模式 
 		@example
-			var list = st.priorityList();
+			var list = st.priorityList(),
+                result = [];
+
+            //添加项
+            list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
+
+            //10为第一个
+            expect(list.at(0)).toBe(10);
+
+
+            //按优先级大到小循环
+            list.each(function(item) {
+                result.push(item);
+            })
+
+            expect(result + '').toBe('10,5,1,0,-1');
 	*/
 	function priorityList(mode, defaultPriority) {
 		var _maxPriority = 0,
@@ -393,16 +427,24 @@ stDefine('util', function(st) {
             @param [priority] {number} 权重
             @chainable
             @example 
+            	var list = st.priorityList(),
+                result = [];
+
 	            //添加项
 	            list.add(1).add(0);
 
 	            //根据priority添加项
 	            list.add(10, 10).add(5, 5).add(-1, -1);
+				
+				//按优先级大到小循环
+	            list.each(function(item) {
+	                result.push(item);
+	            })
 
-	            //最终存储为[10,5,1,0,-1]
+            	expect(result + '').toBe('10,5,1,0,-1');
         */
 		function add(item, priority) {
-			var len = _list.length;
+			var len = _list.length,itemPriority;
 			if (isSelf)
 				priority = item.priority;
 
@@ -428,7 +470,8 @@ stDefine('util', function(st) {
 					len || (_maxPriority = priority);
 				} else {
 					for (var i = 1; i < len; i++) {
-						if (_list[i].priority < priority) {
+						itemPriority = _list[i].priority;
+						if ((itemPriority == null ? _priority : itemPriority) < priority) {
 							break;
 						}
 					}
@@ -451,12 +494,19 @@ stDefine('util', function(st) {
              3. 'done' : 完成匹配
             @chainable
             @example 
+            	var list = st.priorityList();
+
+            	list.add({id : 1});
+            	list.add({id : 2});
+
 	           	//删除 item为1的项
 	            list.remove(function(item){
-	                if(item === 1)
+	                if(item.id === 1)
 	                	//结束匹配
 	                    return "done";
 	            })
+
+				expect(list.len()).toBe(1);
         */
 		function remove(filter) {
 			var type = typeof filter;
@@ -490,11 +540,19 @@ stDefine('util', function(st) {
             @param handler {function} 循环处理函数
             @chainable
 			@example 
+				var list = st.priorityList(),
+	                result = [];
+
+	            //添加项
+	            list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
+
 				 //按优先级大到小循环
 	            list.each(function(item) {
 	                result.push(item);
 	            })
 	            expect(result + '').toBe('10,5,1,0,-1');
+				
+				result = [];
 
 				//按优先级小到大循环
 	            list.each(true,function(item) {
@@ -581,9 +639,6 @@ stDefine('util', function(st) {
     @module AOP
 */
 stDefine('aop', function(st) {
-    "use strict"
-
-    //默认权重
     var sliceArgs = st.sliceArgs;
 
     //设置默认权重
@@ -645,8 +700,50 @@ stDefine('aop', function(st) {
             3. 'noBlock' : 非阻塞模式；
         @example
 
-            //使用once和callback模式创建promiseEvent
-            var calls = st.promiseEvent("once callback")
+            //使用once模式创建promiseEvent
+            var events = st.promiseEvent("once");
+
+            //添加回调
+            events.add('call1', function(e, text) {
+                return text;
+            });
+            
+            //执行事件
+            expect(events.fire('called')).toBe('called');
+            
+            var result = [];
+
+            //创建一个noBlock模式的promiseEvents;
+            var noBlockEvents = st.promiseEvent("noBlock");
+
+            //第一个回调延迟100
+            noBlockEvents.add("c1", function(e) {
+                //异步的promise处理
+                setTimeout(function() {
+                    result.push('c1');
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            });
+
+            //第二个正常执行
+            noBlockEvents.add("c2", function(e) {
+                result.push('c2');
+            });
+
+            //第三个回调延迟50
+            noBlockEvents.add("c3", function(e) {
+                setTimeout(function() {
+                    result.push('c3');
+                    e.resolve();
+                }, 50);
+                return e.promise();
+            });
+
+            $.when(noBlockEvents.fire()).done(function(data) {
+                //最终执行顺序是c2-c3-c1
+                expect(result + '').toBe('c2,c3,c1');
+            });
     */
     function promiseEvent(mode) {
         var _mode, _callbackMode, _noBlock,
@@ -671,8 +768,21 @@ stDefine('aop', function(st) {
             @method clear 
             @chainable
             @example
-                //清除calls下面注册的事件
-                calls.clear();
+                var events = st.promiseEvent();
+
+                //添加回调
+                events.add('call1', function(e, text) {});
+                events.add('call2', function(e, text) {});
+                
+                //回调事件总数为2
+                expect(events.len()).toBe(2);
+
+                //清除events下面注册的事件
+                events.clear();
+                
+                //回调事件总数为0
+                expect(events.len()).toBe(0);
+
         */
         function clear() {
             _list.clear();
@@ -684,58 +794,94 @@ stDefine('aop', function(st) {
             @method add 
             @param name {string} 事件回调名
             @param fn {string} 事件回调方法
-            @param [priority=0] {number} 权重
+            @param [priority=0] {number} 权重;预设为0，可以通过配置调整
             @param [mode] {string} 回调模式："once":执行一次
             @chainable
             @example
 
-                //注册事件
-                calls.add('call1', function(e, text) {})
-
-                //自定义priority注册事件
-                calls.add('call2', function(e, text) {},100)
-
-                //单once模式注册
-                calls.add('call3', function(e, text) {},'mode')
-
-                //所有设置
-                calls.add('call4', function(e, text) {},50,'mode')
-                
-
-
-                //返回promise
-                call.add("promiseCall", function(e, name) {
-                    //异步的方法
-                    async(function() {
-                        e.resolve();
-                    });
-                    return e.promise();
-                });
-                
-
-
-                //result传递
-                var resultCalls = st.promiseEvent();
-                resultCalls.add("c1", function(e) {
-                    //传递结果（promise下的resolve与return效果相同）
-                    return "c1";
-                }).add("c2", function(e) {
-                    //e.result是由c1返回过来的值
-                    return e.result + ",c2";
-                });
-                
-
-
                 //callbak 模式下添加事件
-                var calls1 = st.promiseEvent("callback");
+                var calls = st.promiseEvent("callback"),
+                    ret = [];
 
                 //没有eventArg参数
-                calls1.add("c1", function(name) {
+                calls.add("c1", function(name) {
+                    ret.push(name + '-c1');
+                }).add("c2", function(name) {
+                    ret.push(name + '-c2');
                 });
+                calls.fire('test');
+                expect(ret.join(';')).toBe('test-c1;test-c2');
+
+                
+                //标准模式
+                var events = st.promiseEvent(),
+                    result = [];
+
+                //注册事件
+                events.add('call1', function(e, text) {
+                    result.push('call1');
+                });
+
+                //自定义priority注册事件
+                events.add('call2', function(e, text) {
+                    result.push('call2');
+                },100);
+
+                //单once模式注册
+                events.add('call3', function(e, text) {
+                    result.push('call3');
+                },'once');
+
+                //所有设置
+                events.add('call4', function(e, text) {
+                    result.push('call4');
+                },50,'once');
+                
+                //返回promise
+                events.add("promiseCall", function(e, text) {
+                    //异步的方法
+                    setTimeout(function() {
+                        result.push('promiseCall');
+                        e.resolve();
+                    },0);
+                    return e.promise();
+                },20);
+                
+                //回调中如果存在promise需要,$.when来获取结果
+                $.when(events.fire('test')).done(function(){
+                    expect(result.join('-')).toBe('call2-call4-promiseCall-call1-call3');
+                });
+                
+
+                //result传递
+                var resultEvents = st.promiseEvent();
+                resultEvents.add("c1", function(e) {
+                    //使用return传递结果
+                    return "c1";
+                }).add("c2", function(e) {
+                    //e.result是由c1返回过来的值; 使用事件参数e的resolve传递
+                    setTimeout(function() {
+                        e.resolve(e.result + "-c2");
+                    },0);
+                    return e.promise();
+
+                }).add("c3", function(e) {
+                    //e.result是由c1返回过来的值
+                    return e.result + "-c3";
+                });
+                
+                $.when(resultEvents.fire()).done(function(ret){
+                    expect(ret).toBe('c1-c2-c3');
+                })
         */
         function add(name, fn, priority, mode) {
             if (!name && typeof name !== 'string' && !fn)
                 return;
+
+            if(typeof (priority) === 'string') {
+                mode = priority;
+                priority = null;
+            }
 
             _list.add({
                 name: name,
@@ -752,11 +898,15 @@ stDefine('aop', function(st) {
             @param name {string} 事件回调名
             @chainable
             @example
+                var events = st.promiseEvent();
+
                 //注册事件
-                calls.add('call1', function(e, text) {})
+                events.add('call1', function(e, text) {});
 
                 //删除事件
-                calls.remove('call1');
+                events.remove('call1');
+
+                expect(events.len()).toBe(0);
                 
         */
         function remove(name) {
@@ -774,10 +924,25 @@ stDefine('aop', function(st) {
             @param [argHandle] {function} 参数处理方法，可以对eventarg进行修改；例如：argHandle(e)
             @return {object|promise} 返回执行结果
             @example
-                //使用context上下执行
-                calls.fireWith(context,[param1,param2],function(e){
-                    //此处在e(EventArg)初始化时，进行扩展
-                })
+                var events = st.promiseEvent(),
+                target = {
+                    name : 'target'
+                };
+
+                 //注册事件
+                 events.add('call1', function(e, text) {
+                    return this.name + '-' + text + '-' + e.extend();
+                 });
+
+                 //使用fireWith执行
+                 var result = events.fireWith(target,['test'],function(e){
+                    //扩展事件参数；只会在这一次的fire中生效
+                    e.extend = function(){
+                        return 'extend';
+                    }
+                 });
+
+                 expect(result).toBe('target-test-extend');
         */
         function fireWith(context, args, argHandle) {
             var i = 0,
@@ -803,14 +968,22 @@ stDefine('aop', function(st) {
                     @method stopPropagation 
                     @chainable
                     @example
-                        calls.add("c1", function(e) {
+                        var events = st.promiseEvent(),
+                            result = [];
+
+                        events.add("c1", function(e) {
                             //阻止冒泡
                             e.stopPropagation();
+                            result.push("c1");
                         })
-                        .add("c2", function() {});
+                        .add("c2", function() {
+                            result.push("c2");
+                        });
 
                         //只执行了c1
-                        calls.fire();
+                        events.fire();
+
+                        expect(result.join('-')).toBe('c1')
                 */
                 stopPropagation: function() {
                     _stop = true;
@@ -846,9 +1019,11 @@ stDefine('aop', function(st) {
                 },
                 /**
                     拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行
-                    @method resolve 
+                    @method reject 
                     @param err {object} 拒绝参数
                     @example
+                        var pCalls = st.promiseEvent();
+
                         pCalls.add("c1", function(e, name) {
                             //延迟100ms
                             setTimeout(function() {
@@ -857,13 +1032,12 @@ stDefine('aop', function(st) {
                             }, 100);
 
                             //返回promise
-                            return e.promise();
+                              return e.promise();
                         });
 
                         //使用when来监控promiseEvent的执行，使用fail捕获reject
                         $.when(pCalls.fire("call")).fail(function(data) {
                             expect(data).toBe('call,reject!');
-                            testCall();
                         });
                 */
                 reject: function(err) {
@@ -874,7 +1048,9 @@ stDefine('aop', function(st) {
                     @method remove 
                     @chainable
                     @example
-                         calls.add("onceTest", function(e) {
+                        var calls = st.promiseEvent();
+                        
+                        calls.add("onceTest", function(e) {
                             //删除"onceTest"这个事件；
                             e.remove();
                         });
@@ -956,9 +1132,12 @@ stDefine('aop', function(st) {
             @param name {string} 事件回调名
             @return {boolean} 是否存在
             @example 
+                 var calls = st.promiseEvent();
+                        
+                calls.add("call1", function(e) {});
+
                 //判断是否注册了"call1"的event
-                if(calls.has("call1"))
-                    .........
+                expect(calls.has("call1")).toBeTruthy();
         */
         function has(name) {
             var result = false;
@@ -976,6 +1155,14 @@ stDefine('aop', function(st) {
         return {
             add: add,
             has: has,
+            /**
+             * 获取注册的事件长度/数
+             * @method len
+             * @return {number} 注册的事件长度/数
+             */
+            len : function(){
+                return _list.len();
+            },
             remove: remove,
             /**
                 执行回调
@@ -985,25 +1172,32 @@ stDefine('aop', function(st) {
                 @param [argHandle] {function} 参数处理方法，可以对eventarg进行修改；例如：argHandle(e)
                 @return {object} 返回执行结果
                 @example
+                    //once模式创建
+                    var calls = st.promiseEvent("once");
+
                     //注册call1
                     calls.add('call1', function(e, text) {
-                        alert(text);
+                        return text;
                     })
 
                     //执行call1，返回called
-                    calls.fire('called');
+                    expect(calls.fire('called')).toBe('called');
                     
+                    var result = '';
+
                     //使用eventArg控制
                     calls.add("c1", function(e) {
                         //阻止后续回调
                         e.stopPropagation();
+                        result += "c1";
                     })
                     .add("c2", function() {
+                        result += "c2";
                     });
 
                     //只执行了c1
                     calls.fire();
-
+                    expect(result).toBe('c1');
 
 
                     //promise模式下
@@ -1015,45 +1209,11 @@ stDefine('aop', function(st) {
                     });
                     
                     //使用when来监控返回的result
-                    $.when(calls.fire("call")).done(function(result) {
-
+                    $.when(calls.fire("call")).done(function(ret) {
+                        expcet(ret).toBe('call-c1');
                     }.fail(function(error){
 
                     }));
-                    
-
-
-                    //noBlock模式的promiseEvents;
-                    var noBlockCalls = st.promiseEvent("noBlock");
-
-                    //第一个回调延迟100
-                    noBlockCalls.add("c1", function(e) {
-                        setTimeout(function() {
-                            result.push('c1');
-                            e.resolve();
-                        }, 100);
-                        return e.promise();
-                    });
-
-                    //第二个正常执行
-                    noBlockCalls.add("c2", function(e) {
-                        result.push('c2');
-                    });
-
-                    //第三个回调延迟50
-                    noBlockCalls.add("c3", function(e) {
-                        setTimeout(function() {
-                            result.push('c3');
-                            e.resolve();
-                        }, 50);
-                        return e.promise();
-                    });
-
-                    $.when(noBlockCalls.fire()).done(function(data) {
-                        //最终执行顺序是c2-c3-c1
-                        expect(result + '').toBe('c2,c3,c1');
-                        testCall();
-                    });
             */
             fire: function() {
                 return fireWith(null, sliceArgs(arguments));
@@ -1094,33 +1254,114 @@ stDefine('aop', function(st) {
             @param [fnInterface] {object} ；自定义接口方法；在使用attachTrigger方法后，会在target上附加一些控制方法，为了避免重名和控制对外的方法，使用fnInterface来自定义
             @return {trigger} 返回附加上了trigger的对象;
             @example
-                 var obj1 = {
+                var result = [];
+
+                var obj1 = {
                     test: function(name) {
                         result.push(name);
                     }
                 };
 
+                function injectCall(e,name){
+                    result.push(name + '-after');
+                }
+
                 //给obj1对象附上触发器功能
                 st.attachTrigger(obj1);
                 
+
+                //注册前置触发方法
+                obj1.onBefore('test','beforeCall',function(e,name){
+                    result.push(name + '-before');
+                });
+
+
+                //注册后置触发方法
+                obj1.on('test','afterCall',injectCall);
+
+                obj1.test('test');
+
+                expect(result.join(';')).toBe('test-before;test;test-after');
+                
+
+                //清空结果
+                result = [];
+
                 //直接初始化成trigger对象
                 var obj2 = st.attachTrigger({
-                    test: function(name) {
-                        result.push(name);
+                    child : {
+                        test : function(name){
+                            result.push(name);
+                        }
                     }
                 });
+                
+                //注册后置触发方法到子对象方法
+                obj2.on('child.test','afterCall',injectCall);
+                
+                obj2.child.test('test2');
+
+                expect(result.join(';')).toBe('test2;test2-after');
+
                 
                 //定制trigger的接口方法
                  var obj3 = st.attachTrigger({
                     test: function(name) {
-                        result.push(name);
+                        return name;
                     }
                 }, {
-                    //屏蔽trigger的on方法
-                    on: null,
                     //将trigger的onBebefore方法名改成bind
-                    onBefore: "bind"
-                })
+                    on: "bind",
+                    //屏蔽trigger的onBefore方法
+                    onBefore: null
+                });
+                
+                //使用自定义的bind接口注册前置触发方法
+                obj3.bind('test','afterCall',function(e,name){
+                    //将原方法的结果改变，然后返回
+                    return e.result + '-after';
+                });
+                
+                expect(obj3.test('test3')).toBe('test3-after');
+                
+
+                result = [];
+
+                //全promise模式
+                var objPromise = st.attachTrigger({
+                    test: function(name) {
+                        //在原始方法中使用jquery的deferred
+                        var e = $.Deferred();
+                        setTimeout(function() {
+                            result.push(name);
+                            e.resolve();
+                        }, 100);
+                        return e.promise();
+                    }
+                });
+
+                //前置promise
+                objPromise.onBefore('test', 'testBefore', function(e, name) {
+                    setTimeout(function() {
+                        result.push(name + '-before');
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                });
+
+                //后置promise
+                objPromise.on('test', 'testAfter', function(e, name) {
+                    setTimeout(function() {
+                        result.push(name + '-after');
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                });
+
+                $.when(objPromise.test('call')).done(function() {
+                    expect(result.join(',')).toBe('call-before,call,call-after');
+                });
+
     */
     function attachTrigger(target, mode, fnInterface) {
         if (!target && typeof target !== 'object')
@@ -1269,6 +1510,8 @@ stDefine('aop', function(st) {
                         @method preventDefault
                         @chainable
                         @example
+                            var result = [];
+
                             var obj = st.attachTrigger({
                                 test: function(name) {
                                     result.push(name);
@@ -1279,17 +1522,18 @@ stDefine('aop', function(st) {
                                 result.push(name + '-before1');
                                 //阻止前置后续的事件&阻止默认方法
                                 e.stopPropagation().preventDefault();
-                            })
+                            });
 
                             obj.onBefore('test', 'testAfter', function(e, name) {
                                 result.push(name + '-before2');
-                            })
+                            });
 
                             obj.on('test', 'testBefore2', function(e, name) {
                                 result.push(name + '-after');
-                            })
+                            });
 
                             obj.test('call');
+
                             //最终输出前置call-before1和后置
                             expect(result.join(',')).toBe('call-before1,call-after');
                     */
@@ -1303,6 +1547,8 @@ stDefine('aop', function(st) {
                         @method stop
                         @chainable
                         @example
+                            var result = [];
+
                             var obj = st.attachTrigger({
                                 test: function(name) {
                                     result.push(name);
@@ -1313,15 +1559,15 @@ stDefine('aop', function(st) {
                                 result.push(name + '-before1');
                                 //停止执行
                                 e.stop();
-                            })
+                            });
 
                             obj.onBefore('test', 'testBefore2', function(e, name) {
                                 result.push(name + '-before2');
-                            })
+                            });
 
                             obj.on('test', 'testAfter', function(e, name) {
                                 result.push(name + '-after');
-                            })
+                            });
 
                             obj.test('call');
 
@@ -1425,7 +1671,7 @@ stDefine('aop', function(st) {
                         set: bindFn
                     });
                 } else //方法绑定
-                    _target[_name] = bindFn;
+                    st.setObj(_target,_name,bindFn);
             }
 
             if (roundMode) {
@@ -1453,14 +1699,33 @@ stDefine('aop', function(st) {
                 注册手动的触发的Handler
                 @method onHandler
                 @for attachTrigger
-                @param name [string] 目标方法或者属性名称
+                @param name [string] 手动触发器名称
                 @param trName [string] 注册事件方法的名称
                 @param fn [function] 注册事件方法
                 @param [priority] [number] 权重设置，同PrmiseEvent 
                 @param [mode] [string] 加入的事件模式，同PrmiseEvent
                 @chainable
                 @example
-                    
+                    var obj = st.attachTrigger({
+                        test: function(text) {
+                            //手动执行handler
+                            return this.fireHandler('handler', [text, "run"]);
+                        }
+                    });
+
+                    //注册handler1
+                    obj.onHandler('handler', 'handler1', function(e, text, state) {
+                        //返回结果
+                        return text + '-' + state + '-' + 'handler1';
+                    })
+
+                    //注册handler2
+                    obj.onHandler('handler', 'handler2', function(e, text, state) {
+                        //接受handler1结果
+                        return e.result + '-' + 'handler2';
+                    })
+
+                    expect(obj.test('test')).toBe('test-run-handler1-handler2');
             */
             onHandler: function(name, trName, fn, priority, mode) {
                 find(name, null, true).add(trName, fn, priority, mode);
@@ -1470,11 +1735,9 @@ stDefine('aop', function(st) {
                 执行手动触发的Handler
                 @method fireHandler
                 @for attachTrigger
-                @param name [string] 目标方法或者属性名称
+                @param name [string] 手动触发器名称
                 @param args [array] 执行参数数组
                 @return [object] 执行结果
-                @example
-                    
             */
             fireHandler: function(name, args) {
                 return fire(name, args);
@@ -1500,18 +1763,18 @@ stDefine('aop', function(st) {
                             test : function(name){
                                 result.push(name);
                             }
-                        }，
+                        },
                         //属性
                         prop : 1
                     });
 
                     //注册前置
                     obj.onBefore("test", "addBefore", function(e, name) {
-                        result.push('before-' + name)
+                        result.push('before-' + name);
                     })
                     //注册后置
                     .on("test", "addAfter", function(e, name) {
-                        result.push('after-' + name)
+                        result.push('after-' + name);
                     });
 
                     //执行test方法
@@ -1519,13 +1782,16 @@ stDefine('aop', function(st) {
                     //前后置正确触发
                     expect(result.join(',')).toBe("before-bind,bind,after-bind");
                     
+                    result = [];
+
 
                     //支持子对象方法注册
                     obj.onBefore("child.test", "addBefore", function(e, name) {
-                        result.push('before-' + name)
+                        result.push('before-' + name);
                     }).on("child.test", "addAfter", function(e, name) {
-                        result.push('after-' + name)
+                        result.push('after-' + name);
                     });
+
 
                     //属性监听只有before，after两种方法注入类型，不支持round环绕模式。
                     //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
@@ -1535,36 +1801,44 @@ stDefine('aop', function(st) {
                     //注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
                      obj.onBefore('prop', 'testBefore', function(e, value,oldValue) {
                         result.push(value + '-before-' + oldValue);
-                    })
+                    });
                     
                     obj.on('prop', 'testAfter', function(e, value,oldValue) {
                         result.push(value + '-after-' + oldValue);
-                    })
+                    });
                     
                     expect(obj.prop).toBe(1);
 
+                    //属性赋值
                     obj.prop = 2;
+
                     //输出前后置监听
                     expect(result.join(',')).toBe('2-before-1,2-after-1');
                     expect(obj.prop).toBe(2);
                     
+
                     //前置中干预赋值
                     obj.onBefore('prop', 'testBefore', function(e, value) {
-                        result.push(value + '-before');
                         //停止方法，阻止赋值行为
                         e.stop();
-                    })
+                    });
 
+                    obj.prop = 4;
+                    //结果未变化
+                    expect(obj.prop).toBe(2);
+
+
+                    result = [];
 
                     //对象注入例子
-                    var obj = st.attachTrigger({
+                    var objInject = st.attachTrigger({
                         test: function(name) {
                             result.push(name);
                         }
                     });
 
                     //对象注入
-                    obj.on({
+                    objInject.on({
                         //简单的注入后置方法
                         test : function(e,name){
                             result.push('after');
@@ -1582,7 +1856,7 @@ stDefine('aop', function(st) {
                         }
                     },"onObject");
 
-                    obj.test('call');
+                    objInject.test('call');
                     expect(result.join(',')).toBe('before,call,after');
             */
             on: function(name, trName, fn, priority, mode) {
@@ -1628,6 +1902,8 @@ stDefine('aop', function(st) {
                 @param fn [function] 注册事件方法
                 @chainable
                 @example
+                    var result = [];
+
                      var obj3 = st.attachTrigger({
                         test: function(name) {
                             result.push(name);
@@ -1672,8 +1948,8 @@ stDefine('aop', function(st) {
                     testError.onError("test","triggerError",function(err,name){
                           expect(err).toBe('reject');
                           expect(name).toBe('call');
-                          testCall();
-                    })
+                    });
+
                     testError.test('call');
             */
             onError: function(name, trName, fn, mode) {
@@ -1690,13 +1966,30 @@ stDefine('aop', function(st) {
                         3. 数组为多个
                 @chainable
                 @example
-                    //注册后置testAfter
-                    obj.on('test', 'testAfter', function(e, name) {
-                        result.push(name + '-after');
-                    })
+                    var result = [];
+
+                    var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
+                    //注册后置testAfter1
+                    obj.on('test', 'testAfter1', function(e, name) {
+                        result.push('after1');
+                    });
+
+                    //注册后置testAfter2
+                    obj.on('test', 'testAfter2', function(e, name) {
+                        result.push('after2');
+                    });
 
                     //注销单个后置
-                    obj.off('test', 'testAfter');
+                    obj.off('test', 'testAfter1');
+
+                    obj.test('test');
+
+                    expect(result.join('-')).toBe('test-after2');
             */
             off: function(name, trName) {
                 remove(name, trTypes[1], trName);
@@ -1713,18 +2006,30 @@ stDefine('aop', function(st) {
                         3. 数组为多个
                 @chainable
                 @example
+                    var result = [];
+
+                    var obj = st.attachTrigger({
+                        test: function(name) {
+                            result.push(name);
+                        }
+                    });
+
                     //注册前置testBefore
                     obj.onBefore('test', 'testBefore', function(e, name) {
-                        result.push(name + '-before1');
-                    })
+                        result.push('before1');
+                    });
 
                     //注册前置testBefore2
                     obj.onBefore('test', 'testBefore2', function(e, name) {
-                        result.push(name + '-before2');
-                    })
+                        result.push('before2');
+                    });
 
                     //注销多个前置
                     obj.offBefore('test', ['testBefore', 'testBefore2']);
+
+                    obj.test('test');
+
+                    expect(result.join('-')).toBe('test');
             */
             offBefore: function(name, trName) {
                 remove(name, trTypes[0], trName);
@@ -1742,11 +2047,22 @@ stDefine('aop', function(st) {
                             result.push(name);
                         }
                     });
+
+                    //注册后置testAfter
+                    obj.on('test', 'testAfter', function(e, name) {
+                        result.push('after');
+                    });
+
+                    //扩展替换test
                     obj.extend({
                         test : function(name){
-                            result.push(name + '-extend')
+                            result.push(name + ':extend')
                         }
-                    })
+                    });
+    
+                    obj.test('test');
+
+                    expect(result.join('-')).toBe('test:extend-after2');
             */
             extend: function(prop) {
                 var fn;
@@ -1790,54 +2106,58 @@ stDefine('aop', function(st) {
 
         @return {flowController} 返回流程控制器
         @example
+            var result = [];
+
             //以widget简单的的生命周期为例
             var flow = st.flowController({
                 flow: {
                     init: function(e, name, op) {
-                        log(name, 'init');
+                        result.push(name,'init');
                         //input的进入buildInput流程
                         if (name === 'input')
                             //指定进入buildInput，同时指定的参数
                             e.next("buildInput", [op.type]);
                         //进入cancel流程
                         else if (name === 'cancel')
-                            e.next('cancel')
+                            e.next('cancel');
                     },
                     buildInput: function(e, type) {
-                        log('buildInput');
+                        result.push('buildInput');
                         //返回传递结果
                         return type;
                     },
                     cancel: function(e) {
-                        log('cancel');
+                        result.push('cancel');
                         e.end();
                     },
                     render: function(e, name, op) {
                         //判断是否存在传递结果
-                        e.result && log(e.result);
-                        log('render');
+                        e.result && result.push(e.result);
+                        result.push('render');
                     },
                     complete: function(e, name, op) {
-                        log('complete');
+                        result.push('complete');
                     }
                 },
                 //设定执行流程
                 order: ["init", "render", "complete"]
             });
 
-
             
+            flow.boot('div');
+            expect(result + '').toBe('div,init,render,complete');
+
             //简单流程，流程中不带事件参数EventArg
             var simpleFlow = st.flowController({
                 flow: {
                     init: function(name, op) {
-                        log(name, 'init');
+                        result.push(name, 'simpleInit');
                     },
                     render: function(name, op) {
-                        log('render');
+                        result.push('simpleRender');
                     },
                     complete: function(name, op) {
-                        log('complete');
+                        result.push('simpleComplete');
                     }
                 },
                 order: ["init", "render", "complete"],
@@ -1845,22 +2165,28 @@ stDefine('aop', function(st) {
                 mode: "simple"
             });
 
+            result = [];
+
+            simpleFlow.boot('div');
+            expect(result + '').toBe('div,simpleInit,simpleRender,simpleComplete');
+
+
             //异步的流程,开启trigger
             var triggerFlow = st.flowController({
                 flow: {
                     init: function(e, name, op) {
                         //模拟异步
                         setTimeout(function() {
-                            log(name, 'init');
+                            result.push(name, 'triggerInit');
                             e.resolve();
-                        }, 100)
+                        }, 100);
                         return e.promise();
                     },
                     render: function(e, name, op) {
-                        log('render');
+                        result.push('triggerRender');
                     },
                     complete: function(e, name, op) {
-                        log('complete');
+                        result.push('triggerComplete');
                     }
                 },
                 order: ["init", "render", "complete"],
@@ -1869,22 +2195,24 @@ stDefine('aop', function(st) {
 
             //在init之前注入
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
-                log('initBefore');
+                result.push('triggerInitBefore');
             }, "once");
 
             //在init之后注入异步
             triggerFlow.on("init", "initAfter", function(e, name, op) {
                 setTimeout(function() {
-                    log('initAfter');
+                    result.push('triggerInitAfter');
                     e.resolve();
-                }, 100)
+                }, 100);
                 return e.promise();
             }, "once");
 
+            result = [];
+
             //使用when来捕获异步的流程执行结果
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,div,init,initAfter,render,complete');
-            })
+                expect(result + '').toBe('triggerInitBefore,div,triggerInit,triggerInitAfter,triggerRender,triggerComplete');
+            });
     */
     function flowController(op) {
         var flow, order, trigger, mode;
@@ -1905,12 +2233,33 @@ stDefine('aop', function(st) {
          * @param  {string} start 流程开始的节点
          * @param  {array} args  执行参数
          * @return {object|promise} 返回执行结果或者promise（异步）
-         * @example
-         *      //从render阶段开始构建div
+           @example
+          
+                var result = [];
+
+                var flow = st.flowController({
+                    flow: {
+                        init: function(e, name, op) {
+                            result.push(name,'init');
+                        },
+                        render: function(e, name, op) {
+                            //判断是否存在传递结果
+                            e.result && result.push(e.result);
+                            result.push('render');
+                        },
+                        complete: function(e, name, op) {
+                            result.push('complete');
+                        }
+                    },
+                    //设定执行流程
+                    order: ["init", "render", "complete"]
+                });
+
+                //从render阶段开始构建div
                 flow.bootWithStart('render', ["div"]);
 
                 //略过了render阶段
-                expect(arr + '').toBe('render,complete');
+                expect(result + '').toBe('render,complete');
          */
         function bootWithStart(start, args) {
             var _next = start,
@@ -1929,22 +2278,45 @@ stDefine('aop', function(st) {
                 */
                 d = buildPromiseArg({
                     /**
-                     * 结束流程。无论是注册的事件方法还是流程方法全部结束
-                     * @method end
-                     * @chainable
-                     * @example
-                     *      triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
+                       结束流程。无论是注册的事件方法还是流程方法全部结束
+                       @method end
+                       @chainable
+                       @example
+                            var result = [];
+                            
+                            var triggerFlow = st.flowController({
+                                flow: {
+                                    init: function(e, name, op) {
+                                        //模拟异步
+                                        setTimeout(function() {
+                                            result.push(name, 'triggerInit');
+                                            e.resolve();
+                                        }, 100);
+                                        return e.promise();
+                                    },
+                                    render: function(e, name, op) {
+                                        result.push('triggerRender');
+                                    },
+                                    complete: function(e, name, op) {
+                                        result.push('triggerComplete');
+                                    }
+                                },
+                                order: ["init", "render", "complete"],
+                                trigger: true
+                            });
+
+                            triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                                 setTimeout(function() {
-                                    log('initBefore');
                                     //停止流程
                                     e.end().resolve();
-                                }, 100)
+                                    result.push('initBefore');
+                                }, 100);
                                 return e.promise();
                             }, "once");
 
                             $.when(triggerFlow.boot("div")).done(function() {
                                 //执行了注入事件initBefore后停止流程
-                                expect(arr + '').toBe('initBefore');
+                                expect(result + '').toBe('initBefore');
                             })
                      */
                     end: function() {
@@ -1959,30 +2331,61 @@ stDefine('aop', function(st) {
                      * 拒绝契约同时设置流程状态为失败，结束流程
                      * @method reject
                      * @param {object} comment 拒绝的说明或参数
-                     * @example
-                     *      flowReject.onBefore("init", "initBefore", function(e, name, op) {
-                                setTimeout(function() {
-                                    //拒绝契约，结束流程
-                                    e.reject("initBefore-reject");
-                                }, 100)
-                                return e.promise();
-                            });
-                            
-                            //使用fail来捕获
-                            $.when(flowReject.boot('boot')).fail(function(err) {
-                                expect(err).toBe('initBefore-reject');
-                            });
                      */
                     reject: function(comment) {
                         fail(comment);
                     },
                     /**
-                     * 手动指定下一个流程，（指定的流程可以不在order配置中）
-                     * @method next
-                     * @param  {string}   nextNode 下一个流程名称
-                     * @param  {number}   pass     下个流程执行完毕略过的流程数（相对于order）
-                     * @param  {array}   args     下个流程的参数，只在该流程节点有效，在之后就会恢复成原始参数，如想改变后续参数，请使用changeArgs方法
-                     * @chainable
+                       手动指定下一个流程，（指定的流程可以不在order配置中）
+                       @method next
+                       @param  {string}   nextNode 下一个流程名称
+                       @param  {number}   pass     下个流程执行完毕略过的流程数（相对于order）
+                       @param  {array}   args     下个流程的参数，只在该流程节点有效，在之后就会恢复成原始参数，如想改变后续参数，请使用changeArgs方法
+                       @chainable
+                       @example
+                          var result = [];
+
+                            //以widget简单的的生命周期为例
+                            var flow = st.flowController({
+                                flow: {
+                                    init: function(e, name, op) {
+                                        result.push(name,'init');
+                                        //input的进入buildInput流程
+                                        if (name === 'input')
+                                            //指定进入buildInput，同时指定的参数
+                                            e.next("buildInput", [op.type]);
+                                        //进入cancel流程
+                                        else if (name === 'cancel')
+                                            e.next('cancel');
+                                    },
+                                    buildInput: function(e, type) {
+                                        result.push('buildInput');
+                                        //返回传递结果
+                                        return type;
+                                    },
+                                    cancel: function(e) {
+                                        result.push('cancel');
+                                        e.end();
+                                    },
+                                    render: function(e, name, op) {
+                                        //判断是否存在传递结果
+                                        e.result && result.push(e.result);
+                                        result.push('render');
+                                    },
+                                    complete: function(e, name, op) {
+                                        result.push('complete');
+                                    }
+                                },
+                                //设定执行流程
+                                order: ["init", "render", "complete"]
+                            });
+
+                            
+                            flow.boot('input',{
+                                type: 'text'
+                            });
+
+                            expect(result + '').toBe('input,init,buildInput,text,render,complete');
                      */
                     next: function(nextNode, pass, args) {
                         _next = nextNode;
@@ -1995,9 +2398,35 @@ stDefine('aop', function(st) {
                         return this;
                     },
                     /**
-                     * 改变后续流程的执行参数
-                     * @method changeArgs
-                     * @param  {array}   args   执行参数
+                       改变后续流程的执行参数
+                       @method changeArgs
+                       @param  {array}   args   执行参数
+                       @example
+                           var result = [];
+
+                            var flow = st.flowController({
+                                flow: {
+                                    init: function(e, name) {
+                                        result.push(name,'init');
+                                        //改变下个流程的方法参数
+                                        e.changeArgs(['text']);
+                                    },
+                                    render: function(e,type) {
+                                        result.push('render',type);
+                                        //恢复原始参数
+                                        e.recoverArgs();
+                                    },
+                                    complete: function(e, name) {
+                                        result.push('complete',name);
+                                    }
+                                },
+                                //设定执行流程
+                                order: ["init", "render", "complete"]
+                            });
+
+                            flow.boot("input");
+
+                            expect(result + '').toBe('input,init,render,text,complete,input');
                      */
                     changeArgs: getArgs,
                     /**
@@ -2010,7 +2439,7 @@ stDefine('aop', function(st) {
                         return this;
                     },
                     __mergePArg: function(arg) {
-                        st.mergeObj(arg, d);
+                        st.mix(arg, d);
                         arg.end = st.mergeFn(arg.stop, arg.end);
                     }
                 });
@@ -2084,20 +2513,6 @@ stDefine('aop', function(st) {
          * @for flowController
          * @param {argument} 流程参数
          * @return {object|promise} 返回执行结果或者promise（异步）
-         * @example
-         *      //执行构建div的流程
-                flow.boot("div");
-                
-                //正常输出init，render，complete三个流程
-                expect(arr + '').toBe('div,init,render,complete');
-
-                //执行构建input的流程，设置input的type
-                flow.boot("input", {
-                    type: 'text'
-                });
-
-                //除正常流程外，在init后进入buildInput流程
-                expect(arr + '').toBe('input,init,buildInput,text,render,complete');
          */
         flow.boot = function() {
             return bootWithStart(null, sliceArgs(arguments));
@@ -2112,8 +2527,7 @@ stDefine('aop', function(st) {
         attachTrigger: attachTrigger,
         flowController: flowController
     };
-});;
-/**
+});;/**
     面向对象思想的辅助实现模块;
     
     Feartures : 
@@ -2126,13 +2540,12 @@ stDefine('aop', function(st) {
     @module OOP
 */
 stDefine('oop', function(st) {
-    "use strict"
-
     //初始化扩展函数
     var _onKlassInit = st.promiseEvent(),
         /**
          * klass的基类对象
          * @class klassBase
+         * 
          */
         _klassBase = {
             /**
@@ -2141,6 +2554,23 @@ stDefine('oop', function(st) {
                 @param name {string} 需要执行的原型链方法名
                 @param [args] {array} 执行参数
                 @return [object] 返回执行结果
+                @example
+                    var Animate = st.klass("Animate", {
+                        klassInit: function(name) {
+                            this.name = name;
+                        },
+                        say: function(text) {
+                            return this.name + ':' + text;
+                        }
+                    });
+
+                    var chicken = new Animate('chicken');
+                    chicken.say = function(text){
+                        //调用原型链方法
+                        return '[Bird]' + this.callProto('say',[text]);
+                    };
+
+                    expect(chicken.say('hello')).toBe('[Bird]chicken:hello');
             */
             callProto : function(name,args){
                 var fn = this._$fn[name];
@@ -2152,6 +2582,31 @@ stDefine('oop', function(st) {
                 @method getBase
                 @param [baseName] {string} 基类名称,不设置则返回父类
                 @return [object] 返回基类 
+                @example
+                    var Animate = st.klass("Animate", {
+                            klassInit: function(name) {
+                                this.name = name;
+                            },
+                            say: function(text) {
+                                return this.name + ':' + text;
+                            }
+                        });
+                    
+                    //继承user
+                    var Bird = st.klass("Bird", {
+                        //重写say方法
+                        say: function(text) {
+                            //根据名称向上找到父类原型
+                            var parent =  this.getBase('Animate');
+                            
+                            //调用原型链方法
+                            return '[Bird]' + parent.say.call(this,text);
+                        }
+                    }, Animate);
+                    
+                    var chicken = new Bird('chicken');
+                    expect(chicken.say('hello')).toBe('[Bird]chicken:hello');
+
             */
             getBase: function(baseName) {
                 var self = this,
@@ -2172,12 +2627,34 @@ stDefine('oop', function(st) {
                 return parent;
             },
             /**
-             * 调用基类的方法
-             * @method  callBase
-             * @param  {string} fnName   方法名称
-             * @param  {string} [baseName] 基类名称
-             * @param  {array} [args]    方法参数数组
-             * @return {object}  执行结果       
+               调用基类的方法
+               @method  callBase
+               @param  {string} fnName   方法名称
+               @param  {string} [baseName] 基类名称
+               @param  {array} [args]    方法参数数组
+               @return {object}  执行结果   
+               @example
+                    var Animate = st.klass("Animate", {
+                            klassInit: function(name) {
+                                this.name = name;
+                            },
+                            say: function(text) {
+                                return this.name + ':' + text;
+                            }
+                        });
+                    
+                    //继承user
+                    var Bird = st.klass("Bird", {
+                        //重写say方法
+                        say: function(text) {
+                             //调用基类方法
+                             return '[Bird]' + this.callBase('say',[text]);
+                        }
+                    }, Animate);
+                    
+                    var chicken = new Bird('chicken');
+                    expect(chicken.say('hello')).toBe('[Bird]chicken:hello');
+
              */
             callBase: function(fnName, baseName, args) {
                 var self = this,
@@ -2205,10 +2682,30 @@ stDefine('oop', function(st) {
                 return result;
             },
             /**
-             * 类扩展方法
-             * @method extend
-             * @param  {object} prop 扩展的属性和方法对象
-             * @chainable
+               类扩展方法
+               @method extend
+               @param  {object} prop 扩展的属性和方法对象
+               @chainable
+               @example
+                    var Animate = st.klass("Animate", {
+                        klassInit: function(name) {
+                            this.name = name;
+                        },
+                        say: function(text) {
+                            return this.name + ':' + text;
+                        }
+                    });
+
+                    var chicken = new Animate('chicken');
+
+                    //扩展等同于 chicken.say = xxx
+                    chicken.extend({
+                        say : function(text){
+                            return 'hello';
+                        }
+                    });
+
+                    expect(chicken.say('hello')).toBe('hello');
              */
             extend: function(prop) {
                 $.extend(this, prop);
@@ -2235,7 +2732,7 @@ stDefine('oop', function(st) {
         @return {klass} 返回类
         @example
             //创建一个class
-            var User = st.klass('User',{
+            var User = st.klass('user',{
                 klassInit:function(name){
                     this.name = name;
                 },
@@ -2272,7 +2769,7 @@ stDefine('oop', function(st) {
                     //调用父类
                     return this.callBase('say', [text]) + "-lv3";
                 }
-            }, User);
+            }, user2);
 
             var user4 = st.klass('user4', {
                 say: function(text) {
@@ -2373,7 +2870,7 @@ stDefine('oop', function(st) {
      * @param  {boolean} [initDefault] 是否将base设置成为默认的对象；当使用factory.get找不到对象时返回默认对象
      * @return {factory}  返回创建的工厂对象
      * @example
-     *     //widget基类
+           //widget基类
             var baseWidget = {
                 //widget类型
                 type: '',
@@ -2393,6 +2890,9 @@ stDefine('oop', function(st) {
 
             //找到添加的input
             var input = widgetFactory.find('input');
+            
+            //_$fType为注册的类型名
+            expect(input._$fType).toBe('input');
 
             //输出
             expect(input.render('txt')).toBe("input:txt");
@@ -2409,7 +2909,7 @@ stDefine('oop', function(st) {
 
 
 
-            // class mode
+            // 类模式，注册的对象都是类的方式，使用需要初始化
             var f1 = st.factory({
                 name: 'classMode',
                 //设置class类型
@@ -2427,6 +2927,7 @@ stDefine('oop', function(st) {
             });
 
             expect(c1.fn).toBeDefined();
+
             //需要初始化
             var c = new c1('class1');
             expect(c.type).toBe("c1");
@@ -2505,20 +3006,39 @@ stDefine('oop', function(st) {
         _initDefault && (_defaultItem = needInit ? new _base : _base);
 
         /**
-         * 使用工厂创建产品方法，但不注册到factory中
-         * @method build
-         * @param  {string} name   产品名称
-         * @param  {object} item   产品特性
-         * @param  {string} [parent] 父类名称，注册到factory中产品名称
-         * @return {object|klass}  返回创建的产品
-         * @example
-         * 
+           使用工厂创建产品方法，但不注册到factory中
+           @method build
+           @param  {string} name   产品名称
+           @param  {object} item   产品特性
+           @param  {string} [parent] 父类名称，注册到factory中产品名称
+           @return {object|klass}  返回创建的产品
+           @example
+                //一个widget工厂
+                var widgetFactory = st.factory('wdigetfactory', {
+                    //widget类型
+                    type: '',
+                    //widget的渲染方法
+                    render: function(id) {
+                        return this.type + ':' + id;
+                    }
+                },'class');
+
+                var Tab = widgetFactory.build('Tab',{type : 'Tab'});
+
+                expect(widgetFactory.find('Tab')).toBeUndefined();
+                
+                var tab1 = new Tab();
+
+                expect(tab1.render('tab1')).toBe('Tab:tab1');
+
          */
         function build(name, item, parent) {
             parent = parent ? find(parent) || _base : _base;
 
+            item._$fType = name;
+
             if (mergeMode)
-                return st.mergeObj(true, item, parent);
+                return st.mix(true, item, parent);
             else {
                 item = klass(name, item, parent);
                 return klassMode ? item : new item;
@@ -2526,27 +3046,49 @@ stDefine('oop', function(st) {
         }
 
         /**
-         * 添加产品方法，注册到factory中
-         * @method add
-         * @param  {string} name   产品名称
-         * @param  {object} item   产品特性
-         * @param  {string} [parent] 父类名称，注册到factory中产品名称
-         * @return {object|klass}  返回创建的产品
-         * @example
-         * 
+           添加产品方法，注册到factory中
+           @method add
+           @param  {string} name   产品名称
+           @param  {object} item   产品特性
+           @param  {string} [parent] 父类名称，注册到factory中产品名称
+           @return {object|klass}  返回创建的产品
+           @example
+                //一个widget工厂
+                var widgetFactory = st.factory({
+                    //工厂名
+                    name : 'wdigetfactory',
+                    //工厂类型
+                    type: 'class',
+                    //基类对象  
+                    base : {
+                        //widget类型
+                        type: '',
+                        //widget的渲染方法
+                        render: function(id) {
+                            return this.type + ':' + id;
+                        }
+                    } 
+                });
+
+                var Tab = widgetFactory.add('Tab',{type : 'Tab'});
+
+                expect(widgetFactory.find('Tab')).toBeDefined();
+                
+                var tab1 = new Tab();
+
+                expect(tab1.render('tab1')).toBe('Tab:tab1');
+
          */
         function add(name, item, parent) {
             return (_store[name] = build(name, item, parent));
         }
 
         /**
-         * 查找注册的产品
-         * @method find
-         * @param  {string} name   产品名称
-         * @param  {object} defaultMode   是否在找不到产品的时候返回默认产品
-         * @return {object} 返回查找的产品
-         * @example
-         * 
+           查找注册的产品
+           @method find
+           @param  {string} name   产品名称
+           @param  {object} defaultMode   是否在找不到产品的时候返回默认产品
+           @return {object} 返回查找的产品
          */
         function find(name, defaultMode) {
             var obj;
@@ -2554,19 +3096,47 @@ stDefine('oop', function(st) {
                 return _defaultItem;
 
             if (name && (obj = _store[name])) {
-                obj._itemType = type;
                 return obj;
             }
-            return defaultMode ? _defaultItem : null;
+            return defaultMode ? _defaultItem : undefined;
         }
 
         /**
-         * 将注册的产品设置成默认产品
-         * @method setDefault
-         * @param  {string} name   产品名称
-         * @chainable
-         * @example
-         * 
+           将注册的产品设置成默认产品
+           @method setDefault
+           @param  {string} name   产品名称
+           @chainable
+           @example
+               
+                //一个widget工厂
+                var widgetFactory = st.factory({
+                    //工厂名
+                    name : 'wdigetfactory',
+                    //工厂类型
+                    type: 'class',
+                    //基类对象  
+                    base : {
+                        //widget类型
+                        type: '',
+                        //widget的渲染方法
+                        render: function(id) {
+                            return this.type + ':' + id;
+                        }
+                    } 
+                });
+
+                widgetFactory.add('Panel',{type : 'Panel'});
+
+                //将Panel设置成默认项
+                widgetFactory.setDefault('Panel')
+                
+                //Tab未注册，但参数中设置了返回默认，则会返回Panel
+                var Tab = widgetFactory.find('Tab',true);
+
+                var tab1 = new Tab();
+                
+                expect(tab1.render('tab1')).toBe('Panel:tab1');
+
          */
         function setDefault(name) {
             _defaultItem = get(name, true);
@@ -2574,12 +3144,10 @@ stDefine('oop', function(st) {
         }
 
          /**
-         * 在工厂中移除注册的产品
-         * @method remove
-         * @param  {string} name   产品名称
-         * @chainable
-         * @example
-         * 
+           在工厂中移除注册的产品
+           @method remove
+           @param  {string} name   产品名称
+           @chainable
          */
         function remove(name) {
             delete _store[name];
@@ -2592,16 +3160,52 @@ stDefine('oop', function(st) {
             remove: remove,
             setDefault: setDefault,
             /**
-             * 执行工厂中产品的方法
-             * @method fire
-             * @param  {string} name 方法名称
-             * @param  {array} [args] 执行参数
+               执行工厂中产品的方法,不会返回结果;当工厂类型为class时，则执行的则是原型链上的方法
+               @method fire
+               @param  {string} name 方法名称
+               @param  {array} [args] 执行参数
+               @param  {function} [handler] 处理方法
+               @example
+                    
+                    //一个widget工厂
+                    var widgetFactory = st.factory({
+                        //工厂名
+                        name : 'wdigetfactory',
+                        //工厂类型
+                        type: 'class',
+                        //基类对象  
+                        base : {
+                            //widget类型
+                            type: '',
+                            //widget的渲染方法
+                            render: function(id) {
+                                return this.type + ':' + id;
+                            }
+                        } 
+                    });
+
+                    widgetFactory.add('Panel',{type : 'Panel'});
+                    widgetFactory.add('Tab',{type : 'Tab'});
+                    
+                    var ret = '';
+                    //执行每个widget的render方法；
+                    widgetFactory.fire('render',['id'],function(item,result){
+                        //this为widgetFactory；item为产品；result为render执行结果
+                        ret += result + '-';
+                    })
+
+                    expect(ret).toBe('Panel:id-Tab:id-');
              */
-            fire : function(name,args){
-                var fn;
+            fire : function(name,args,handler){
+                var fn,result,self = this;
                 $.each(_store,function(n,item){
-                    if(item && (fn = item[name])){
-                        fn.apply(null,args);
+                    if(item){
+                        item.fn && (item = item.fn);
+                        if(fn = item[name])
+                        {
+                            result = fn.apply(item,args);
+                            handler && handler.call(self,item,result);
+                        }
                     }
                 })
             }
@@ -2617,1739 +3221,4 @@ stDefine('oop', function(st) {
         onKlassInit : _onKlassInit,
         factory: factory
     };
-});
-/**
-    过滤器生成器
-    
-    Feartures : 
-        1. 编译字符串过滤，“name = @name and (age > @age and type = @type)”，生产过滤条件参数或者过滤方法
-        2. 参数过滤，以参数的方式全部构建"="的方式构建查询方法
-        3. 方法过滤
-        4. 忽略null的条件
-        5. 自定义扩展过滤操作符
-        6. 条件&参数合并
-
-    Update Note：
-        + 2014.7 ：Created
-
-    @module FilterBuilder
-*/
-stDefine('filterBuilder', function(st) {
-	//空值忽略条件标示符
-	var NullIgnoreSign = ["{", "}"],
-		//关系字符
-		Relations = ["and", "or"],
-		isArray = $.isArray;
-
-	/**
-	 * 过滤生成器对象
-	 * @class FilterBuilder
-	 * @constructor
-	 * @param {string|function|object} filter 三种类型： 
-	 * 1. {string}, 查询字符串
-	 * 2. {object}, 参数对象
-	 * 3. {function}, 过滤方法
-	 * @return {FilterBuilder} 返回过滤生成器对象
-	 * @example
-	 * 		//查询字符串,{age > @age}用{}包含的条件表示当@age为null的时候，忽略此条件
-	 * 		var str = "{age > @age} and (role = @sa or role = @coder) and project = @project";
-			
-			//创建过滤器
-			var filter = st.filterBuilder(str);
-			
-			//生成过滤方法
-			var filterFn = filter.buildFn({
-				age : 20,
-				sa : 'sa',
-				coder : 'coder',
-				project : "smartjs"
-			});
-			
-			//定义数据
-			var data = [
-					{name: "roy",age: 30,role: "coder",project: "smartjs"},
-			 		{name: "coder1", age: 20, role: "coder", project: "smartjs"}
-			];
-			
-			//过滤数据
-			var result = data.filter(filterFn);
-	 */
-	function FilterBuilder(filter) {
-		if (filter) {
-			switch (typeof filter) {
-				//查询字符串
-				case "string":
-					this._conditions = compileStringCondition(filter);
-					break;
-				//过滤方法
-				case "function":
-					this._filter = filter;
-					break;
-				//参数过滤
-				case "object":
-					this._params = filter;
-					break;
-			}
-		}
-	}
-
-	FilterBuilder.prototype = {
-		/**
-		 * 生成条件参数,当使用查询字符串进行构建过滤器时，根据传入的参数值生产最终的带关系和操作过滤参数
-		 * @method buildCondition
-		 * @param  {object} params 过滤的参数值
-		 * @return {object}   条件参数
-		 * @example
-		 * 		var str = "age > @age and (role = @sa or role = @coder) and project = @project";
-				var filter = st.filterBuilder(str);
-		 *
-		 * 		//生成条件
-		 * 		var conditions = filter.buildCondition({
-		 * 			age : 20,
-					sa : 'sa',
-					coder : 'coder',
-					project : "smartjs"
-				})
-
-		 * 		//生成的conditions对象
-		 * 		{"and":[
-		 * 			{"field":"age","operation":">","param":20},
-	 * 				{"or":[
-	 * 					{"field":"role","operation":"=","param":"sa"},
-	 * 					{"field":"role","operation":"=","param":"coder"}
-	 * 				]},
-		 * 			{"field":"project","operation":"=","param":"smartjs"}
-		 * 		]}
-		 */
-		buildCondition: function(params) {
-			if (this._conditions)
-				return buildConditions(this._conditions, params);
-		},
-		/**
-		 * 生成过滤方法
-		 * @method buildFn
-		 * @param  [params] {object}  过滤的参数值
-		 * @param  [mergeFilter]  {string|function|object}需要合并的过滤条件
-		 * @return {function} 过滤方法
-		 * @example
-		 * 		//创建role的过滤器
-		 * 		var filter = st.filterBuilder("role = @role");
-		 *
-		 * 		//传入条件参数，合并age的过滤
-		 * 		filter.buildFn({role:"sa",age:20},"age > @age")
-		 */
-		buildFn: function(params, mergeFilter) {
-			var self = this,
-				conditions, fnFilter, mergeFilterFn;
-
-			//过滤方法模式
-			if (self._filter)
-				fnFilter = self._filter;
-			//条件生成模式
-			else if (self._conditions) {
-				conditions = this.buildCondition(params);
-				if (conditions)
-					fnFilter = buildFn(conditions)
-			} else if(!mergeFilter)
-				//参数过滤非合并参数模式下，根据参数创建过滤方法
-				fnFilter = compileObjectCondition(st.mergeObj(params, self._params));
-
-			//存在合并过滤情况下，生成合并过滤方法
-			if (mergeFilter) {
-				filterType = typeof(mergeFilter);
-				if (filterType === 'string')
-					mergeFilterFn = (new FilterBuilder(mergeFilter)).buildFn(params);
-				else if(filterType === 'function')
-					mergeFilterFn = mergeFilter;
-			}
-			//合并过滤条件
-			return st.mergeFn(fnFilter, mergeFilterFn);
-		}
-	}
-
-	//将对象参数编译成过滤方法
-	function compileObjectCondition(obj) {
-		return function(item) {
-			var check = true;
-			$.each(obj, function(name, value) {
-				if (item[name] !== value) {
-					check = false;
-					return check;
-				}
-			})
-			return check;
-		}
-	}
-
-	//将过滤字符串编译成过滤条件对象
-	function compileStringCondition(filter) {
-		var groups = [],
-			deep = 0,
-			//条件关系链
-			chain = [groups];
-
-		filter.split('(').forEach(function(part, i) {
-			if (i === 0) {
-				compileGroup(chain, deep, part)
-			} else {
-				part.split(')').forEach(function(exp, i) {
-					i > 0 ? deep-- : deep++;
-
-					compileGroup(chain, deep, exp);
-				})
-			}
-		})
-		return groups.length ? groups : null;
-		//console.log(groups);
-	}
-
-	//编译查询条件组
-	function compileGroup(chain, deep, part) {
-		var group, arr, condition, len = chain.length - 1;
-
-		arr = part.split(/\s(or|and)\s/g);
-		//判断开始是否存在关系表达式
-		if (arr[0].length === 0 && Relations.indexOf(arr[1]) > -1) {
-			arr.shift();
-			chain[len].or = arr.shift() === Relations[1];
-		}
-
-		//深度大于关系链时，扩展关系链
-		if (deep > len)
-			group = chain[deep] = [];
-		else {
-			group = chain[deep];
-			//深度小于关系链时，将关系链最后一项清除，添加到当前group中
-			deep < len && group.push(chain.pop());
-		} 
-
-		arr.forEach(function(item, i) {
-			if (item) {
-				//判断为关系参数时，设置条件关系
-				if (Relations.indexOf(item) > -1) {
-					condition.or = item === Relations[1];
-				} else {
-					condition = compileConditionStr(item);
-					group.push(condition);
-				}
-			}
-		})
-	}
-
-	//编译查询条件字符串
-	function compileConditionStr(condition) {
-		var arr, ignoreNull = false,
-			index;
-
-		//判断是否空忽略
-		if (condition.charAt(0) === NullIgnoreSign[0]) {
-			index = condition.lastIndexOf(NullIgnoreSign[1]);
-			if (index > 1) {
-				condition = condition.substring(1, index);
-				ignoreNull = true;
-			} else {
-				condition = condition.substring(1);
-			}
-		}
-
-		arr = condition.split(' ').filter(function(item) {
-			return item.length > 0;
-		});
-
-		return {
-			ignoreNull: ignoreNull,
-			field: arr[0],
-			operation: arr[1],
-			param: arr[2]
-		};
-	}
-
-	//根据过滤条件组生成过滤条件
-	function buildConditions(conditions, params) {
-		var unit, orGroup, lastOr, or, pass, newGroup, len = conditions.length - 1,
-			group = [],
-			chain = [group];
-
-		conditions.forEach(function(condition, i) {
-			//判断是否pass模式
-			if (pass) {
-				pass = false;
-				lastOr = condition.or;
-				return;
-			}
-
-			or = condition.or;
-			//判断是否为过滤条件组
-			if (isArray(condition)) {
-				unit = buildConditions(condition, params);
-			} else {
-				param = condition.param;
-				//判断为过滤参数还是过滤值
-				if (param.charAt(0) === '@')
-					param = st.getObj(params, param.substr(1));
-
-				//判断是否空忽略
-				if (condition.ignoreNull && param == null) {
-					or && (pass = true);
-					unit = null;
-				} else {
-					unit = {
-						field: condition.field,
-						operation: condition.operation,
-						param: param
-					};
-				}
-			}
-			if (unit) {
-				if (i === len) {
-					//最后一个条件和or关系下，将group设置到关系链开始
-					if (or)
-						group = chain[0];
-				} 
-				//在上一个和当前关系不一致时
-				else if (i > 0 && !lastOr !== !or) {
-					//当前关系为or时，提升or级别，将原有and关系组置于or关系组下
-					if (or) {
-						//如果存在关系链，在加深一级，否则创建关系链
-						if (chain.length > 1) {
-							group = chain[0];
-							chain = [group];
-						} else {
-							chain[0] = group = [{
-								and: group
-							}];
-						}
-					} else {
-						//当前为and时，创建新组，添加到前一个or关系组
-						newGroup = [];
-						chain.push(newGroup);
-						group.push({
-							and: newGroup
-						});
-						group = newGroup;
-					}
-				}
-				group.push(unit);
-			}
-			if (or)
-				orGroup = true;
-
-			lastOr = or;
-		})
-		group = chain[0];
-		if (group.length)
-			return orGroup ? {
-				or: group
-			} : {
-				and: group
-			};
-	}
-	//根据条件关系生成过滤方法
-	function buildFn(conditions) {
-		return function(data) {
-			var result = true,
-				isOr;
-			$.each(conditions, function(relation, condition) {
-				if (!checkGroup(data, condition, relation === 'or')) {
-					result = false;
-				}
-			})
-			return result;
-		}
-	}
-
-	//验证关系组条件是否匹配
-	function checkGroup(data, condistions, isOr) {
-		var group, result;
-		condistions.some(function(condition, i) {
-			if (condition.field) {
-				result = compare(data, condition);
-			} else {
-				if (group = condition.or)
-					result = checkGroup(data, group, true);
-				else if (group = condition.and)
-					result = checkGroup(data, group, false);
-			}
-			if(isOr && result)
-				return true;
-			else if (!isOr && !result)
-				return true;
-		})
-		return result;
-	}
-
-	function getIndex(datas, data) {
-		if (data && datas && datas.length && datas.indexOf)
-			return datas.indexOf(String(data)) > -1;
-
-		return false;
-	}
-
-	function checkStartEnd(datas, data, endOf) {
-		if (data && datas && datas.length && datas.substr) {
-			data = String(data);
-			return (endOf ? datas.substr(datas.length - data.length) : datas.substr(0, data.length)) === data;
-		}
-		return false;
-	}
-
-	/**
-	 * 判断操作配置对象
-	 * @class Operations
-	 */
-	var Operations = {
-		/**
-		 * 非判断，在判断操作符之前加入!,则将判断结果取非
-		 * @property {operation} ! 
-		 * @example
-		 * 		//查询name不等于'roy'的数据
-		 * 		var filter = "name != 'roy'"
-		 */
-
-		/**
-		 * 等于判断
-		 * @property {operation} = 
-		 */
-		"=": function(data, param) {
-			return data === param;
-		},
-		/**
-		 * 小于判断
-		 * @property {operation} < 
-		 */
-		"<": function(data, param) {
-			return data < param;
-		},
-		/**
-		 * 小于等于判断
-		 * @property {operation} <=
-		 */
-		"<=": function(data, param) {
-			return data <= param;
-		},
-		/**
-		 * 大于判断
-		 * @property {operation} >
-		 */
-		">": function(data, param) {
-			return data > param;
-		},
-		/**
-		 * 大于等于判断
-		 * @property {operation} >= 
-		 */
-		">=": function(data, param) {
-			return data >= param;
-		},
-		/**
-		 * 参数中包含数据
-		 * @property {operation} in 
-		 */
-		"in": function(data, param) {
-			return getIndex(param, data);
-		},
-		/**
-		 * 数据中包含参数
-		 * @property {operation} like 
-		 */
-		"like": getIndex,
-		/**
-		 * 以参数为开头
-		 * @property {operation} startOf 
-		 */
-		"startOf": checkStartEnd,
-		/**
-		 * 以参数为结尾
-		 * @property {operation} endOf 
-		 * @example
-		 * 		//匹配以'es'结尾的name
-		 * 		var filter = "name endOf 'es'";
-		 */
-		"endOf": function(data, param) {
-			return checkStartEnd(data, param, true);
-		}
-	};
-
-	function compare(data, condition) {
-		var operation = condition.operation,check,not,result;
-
-		//判断是否为非
-		if(operation.charAt(0) === '!'){
-			not = 1;
-			operation = operation.substring(1);
-		}
-
-		result = (check = Operations[operation]) ? check(st.getObj(data, condition.field), condition.param) : false;
-
-		return not ? !result : result;
-	}
-
-	return {
-		filterBuilder: function(filter) {
-			return new FilterBuilder(filter);
-		},
-		/**
-		 * 扩展判断操作符,如：'='比较操作符,name = @name
-		 * @method extendOperation
-		 * @param  {string} operation 操作名称
-		 * @param  {function} checkFn   判断方法
-		 * @example
-		 * 		//添加大于操作符'>'
-		 * 		st.extendOperation('>',function(data, param) {
-		 * 			//data为数据，param为条件参数
-					return data > param;
-				});
-		 */
-		extendOperation : function(operation,checkFn){
-			Operations[operation] = checkFn;
-		}
-	};
-});
-/**
-    数据管理模块
-    
-    Feartures : 
-        1. dataServices ：数据服务接口
-        2. dataManager ：基于策略的数据管理基类
-        3. dataPolicyManager ：数据策略管理器；
-
-    Update Note：
-        + 2014.7 ：Created
-
-    @module DataManager
-*/
-stDefine('dataManager', function(st) {
-
-	var dataManager, policyManager, dataServices,
-		_config = {
-			ignoreMerges: ["params", "filter", "_filterBuilder"],
-			dmOp: {
-				set: {},
-				get: {}
-			}
-		},
-		defFilterBuilder = st.filterBuilder(),
-		promiseEvent = st.promiseEvent,
-		isFunction = $.isFunction;
-
-
-	/**
-	 * 数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
-	 * 数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
-	 * @class dataServices
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 * 		//注册cache的数据服务
-			dataServices.add("cache", {
-				//实现search接口方法
-				search: function(op) {
-					var result, filter = op.filter;
-					//过滤数据
-					result = filter ? _cache.filter(filter) : _cache;
-					
-					//执行成功之后的方法
-					op.success && op.success(result);
-				},
-				//实现update接口方法
-				update: function(op) {
-					var filter = op.filter,
-						data = getData(op.data);
-
-					if (filter) {
-						//测试使用，只更新第一条匹配数据
-						$.each(_cache, function(i, item) {
-							if (filter(item)) {
-								_cache[i] = data;
-								return false;
-							}
-						})
-					} else {
-						_cache = op.data || [];
-					}
-					op.success && op.success(op.data);
-				},
-				//实现initOptions接口方法
-				initOptions: function(op) {
-					//生成fitler，当filter为obj类型时，编译成fn
-					op.filter = buildFitler(op.filter || op.params);
-				}
-			});
-	 */
-	dataServices = st.factory({
-		name: "dataServices",
-		proto: {
-			/**
-			 * 数据服务通用操作方法；直接执行到具体的数据服务的方法上
-			 * @method  operate
-			 * @param  {string} type 操作类型；1. search; 2. update
-			 * @param  {object} op   参数；具体参数同数据服务
-			 * @param  {object} op.dsType   数据服务类型
-			 * @return {object}      操作结果
-			 * @example
-			 * 		//执行查询cache的操作
-			 * 		var result = dataServices.operate('search',{
-			 * 			//设置数据服务类型为cache
-			 * 			dsType : 'cache',
-			 * 			//过滤参数
-			 * 			fitler : {name : 'roy'},
-			 * 			//换成的key，cache类型数据服务特有属性参数
-			 * 			cacheKey : 'test'
-			 * 		});
-			 */
-			operate: function(type, op) {
-				var ds = this.find(op.dsType);
-				if (ds) {
-					if (type !== 'initOptions') {
-						ds.initOptions(op);
-					}
-					return ds[type](op);
-				} else
-					throw op.dsType + ",not defined in dataServices!";
-			},
-			/**
-			 * 执行数据服务search操作方法
-			 * @method  search
-			 * @param  {object} op   参数；具体参数同数据服务
-			 * @param  {object} op.dsType   数据服务类型
-			 * @return {object}      操作结果
-			 * @example
-			 * 		//使用ajax进行查询
-			 * 		dataServices.search({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'ajax',
-			 * 			//服务地址
-			 * 			url : 'xxxx',
-			 * 			//查询参数
-			 * 			param : {name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
-			 */
-			search: function(op) {
-				return this.operate('search', op);
-			},
-			/**
-			 * 执行数据服务update操作方法
-			 * @method  update
-			 * @param  {object} op   参数；具体参数同数据服务
-			 * @param  {object} op.dsType   数据服务类型
-			 * @return {object}      操作结果
-		 	 * @example
-			 * 		//使用rest进行更新
-			 * 		dataServices.update({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'rest',
-			 * 			//rest服务地址
-			 * 			url : 'user/update/{id}',
-			 * 			//更新参数
-			 * 			param : {id : 1 ,name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
-			 */
-			update: function(op) {
-				return this.operate('update', op);
-			}
-		},
-		/**
-		 * 数据服务基类
-		 * @class baseDataService
-		 */
-		base: {
-			/**
-			 * 查询操作接口  **[接口方法]**
-			 * @method  search
-			 * @param  {object} op   参数；其他具体参数同见具体数据服务
-			 *    @param  {object} op.filter   过滤器
-			 *    @param  {object} op.success   成功之后执行的方法
-			 *    @param  {object} op.error   失败之后执行的方法
-			 * @return {object}      操作结果
-			 */
-			search: function(op) {},
-			/**
-			 * 更新操作接口 **[接口方法]**
-			 * @method  update
-			 * @param  {object} op   参数；其他具体参数同见具体数据服务
-			 *    @param  {object} op.filter   过滤器
-			 *    @param  {object} op.data   更新数据
-			 *    @param  {object} op.success   成功之后执行的方法
-			 *    @param  {object} op.error   失败之后执行的方法
-			 * @return {object}      操作结果
-			 */
-			update: function(op) {},
-			/**
-			 * 通用初始化参数接口 **[接口方法]**
-			 * @method  initOptions
-			 * @param  {object} op   参数；其他具体参数同见具体数据服务
-			 *    @param  {object} op.filter   过滤器
-			 *    @param  {object} op.success   成功之后执行的方法
-			 *    @param  {object} op.error   失败之后执行的方法
-			 * @return {object}      参数
-			 */
-			initOptions: function(op) {}
-		}
-	})
-
-	/**
-	 * 数据管理器工厂
-	 * @class dataManager
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 *
-	 */
-	dataManager = st.factory({
-		name: "dataManager",
-		type: "class",
-		proto: {
-			/**
-			 * 创建数据管理器
-			 * @method create
-			 * @param  {string} type 数据管理器类型
-			 * @param  {object} op   数据管理参数设置
-			 * @return {dataManager}     数据管理对象
-			 */
-			create: function(type, op) {
-				var dm = this.find(type);
-				if (dm)
-					return new dm(op);
-				else
-					console.log(type + ",not defined in dataManager");
-			}
-		},
-		/**
-		 * 数据管理器基类
-		 * @class baseDataManager
-		 */
-		base: {
-			/**
-			 * 是否过滤模式
-			 * @type {Boolean} _filterMode
-			 */
-			_filterMode: true,
-			//_operations : ["get","set"],
-			/**
-			 * 数据管理对象的类初始化方法；
-			 * @method klassInit
-			 * @final
-			 * @param op {object}  数据管理设置参数
-			 * @return {dataManager}   初始化完成的数据管理对象
-			 */
-			klassInit: function(op) {
-				var dm = st.attachTrigger(this);
-
-				op = dm.op = st.mergeObj(op, _config.dmOp);
-
-				initPolicy(dm, op.get, 'get');
-				initPolicy(dm, op.set, 'set');
-
-				initFlow(dm);
-				policyManager.applyPolicy(dm, dm._Flow, op);
-				this.init(op);
-			},
-			/**
-			 * 数据管理对象的初始化接口方法 **[接口方法]**
-			 * @method init
-			 * @param  op {object} 数据管理设置参数
-			 */
-			init: function(op) {},
-			/**
-			 * 使用dataManager的数据通道进行获取数据
-			 * @method get
-			 * @param  conf {object} 获取设置参数
-			 * @return {object|promise}   查询结果或者promise
-			 */
-			get: function(conf) {
-				var dm = this;
-				conf = initConf(dm, conf);
-				return whenFlow(dm._Flow.boot(dm, dm.op, conf.policy), conf.success, conf.error);
-			},
-			/**
-			 * 使用dataManager的数据通道进行设置数据
-			 * @method set
-			 * @param  conf {object} 设置参数
-			 * @return {object|promise}   设置结果或者promise
-			 */
-			set: function(conf) {
-				var dm = this;
-				conf = initConf(dm, conf);
-				return whenFlow(dm._Flow.bootWithStart("setData", [dm, dm.op, conf.policy]), conf.success, conf.error);
-			},
-			/**
-			 * 使用dataManager内置查询(即只在dataManager内部查询，不查询dataService)接口. **[接口方法]**
-			 * @method _innerSearch
-			 * @param  conf {object} 获取设置参数
-			 * @return {object}   查询结果
-			 */
-			_innerSearch: function(conf) {
-
-			},
-			/**
-			 * 使用dataManager内置更新(即只在dataManager内部更新，不更新到dataService)接口. **[接口方法]**
-			 * @method _innerUpdate
-			 * @param  conf {object} 设置参数
-			 * @return {object}   设置结果
-			 */
-			_innerUpdate: function(conf) {
-
-			},
-			/**
-			 * 检查数据是否为空;数据策略的判断空数据会根据此方法的结果来判断;不同类型的数据管理的判断也不同。
-			 * 如：object判断是否为undefined;table判断数据的长度是否大于0
-			 * @method checkEmpty
-			 * @param  data {object} 检查的数据
-			 * @param  conf {object} 设置参数
-			 * @return {[type]}  判断是否为空
-			 */
-			checkEmpty: function(data, conf) {
-				return data === undefined;
-			},
-			//验证方法
-			validate: function() {
-
-			},
-			/**
-			 * 清空数据管理内的数据的方法. **[接口方法]**
-			 * @method clear
-			 */
-			clear: function() {
-			},
-			/**
-			 * 设置dataService的参数,在每次使用数据通道时执行. **[接口方法]**
-			 * @method setDataSerive
-			 * @param config {object} 设置dataService的参数
-			 */
-			setDataSerive: function(config) {},
-			/**
-			 * 初始化策略参数
-			 * @method initPolicy
-			 * @param  policy {object} 策略设置
-			 * @param  type  {type}  操作类型. 
-			 *  1. get; 
-			 *  2. set;
-			 */
-			initPolicy: function(policy, type) {
-				if (this._filterMode) {
-					policy._filterBuilder = policy.filter ? st.filterBuilder(policy.filter) : defFilterBuilder;
-				}
-			},
-			/**
-			 * 生成传递的参数
-			 * @method buildParam
-			 * @param  policy {object}    策略设置
-			 * @param  defPolicy {object} 默认的策略设置
-			 */
-			buildParams: function(policy, defPolicy) {
-				buildParams(this, policy, defPolicy);
-			},
-			/**
-			 * 生成策略，对策略参数进行初始化，生成传递参数，合并参数
-			 * @method  buildPolicy
-			 * @param  policy {object}    策略设置
-			 * @param  defPolicy {object}  默认的策略设置
-			 */
-			buildPolicy: function(policy, defPolicy) {
-				this.buildParams(policy, defPolicy)
-				st.mergeObj(policy, defPolicy, _config.ignoreMerges);
-			}
-		}
-	});
-
-	function initFlow(dm) {
-		dm._Flow = st.flowController({
-			flow: {
-				buildGetPolicy: function(e, dm, op, policy, isTrigger) {
-					//合并策略
-					dm.buildPolicy(policy, op.get);
-				},
-				getData: function(e, dm, op, policy, isTrigger) {
-					var result = searchDM(dm, policy);
-					e.__getDone = true;
-					if (checkEmpty(dm, result, policy)) {
-						e.next("getFromDs");
-					} else {
-						e.next("getFromDm");
-					}
-					return result;
-				},
-				getFromDm: function(e, dm, op, policy, isTrigger) {
-					var result = e.__getDone ? e.result : searchDM(dm, policy);
-					if (!policy.update)
-						e.end();
-
-					return result;
-				},
-				getFromDs: function(e, dm, op, policy, isTrigger) {
-					var success, ds = getDs(policy, op);
-					if (ds) {
-						success = function(result) {
-							if (policy.update !== false) {
-								dm.set(buildGetSetPolicy(dm, result, policy,
-									function(result) {
-										e.end().resolve(result);
-									}, e.reject));
-
-							} else {
-								e.end().resolve(result);
-							}
-						}
-
-						openDatatransfer('search', ds, dm, policy, success, e.reject);
-						return e.promise();
-					} else {
-						e.end().resolve(searchDM(dm, policy));
-					}
-				},
-				setData: function(e, dm, op, policy, isTrigger) {
-					//合并策略
-					dm.buildPolicy(policy, op.set);
-					e.next(policy.way === 'ds' ? 'setToDs' : 'setToDm');
-				},
-				setToDm : function(e, dm, op, policy, isTrigger){
-					if(policy.way !== 'dm')
-						e.next('setToDs');
-					return dm._innerUpdate(policy);;
-				},
-				setToDs: function(e, dm, op, policy, isTrigger) {
-					var success, error, ds = getDs(policy, op),
-						isPending = policy.pending !== false;
-
-					if (ds) {
-						if (isPending) {
-							success = e.resolve;
-							error = e.reject;
-						} else {
-							e.resolve(data);
-						}
-
-						openDatatransfer('update', ds, dm, policy, success, error);
-
-						if (isPending)
-							return e.promise();
-					}
-				}
-			},
-			order: ["buildGetPolicy", "getData", "setData"],
-			trigger: true
-		});
-	}
-
-	function initPolicy(dm, policy, type) {
-		if (policy) {
-			dm.initPolicy(policy, type);
-			if (policy.get && (type === 'get' || type === 'trigger'))
-				dm.initPolicy(policy.get, 'set');
-		}
-	}
-
-	/*初始化dm的get，set配置*/
-	function initConf(dm, conf) {
-		if (!conf) {
-			conf = {};
-		}
-		var success = conf.success,
-			error = conf.error;
-
-		conf.success = null;
-		conf.error = null;
-
-		return {
-			policy: conf,
-			success: success,
-			error: error
-		};
-	}
-
-	function checkEmpty(dm, data, policy) {
-		return (dm.op.checkEmpty || dm.checkEmpty)(data, policy)
-	}
-
-	function whenFlow(fireResult, success, error) {
-		var d = $.Deferred();
-		$.when(fireResult).done(function(result) {
-			success && success(result);
-			d.resolve(result);
-		}).fail(function(err) {
-			error && error(err);
-			d.resolve(err);
-		})
-		return d.promise();
-	}
-
-	function buildParams(dm, policy, mgPolicy) {
-		if(policy._$builded)
-			return;
-		
-		var mgParams, pType, params = policy.params;
-
-		//条件参数处理
-		if (isFunction(params)) {
-			params = policy.params = params.apply(null, [dm, policy]);
-		}
-
-		if (mgPolicy && policy.mergeFilter !== false) {
-			mgParams = mgPolicy.params;
-
-			if (isFunction(mgParams)) {
-				mgParams = mgParams.apply(null, [dm, policy]);
-			}
-
-			if (params) {
-				pType = typeof params;
-				if (pType === typeof mgParams && pType === 'object') {
-					//合并条件参数
-					st.mergeObj(params, mgParams);
-				}
-			} else {
-				policy.params = mgParams;
-			}
-		}
-		if (dm._filterMode) {
-			var filterBuilder = mgPolicy && mgPolicy._filterBuilder || defFilterBuilder;
-			policy.filter = filterBuilder.buildFn(policy.params, policy.filter);
-		}
-		policy._$builded = true;
-	}
-
-	function buildGetSetPolicy(dm, data, policy, success, error) {
-		var setPolicy = {
-			data: data,
-			filter: policy.filter,
-			params: policy.params,
-			way: 'dm',
-			pending: false,
-			success: success,
-			error: error
-		};
-
-		if (policy.set) {
-			dm.buildPolicy(policy.set, setPolicy);
-			return policy.set
-		}
-		return setPolicy;
-	}
-
-	function searchDM(dm, policy) {
-		return dm._innerSearch(policy);
-	}
-
-	function getDs() {
-		var args = arguments,
-			len = args.length,
-			i = 0,
-			ds;
-
-		for (; i < len; i++) {
-			if ((arg = args[i]) && (ds = arg.dataServices))
-				return ds;
-		};
-	}
-
-	/*开启数据传输*/
-	function openDatatransfer(type, ds, dm, policy, success, error) {
-		var dsOp, fnDsQueue, i = 0;
-
-		function buildDsOp(op) {
-			var conf = $.extend(true, {}, op, policy);
-			conf.success = success;
-			conf.error = error;
-			dm.setDataSerive(conf);
-			return conf;
-		}
-		if ($.isArray(ds)) {
-			fnDsQueue = function() {
-				if (dsOp = ds[i++]) {
-					dsOp = buildDsOp(dsOp);
-					dsOp.success = function(result) {
-						checkEmpty(dm, result, policy) ? fnDsQueue() : success(result);
-					}
-					dataServices.operate(type, dsOp);
-				} else
-					success(data);
-			}
-			fnDsQueue();
-		} else
-			dataServices.operate(type, buildDsOp(ds));
-	}
-
-	//策略管理器
-	policyManager = st.factory({
-		name: "DataPolicyManager",
-		type: 'copy',
-		proto: {
-			applyPolicy: function(dm, flow, op) {
-				this.fire('init', [dm, flow, op]);
-			}
-		},
-		base: {
-			init: function(dm, flow, op) {
-
-			}
-		}
-	});
-
-	policyManager.add("getWay", {
-		init: function(dm, flow, op) {
-			flow.onBefore("getData", "checkGetWay", function(e, dm, op, policy) {
-				var way = policy.way,
-					node;
-				if (way) {
-					if (way === 'ds') {
-						node = 'getFromDs';
-					} else if (way === 'dm') {
-						node = 'getFromDm';
-					}
-					node && e.next(node).stop();
-				}
-			})
-
-		}
-	});
-
-	/*判断并设置定时器*/
-	function checkTimer(id, timer, fn, dm) {
-		if (!timer)
-			return fn;
-
-		var timers = dm.__timers;
-		if (!__timers) {
-			timers = dm.__timers = {};
-			dm.stopTimer = function(id) {
-				var ts = this.__timers,
-					no;
-				if ($.isEmptyObject(ts))
-					return;
-
-				if (id) {
-					if (no = ts[id]) {
-						ts[id] = null;
-						clearInterval(no);
-					}
-				} else {
-					$.each(ts, function(i, no) {
-						no && clearInterval(no);
-					});
-					this.__timers = {};
-				}
-
-			}
-		}
-		return function() {
-			timers[id] = setInterval(fn, timer)
-		}
-	}
-
-	/*解析Trigger*/
-	function compileTrigger(i, conf, dm, flow, op) {
-		var flowNode, fnRemove, conf = initConf(dm,conf),
-			trPolicy = conf.policy,
-			isDef = trPolicy.def,
-			setPolicy = trPolicy.set,
-			pos = trPolicy.position,
-			delay = trPolicy.delay || 0,
-			timer = trPolicy.timer,
-			userfulLife = trPolicy.userfulLife;
-
-		initPolicy(dm, trPolicy, 'trigger');
-
-		//判断注入的流程节点
-		flowNode = trPolicy.def ? "buildGetPolicy" : (pos === "get" ? "getData" : (pos === "dm" ? "getFromDm" : "getFromDs"));
-
-		//注入Handler
-		// success = st.mergeFn(trPolicy.success, function(result) {
-		// 	dm.fireHandler("trigger", [result, trPolicy]);
-		// });
-
-		//有效期
-		if (userfulLife) {
-			if (userfulLife === "once") {
-				fnRemove = function() {
-					return true;
-				}
-			} else if (isFunction(userfulLife)) {
-				fnRemove = userfulLife;
-			}
-		}
-
-		flow.on(flowNode, "trigger", function(e, dm, op, policy, isTrigger) {
-			var fnRequest, ds, _policy, fnSuccess;
-			if (isTrigger)
-				return;
-
-			//默认时与get动作policy合并
-			if (isDef) {
-				dm.buildPolicy(policy, trPolicy);
-				return;
-			}
-
-			_policy = $.extend({
-				mergeFilter: false,
-				way: 'ds',
-			}, trPolicy);
-
-			//合并filter
-			buildParams(dm, _policy, policy);
-
-			fnRequest = function() {
-				whenFlow(dm._Flow.bootWithStart("getData", [dm, dm.op, _policy, true]), conf.success, conf.error).always(function(result) {
-					dm.fireHandler("trigger", [result, _policy]);
-				});
-			}
-
-			setTimeout(checkTimer(i, timer, fnRequest, dm), delay);
-		})
-	}
-
-	//添加触发器
-	policyManager.add("trigger", {
-		init: function(dm, flow, op) {
-			var trigger = op.get && op.get.trigger;
-			if (trigger) {
-
-				$.each(trigger, function(i, trPolicy) {
-					compileTrigger(i, trPolicy, dm, flow, op);
-				});
-				op.get.trigger = null;
-			}
-		}
-	});
-
-	return {
-		dataManager: dataManager,
-		dataPolicyManager: policyManager,
-		dataServices: dataServices
-	};
-});
-/**
-    针对于表类型的数据进行管理
-    
-    Feartures : 
-        1. 提供CRUD接口
-        2. 内置状态控制
-
-
-    Update Note：
-        + 2014.7 ：Created
-
-    @module DataManager
-    @submodule DataManager-Table
-*/
-stDefine("dataManager-table", function(st) {
-	var isArray = $.isArray,
-		isPlainObj = $.isPlainObject,
-		_states = ["_$new", "_$selected", "_$updated", "_$deleted"],
-		_dtConfig = {
-			//分页设置
-			pageInf: {
-				pageSize: 20,
-				groupSize: 20,
-				page : 1,
-				total: 0
-			},
-			getField : {
-				pageInf : "pageInf",
-				result :　"result"
-			}
-		};
-
-	st.dataManager.add("DataTable", {
-		init: function(op) {
-			var dm = this;
-			st.mergeObj(true, op, _dtConfig);
-
-			dm.$store = [];
-
-			if (op.crud) {
-				dm.crud.forEach(function(type, conf) {
-					dm.initPolicy(conf);
-					conf.set && dm.initPolicy(conf.set);
-				})
-			} else
-				op.crud = {};
-
-			//注册处理设置数据方法
-			dm._Flow.onBefore("setData", "handleResult", handleResult);
-		},
-		getKey: function() {
-			return this.op.key;
-		},
-		checkEmpty: function(data, filter) {
-			return data == null || data.length === 0;
-		},
-		clear: function() {
-			this.$store = [];
-		},
-		_innerUpdate: function(config) {
-			if (!config)
-				return;
-
-			var isReplace = config.updateMode === 'replace',
-				updateType = config.updateType,
-				filter = config.filter,
-				dm = this,
-				data = config.data,
-				store = dm.$store,
-				isOneData = !isArray(data);
-
-			if (updateType === 'find')
-				updateFindData(dm, data);
-			else if (updateType === 'insert') {
-				insertData(dm, data);
-			} else if (updateType === 'delete') {
-				deleteData(dm, config);
-			} else {
-				(isArray(data) ? updateData : updateOneData)(dm, data, config, isReplace, updateType === 'save');
-			}
-			return data;
-		},
-		store: function(data) {
-			if (checkArray(data)) {
-				this.$store = data;
-			}
-		},
-		//单条数据更新
-		updateOne: function(config) {
-			if (!config)
-				return;
-
-			buildParamByOne(this, config);
-			return this.update(config);
-		},
-		update: function(config) {
-			buildCRUDConfig(this, 'update', config);
-			return this.set(config);
-		},
-		insert: function(config) {
-			buildCRUDConfig(this, 'insert', config);
-			return this.set(config);
-		},
-		save: function(config) {
-			buildCRUDConfig(this, 'save', config);
-			return this.set(config);
-		},
-		_innerSearch: function(config) {
-			return findDm(this, config);
-		},
-		findOne: function(config) {
-			var success;
-			if (config) {
-				buildParamByOne(this, config);
-				success = config.success;
-			} else {
-				config = {};
-			}
-
-			if (success) {
-				config.success = function(data) {
-					success(data && data[0]);
-				}
-			}
-			return this.find(buildCRUDConfig(this, 'findOne', config, true));
-		},
-		find: function(config) {
-			buildCRUDConfig(this, 'find', config, true)
-			initFindConfig(this.op, config);
-			return this.get(config);
-		},
-		removeOne: function(config) {
-			if (!config)
-				return;
-
-			buildParamByOne(this, config);
-			return this.remove(config);
-		},
-		remove: function(config) {
-			return this.update(buildCRUDConfig(this, 'remove', config));
-		},
-		findWithStates: function(states, config) {
-			var stateFilter = [];
-
-			states.forEach(function(state) {
-				result[state] = [];
-			})
-
-			stateFilter = function(item) {
-				states.some(function(state) {
-					if (item[state]) {
-						result[state].push(item);
-						return true;
-					}
-				})
-			}
-			return result;
-		},
-		findByState: function(state, config) {
-
-		},
-		setDataSerive: function(conf) {
-
-		}
-	});
-
-	function checkArray(data) {
-		if (isArray(data))
-			return true;
-
-		console.log("存储的数据不正确！");
-	}
-
-	function buildCRUDConfig(dm, type, conf, isFind) {
-		var defConf = dm.op.crud[type];
-		if (!conf)
-			conf = {};
-
-		defConf && dm.buildPolicy(conf, defConf);
-
-		if (!isFind && conf.updateType == null)
-			conf.updateType = type;
-
-		return conf;
-	}
-
-	function initFindConfig(op, config) {
-		var changed, pageInf = config.pageInf,
-			oldPageInf = op.pageInf;
-
-		if (config.update && !config.updateType)
-			config.updateType = 'find';
-
-		if (config.way)
-			return;
-
-		if(pageInf && checkChanged(pageInf,oldPageInf,["page","pageSize"]))
-			changed = true;
-		else
-			changed = checkChanged(config,op,["order","group"]);;
-
-		changed && (config.way = 'ds');
-	}
-
-	function checkChanged(obj,oldObj,fields){
-		var value,changed;
-		fields.some(function(field){
-			value1 = obj[field];
-			if((value != null) && value == oldObj[field]){
-				changed = true;
-				return true;
-			}
-		})
-		return changed;
-	}
-
-	//生成操作单个的param
-	function buildParamByOne(dm, policy) {
-		var params, key, keyValue, type;
-
-		if (policy && (params = policy.params) != null) {
-			type = typeof params;
-			if (type !== 'function') {
-				if (type !== 'object' && (key = dm.getKey())) {
-					keyValue = params;
-					policy.params = params = {};
-					params[key] = keyValue;
-				}
-			}
-		}
-	}
-
-	function handleResult(e, dm, op, policy, isTrigger) {
-		var data = policy.data,pageInf;
-		if(data && (pageInf = data[op.getField.pageInf])){
-			$.extend(op.pageInf,pageInf);
-			policy.data = data[op.getField.result];
-		}
-	}
-
-	function updateFindData(dm, data) {
-		dm.store(data || []);
-	}
-
-	function insertData(dm, data) {
-		var store = dm.$store;
-		if (isArray(data))
-			dm.$store = store.concat(data);
-		else
-			store.push(data);
-	}
-
-	function updateItemByFilter(store, data, filter, isReplace) {
-		var isUpdated;
-		//根据条件检索
-		store.forEach(function(item, i) {
-			if (filter(item, i)) {
-				if (isReplace)
-					store[i] = data;
-				else
-					$.extend(item, data);
-
-				isUpdated = true;
-				return false;
-			}
-		})
-		return isUpdated;
-	}
-
-	function updateOneData(dm, data, config, isReplace, saveMode) {
-		var isUpdated, store = dm.$store;
-
-		if (store.length && config.filter) {
-			isUpdated = updateItemByFilter(store, data, config.filter, isReplace);
-		}
-
-		//没有更新时插入数据
-		saveMode && isUpdated || insertData(dm, [data]);
-		return true;
-	}
-
-	function updateData(dm, data, config, isReplace, saveMode) {
-		var filter, store = dm.$store,
-			key = dm.getKey(),
-			keyValue, updateNum = 0;
-
-		if (store.length && key) {
-			//通过Key来更新
-			data.forEach(function(updateItem, i) {
-				keyValue = updateItem[key];
-				if (!updateItemByFilter(store, updateItem, function(item) {
-					return item[key] === keyValue;
-				}, isReplace)) {
-					//找不到更新项时，插入数据
-					if (saveMode) {
-						updateNum++;
-						insertData(dm, updateItem);
-					}
-				} else
-					updateNum++;
-			})
-		} else if (saveMode) {
-			insertData(dm, data);
-			updateNum = data.length;
-		}
-		return updateNum;
-	}
-
-	function findDm(dm, config) {
-		var store = dm.$store,
-			result = [];
-
-		if (store.length === 0)
-			return result;
-
-		if (config && config.filter) {
-			forEachByFitler(store, config, function(item) {
-				result.push(item);
-			}, true);
-			return result;
-		}
-		return result.concat(store);
-	}
-
-	function forEachByFitler(data, config, handle, filterMode) {
-		var filter, pageInf, index,
-			start = 0,
-			end = data.length,
-			item;
-
-		if (end === 0)
-			return;
-
-		if (config) {
-
-			filter = config.filter;
-			//判断filterMode下，filter为空时退出
-			if (!filter && filterMode)
-				return;
-
-			pageInf = config.pageInf;
-			//根据分页信息设置检索范围
-			if (pageInf && pageInf.page) {
-				st.mergeObj(pageinf, _dtConfig.pageInf);
-				start = (pageInf.page - 1) * pageInf.pageSize;
-				start + pageInf.pageSize > end && (end = start + pageInf.pageSize);
-			}
-		}
-
-		if (filter) {
-			for (; start < end; start++) {
-				item = data[start];
-				if (filter(item, start, data)) {
-					index = handle(item, start, data);
-					if (index != null) {
-						start = index;
-					}
-				}
-			}
-		} else {
-			for (; start < end; start++) {
-				index = handle(item, start, data);
-				if (index != null) {
-					start = index;
-				}
-			}
-		}
-	}
-
-	function deleteData(dm, config) {
-		var filter, store = dm.$store,
-			count = 0,
-			start = 0,
-			end = store.length,
-			index, item, handle;
-
-		if (end === 0)
-			return;
-
-		if (config && (filter = config.filter)) {
-			if (config.preDelete) {
-				handle = function(item, index) {
-					setState(item, _states[3], true);
-				}
-			} else {
-				handle = function(item, index) {
-					store.splice(index, 1);
-					count++;
-					return --index;
-				}
-			}
-			forEachByFitler(store, config, handle, true);
-		} else
-			dm.$store = [];
-
-		return count;
-	}
-
-	function setState(item, type, value) {
-		item[type] = value;
-	}
 })
-
-// policy = {
-// 	get: {
-// 		//获取的方式，auto默认方式；dm，只用dm获取；ds，从
-// 		way: ""
-// 	},
-// 	set: {
-
-// 	},
-// 	dataServices: [{
-// 		//数据服务类型
-// 		dsType: str,
-// 		//过滤参数
-// 		param： obj,
-// 		//过滤器
-// 		fitler: fn | obj
-// 		//更新的数据
-// 		data： obj,
-// 		//成功以后执行的方法
-// 		success: success,
-// 		//失败以后执行的方法
-// 		error: error
-
-// 	}]
-// }
-
-// //服务端的user数据转成前端model数据
-// var userData = {
-// 	id: 1,
-// 	name: "user1",
-// 	age: 20,
-// 	role: "tester"，
-// 	//关联projectid
-// 	projectId： 1
-// }
-// //项目数据的model数据
-// var projectData = {
-// 	id: 1
-// 	name: "smartjs",
-// 	ver： "0.3"
-// }
-
-// //创建一个object的对象
-// var user = dataManager.create("object", {
-// 	//设置主键字段
-// 	key: "id",
-// 	//get动作的策略
-// 	get: {
-// 		//定义数据服务
-// 		dataServices: {
-// 			//ajax数据服务
-// 			dsType: "ajax",
-// 			//默认的请求url地址；根据id查询
-// 			url: "services/user/{id}",
-// 			//url规则映射
-// 			fieldMapping: {
-// 				//project的查询地址
-// 				project: "services/project/{projectId}"
-// 			}
-// 		}
-// 	}
-// })
-
-// //首先通过id=1的条件，查询user
-// user.get({
-// 	//设置查询参数，默认匹配key字段
-// 	params: 1,
-// 	//执行成功，数据填充到dm，并执行成功方法
-// 	success: function(result) {
-// 		//进行数据渲染
-// 		renderUser(result);
-// 	}
-// })
-
-// //当需要查询项目信息时
-// user.get({
-// 	//查询的字段；dm会根据field匹配到fieldMapping的ajax设置，从而拿到数据
-// 	field: "project",
-// 	//执行成功，数据填充到dm，并执行成功方法
-// 	success: function(result) {
-// 		//进行数据渲染
-// 		renderProject(result);
-// 	}
-// })
-
-// //如果采用第二种方式，我们在查询玩user后，想延迟10s在加载project信息，那么应该怎么做？
-// //答案是:使用dataManager的trigger
-
-// var user = dataManager.create("object", {
-// 	//设置主键字段
-// 	key: "id",
-// 	//get动作的策略
-// 	get: {
-// 		//定义数据服务
-// 		dataServices: {
-// 			//ajax数据服务
-// 			dsType: "ajax",
-// 			//默认的请求url地址；根据id查询
-// 			url: "services/user/{id}"
-// 		},
-// 		//定义触发器
-// 		trigger: [{
-// 			name: "get project",
-// 			//延迟10s
-// 			delay: 10000,
-// 			field: "project",
-// 			dataServices: {
-// 				//ajax数据服务
-// 				dsType: "ajax",
-// 				//project的查询地址
-// 				url: "services/project/{projectId}",
-// 			},
-// 			//触发器执行成功，数据填充到dm数据的project字段中，并执行成功方法
-// 			success: function(result) {
-// 				//进行数据渲染
-// 				renderProject(result);
-// 			}
-// 		}]
-// 	}
-// })
-// //首先通过id=1的条件，查询user
-// user.get({
-// 	//设置查询参数，默认匹配key字段
-// 	params: 1,
-// 	//执行成功，数据填充到dm，并执行成功方法
-// 	success: function(result) {
-// 		//进行数据渲染
-// 		renderUser(result);
-// 	}
-// })

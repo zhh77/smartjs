@@ -43,7 +43,7 @@
             };
 
             //根据person的数据进行合并
-            st.mergeObj(obj, person);
+            st.mix(obj, person);
 
             //child被复制
             expect(obj.child).toBeDefined();
@@ -58,7 +58,7 @@
                 name: 'a'
             };
 
-            st.mergeObj(true, obj, person);
+            st.mix(true, obj, person);
 
             expect(obj.child).toBeDefined();
             expect(obj.age).toBe(10);
@@ -78,7 +78,7 @@
                 }
             };
 
-            var mObj = st.mergeObj(true, {
+            var mObj = st.mix(true, {
                 age: 20
             }, obj, ["age", "project.state"]);
 
@@ -111,21 +111,21 @@
             expect(user1.age).toBe(20);
         });
 
-        it("setObj - mix mode", function() {
+        it("setObj - merge mode", function() {
             st.setObj(user1, "project1", {
                 level: 2,
                 status: 'coding'
-            }, 'mix');
+            }, 'merge');
             expect(user1.project1.level).toBe(2);
             expect(user1.project1.status).toBe('coding');
         });
 
-        it("setObj - merge and root mode", function() {
+        it("setObj - mix and root mode", function() {
             st.setObj(user1, "user1.project1", {
                 level: 3,
                 status: 'testing',
                 module: 'core'
-            }, 'merge', true);
+            }, 'mix', true);
             expect(user1.project1.level).toBe(2);
             expect(user1.project1.status).toBe('coding');
             expect(user1.project1.module).toBe('core');

@@ -3,13 +3,13 @@
 
     describe('OOP Test', function() {
         var user = st.klass("user", {
-            klassInit: function(name) {
-                this.name = name;
-            },
-            say: function(text) {
-                return this.name + ',' + text;
-            }
-        }),
+                klassInit: function(name) {
+                    this.name = name;
+                },
+                say: function(text) {
+                    return this.name + ',' + text;
+                }
+            }),
             result = [];
 
         it("klass prop check", function() {
@@ -196,5 +196,30 @@
             expect(c.project.name).toBe("smartjs");
             expect(c.project.role).toBe("pm");
         });
+
+        it("fire", function() {
+            var widgetFactory = st.factory('wdigetfactory', {
+                type: '',
+                render: function(id) {
+                    return this.type + ':' + id;
+                }
+            });
+
+            widgetFactory.add('Panel', {
+                type: 'Panel'
+            });
+            widgetFactory.add('Tab', {
+                type: 'Tab'
+            });
+
+            var ret = '';
+            //执行每个widget的render方法；
+            widgetFactory.fire('render', ['id'], function(item, result) {
+                //this为widgetFactory；item为产品；result为render执行结果
+                ret += result + '-';
+            })
+
+            expect(ret).toBe('Panel:id-Tab:id-');
+        })
     });
 })();
