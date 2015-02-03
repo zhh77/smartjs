@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,49 +263,25 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>factory <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <p>factory并不只是指的是工厂模式。在factory要求定义一个基础对象，这个对象可以是基类，也可以是模板对象或者是接口。然后factory就已此基础对象为基础，其他添加或者创建的对象，继承或者是复制基础对象的属性和方法。factory在提供一系列方法来对这些对象做控制。
+      <div class="stdoc-code"><p>factory并不只是指的是工厂模式。在factory要求定义一个基础对象，这个对象可以是基类，也可以是模板对象或者是接口。然后factory就已此基础对象为基础，其他添加或者创建的对象，继承或者是复制基础对象的属性和方法。factory在提供一系列方法来对这些对象做控制。
        factory经过简单的处理可以实现工厂、外观、模板等设计模式。</p>
-
+</div>
  </div>
 
-<div class="well well-small sign-left2" id="classesItems">
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
     
-        <div class="index-section methods">
+        <div class="index-section methods col-sm-4">
             <h3>Methods</h3>
-
+            
             <ul class="index-list methods extends">
                 
                     <li class="index-item method">
@@ -364,14 +355,19 @@
                     </li>
                 
             </ul>
+            
         </div>
     
-
+        <div class="index-section properties col-sm-4">
+            <h3>Properties</h3>
+            
+        </div>
     
-
-    
-
-    
+        <div class="index-section events col-sm-4">
+            <h3>Events</h3>
+            
+        </div>
+    </div>
 </div>
 
 <div>
@@ -382,12 +378,11 @@
         
         
         
-        
     </ul>
 
     <div class="tab-content">
         <div id="class" class="tab-pane active">
-           <div class="well well-small classDetail sign-left1">
+            <div class="well well-small classDetail sign-left1">
             
 
             
@@ -398,7 +393,7 @@
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/src_base_oop.js.html#l329"><code>src\base\oop.js:329</code></a>
+                    Defined in: <a href="../files/src_base_oop.js.html#l191"><code>src\base\oop.js:191</code></a>
                 </div>
             
 
@@ -487,7 +482,7 @@
             
         
         
-        <a href="../files/src_base_oop.js.html#l329"><code>src\base\oop.js:329</code></a>
+        <a href="../files/src_base_oop.js.html#l191"><code>src\base\oop.js:191</code></a>
         
         </p>
 
@@ -624,102 +619,88 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>      //widget基类
-       var baseWidget = {
-           //widget类型
-           type: &#39;&#39;,
-           //widget的渲染方法
-           render: function(id) {
-               return this.type + &#39;:&#39; + id;
-           }
-       };
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>继承</a></li>
+                
+                <li role="presentation"   _no='1'> <a>类继承模式</a></li>
+                
+                <li role="presentation"   _no='2'> <a>对象合并模式</a></li>
+                
+            </ul>
 
-       //一个widget工厂
-       var widgetFactory = st.factory(&#39;wdigetfactory&#39;, baseWidget);
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            //一个widget工厂
+            var widgetFactory = st.factory(&#39;wdigetfactory&#39;, {
+                //widget类型
+                type: &#39;&#39;,
+                //widget的渲染方法
+                render: function (id) {
+                    return this.type + &#39;:&#39; + id;
+                }
+            });
 
-       //添加一个input
-       widgetFactory.add(&#39;input&#39;, {
-           type: &#39;input&#39;
-       })
+            //添加一个input
+            widgetFactory.add(&#39;input&#39;, {
+                type: &#39;input&#39;
+            })
+            //添加一个number类型的input
+            var num = widgetFactory.add(&#39;number&#39;, {
+                type: &#39;input[number]&#39;
+            }, &#39;input&#39;)
 
-       //找到添加的input
-       var input = widgetFactory.find(&#39;input&#39;);
+            expect(num.render(&#39;txtNum&#39;)).toBe("input[number]:txtNum");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var f1 = st.factory({
+                name: &#39;classMode&#39;,
+                //设置class类型
+                type: &#39;class&#39;,
+                base: {
+                    klassInit: function (name) {
+                        this.name = name;
+                    }
 
-       //_$fType为注册的类型名
-       expect(input._$fType).toBe(&#39;input&#39;);
+                }
+            });
 
-       //输出
-       expect(input.render(&#39;txt&#39;)).toBe("input:txt");
+            var c1 = f1.add(&#39;c1&#39;, {
+                type: &#39;c1&#39;
+            });
 
+            expect(c1.fn).toBeDefined
+            //需要初始化
+            var c = new c1(&#39;class1&#39;);
+            expect(c.type).toBe("c1");
+            expect(c.name).toBe("class1");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var f2 = st.factory({
+                name: &#39;copyMode&#39;,
+                //设置merge类型
+                type:&#39;merge&#39;,
+                //设置默认模式
+                initDefault:true,
+                base:{
+                    name: &#39;copy&#39;,
+                    project :{
+                    name: &#39;smartjs&#39;
+                }
+            }
+        });
 
-       //添加一个number类型的input
-       var num = widgetFactory.add(&#39;number&#39;, {
-           type: &#39;input[number]&#39;
-           //指定父类为input
-       }, &#39;input&#39;)
+        var c = f2.add(&#39;c1&#39;, {
+            name: &#39;c1&#39;,
+            project: {
+                role: &#39;pm&#39;
+            }
+        });
 
-       //输出
-       expect(num.render(&#39;txtNum&#39;)).toBe("input[number]:txtNum");
-
-
-
-       // 类模式，注册的对象都是类的方式，使用需要初始化
-       var f1 = st.factory({
-           name: &#39;classMode&#39;,
-           //设置class类型
-           type: &#39;class&#39;,
-           base: {
-               klassInit: function(name) {
-                   this.name = name;
-               }
-
-           }
-       });
-
-       var c1 = f1.add(&#39;c1&#39;, {
-           type: &#39;c1&#39;
-       });
-
-       expect(c1.fn).toBeDefined();
-
-       //需要初始化
-       var c = new c1(&#39;class1&#39;);
-       expect(c.type).toBe("c1");
-       expect(c.name).toBe("class1");
-
-
-
-       //merget mode
-        var f2 = st.factory({
-           name: &#39;copyMode&#39;,
-           //设置merge类型
-           type: 　&#39;merge&#39;,
-           //设置默认模式
-           initDefault: true,
-           base: {
-               name: &#39;copy&#39;,
-               project: {
-                   name: &#39;smartjs&#39;
-               }
-           }
-       })
-
-       var c = f2.add(&#39;c1&#39;, {
-           name: &#39;c1&#39;,
-           project: {
-               role: &#39;pm&#39;
-           }
-       });
-
-       expect(f2.find().name).toBe("copy");
-       expect(c.name).toBe("c1");
-       expect(c.project.name).toBe("smartjs");
-       expect(c.project.role).toBe("pm");</code></pre>
-
+        expect(f2.find.name).toBe("copy");
+        expect(c.name).toBe("c1");
+        expect(c.project.name).toBe("smartjs");
+        expect(c.project.role).toBe("pm");</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -793,7 +774,7 @@
             
         
         
-        <a href="../files/src_base_oop.js.html#l520"><code>src\base\oop.js:520</code></a>
+        <a href="../files/src_base_oop.js.html#l274"><code>src\base\oop.js:274</code></a>
         
         </p>
 
@@ -804,8 +785,8 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>添加产品方法，注册到factory中</p>
-
+        <div class="stdoc-code"><p>添加产品方法，注册到factory中</p>
+</div>
     </div>
 
     
@@ -890,35 +871,44 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> //一个widget工厂
- var widgetFactory = st.factory({
-     //工厂名
-     name : &#39;wdigetfactory&#39;,
-     //工厂类型
-     type: &#39;class&#39;,
-     //基类对象  
-     base : {
-         //widget类型
-         type: &#39;&#39;,
-         //widget的渲染方法
-         render: function(id) {
-             return this.type + &#39;:&#39; + id;
-         }
-     } 
- });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>oop</a></li>
+                
+            </ul>
 
- var Tab = widgetFactory.add(&#39;Tab&#39;,{type : &#39;Tab&#39;});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            //widget基类
+            var baseWidget = {
+                //widget类型
+                type: &#39;&#39;,
+                //widget的渲染方法
+                render: function (id) {
+                    return this.type + &#39;:&#39; + id;
+                }
+            };
 
- expect(widgetFactory.find(&#39;Tab&#39;)).toBeDefined();
+            //一个widget工厂
+            var widgetFactory = st.factory(&#39;wdigetfactory&#39;, baseWidget);
 
- var tab1 = new Tab();
+            //添加一个input
+            widgetFactory.add(&#39;input&#39;, {
+                type: &#39;input&#39;
+            })
 
- expect(tab1.render(&#39;tab1&#39;)).toBe(&#39;Tab:tab1&#39;);</code></pre>
+            //找到添加的input
+            var input = widgetFactory.find(&#39;input&#39;);
 
+            //_$fType为注册的类型名
+            expect(input._$fType).toBe(&#39;input&#39;);
+
+            //输出
+            expect(input.render(&#39;txt&#39;)).toBe("input:txt");</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -984,7 +974,7 @@
             
         
         
-        <a href="../files/src_base_oop.js.html#l480"><code>src\base\oop.js:480</code></a>
+        <a href="../files/src_base_oop.js.html#l252"><code>src\base\oop.js:252</code></a>
         
         </p>
 
@@ -995,8 +985,8 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>使用工厂创建产品方法，但不注册到factory中</p>
-
+        <div class="stdoc-code"><p>使用工厂创建产品方法，但不注册到factory中</p>
+</div>
     </div>
 
     
@@ -1081,28 +1071,35 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> //一个widget工厂
- var widgetFactory = st.factory(&#39;wdigetfactory&#39;, {
-     //widget类型
-     type: &#39;&#39;,
-     //widget的渲染方法
-     render: function(id) {
-         return this.type + &#39;:&#39; + id;
-     }
- },&#39;class&#39;);
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>oop</a></li>
+                
+            </ul>
 
- var Tab = widgetFactory.build(&#39;Tab&#39;,{type : &#39;Tab&#39;});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>        //一个widget工厂
+        var widgetFactory = st.factory(&#39;wdigetfactory&#39;, {
+            //widget类型
+            type: &#39;&#39;,
+            //widget的渲染方法
+            render: function (id) {
+                return this.type + &#39;:&#39; + id;
+            }
+        }, &#39;class&#39;);
 
- expect(widgetFactory.find(&#39;Tab&#39;)).toBeUndefined();
+        var Tab = widgetFactory.build(&#39;Tab&#39;, {type: &#39;Tab&#39;});
 
- var tab1 = new Tab();
+        expect(widgetFactory.find(&#39;Tab&#39;)).toBeUndefined
 
- expect(tab1.render(&#39;tab1&#39;)).toBe(&#39;Tab:tab1&#39;);</code></pre>
+        var tab1 = new Tab;
 
+        expect(tab1.render(&#39;tab1&#39;)).toBe(&#39;Tab:tab1&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1165,7 +1162,7 @@
             
         
         
-        <a href="../files/src_base_oop.js.html#l101"><code>src\base\oop.js:101</code></a>
+        <a href="../files/src_base_oop.js.html#l60"><code>src\base\oop.js:60</code></a>
         
         </p>
 
@@ -1176,8 +1173,8 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>调用基类的方法</p>
-
+        <div class="stdoc-code"><p>调用基类的方法</p>
+</div>
     </div>
 
     
@@ -1263,31 +1260,100 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> var Animate = st.klass("Animate", {
-         klassInit: function(name) {
-             this.name = name;
-         },
-         say: function(text) {
-             return this.name + &#39;:&#39; + text;
-         }
-     });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>调用父类</a></li>
+                
+                <li role="presentation"   _no='1'> <a>多级继承示例</a></li>
+                
+            </ul>
 
- //继承user
- var Bird = st.klass("Bird", {
-     //重写say方法
-     say: function(text) {
-          //调用基类方法
-          return &#39;[Bird]&#39; + this.callBase(&#39;say&#39;,[text]);
-     }
- }, Animate);
+            <div class="example-content ">
+                <div class="stdoc-code"><div class="stdoc-code"><pre class="code prettyprint"><code>            var Animate = st.klass("Animate", {
+                klassInit: function (name) {
+                    this.name = name;
+                },
+                say: function (text) {
+                    return this.name + &#39;:&#39; + text;
+                }
+            });
 
- var chicken = new Bird(&#39;chicken&#39;);
- expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+            //继承user
+            var Bird = st.klass("Bird", {
+                //重写say方法
+                say: function (text) {
+                    //调用基类方法
+                    return &#39;[Bird]&#39; + this.callBase(&#39;say&#39;, [text]);
+                }
+            }, Animate);
 
+            var chicken = new Bird(&#39;chicken&#39;);
+            expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            //创建一个class
+            var User = st.klass(&#39;user&#39;, {
+                klassInit: function (name) {
+                    this.name = name;
+                },
+                say: function (text) {
+                    return this.name + &#39;,&#39; + text;
+                }
+            });
+
+            //实例化一个User
+            var xiaoming = new User(&#39;小明&#39;);
+
+            //方法实例化
+            var xiaozhang = User(&#39;小张&#39;);
+
+            //多级继承例子。在多级继承中有一种场景每个子类方法都会调用父类的方法，而方法中又会使用到当前对象的属性，则问题就来了；
+            //如果是采用的parent.xxx然后传递this下的属性值过去，则没太大的问题。backbone就采用的这种。
+            //另外像base.js直接改写原始方法，将父对象封入闭包中，也无问题。只是这种限制比较大，只能调用父类的同名方法。
+            //而dojo采用的是this.parent.xxx.call(this)的方式，则就会悲剧了，死循环就来了。
+            //导致这样的原因就是将this带入parent方法后，父类又执行this.parent。而这是this则是子类的对象，那么方法就只会不停的调用parent的方法。
+            //在smartjs中klass调用父类方法由callBae这个方法来代理，同时使用指针来记录方法的执行轨迹，这样保证了从子到根的各级调用
+
+            var user2 = st.klass(&#39;user2&#39;, {
+                say: function (text) {
+                    //调用父类
+                    return this.callBase(&#39;say&#39;, [text]) + "-lv2";
+                }
+            }, User);
+
+            var user3 = st.klass(&#39;user3&#39;, {
+                say: function (text) {
+                    //调用父类
+                    return this.callBase(&#39;say&#39;, [text]) + "-lv3";
+                }
+            }, user2);
+
+            var user4 = st.klass(&#39;user4&#39;, {
+                say: function (text) {
+                    //调用父类
+                    return this.callBase(&#39;say&#39;, [text]) + "-lv4";
+                }
+            }, user3);
+
+            var roy = new user4(&#39;roy&#39;);
+
+            //继承路径
+            expect(roy._$inheirts + &#39;&#39;).toBe(&#39;user4,user3,user2,user&#39;);
+
+            //依次执行到根，正确将当前的this对象的值输出
+            expect(roy.say(&#39;hello&#39;)).toBe(&#39;roy,hello-lv2-lv3-lv4&#39;);
+
+            //从3级开始执行
+            expect(roy.callBase(&#39;say&#39;, [&#39;hello&#39;])).toBe("roy,hello-lv2-lv3");
+
+            //指定从user开始执行
+            expect(roy.callBase(&#39;say&#39;, &#39;user&#39;, [&#39;hello&#39;])).toBe("roy,hello");
+
+            //上向略过2级执行
+            expect(roy.callBase(&#39;say&#39;, 2, [&#39;hello&#39;])).toBe("roy,hello-lv2");</code></pre>
+</div></div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1344,7 +1410,7 @@
             
         
         
-        <a href="../files/src_base_oop.js.html#l23"><code>src\base\oop.js:23</code></a>
+        <a href="../files/src_base_oop.js.html#l22"><code>src\base\oop.js:22</code></a>
         
         </p>
 
@@ -1355,8 +1421,8 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>调用原型链方法</p>
-
+        <div class="stdoc-code"><p>调用原型链方法</p>
+</div>
     </div>
 
     
@@ -1422,27 +1488,34 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var Animate = st.klass("Animate", {
-    klassInit: function(name) {
-        this.name = name;
-    },
-    say: function(text) {
-        return this.name + &#39;:&#39; + text;
-    }
-});
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>执行原型链方法</a></li>
+                
+            </ul>
 
-var chicken = new Animate(&#39;chicken&#39;);
-chicken.say = function(text){
-    //调用原型链方法
-    return &#39;[Bird]&#39; + this.callProto(&#39;say&#39;,[text]);
-};
+            <div class="example-content ">
+                <div class="stdoc-code"><div class="stdoc-code"><pre class="code prettyprint"><code>            var Animate = st.klass("Animate", {
+                klassInit: function (name) {
+                    this.name = name;
+                },
+                say: function (text) {
+                    return this.name + &#39;:&#39; + text;
+                }
+            });
 
-expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+            var chicken = new Animate(&#39;chicken&#39;);
+            chicken.say = function (text) {
+                //调用原型链方法
+                return &#39;[Bird]&#39; + this.callProto(&#39;say&#39;, [text]);
+            };
 
+            expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+</div></div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1491,7 +1564,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l156"><code>src\base\oop.js:156</code></a>
+        <a href="../files/src_base_oop.js.html#l95"><code>src\base\oop.js:95</code></a>
         
         </p>
 
@@ -1502,8 +1575,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>类扩展方法</p>
-
+        <div class="stdoc-code"><p>类扩展方法</p>
+</div>
     </div>
 
     
@@ -1539,30 +1612,37 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> var Animate = st.klass("Animate", {
-     klassInit: function(name) {
-         this.name = name;
-     },
-     say: function(text) {
-         return this.name + &#39;:&#39; + text;
-     }
- });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>类扩展</a></li>
+                
+            </ul>
 
- var chicken = new Animate(&#39;chicken&#39;);
+            <div class="example-content ">
+                <div class="stdoc-code"><div class="stdoc-code"><pre class="code prettyprint"><code>            var Animate = st.klass("Animate", {
+                klassInit: function (name) {
+                    this.name = name;
+                },
+                say: function (text) {
+                    return this.name + &#39;:&#39; + text;
+                }
+            });
 
- //扩展等同于 chicken.say = xxx
- chicken.extend({
-     say : function(text){
-         return &#39;hello&#39;;
-     }
- });
+            var chicken = new Animate(&#39;chicken&#39;);
 
- expect(chicken.say(&#39;hello&#39;)).toBe(&#39;hello&#39;);</code></pre>
+            //扩展等同于 chicken.say = xxx
+            chicken.extend({
+                say: function (text) {
+                    return &#39;hello&#39;;
+                }
+            });
 
+            expect(chicken.say(&#39;hello&#39;)).toBe(&#39;hello&#39;);</code></pre>
+</div></div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1622,7 +1702,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l558"><code>src\base\oop.js:558</code></a>
+        <a href="../files/src_base_oop.js.html#l287"><code>src\base\oop.js:287</code></a>
         
         </p>
 
@@ -1633,8 +1713,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>查找注册的产品</p>
-
+        <div class="stdoc-code"><p>查找注册的产品</p>
+</div>
     </div>
 
     
@@ -1758,7 +1838,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l634"><code>src\base\oop.js:634</code></a>
+        <a href="../files/src_base_oop.js.html#l333"><code>src\base\oop.js:333</code></a>
         
         </p>
 
@@ -1769,8 +1849,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>执行工厂中产品的方法,不会返回结果;当工厂类型为class时，则执行的则是原型链上的方法</p>
-
+        <div class="stdoc-code"><p>执行工厂中产品的方法,不会返回结果;当工厂类型为class时，则执行的则是原型链上的方法</p>
+</div>
     </div>
 
     
@@ -1842,39 +1922,40 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> //一个widget工厂
- var widgetFactory = st.factory({
-     //工厂名
-     name : &#39;wdigetfactory&#39;,
-     //工厂类型
-     type: &#39;class&#39;,
-     //基类对象  
-     base : {
-         //widget类型
-         type: &#39;&#39;,
-         //widget的渲染方法
-         render: function(id) {
-             return this.type + &#39;:&#39; + id;
-         }
-     } 
- });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>oop</a></li>
+                
+            </ul>
 
- widgetFactory.add(&#39;Panel&#39;,{type : &#39;Panel&#39;});
- widgetFactory.add(&#39;Tab&#39;,{type : &#39;Tab&#39;});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>        var widgetFactory = st.factory(&#39;wdigetfactory&#39;, {
+            type: &#39;&#39;,
+            render: function (id) {
+                return this.type + &#39;:&#39; + id;
+            }
+        });
 
- var ret = &#39;&#39;;
- //执行每个widget的render方法；
- widgetFactory.fire(&#39;render&#39;,[&#39;id&#39;],function(item,result){
-     //this为widgetFactory；item为产品；result为render执行结果
-     ret += result + &#39;-&#39;;
- })
+        widgetFactory.add(&#39;Panel&#39;, {
+            type: &#39;Panel&#39;
+        });
+        widgetFactory.add(&#39;Tab&#39;, {
+            type: &#39;Tab&#39;
+        });
 
- expect(ret).toBe(&#39;Panel:id-Tab:id-&#39;);</code></pre>
+        var ret = &#39;&#39;;
+        //执行每个widget的render方法；
+        widgetFactory.fire(&#39;render&#39;, [&#39;id&#39;], function (item, result) {
+            //this为widgetFactory；item为产品；result为render执行结果
+            ret += result + &#39;-&#39;;
+        })
 
+        expect(ret).toBe(&#39;Panel:id-Tab:id-&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1925,7 +2006,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l52"><code>src\base\oop.js:52</code></a>
+        <a href="../files/src_base_oop.js.html#l35"><code>src\base\oop.js:35</code></a>
         
         </p>
 
@@ -1936,8 +2017,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>获取基类对象</p>
-
+        <div class="stdoc-code"><p>获取基类对象</p>
+</div>
     </div>
 
     
@@ -1986,34 +2067,41 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var Animate = st.klass("Animate", {
-        klassInit: function(name) {
-            this.name = name;
-        },
-        say: function(text) {
-            return this.name + &#39;:&#39; + text;
-        }
-    });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>获取基类对象</a></li>
+                
+            </ul>
 
-//继承user
-var Bird = st.klass("Bird", {
-    //重写say方法
-    say: function(text) {
-        //根据名称向上找到父类原型
-        var parent =  this.getBase(&#39;Animate&#39;);
+            <div class="example-content ">
+                <div class="stdoc-code"><div class="stdoc-code"><pre class="code prettyprint"><code>            var Animate = st.klass("Animate", {
+                klassInit: function (name) {
+                    this.name = name;
+                },
+                say: function (text) {
+                    return this.name + &#39;:&#39; + text;
+                }
+            });
 
-        //调用原型链方法
-        return &#39;[Bird]&#39; + parent.say.call(this,text);
-    }
-}, Animate);
+            //继承user
+            var Bird = st.klass("Bird", {
+                //重写say方法
+                say: function (text) {
+                    //根据名称向上找到父类原型
+                    var parent = this.getBase(&#39;Animate&#39;);
 
-var chicken = new Bird(&#39;chicken&#39;);
-expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+                    //调用原型链方法
+                    return &#39;[Bird]&#39; + parent.say.call(this, text);
+                }
+            }, Animate);
 
+            var chicken = new Bird(&#39;chicken&#39;);
+            expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code></pre>
+</div></div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -2065,7 +2153,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l618"><code>src\base\oop.js:618</code></a>
+        <a href="../files/src_base_oop.js.html#l317"><code>src\base\oop.js:317</code></a>
         
         </p>
 
@@ -2076,8 +2164,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>在工厂中移除注册的产品</p>
-
+        <div class="stdoc-code"><p>在工厂中移除注册的产品</p>
+</div>
     </div>
 
     
@@ -2160,7 +2248,7 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
             
         
         
-        <a href="../files/src_base_oop.js.html#l576"><code>src\base\oop.js:576</code></a>
+        <a href="../files/src_base_oop.js.html#l305"><code>src\base\oop.js:305</code></a>
         
         </p>
 
@@ -2171,8 +2259,8 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>将注册的产品设置成默认产品</p>
-
+        <div class="stdoc-code"><p>将注册的产品设置成默认产品</p>
+</div>
     </div>
 
     
@@ -2208,39 +2296,46 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> //一个widget工厂
- var widgetFactory = st.factory({
-     //工厂名
-     name : &#39;wdigetfactory&#39;,
-     //工厂类型
-     type: &#39;class&#39;,
-     //基类对象  
-     base : {
-         //widget类型
-         type: &#39;&#39;,
-         //widget的渲染方法
-         render: function(id) {
-             return this.type + &#39;:&#39; + id;
-         }
-     } 
- });
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>oop</a></li>
+                
+            </ul>
 
- widgetFactory.add(&#39;Panel&#39;,{type : &#39;Panel&#39;});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>        //一个widget工厂
+        var widgetFactory = st.factory({
+            //工厂名
+            name: &#39;wdigetfactory&#39;,
+            //工厂类型
+            type: &#39;class&#39;,
+            //基类对象
+            base: {
+                //widget类型
+                type: &#39;&#39;,
+                //widget的渲染方法
+                render: function (id) {
+                    return this.type + &#39;:&#39; + id;
+                }
+            }
+        });
 
- //将Panel设置成默认项
- widgetFactory.setDefault(&#39;Panel&#39;)
+        widgetFactory.add(&#39;Panel&#39;, {type: &#39;Panel&#39;});
 
- //Tab未注册，但参数中设置了返回默认，则会返回Panel
- var Tab = widgetFactory.find(&#39;Tab&#39;,true);
+        //将Panel设置成默认项
+        widgetFactory.setDefault(&#39;Panel&#39;)
 
- var tab1 = new Tab();
+        //Tab未注册，但参数中设置了返回默认，则会返回Panel
+        var Tab = widgetFactory.find(&#39;Tab&#39;, true);
 
- expect(tab1.render(&#39;tab1&#39;)).toBe(&#39;Panel:tab1&#39;);</code></pre>
+        var tab1 = new Tab
 
+        expect(tab1.render(&#39;tab1&#39;)).toBe(&#39;Panel:tab1&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -2252,17 +2347,13 @@ expect(chicken.say(&#39;hello&#39;)).toBe(&#39;[Bird]chicken:hello&#39;);</code>
         
 
         
-
-        
     </div>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

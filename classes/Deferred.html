@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Operations - SmartJs</title>
+    <title>Deferred - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -268,10 +268,10 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>Operations <small>Class</small></h1>
+    <h1>Deferred <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <div class="stdoc-code"><p>针对过滤器条件字符串的条件过滤操作；预设了基础操作；另外可以通过<code>st.extendOperation(operation,checkFn)</code>进行扩展和重写</p>
+      <div class="stdoc-code"><p>Deferred对象，非依赖jquery下加载使用</p>
 </div>
  </div>
 
@@ -284,7 +284,63 @@
             <ul class="index-list methods">
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_extendOperation" data-tablink="extendOperation">extendOperation</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_always" data-tablink="always">always</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_done" data-tablink="done">done</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_fail" data-tablink="fail">fail</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_promise" data-tablink="promise">promise</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_reject" data-tablink="reject">reject</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_resolve" data-tablink="resolve">resolve</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_state" data-tablink="state">state</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_then" data-tablink="then">then</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_when" data-tablink="when">when</a>
 
                         
                         
@@ -296,80 +352,6 @@
     
         <div class="index-section properties col-sm-4">
             <h3>Properties</h3>
-            
-            <ul class="index-list properties">
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_!" data-tablink="!">!</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_&lt;" data-tablink="&lt;">&lt;</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_&lt;=" data-tablink="&lt;=">&lt;=</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_=" data-tablink="=">=</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_&gt;" data-tablink="&gt;">&gt;</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_&gt;=" data-tablink="&gt;=">&gt;=</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_endOf" data-tablink="endOf">endOf</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_in" data-tablink="in">in</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_like" data-tablink="like">like</a>
-
-                        
-                        
-                    </li>
-                
-                    <li class="index-item property">
-                        <a href="#" data-tabid="#property" data-anchor="#property_startOf" data-tablink="startOf">startOf</a>
-
-                        
-                        
-                    </li>
-                
-            </ul>
             
         </div>
     
@@ -387,8 +369,6 @@
             <li><a data-toggle="tab" href="#method">Methods</a></li>
         
         
-            <li><a data-toggle="tab" href="#property">Properties</a></li>
-        
         
     </ul>
 
@@ -401,13 +381,13 @@
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/src_dataManager_filterBuilder.js.html#l419"><code>src\dataManager\filterBuilder.js:419</code></a>
+                    Defined in: <a href="../files/src_base_deferred.js.html#l15"><code>src\base\deferred.js:15</code></a>
                 </div>
             
 
             
                 
-                    Module: <a href="../modules/FilterBuilder.html">FilterBuilder</a>
+                    Module: <a href="../modules/Promise.html">Promise</a>
                 
             
 
@@ -415,6 +395,65 @@
         </div>
 
         
+            
+                <div class="constructor">
+                    <h2>Constructor</h2>
+                    <div id="method_Deferred" class="method item">
+    <h3 class="name">Deferred</h3>
+    <code>
+    Deferred
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_deferred.js.html#l15"><code>src\base\deferred.js:15</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                </div>
             
         </div>
 
@@ -423,23 +462,17 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_extendOperation" class="method item">
-    <h3 class="name">extendOperation</h3>
+                    <div id="method_always" class="method item">
+    <h3 class="name">always</h3>
     <code>
-    extendOperation
+    always
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        operation
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        checkFn
+                        callback
                     
                 </li>
             
@@ -473,7 +506,7 @@
             
         
         
-        <a href="../files/src_dataManager_filterBuilder.js.html#l514"><code>src\dataManager\filterBuilder.js:514</code></a>
+        <a href="../files/src_base_deferred.js.html#l125"><code>src\base\deferred.js:125</code></a>
         
         </p>
 
@@ -484,7 +517,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>扩展判断操作符,如：&#39;=&#39;比较操作符,name = @name</p>
+        <div class="stdoc-code"><p>当递延对象是解决或拒绝时被调用添加处理程序；</p>
 </div>
     </div>
 
@@ -497,32 +530,15 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">operation</code>
-                       <td> <span class="type">String</span>
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function | Array</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>操作名称</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">checkFn</code>
-                       <td> <span class="type">Function</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>判断方法</p>
+                        <p>回调函数或者数组函数</p>
 
                     </div>
 
@@ -536,39 +552,33 @@
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-            <ul class="nav nav-tabs example-list">
-                
-            </ul>
-
-            <div class="example-content ">
-                <div class="stdoc-code"><pre class="code prettyprint"><code>    //添加大于操作符&#39;&gt;&#39;
-    st.extendOperation(&#39;&gt;&#39;,function(data, param) {
-        //data为数据，param为条件参数
-                return data &gt; param;
-            });</code></pre>
 </div>
-            </div>
 
-             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
-            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
+                
+                    <div id="method_done" class="method item">
+    <h3 class="name">done</h3>
+    <code>
+    done
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
         </div>
     
-</div>
+    </code>
 
-                
-            </div>
-        
+    
 
-        
-            <div id="property" class="tab-pane">
-                <h2 class="off-left">Properties</h2>
+    
 
-                
-                    <div id="property_!" class="property item">
-    <h3 class="name"><code>!</code></h3>
-    <span class="type">Operation</span>
+    
 
     
 
@@ -589,321 +599,79 @@
             
         
         
-        <a href="../files/src_dataManager_filterBuilder.js.html#l424"><code>src\dataManager\filterBuilder.js:424</code></a>
+        <a href="../files/src_base_deferred.js.html#l109"><code>src\base\deferred.js:109</code></a>
         
         </p>
 
+
         
 
         
     </div>
 
-    <div class="description">
-        <div class="stdoc-code"><p>非判断，在判断操作符之前加入!,则将判断结果取非</p>
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>当延迟成功时调用一个函数或者数组函数。</p>
 </div>
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <div class="stdoc-code"><pre class="code prettyprint"><code>    //查询name不等于&#39;roy&#39;的数据
-    var filter = "name != &#39;roy&#39;"</code></pre>
-</div>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="property_&lt;" class="property item">
-    <h3 class="name"><code>&lt;</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
             
-                
-                <p>
-                
-                Defined in
-                
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function | Array</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>回调函数或者数组函数</p>
+
+                    </div>
+
+                    
+                </tr>
             
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l439"><code>src\dataManager\filterBuilder.js:439</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>小于判断</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_&lt;=" class="property item">
-    <h3 class="name"><code>&lt;=</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l446"><code>src\dataManager\filterBuilder.js:446</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>小于等于判断</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_=" class="property item">
-    <h3 class="name"><code>=</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l432"><code>src\dataManager\filterBuilder.js:432</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>等于判断</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_&gt;" class="property item">
-    <h3 class="name"><code>&gt;</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l453"><code>src\dataManager\filterBuilder.js:453</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>大于判断</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_&gt;=" class="property item">
-    <h3 class="name"><code>&gt;=</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l460"><code>src\dataManager\filterBuilder.js:460</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>大于等于判断</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_endOf" class="property item">
-    <h3 class="name"><code>endOf</code></h3>
-    <span class="type">Operation</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_dataManager_filterBuilder.js.html#l484"><code>src\dataManager\filterBuilder.js:484</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <div class="stdoc-code"><p>以参数为结尾</p>
-</div>
-    </div>
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <div class="stdoc-code"><pre class="code prettyprint"><code>    //匹配以&#39;es&#39;结尾的name
-    var filter = "name endOf &#39;es&#39;";</code></pre>
-</div>
-            </div>
+            </table>
         </div>
     
 
     
+
+    
 </div>
 
                 
-                    <div id="property_in" class="property item">
-    <h3 class="name"><code>in</code></h3>
-    <span class="type">Operation</span>
+                    <div id="method_fail" class="method item">
+    <h3 class="name">fail</h3>
+    <code>
+    fail
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
 
     
 
@@ -924,20 +692,47 @@
             
         
         
-        <a href="../files/src_dataManager_filterBuilder.js.html#l467"><code>src\dataManager\filterBuilder.js:467</code></a>
+        <a href="../files/src_base_deferred.js.html#l117"><code>src\base\deferred.js:117</code></a>
         
         </p>
 
+
         
 
         
     </div>
 
-    <div class="description">
-        <div class="stdoc-code"><p>参数中包含数据</p>
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>当延迟失败时调用一个函数或者数组函数。</p>
 </div>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function | Array</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>回调函数或者数组函数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
     
 
     
@@ -946,9 +741,20 @@
 </div>
 
                 
-                    <div id="property_like" class="property item">
-    <h3 class="name"><code>like</code></h3>
-    <span class="type">Operation</span>
+                    <div id="method_promise" class="method item">
+    <h3 class="name">promise</h3>
+    <code>
+    promise
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
 
     
 
@@ -969,17 +775,18 @@
             
         
         
-        <a href="../files/src_dataManager_filterBuilder.js.html#l474"><code>src\dataManager\filterBuilder.js:474</code></a>
+        <a href="../files/src_base_deferred.js.html#l92"><code>src\base\deferred.js:92</code></a>
         
         </p>
+
 
         
 
         
     </div>
 
-    <div class="description">
-        <div class="stdoc-code"><p>数据中包含参数</p>
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>返回契约</p>
 </div>
     </div>
 
@@ -991,9 +798,30 @@
 </div>
 
                 
-                    <div id="property_startOf" class="property item">
-    <h3 class="name"><code>startOf</code></h3>
-    <span class="type">Operation</span>
+                    <div id="method_reject" class="method item">
+    <h3 class="name">reject</h3>
+    <code>
+    reject
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        arg
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
 
     
 
@@ -1014,20 +842,432 @@
             
         
         
-        <a href="../files/src_dataManager_filterBuilder.js.html#l479"><code>src\dataManager\filterBuilder.js:479</code></a>
+        <a href="../files/src_base_deferred.js.html#l84"><code>src\base\deferred.js:84</code></a>
         
         </p>
 
+
         
 
         
     </div>
 
-    <div class="description">
-        <div class="stdoc-code"><p>以参数为开头</p>
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>拒绝延迟对象，并根据给定的参数调用任何失败的回调函数。</p>
 </div>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">arg</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>拒绝传递的参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_resolve" class="method item">
+    <h3 class="name">resolve</h3>
+    <code>
+    resolve
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        result
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_deferred.js.html#l76"><code>src\base\deferred.js:76</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>解决递延对象，并根据给定的参数调用任何完成的回调函数</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">result</code>
+                       <td> <span class="type">Object</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>解决传递的结果</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_state" class="method item">
+    <h3 class="name">state</h3>
+    <code>
+    state
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_deferred.js.html#l99"><code>src\base\deferred.js:99</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>返回契约状态；</p>
+<pre class="code prettyprint"><code>1. pending: 未完成状态。 
+2. resolved: 解决状态。 
+3. rejected: 拒绝的状态。</code></pre>
+</div>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_then" class="method item">
+    <h3 class="name">then</h3>
+    <code>
+    then
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        doneCallback
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        priority
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_deferred.js.html#l133"><code>src\base\deferred.js:133</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>添加处理程序被调用时，递延对象得到解决或者拒绝；</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">doneCallback</code>
+                       <td> <span class="type">Function</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>成功回调函数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>失败回调函数或者数组函数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">priority</code>
+                       <td> <span class="type">Number</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>权重；优先级</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_when" class="method item">
+    <h3 class="name">when</h3>
+    <code>
+    when
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        result
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_base_deferred.js.html#l151"><code>src\base\deferred.js:151</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>捕获promise的方法，使用st.when调用；</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">result</code>
+                       <td> <span class="type">Object | Args</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>单个判断对象或者一组（参数组）判断对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
     
 
     
@@ -1037,6 +1277,8 @@
 
                 
             </div>
+        
+
         
 
         

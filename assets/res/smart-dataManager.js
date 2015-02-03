@@ -15,12 +15,12 @@
 
     @module FilterBuilder
 */
-stDefine('filterBuilder', function(st) {
+_stDefine('filterBuilder', function(st) {
 	//空值忽略条件标示符
 	var NullIgnoreSign = ["{", "}"],
 		//关系字符
 		Relations = ["and", "or"],
-		isArray = $.isArray;
+		isArray = st.isArray;
 
 	/**
 	   过滤生成器对象；可以使用：条件字符串；参数；方法来构建； 
@@ -142,7 +142,7 @@ stDefine('filterBuilder', function(st) {
 		 * 生成过滤方法
 		 * @method buildFn
 		 * @param  [params] {object}  过滤的参数值
-		 * @param  [mergeFilter]  {string|function|object}需要合并的过滤条件
+		 * @param  [mergeFilter]  {string|function|object} 需要合并的过滤条件;合并全部都为and
 		 * @return {function} 过滤方法
 		 * @example
 		 * 		var data = [
@@ -194,7 +194,7 @@ stDefine('filterBuilder', function(st) {
 	function compileObjectCondition(obj) {
 		return function(item) {
 			var check = true;
-			$.each(obj, function(name, value) {
+			st.each(obj, function(name, value) {
 				if (item[name] !== value) {
 					check = false;
 					return check;
@@ -372,7 +372,7 @@ stDefine('filterBuilder', function(st) {
 		return function(data) {
 			var result = true,
 				isOr;
-			$.each(conditions, function(relation, condition) {
+			st.each(conditions, function(relation, condition) {
 				if (!checkGroup(data, condition, relation === 'or')) {
 					result = false;
 				}
@@ -527,7 +527,8 @@ stDefine('filterBuilder', function(st) {
 			Operations[operation] = checkFn;
 		}
 	};
-});/**
+})
+/**
     数据管理模块
     
     Feartures : 
@@ -540,7 +541,7 @@ stDefine('filterBuilder', function(st) {
 
     @module DataManager
 */
-stDefine('dataManager', function(st) {
+_stDefine('dataManager', function(st) {
 
 	var dataManager, policyManager, dataServices,
 		_config = {
@@ -552,51 +553,15 @@ stDefine('dataManager', function(st) {
 		},
 		defFilterBuilder = st.filterBuilder(),
 		promiseEvent = st.promiseEvent,
-		isFunction = $.isFunction;
-
+		isFunction = st.isFunction;
 
 	/**
-	 * 数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
-	 * 数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
-	 * @class dataServices
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 * 		//注册cache的数据服务
-			dataServices.add("cache", {
-				//实现search接口方法
-				search: function(op) {
-					var result, filter = op.filter;
-					//过滤数据
-					result = filter ? _cache.filter(filter) : _cache;
-					
-					//执行成功之后的方法
-					op.success && op.success(result);
-				},
-				//实现update接口方法
-				update: function(op) {
-					var filter = op.filter,
-						data = getData(op.data);
-
-					if (filter) {
-						//测试使用，只更新第一条匹配数据
-						$.each(_cache, function(i, item) {
-							if (filter(item)) {
-								_cache[i] = data;
-								return false;
-							}
-						})
-					} else {
-						_cache = op.data || [];
-					}
-					op.success && op.success(op.data);
-				},
-				//实现initOptions接口方法
-				initOptions: function(op) {
-					//生成fitler，当filter为obj类型时，编译成fn
-					op.filter = buildFitler(op.filter || op.params);
-				}
-			});
+	   数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
+	   数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
+	   @class dataServices
+	   @constructor
+	   @extends factory
+       @demo test/dataManager/demo.js [dataServices]
 	 */
 	dataServices = st.factory({
 		name: "dataServices",
@@ -607,17 +572,7 @@ stDefine('dataManager', function(st) {
 			 * @param  {string} type 操作类型；1. search; 2. update
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
-			 * @return {object}      操作结果
-			 * @example
-			 * 		//执行查询cache的操作
-			 * 		var result = dataServices.operate('search',{
-			 * 			//设置数据服务类型为cache
-			 * 			dsType : 'cache',
-			 * 			//过滤参数
-			 * 			fitler : {name : 'roy'},
-			 * 			//换成的key，cache类型数据服务特有属性参数
-			 * 			cacheKey : 'test'
-			 * 		});
+			 * @return {object|promise}      操作结果或者promise
 			 */
 			operate: function(type, op) {
 				var ds = this.find(op.dsType);
@@ -635,18 +590,6 @@ stDefine('dataManager', function(st) {
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
 			 * @return {object}      操作结果
-			 * @example
-			 * 		//使用ajax进行查询
-			 * 		dataServices.search({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'ajax',
-			 * 			//服务地址
-			 * 			url : 'xxxx',
-			 * 			//查询参数
-			 * 			param : {name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
 			 */
 			search: function(op) {
 				return this.operate('search', op);
@@ -657,18 +600,6 @@ stDefine('dataManager', function(st) {
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
 			 * @return {object}      操作结果
-		 	 * @example
-			 * 		//使用rest进行更新
-			 * 		dataServices.update({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'rest',
-			 * 			//rest服务地址
-			 * 			url : 'user/update/{id}',
-			 * 			//更新参数
-			 * 			param : {id : 1 ,name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
 			 */
 			update: function(op) {
 				return this.operate('update', op);
@@ -714,12 +645,12 @@ stDefine('dataManager', function(st) {
 	})
 
 	/**
-	 * 数据管理器工厂
-	 * @class dataManager
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 *
+	   数据管理器工厂； 更多数据管理的例子见smartjs其他数据管理项
+	   @class dataManager
+	   @constructor
+	   @extends factory
+       @demo test/dataManager/demo.js [dataManager]
+
 	 */
 	dataManager = st.factory({
 		name: "dataManager",
@@ -746,8 +677,9 @@ stDefine('dataManager', function(st) {
 		 */
 		base: {
 			/**
-			 * 是否过滤模式
+			 * 是否过滤模式; true时,使用filterBuilder组织过滤
 			 * @type {Boolean} _filterMode
+			 * @default true
 			 */
 			_filterMode: true,
 			//_operations : ["get","set"],
@@ -988,8 +920,8 @@ stDefine('dataManager', function(st) {
 	}
 
 	function whenFlow(fireResult, success, error) {
-		var d = $.Deferred();
-		$.when(fireResult).done(function(result) {
+		var d = st.Deferred();
+		st.when(fireResult).done(function(result) {
 			success && success(result);
 			d.resolve(result);
 		}).fail(function(err) {
@@ -1073,13 +1005,14 @@ stDefine('dataManager', function(st) {
 		var dsOp, fnDsQueue, i = 0;
 
 		function buildDsOp(op) {
-			var conf = $.extend(true, {}, op, policy);
+			var conf = st.mergeMulti(true,[{},op, policy]);
 			conf.success = success;
 			conf.error = error;
 			dm.setDataSerive(conf);
 			return conf;
 		}
-		if ($.isArray(ds)) {
+
+		if (st.isArray(ds)) {
 			fnDsQueue = function() {
 				if (dsOp = ds[i++]) {
 					dsOp = buildDsOp(dsOp);
@@ -1140,7 +1073,7 @@ stDefine('dataManager', function(st) {
 			dm.stopTimer = function(id) {
 				var ts = this.__timers,
 					no;
-				if ($.isEmptyObject(ts))
+				if (st.isEmptyObject(ts))
 					return;
 
 				if (id) {
@@ -1149,7 +1082,7 @@ stDefine('dataManager', function(st) {
 						clearInterval(no);
 					}
 				} else {
-					$.each(ts, function(i, no) {
+					st.each(ts, function(i, no) {
 						no && clearInterval(no);
 					});
 					this.__timers = {};
@@ -1205,7 +1138,7 @@ stDefine('dataManager', function(st) {
 				return;
 			}
 
-			_policy = $.extend({
+			_policy = st.mergeObj({
 				mergeFilter: false,
 				way: 'ds',
 			}, trPolicy);
@@ -1229,7 +1162,7 @@ stDefine('dataManager', function(st) {
 			var trigger = op.get && op.get.trigger;
 			if (trigger) {
 
-				$.each(trigger, function(i, trPolicy) {
+				st.each(trigger, function(i, trPolicy) {
 					compileTrigger(i, trPolicy, dm, flow, op);
 				});
 				op.get.trigger = null;
@@ -1242,7 +1175,8 @@ stDefine('dataManager', function(st) {
 		dataPolicyManager: policyManager,
 		dataServices: dataServices
 	};
-});/**
+})
+/**
     针对于表类型的数据进行管理
     
     Feartures : 
@@ -1256,9 +1190,9 @@ stDefine('dataManager', function(st) {
     @module DataManager
     @submodule DataManager-Table
 */
-stDefine("dataManager-table", function(st) {
-	var isArray = $.isArray,
-		isPlainObj = $.isPlainObject,
+_stDefine("dataManager-table", function(st) {
+	var isArray = st.isArray,
+		isPlainObj = st.isPlainObject,
 		_states = ["_$new", "_$selected", "_$updated", "_$deleted"],
 		_dtConfig = {
 			//分页设置
@@ -1270,7 +1204,7 @@ stDefine("dataManager-table", function(st) {
 			},
 			getField : {
 				pageInf : "pageInf",
-				result :　"result"
+				result :"result"
 			}
 		};
 
@@ -1477,7 +1411,7 @@ stDefine("dataManager-table", function(st) {
 	function handleResult(e, dm, op, policy, isTrigger) {
 		var data = policy.data,pageInf;
 		if(data && (pageInf = data[op.getField.pageInf])){
-			$.extend(op.pageInf,pageInf);
+			st.mergeObj(op.pageInf,pageInf);
 			policy.data = data[op.getField.result];
 		}
 	}
@@ -1502,7 +1436,7 @@ stDefine("dataManager-table", function(st) {
 				if (isReplace)
 					store[i] = data;
 				else
-					$.extend(item, data);
+					st.mergeObj(item, data);
 
 				isUpdated = true;
 				return false;

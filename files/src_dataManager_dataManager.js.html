@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,36 +263,11 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>src\dataManager\dataManager.js <small>File</small></h1>
 </div>
 
@@ -297,7 +287,7 @@
 
     @module DataManager
 */
-stDefine(&#x27;dataManager&#x27;, function(st) {
+_stDefine(&#x27;dataManager&#x27;, function(st) {
 
 	var dataManager, policyManager, dataServices,
 		_config = {
@@ -309,7 +299,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		},
 		defFilterBuilder = st.filterBuilder(),
 		promiseEvent = st.promiseEvent,
-		isFunction = $.isFunction;
+		isFunction = st.isFunction;
 
 	/**
 	   数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
@@ -317,69 +307,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 	   @class dataServices
 	   @constructor
 	   @extends factory
-	   @example
-	   		//cache数组
-	  		var _cache = [];
-
-			//注册cache的数据服务
-	        st.dataServices.add(&quot;cache&quot;, {
-	            //实现search接口方法
-	            search: function(op) {
-	                var result, filter = op.filter;
-	                //过滤数据
-	                result = filter ? _cache.filter(filter) : _cache;
-
-	                //执行成功之后的方法
-	                op.success &amp;&amp; op.success(result);
-	            },
-	            //实现update接口方法
-	            update: function(op) {
-	                var filter = op.filter,
-	                    //测试使用，只更新第一条匹配数据
-	                    data = $.isArray(data) ? data[0] : data;
-
-	                if (filter) {
-	                    //查找数据进行更新
-	                    $.each(_cache, function(i, item) {
-	                        if (filter(item)) {
-	                            _cache[i] = data;
-	                            return false;
-	                        }
-	                    })
-	                } else {
-	                    _cache = op.data || [];
-	                }
-	              
-	                op.success &amp;&amp; op.success(op.data);
-	            }
-	        });
-
-	        //更新cache的数据
-	        st.dataServices.update({
-	            dsType: &#x27;cache&#x27;,
-	            data: [{
-	                name: &#x27;user1&#x27;,
-	                age: 20
-	            }, {
-	                name: &#x27;user2&#x27;,
-	                age: 30
-	            }],
-	            success: function(result) {
-	                expect(_cache.length).toBe(2);
-	            }
-	        });
-
-	        //查询server的数据
-	        st.dataServices.search({
-	            dsType: &#x27;cache&#x27;,
-	            filter : function(data){
-					return data.name === &#x27;user1&#x27;
-	            },
-	            success: function(result) {
-	                expect(result.length).toBe(1);
-	                expect(result[0].age).toBe(20);
-	            }
-	        });
+       @demo test/dataManager/demo.js [dataServices]
 	 */
 	dataServices = st.factory({
 		name: &quot;dataServices&quot;,
@@ -467,86 +395,8 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 	   @class dataManager
 	   @constructor
 	   @extends factory
-	   @example
-	  		//添加一个简单的table类型的数据管理
-	        st.dataManager.add(&quot;Table&quot;, {
-	            init: function() {
-	                this._data = [];
-	            },
-	            //dm内置查询
-	            _innerSearch: function(conf) {
-	                return conf.filter ? this._data.filter(conf.filter) : this._data;
-	            },
-	            //dm内置更新
-	            _innerUpdate: function(conf) {
-	                var isUpdate, _data = this._data,
-	                    data = conf.data,
-	                    updateData;
+       @demo test/dataManager/demo.js [dataManager]
 
-	                if (conf.filter) {
-	                    updateData = $.isArray(data) ? data[0] : data;
-	                    //筛选数据
-	                    _data.forEach(function(item, i) {
-	                        if (conf.filter(item)) {
-	                            _data[i] = updateData;
-	                            isUpdate = true;
-	                            return false;
-	                        }
-	                    })
-	                    isUpdate || _data.push(updateData);
-	                } else {
-	                    this._data = data || [];
-	                }
-	                return data;
-	            },
-	            //判断数据是否为空
-	            checkEmpty: function(data, conf) {
-	                return data === undefined || data.length === 0;
-	            },
-	            //清空数据
-	            clear: function() {
-	                this._data = [];
-	            }
-	        });
-
-	        //创建一个tabel的manager
-	        var dm1 = st.dataManager.create(&quot;Table&quot;);
-
-	        //找不到匹配的数据，则插入新数据
-	        dm1._innerUpdate({
-	            data: {
-	                name: &#x27;user3&#x27;,
-	                age: 10
-	            },
-	            //方法过滤器
-	            filter: function(user) {
-	                return user.name == &#x27;user3&#x27;;
-	            }
-	        });
-	        expect(dm1._data.length).toBe(1);
-	        expect(dm1._data[0].name).toBe(&#x27;user3&#x27;);
-
-	        //更新数据
-	        dm1._innerUpdate({
-	            data: {
-	                name: &#x27;user3&#x27;,
-	                age: 40
-	            },
-	            //方法过滤器
-	            filter: function(user) {
-	                return user.name == &#x27;user3&#x27;;
-	            }
-	        });
-
-	        //查询数据
-	        var result = dm1._innerSearch({
-	            //方法过滤器
-	            filter: function(user) {
-	                return user.name == &#x27;user3&#x27;;
-	            }
-	        });
-	        expect(result.length).toBe(1);
-	        expect(result[0].age).toBe(40);
 	 */
 	dataManager = st.factory({
 		name: &quot;dataManager&quot;,
@@ -816,8 +666,8 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 	}
 
 	function whenFlow(fireResult, success, error) {
-		var d = $.Deferred();
-		$.when(fireResult).done(function(result) {
+		var d = st.Deferred();
+		st.when(fireResult).done(function(result) {
 			success &amp;&amp; success(result);
 			d.resolve(result);
 		}).fail(function(err) {
@@ -901,13 +751,14 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 		var dsOp, fnDsQueue, i = 0;
 
 		function buildDsOp(op) {
-			var conf = $.extend(true, {}, op, policy);
+			var conf = st.mergeMulti(true,[{},op, policy]);
 			conf.success = success;
 			conf.error = error;
 			dm.setDataSerive(conf);
 			return conf;
 		}
-		if ($.isArray(ds)) {
+
+		if (st.isArray(ds)) {
 			fnDsQueue = function() {
 				if (dsOp = ds[i++]) {
 					dsOp = buildDsOp(dsOp);
@@ -968,7 +819,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 			dm.stopTimer = function(id) {
 				var ts = this.__timers,
 					no;
-				if ($.isEmptyObject(ts))
+				if (st.isEmptyObject(ts))
 					return;
 
 				if (id) {
@@ -977,7 +828,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 						clearInterval(no);
 					}
 				} else {
-					$.each(ts, function(i, no) {
+					st.each(ts, function(i, no) {
 						no &amp;&amp; clearInterval(no);
 					});
 					this.__timers = {};
@@ -1033,7 +884,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 				return;
 			}
 
-			_policy = $.extend({
+			_policy = st.mergeObj({
 				mergeFilter: false,
 				way: &#x27;ds&#x27;,
 			}, trPolicy);
@@ -1057,7 +908,7 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
 			var trigger = op.get &amp;&amp; op.get.trigger;
 			if (trigger) {
 
-				$.each(trigger, function(i, trPolicy) {
+				st.each(trigger, function(i, trPolicy) {
 					compileTrigger(i, trPolicy, dm, flow, op);
 				});
 				op.get.trigger = null;
@@ -1074,12 +925,10 @@ stDefine(&#x27;dataManager&#x27;, function(st) {
     </pre>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

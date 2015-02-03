@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,36 +263,11 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>src\base\oop.js <small>File</small></h1>
 </div>
 
@@ -296,13 +286,12 @@
 
     @module OOP
 */
-stDefine(&#x27;oop&#x27;, function(st) {
+_stDefine(&#x27;oop&#x27;, function(st) {
     //初始化扩展函数
     var _onKlassInit = st.promiseEvent(),
         /**
          * klass的基类对象
          * @class klassBase
-         * 
          */
         _klassBase = {
             /**
@@ -311,23 +300,7 @@ stDefine(&#x27;oop&#x27;, function(st) {
                 @param name {string} 需要执行的原型链方法名
                 @param [args] {array} 执行参数
                 @return [object] 返回执行结果
-                @example
-                    var Animate = st.klass(&quot;Animate&quot;, {
-                        klassInit: function(name) {
-                            this.name = name;
-                        },
-                        say: function(text) {
-                            return this.name + &#x27;:&#x27; + text;
-                        }
-                    });
-
-                    var chicken = new Animate(&#x27;chicken&#x27;);
-                    chicken.say = function(text){
-                        //调用原型链方法
-                        return &#x27;[Bird]&#x27; + this.callProto(&#x27;say&#x27;,[text]);
-                    };
-
-                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
+                @demo test/base/oop.js [klassBase - callProto] {执行原型链方法}
             */
             callProto : function(name,args){
                 var fn = this._$fn[name];
@@ -338,32 +311,8 @@ stDefine(&#x27;oop&#x27;, function(st) {
                 获取基类对象
                 @method getBase
                 @param [baseName] {string} 基类名称,不设置则返回父类
-                @return [object] 返回基类 
-                @example
-                    var Animate = st.klass(&quot;Animate&quot;, {
-                            klassInit: function(name) {
-                                this.name = name;
-                            },
-                            say: function(text) {
-                                return this.name + &#x27;:&#x27; + text;
-                            }
-                        });
-                    
-                    //继承user
-                    var Bird = st.klass(&quot;Bird&quot;, {
-                        //重写say方法
-                        say: function(text) {
-                            //根据名称向上找到父类原型
-                            var parent =  this.getBase(&#x27;Animate&#x27;);
-                            
-                            //调用原型链方法
-                            return &#x27;[Bird]&#x27; + parent.say.call(this,text);
-                        }
-                    }, Animate);
-                    
-                    var chicken = new Bird(&#x27;chicken&#x27;);
-                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
-
+                @return [object] 返回基类
+                @demo test/base/oop.js [klassBase - getBase] {获取基类对象}
             */
             getBase: function(baseName) {
                 var self = this,
@@ -389,29 +338,9 @@ stDefine(&#x27;oop&#x27;, function(st) {
                @param  {string} fnName   方法名称
                @param  {string} [baseName] 基类名称
                @param  {array} [args]    方法参数数组
-               @return {object}  执行结果   
-               @example
-                    var Animate = st.klass(&quot;Animate&quot;, {
-                            klassInit: function(name) {
-                                this.name = name;
-                            },
-                            say: function(text) {
-                                return this.name + &#x27;:&#x27; + text;
-                            }
-                        });
-                    
-                    //继承user
-                    var Bird = st.klass(&quot;Bird&quot;, {
-                        //重写say方法
-                        say: function(text) {
-                             //调用基类方法
-                             return &#x27;[Bird]&#x27; + this.callBase(&#x27;say&#x27;,[text]);
-                        }
-                    }, Animate);
-                    
-                    var chicken = new Bird(&#x27;chicken&#x27;);
-                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;[Bird]chicken:hello&#x27;);
-
+               @return {object}  执行结果
+               @demo test/base/oop.js [klassBase - callBase] {调用父类}
+               @demo test/base/oop.js [muilt heirht - callBase] {多级继承示例}
              */
             callBase: function(fnName, baseName, args) {
                 var self = this,
@@ -443,29 +372,10 @@ stDefine(&#x27;oop&#x27;, function(st) {
                @method extend
                @param  {object} prop 扩展的属性和方法对象
                @chainable
-               @example
-                    var Animate = st.klass(&quot;Animate&quot;, {
-                        klassInit: function(name) {
-                            this.name = name;
-                        },
-                        say: function(text) {
-                            return this.name + &#x27;:&#x27; + text;
-                        }
-                    });
-
-                    var chicken = new Animate(&#x27;chicken&#x27;);
-
-                    //扩展等同于 chicken.say = xxx
-                    chicken.extend({
-                        say : function(text){
-                            return &#x27;hello&#x27;;
-                        }
-                    });
-
-                    expect(chicken.say(&#x27;hello&#x27;)).toBe(&#x27;hello&#x27;);
+               @demo test/base/oop.js [klassBase - extend] {类扩展}
              */
             extend: function(prop) {
-                $.extend(this, prop);
+                st.mergeObj(this, prop);
                 return this;
             }
         };
@@ -487,70 +397,10 @@ stDefine(&#x27;oop&#x27;, function(st) {
         @param {klass|object|function} [parent] 父类
         @param {object} [config] 扩展参数
         @return {klass} 返回类
-        @example
-            //创建一个class
-            var User = st.klass(&#x27;user&#x27;,{
-                klassInit:function(name){
-                    this.name = name;
-                },
-                say: function(text) {
-                    return this.name + &#x27;,&#x27; + text;
-                }
-            });
-
-            //实例化一个User
-            var xiaoming = new User(&#x27;小明&#x27;);
-            
-            //方法实例化
-            var xiaozhang = User(&#x27;小张&#x27;);
-
-
-
-            
-            //多级继承例子。在多级继承中有一种场景每个子类方法都会调用父类的方法，而方法中又会使用到当前对象的属性，则问题就来了；
-            //如果是采用的parent.xxx然后传递this下的属性值过去，则没太大的问题。backbone就采用的这种。
-            //另外像base.js直接改写原始方法，将父对象封入闭包中，也无问题。只是这种限制比较大，只能调用父类的同名方法。
-            //而dojo采用的是this.parent.xxx.call(this)的方式，则就会悲剧了，死循环就来了。
-            //导致这样的原因就是将this带入parent方法后，父类又执行this.parent。而这是this则是子类的对象，那么方法就只会不停的调用parent的方法。
-            //在smartjs中klass调用父类方法由callBae这个方法来代理，同时使用指针来记录方法的执行轨迹，这样保证了从子到根的各级调用
-
-            var user2 = st.klass(&#x27;user2&#x27;, {
-                say: function(text) {
-                    //调用父类
-                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv2&quot;;
-                }
-            }, User);
-
-            var user3 = st.klass(&#x27;user3&#x27;, {
-                say: function(text) {
-                    //调用父类
-                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv3&quot;;
-                }
-            }, user2);
-
-            var user4 = st.klass(&#x27;user4&#x27;, {
-                say: function(text) {
-                    //调用父类
-                    return this.callBase(&#x27;say&#x27;, [text]) + &quot;-lv4&quot;;
-                }
-            }, user3);
-
-            var roy = new user4(&#x27;roy&#x27;);
-            
-            //继承路径
-            expect(roy._$inheirts + &#x27;&#x27;).toBe(&#x27;user4,user3,user2,user&#x27;);
-
-            //依次执行到根，正确将当前的this对象的值输出
-            expect(roy.say(&#x27;hello&#x27;)).toBe(&#x27;roy,hello-lv2-lv3-lv4&#x27;);
-
-            //从3级开始执行
-            expect(roy.callBase(&#x27;say&#x27;, [&#x27;hello&#x27;])).toBe(&quot;roy,hello-lv2-lv3&quot;);
-
-            //指定从user开始执行
-            expect(roy.callBase(&#x27;say&#x27;, &#x27;user&#x27;, [&#x27;hello&#x27;])).toBe(&quot;roy,hello&quot;);
-
-            //上向略过2级执行
-            expect(roy.callBase(&#x27;say&#x27;, 2, [&#x27;hello&#x27;])).toBe(&quot;roy,hello-lv2&quot;);
+        @demo test/base/oop.js [class init] {实例化}
+        @demo test/base/oop.js [inheirt] {类继承}
+        @demo test/base/oop.js [klass prop check] {继承特性检查}
+        @demo test/base/oop.js [muilt heirht - callBase] {多级继承}
     */
     function klass(name, prop, parent, config) {
         var _super, _proto, _prop = prop,
@@ -592,17 +442,19 @@ stDefine(&#x27;oop&#x27;, function(st) {
             else
                 _inheirts.push(parent.name);
         } else
-            _proto = $.extend(_obj.prototype, _klassBase);
+            _proto = st.mergeObj(_obj.prototype, _klassBase);
 
         _obj.fn = _proto;
-        $.extend(_proto, _prop, {
+
+        st.mergeMulti([_proto, _prop,{
             //类标示
             _$klass: true,
             //类名
             _$kName: name,
             //继承链
             _$inheirts: _inheirts
-        });
+        }]);
+
         return _obj;
     }
 
@@ -626,99 +478,9 @@ stDefine(&#x27;oop&#x27;, function(st) {
      * 3. merge：对象复制合并
      * @param  {boolean} [initDefault] 是否将base设置成为默认的对象；当使用factory.get找不到对象时返回默认对象
      * @return {factory}  返回创建的工厂对象
-     * @example
-           //widget基类
-            var baseWidget = {
-                //widget类型
-                type: &#x27;&#x27;,
-                //widget的渲染方法
-                render: function(id) {
-                    return this.type + &#x27;:&#x27; + id;
-                }
-            };
-
-            //一个widget工厂
-            var widgetFactory = st.factory(&#x27;wdigetfactory&#x27;, baseWidget);
-
-            //添加一个input
-            widgetFactory.add(&#x27;input&#x27;, {
-                type: &#x27;input&#x27;
-            })
-
-            //找到添加的input
-            var input = widgetFactory.find(&#x27;input&#x27;);
-            
-            //_$fType为注册的类型名
-            expect(input._$fType).toBe(&#x27;input&#x27;);
-
-            //输出
-            expect(input.render(&#x27;txt&#x27;)).toBe(&quot;input:txt&quot;);
-
-
-            //添加一个number类型的input
-            var num = widgetFactory.add(&#x27;number&#x27;, {
-                type: &#x27;input[number]&#x27;
-                //指定父类为input
-            }, &#x27;input&#x27;)
-
-            //输出
-            expect(num.render(&#x27;txtNum&#x27;)).toBe(&quot;input[number]:txtNum&quot;);
-
-
-
-            // 类模式，注册的对象都是类的方式，使用需要初始化
-            var f1 = st.factory({
-                name: &#x27;classMode&#x27;,
-                //设置class类型
-                type: &#x27;class&#x27;,
-                base: {
-                    klassInit: function(name) {
-                        this.name = name;
-                    }
-
-                }
-            });
-
-            var c1 = f1.add(&#x27;c1&#x27;, {
-                type: &#x27;c1&#x27;
-            });
-
-            expect(c1.fn).toBeDefined();
-
-            //需要初始化
-            var c = new c1(&#x27;class1&#x27;);
-            expect(c.type).toBe(&quot;c1&quot;);
-            expect(c.name).toBe(&quot;class1&quot;);
-
-
-
-            //merget mode
-             var f2 = st.factory({
-                name: &#x27;copyMode&#x27;,
-                //设置merge类型
-                type: 　&#x27;merge&#x27;,
-                //设置默认模式
-                initDefault: true,
-                base: {
-                    name: &#x27;copy&#x27;,
-                    project: {
-                        name: &#x27;smartjs&#x27;
-                    }
-                }
-            })
-
-            var c = f2.add(&#x27;c1&#x27;, {
-                name: &#x27;c1&#x27;,
-                project: {
-                    role: &#x27;pm&#x27;
-                }
-            });
-            
-            expect(f2.find().name).toBe(&quot;copy&quot;);
-            expect(c.name).toBe(&quot;c1&quot;);
-            expect(c.project.name).toBe(&quot;smartjs&quot;);
-            expect(c.project.role).toBe(&quot;pm&quot;);
-
+     * @demo test/base/oop.js [factory inheirt] {继承}
+     * @demo test/base/oop.js [factory class mode] {类继承模式}
+     * @demo test/base/oop.js [factory merge mode] {对象合并模式}
      */
     function factory(name, base, proto, type, initDefault) {
         var _store = {}, _base = base,
@@ -769,25 +531,7 @@ stDefine(&#x27;oop&#x27;, function(st) {
            @param  {object} item   产品特性
            @param  {string} [parent] 父类名称，注册到factory中产品名称
            @return {object|klass}  返回创建的产品
-           @example
-                //一个widget工厂
-                var widgetFactory = st.factory(&#x27;wdigetfactory&#x27;, {
-                    //widget类型
-                    type: &#x27;&#x27;,
-                    //widget的渲染方法
-                    render: function(id) {
-                        return this.type + &#x27;:&#x27; + id;
-                    }
-                },&#x27;class&#x27;);
-
-                var Tab = widgetFactory.build(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
-
-                expect(widgetFactory.find(&#x27;Tab&#x27;)).toBeUndefined();
-                
-                var tab1 = new Tab();
-
-                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Tab:tab1&#x27;);
-
+           @demo test/base/oop.js [factory build]
          */
         function build(name, item, parent) {
             parent = parent ? find(parent) || _base : _base;
@@ -809,32 +553,7 @@ stDefine(&#x27;oop&#x27;, function(st) {
            @param  {object} item   产品特性
            @param  {string} [parent] 父类名称，注册到factory中产品名称
            @return {object|klass}  返回创建的产品
-           @example
-                //一个widget工厂
-                var widgetFactory = st.factory({
-                    //工厂名
-                    name : &#x27;wdigetfactory&#x27;,
-                    //工厂类型
-                    type: &#x27;class&#x27;,
-                    //基类对象  
-                    base : {
-                        //widget类型
-                        type: &#x27;&#x27;,
-                        //widget的渲染方法
-                        render: function(id) {
-                            return this.type + &#x27;:&#x27; + id;
-                        }
-                    } 
-                });
-
-                var Tab = widgetFactory.add(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
-
-                expect(widgetFactory.find(&#x27;Tab&#x27;)).toBeDefined();
-                
-                var tab1 = new Tab();
-
-                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Tab:tab1&#x27;);
-
+           @demo test/base/oop.js [factory add]
          */
         function add(name, item, parent) {
             return (_store[name] = build(name, item, parent));
@@ -863,40 +582,10 @@ stDefine(&#x27;oop&#x27;, function(st) {
            @method setDefault
            @param  {string} name   产品名称
            @chainable
-           @example
-               
-                //一个widget工厂
-                var widgetFactory = st.factory({
-                    //工厂名
-                    name : &#x27;wdigetfactory&#x27;,
-                    //工厂类型
-                    type: &#x27;class&#x27;,
-                    //基类对象  
-                    base : {
-                        //widget类型
-                        type: &#x27;&#x27;,
-                        //widget的渲染方法
-                        render: function(id) {
-                            return this.type + &#x27;:&#x27; + id;
-                        }
-                    } 
-                });
-
-                widgetFactory.add(&#x27;Panel&#x27;,{type : &#x27;Panel&#x27;});
-
-                //将Panel设置成默认项
-                widgetFactory.setDefault(&#x27;Panel&#x27;)
-                
-                //Tab未注册，但参数中设置了返回默认，则会返回Panel
-                var Tab = widgetFactory.find(&#x27;Tab&#x27;,true);
-
-                var tab1 = new Tab();
-                
-                expect(tab1.render(&#x27;tab1&#x27;)).toBe(&#x27;Panel:tab1&#x27;);
-
+           @demo test/base/oop.js [setDefault]
          */
         function setDefault(name) {
-            _defaultItem = get(name, true);
+            _defaultItem = find(name, true);
             return this;
         }
 
@@ -910,7 +599,7 @@ stDefine(&#x27;oop&#x27;, function(st) {
             delete _store[name];
         }
 
-        proto = $.extend({
+        proto = st.mergeObj({
             build: build,
             add: add,
             find: find,
@@ -922,40 +611,11 @@ stDefine(&#x27;oop&#x27;, function(st) {
                @param  {string} name 方法名称
                @param  {array} [args] 执行参数
                @param  {function} [handler] 处理方法
-               @example
-                    
-                    //一个widget工厂
-                    var widgetFactory = st.factory({
-                        //工厂名
-                        name : &#x27;wdigetfactory&#x27;,
-                        //工厂类型
-                        type: &#x27;class&#x27;,
-                        //基类对象  
-                        base : {
-                            //widget类型
-                            type: &#x27;&#x27;,
-                            //widget的渲染方法
-                            render: function(id) {
-                                return this.type + &#x27;:&#x27; + id;
-                            }
-                        } 
-                    });
-
-                    widgetFactory.add(&#x27;Panel&#x27;,{type : &#x27;Panel&#x27;});
-                    widgetFactory.add(&#x27;Tab&#x27;,{type : &#x27;Tab&#x27;});
-                    
-                    var ret = &#x27;&#x27;;
-                    //执行每个widget的render方法；
-                    widgetFactory.fire(&#x27;render&#x27;,[&#x27;id&#x27;],function(item,result){
-                        //this为widgetFactory；item为产品；result为render执行结果
-                        ret += result + &#x27;-&#x27;;
-                    })
-
-                    expect(ret).toBe(&#x27;Panel:id-Tab:id-&#x27;);
+               @demo test/base/oop.js [fire]
              */
             fire : function(name,args,handler){
                 var fn,result,self = this;
-                $.each(_store,function(n,item){
+                st.each(_store,function(n,item){
                     if(item){
                         item.fn &amp;&amp; (item = item.fn);
                         if(fn = item[name])
@@ -982,12 +642,10 @@ stDefine(&#x27;oop&#x27;, function(st) {
     </pre>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

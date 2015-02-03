@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,40 +263,15 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>attachTrigger <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <p>给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理
+      <div class="stdoc-code"><p>给对象添加触发器功能,在目标对象上加入触发器功能，目标对象的方法就会具有方法和属性注入功能；所有注入方法使用promiseEvent管理
 目前有四种注入方式： </p>
 <ol>
 <li>before，前置注入，在目标方法执行之前执行；</li>
@@ -289,14 +279,15 @@
 <li>round，环绕，将目标方法包装，自定义控制；</li>
 <li>error，错误，捕获reject的事件；</li>
 </ol>
-
+</div>
  </div>
 
-<div class="well well-small sign-left2" id="classesItems">
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
     
-        <div class="index-section methods">
+        <div class="index-section methods col-sm-4">
             <h3>Methods</h3>
-
+            
             <ul class="index-list methods">
                 
                     <li class="index-item method">
@@ -327,50 +318,59 @@
                         
                     </li>
                 
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_on" data-tablink="on">on</a>
+            </ul>
+            
+        </div>
+    
+        <div class="index-section properties col-sm-4">
+            <h3>Properties</h3>
+            
+        </div>
+    
+        <div class="index-section events col-sm-4">
+            <h3>Events</h3>
+            
+            <ul class="index-list events">
+                
+                    <li class="index-item event">
+                        <a href="#" data-tabid="#event" data-anchor="#event_on" data-tablink="on">on</a>
 
                         
                         
                     </li>
                 
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_onBefore" data-tablink="onBefore">onBefore</a>
+                    <li class="index-item event">
+                        <a href="#" data-tabid="#event" data-anchor="#event_onBefore" data-tablink="onBefore">onBefore</a>
 
                         
                         
                     </li>
                 
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_onError" data-tablink="onError">onError</a>
+                    <li class="index-item event">
+                        <a href="#" data-tabid="#event" data-anchor="#event_onError" data-tablink="onError">onError</a>
 
                         
                         
                     </li>
                 
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_onHandler" data-tablink="onHandler">onHandler</a>
+                    <li class="index-item event">
+                        <a href="#" data-tabid="#event" data-anchor="#event_onHandler" data-tablink="onHandler">onHandler</a>
 
                         
                         
                     </li>
                 
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_onRound" data-tablink="onRound">onRound</a>
+                    <li class="index-item event">
+                        <a href="#" data-tabid="#event" data-anchor="#event_onRound" data-tablink="onRound">onRound</a>
 
                         
                         
                     </li>
                 
             </ul>
+             
         </div>
-    
-
-    
-
-    
-
-    
+    </div>
 </div>
 
 <div>
@@ -381,19 +381,20 @@
         
         
         
+            <li><a data-toggle="tab" href="#event">Events</a></li>
         
     </ul>
 
     <div class="tab-content">
         <div id="class" class="tab-pane active">
-           <div class="well well-small classDetail sign-left1">
+            <div class="well well-small classDetail sign-left1">
             
 
             
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/src_base_aop.js.html#l619"><code>src\base\aop.js:619</code></a>
+                    Defined in: <a href="../files/src_base_aop.js.html#l352"><code>src\base\aop.js:352</code></a>
                 </div>
             
 
@@ -470,7 +471,7 @@
             
         
         
-        <a href="../files/src_base_aop.js.html#l619"><code>src\base\aop.js:619</code></a>
+        <a href="../files/src_base_aop.js.html#l352"><code>src\base\aop.js:352</code></a>
         
         </p>
 
@@ -567,118 +568,187 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [];
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>基本注册</a></li>
+                
+                <li role="presentation"   _no='1'> <a>子对象注册</a></li>
+                
+                <li role="presentation"   _no='2'> <a>自定义接口</a></li>
+                
+                <li role="presentation"   _no='3'> <a>callback模式</a></li>
+                
+                <li role="presentation"   _no='4'> <a>promise</a></li>
+                
+                <li role="presentation"   _no='5'> <a>promise结果传递</a></li>
+                
+                <li role="presentation"   _no='6'> <a>属性监听</a></li>
+                
+            </ul>
 
-var obj1 = {
-    test: function(name) {
-        result.push(name);
-    }
-};
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [], obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
 
-function injectCall(e,name){
-    result.push(name + &#39;-after&#39;);
-}
+            //注册前置
+            obj.onBefore("test", "addBefore", function(e, name) {
+                result.push(&#39;before-&#39; + name)
+            })
+            //注册后置
+            .on("test", "addAfter", function(e, name) {
+                result.push(&#39;after-&#39; + name)
+            });
+            //执行test方法
+            obj.test(&#39;bind&#39;);
+            //前后置正确触发
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [], obj = st.attachTrigger({
+                test: {
+                    child: function(name) {
+                        result.push(name);
+                    }
+                }
+            });
+            //注册子对象方法
+            obj.onBefore("test.child", "addBefore", function(e, name) {
+                result.push(&#39;before-&#39; + name)
+            }).on("test.child", "addAfter", function(e, name) {
+                result.push(&#39;after-&#39; + name)
+            });
+            obj.test.child(&#39;bind&#39;);
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [], obj1 = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            }, {
+                //屏蔽trigger的on方法
+                on: null,
+                //将trigger的onBebefore方法名改成bind
+                onBefore: "bind"
+            })
 
-//给obj1对象附上触发器功能
-st.attachTrigger(obj1);
+            obj1.bind("test", "addBefore", function(e, name) {
+                result.push(&#39;before-&#39; + name);
+            });
 
+            obj1.test(&#39;bind&#39;);
 
-//注册前置触发方法
-obj1.onBefore(&#39;test&#39;,&#39;beforeCall&#39;,function(e,name){
-    result.push(name + &#39;-before&#39;);
-});
+            expect(obj1.onBefore).toBeUndefined
+            expect(obj1.on).toBeUndefined;
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj2 = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            }, "callback");
 
+            obj2.onBefore("test", "addBefore", function(name) {
+                result.push(&#39;before-&#39; + name);
+            }).on("test", "addAfter", function(name) {
+                result.push(&#39;after-&#39; + name)
+            });
+            obj2.test(&#39;bind&#39;);
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: function(name) {
+                    //在原始方法中使用jquery的deferred
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        result.push(name);
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                }
+            });
 
-//注册后置触发方法
-obj1.on(&#39;test&#39;,&#39;afterCall&#39;,injectCall);
+            //前置promise
+            obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+                setTimeout(function() {
+                    result.push(name + &#39;-before&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            })
 
-obj1.test(&#39;test&#39;);
+            //后置promise
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+                setTimeout(function() {
+                    result.push(name + &#39;-after&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            })
 
-expect(result.join(&#39;;&#39;)).toBe(&#39;test-before;test;test-after&#39;);
+            $.when(obj.test(&#39;call&#39;)).done(function() {
+                expect(result.join(&#39;,&#39;)).toBe(&#39;call-before,call,call-after&#39;);
 
+            })</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var obj = st.attachTrigger({
+                test: function(name) {
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        e.resolve(name + &#39;-base&#39;);
+                    }, 100);
+                    return e.promise();
+                },
+                testReturn: function(name) {
+                    return name + "-base"
+                }
+            });
 
-//清空结果
-result = [];
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+                setTimeout(function() {
+                    e.resolve(e.result + &#39;-after&#39;);
+                }, 100);
+                return e.promise();
+            })
 
-//直接初始化成trigger对象
-var obj2 = st.attachTrigger({
-    child : {
-        test : function(name){
-            result.push(name);
-        }
-    }
-});
+            obj.on(&#39;testReturn&#39;, &#39;testAfter&#39;, function(e, name) {
+                setTimeout(function() {
+                    e.resolve(e.result + &#39;-after&#39;);
+                }, 100);
+                return e.promise();
+            })
 
-//注册后置触发方法到子对象方法
-obj2.on(&#39;child.test&#39;,&#39;afterCall&#39;,injectCall);
+            $.when(obj.test(&#39;call&#39;)).done(function(data) {
+                expect(data).toBe(&#39;call-base-after&#39;);
+                $.when(obj.testReturn(&#39;call2&#39;)).done(function(data) {
+                    expect(data).toBe(&#39;call2-base-after&#39;);
 
-obj2.child.test(&#39;test2&#39;);
+                });
 
-expect(result.join(&#39;;&#39;)).toBe(&#39;test2;test2-after&#39;);
+            });</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: 1
+            });
+            //属性监听只有before，after两种方法注入类型，不支持round环绕模式。
+            //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
+            //after：在after则是无法干预值的变化，因此只是做监听使用；
 
+            //回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
+            obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, value, oldValue) {
+                result.push(value + &#39;-before-&#39; + oldValue);
+            })
 
-//定制trigger的接口方法
- var obj3 = st.attachTrigger({
-    test: function(name) {
-        return name;
-    }
-}, {
-    //将trigger的onBebefore方法名改成bind
-    on: "bind",
-    //屏蔽trigger的onBefore方法
-    onBefore: null
-});
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, value, oldValue) {
+                result.push(value + &#39;-after-&#39; + oldValue);
+            })
 
-//使用自定义的bind接口注册前置触发方法
-obj3.bind(&#39;test&#39;,&#39;afterCall&#39;,function(e,name){
-    //将原方法的结果改变，然后返回
-    return e.result + &#39;-after&#39;;
-});
+            expect(obj.test).toBe(1);
 
-expect(obj3.test(&#39;test3&#39;)).toBe(&#39;test3-after&#39;);
-
-
-result = [];
-
-//全promise模式
-var objPromise = st.attachTrigger({
-    test: function(name) {
-        //在原始方法中使用jquery的deferred
-        var e = $.Deferred();
-        setTimeout(function() {
-            result.push(name);
-            e.resolve();
-        }, 100);
-        return e.promise();
-    }
-});
-
-//前置promise
-objPromise.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
-    setTimeout(function() {
-        result.push(name + &#39;-before&#39;);
-        e.resolve();
-    }, 100);
-    return e.promise();
-});
-
-//后置promise
-objPromise.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
-    setTimeout(function() {
-        result.push(name + &#39;-after&#39;);
-        e.resolve();
-    }, 100);
-    return e.promise();
-});
-
-$.when(objPromise.test(&#39;call&#39;)).done(function() {
-    expect(result.join(&#39;,&#39;)).toBe(&#39;call-before,call,call-after&#39;);
-});</code></pre>
-
+            obj.test = 2;
+            //输出前后置监听
+            expect(result.join(&#39;,&#39;)).toBe(&#39;2-before-1,2-after-1&#39;);
+            expect(obj.test).toBe(2);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -738,7 +808,7 @@ $.when(objPromise.test(&#39;call&#39;)).done(function() {
             
         
         
-        <a href="../files/src_base_aop.js.html#l1415"><code>src\base\aop.js:1415</code></a>
+        <a href="../files/src_base_aop.js.html#l792"><code>src\base\aop.js:792</code></a>
         
         </p>
 
@@ -749,8 +819,8 @@ $.when(objPromise.test(&#39;call&#39;)).done(function() {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）</p>
-
+        <div class="stdoc-code"><p>扩展对象；（在使用触发器注册后，原始方法不会直接在目标对象下，因此使用obj.test = xx的方式来扩展会替换到所有的注册事件）</p>
+</div>
     </div>
 
     
@@ -786,32 +856,39 @@ $.when(objPromise.test(&#39;call&#39;)).done(function() {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> var obj = st.attachTrigger({
-    test: function(name) {
-        result.push(name);
-    }
-});
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-//注册后置testAfter
-obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
-    result.push(&#39;after&#39;);
-});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [], obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
 
-//扩展替换test
-obj.extend({
-    test : function(name){
-        result.push(name + &#39;:extend&#39;)
-    }
-});
+            //注册后置testAfter
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+                result.push(&#39;after&#39;);
+            });
 
-obj.test(&#39;test&#39;);
+            //扩展替换test
+            obj.extend({
+                test : function(name){
+                    result.push(name + &#39;:extend&#39;)
+                }
+            });
 
-expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre>
+            obj.test(&#39;test&#39;);
 
+            expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -871,7 +948,7 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre
             
         
         
-        <a href="../files/src_base_aop.js.html#l1111"><code>src\base\aop.js:1111</code></a>
+        <a href="../files/src_base_aop.js.html#l677"><code>src\base\aop.js:677</code></a>
         
         </p>
 
@@ -882,8 +959,8 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>执行手动触发的Handler</p>
-
+        <div class="stdoc-code"><p>执行手动触发的Handler</p>
+</div>
     </div>
 
     
@@ -1001,7 +1078,7 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre
             
         
         
-        <a href="../files/src_base_aop.js.html#l1335"><code>src\base\aop.js:1335</code></a>
+        <a href="../files/src_base_aop.js.html#l761"><code>src\base\aop.js:761</code></a>
         
         </p>
 
@@ -1012,8 +1089,8 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>注销注册的后置事件方法</p>
-
+        <div class="stdoc-code"><p>注销注册的后置事件方法</p>
+</div>
     </div>
 
     
@@ -1070,35 +1147,46 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test:extend-after2&#39;);</code></pre
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [];
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-var obj = st.attachTrigger({
-    test: function(name) {
-        result.push(name);
-    }
-});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
+            //注册前置testBefore
+            obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+                result.push(name + &#39;-before1&#39;);
+            })
 
-//注册后置testAfter1
-obj.on(&#39;test&#39;, &#39;testAfter1&#39;, function(e, name) {
-    result.push(&#39;after1&#39;);
-});
+            //注册前置testBefore2
+            obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+                result.push(name + &#39;-before2&#39;);
+            })
 
-//注册后置testAfter2
-obj.on(&#39;test&#39;, &#39;testAfter2&#39;, function(e, name) {
-    result.push(&#39;after2&#39;);
-});
+            //注销多个前置
+            obj.offBefore(&#39;test&#39;, [&#39;testBefore&#39;, &#39;testBefore2&#39;]);
 
-//注销单个后置
-obj.off(&#39;test&#39;, &#39;testAfter1&#39;);
+            //注册后置testAfter
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, name) {
+                result.push(name + &#39;-after&#39;);
+            })
 
-obj.test(&#39;test&#39;);
+            //注销单个后置
+            obj.off(&#39;test&#39;, &#39;testAfter&#39;);
 
-expect(result.join(&#39;-&#39;)).toBe(&#39;test-after2&#39;);</code></pre>
-
+            obj.test(&#39;call&#39;);
+            expect(result.join(&#39;,&#39;)).toBe(&#39;call&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1156,7 +1244,7 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test-after2&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l1375"><code>src\base\aop.js:1375</code></a>
+        <a href="../files/src_base_aop.js.html#l777"><code>src\base\aop.js:777</code></a>
         
         </p>
 
@@ -1167,8 +1255,8 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test-after2&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>注销注册的前置事件方法</p>
-
+        <div class="stdoc-code"><p>注销注册的前置事件方法</p>
+</div>
     </div>
 
     
@@ -1223,97 +1311,27 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test-after2&#39;);</code></pre>
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [];
-
-var obj = st.attachTrigger({
-    test: function(name) {
-        result.push(name);
-    }
-});
-
-//注册前置testBefore
-obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
-    result.push(&#39;before1&#39;);
-});
-
-//注册前置testBefore2
-obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
-    result.push(&#39;before2&#39;);
-});
-
-//注销多个前置
-obj.offBefore(&#39;test&#39;, [&#39;testBefore&#39;, &#39;testBefore2&#39;]);
-
-obj.test(&#39;test&#39;);
-
-expect(result.join(&#39;-&#39;)).toBe(&#39;test&#39;);</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
-    
 </div>
 
                 
-                    <div id="method_on" class="method item">
-    <h3 class="name">on</h3>
-    <code>
-    on
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        name
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        trName
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [priority]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+            </div>
+        
+
+        
+
+        
+            <div id="event" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_on" class="events item">
+    <h3 class="name"><code>on</code></h3>
+    <span class="type"></span>
 
     
 
     
 
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -1329,19 +1347,17 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l1122"><code>src\base\aop.js:1122</code></a>
+        <a href="../files/src_base_aop.js.html#l688"><code>src\base\aop.js:688</code></a>
         
         </p>
-
 
         
 
         
     </div>
-
-    <div class="description well well-small sign-left3">
-        <p>注册[后置的]事件方法;注册后置和对象注入</p>
-
+     <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>注册[后置的]事件方法;注册后置和对象注入</p>
+</div>
     </div>
 
     
@@ -1442,118 +1458,73 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;test&#39;);</code></pre>
         </div>
     
 
-    
 
     
         <div class="example">
             <h4>Example:</h4>
+
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [], obj = st.attachTrigger({
-    //方法
-    test: function(name) {
-        result.push(name);
-    },
-    //子对象
-    child : {
-        test : function(name){
-            result.push(name);
-        }
-    },
-    //属性
-    prop : 1
-});
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [], obj = st.attachTrigger({
+                test: {
+                    child: function(name) {
+                        result.push(name);
+                    }
+                }
+            });
+            //注册子对象方法
+            obj.onBefore("test.child", "addBefore", function(e, name) {
+                result.push(&#39;before-&#39; + name)
+            }).on("test.child", "addAfter", function(e, name) {
+                result.push(&#39;after-&#39; + name)
+            });
+            obj.test.child(&#39;bind&#39;);
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
 
-//注册前置
-obj.onBefore("test", "addBefore", function(e, name) {
-    result.push(&#39;before-&#39; + name);
-})
-//注册后置
-.on("test", "addAfter", function(e, name) {
-    result.push(&#39;after-&#39; + name);
-});
+            //对象注入
+            obj.on({
+                //简单的注入后置方法
+                test: function(e, name) {
+                    result.push(&#39;after&#39;);
+                },
+                //注入前置&amp;注入参数设置
+                &#39;test before&#39;: {
+                    //注入方法
+                    fn: function(e, name) {
+                        result.push(&#39;before&#39;);
+                    },
+                    //注入权重
+                    priority: 100,
+                    //注入模式
+                    mode: &#39;once&#39;
+                }
+            }, "onObject");
 
-//执行test方法
-obj.test(&#39;bind&#39;);
-//前后置正确触发
-expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");
+            obj.test(&#39;call&#39;);
+            expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: 1
+            });
 
-result = [];
+            obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, value) {
+                result.push(value + &#39;-before&#39;);
+                //停止方法，阻止赋值行为
+                e.stop
+            })
 
+            obj.on(&#39;test&#39;, &#39;testAfter&#39;, function(e, value) {
+                result.push(value + &#39;-after&#39;);
+            })
 
-//支持子对象方法注册
-obj.onBefore("child.test", "addBefore", function(e, name) {
-    result.push(&#39;before-&#39; + name);
-}).on("child.test", "addAfter", function(e, name) {
-    result.push(&#39;after-&#39; + name);
-});
-
-
-//属性监听只有before，after两种方法注入类型，不支持round环绕模式。
-//before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
-//after：在after则是无法干预值的变化，因此只是做监听使用；
-
-
-//注册属性监听，回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
- obj.onBefore(&#39;prop&#39;, &#39;testBefore&#39;, function(e, value,oldValue) {
-    result.push(value + &#39;-before-&#39; + oldValue);
-});
-
-obj.on(&#39;prop&#39;, &#39;testAfter&#39;, function(e, value,oldValue) {
-    result.push(value + &#39;-after-&#39; + oldValue);
-});
-
-expect(obj.prop).toBe(1);
-
-//属性赋值
-obj.prop = 2;
-
-//输出前后置监听
-expect(result.join(&#39;,&#39;)).toBe(&#39;2-before-1,2-after-1&#39;);
-expect(obj.prop).toBe(2);
-
-
-//前置中干预赋值
-obj.onBefore(&#39;prop&#39;, &#39;testBefore&#39;, function(e, value) {
-    //停止方法，阻止赋值行为
-    e.stop();
-});
-
-obj.prop = 4;
-//结果未变化
-expect(obj.prop).toBe(2);
-
-
-result = [];
-
-//对象注入例子
-var objInject = st.attachTrigger({
-    test: function(name) {
-        result.push(name);
-    }
-});
-
-//对象注入
-objInject.on({
-    //简单的注入后置方法
-    test : function(e,name){
-        result.push(&#39;after&#39;);
-    },
-    //注入前置&amp;注入参数设置
-    &#39;test before&#39; : {
-        //注入方法
-        fn : function(e,name){
-            result.push(&#39;before&#39;);
-        },
-        //注入权重
-        priority : 100,
-        //注入模式
-        mode : &#39;once&#39;
-    }
-},"onObject");
-
-objInject.test(&#39;call&#39;);
-expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
-
+            obj.test = 2;
+            //最终更新失败，输出前置的监听内容
+            expect(result.join(&#39;,&#39;)).toBe(&#39;2-before&#39;);
+            expect(obj.test).toBe(1);</code></pre>
+</div>
             </div>
             <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
             <button class="btn-runDemo btn btn-success" type="button">edit code</button>
@@ -1562,61 +1533,14 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
 </div>
 
                 
-                    <div id="method_onBefore" class="method item">
-    <h3 class="name">onBefore</h3>
-    <code>
-    onBefore
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        name
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        trName
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [priority]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+                    <div id="event_onBefore" class="events item">
+    <h3 class="name"><code>onBefore</code></h3>
+    <span class="type"></span>
 
     
 
     
 
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -1632,19 +1556,17 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l1257"><code>src\base\aop.js:1257</code></a>
+        <a href="../files/src_base_aop.js.html#l720"><code>src\base\aop.js:720</code></a>
         
         </p>
-
 
         
 
         
     </div>
-
-    <div class="description well well-small sign-left3">
-        <p>注册前置的事件方法</p>
-
+     <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>注册前置的事件方法</p>
+</div>
     </div>
 
     
@@ -1745,71 +1667,19 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
         </div>
     
 
-    
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//见on方法</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
     
 </div>
 
                 
-                    <div id="method_onError" class="method item">
-    <h3 class="name">onError</h3>
-    <code>
-    onError
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        name
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        trName
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+                    <div id="event_onError" class="events item">
+    <h3 class="name"><code>onError</code></h3>
+    <span class="type"></span>
 
     
 
     
 
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -1825,19 +1695,17 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l1304"><code>src\base\aop.js:1304</code></a>
+        <a href="../files/src_base_aop.js.html#l747"><code>src\base\aop.js:747</code></a>
         
         </p>
-
 
         
 
         
     </div>
-
-    <div class="description well well-small sign-left3">
-        <p>注册错误捕获事件，当执行reject的时候触发</p>
-
+     <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>注册错误捕获事件，当执行reject的时候触发</p>
+</div>
     </div>
 
     
@@ -1920,30 +1788,30 @@ expect(result.join(&#39;,&#39;)).toBe(&#39;before,call,after&#39;);</code></pre>
         </div>
     
 
-    
 
     
         <div class="example">
             <h4>Example:</h4>
+
             <div class="example-content">
-                <pre class="code prettyprint"><code>var testError = st.attachTrigger({
-    test: function(name) {
-        var e = $.Deferred();
-        setTimeout(function() {
-            //拒绝契约
-             e.reject(&#39;reject&#39;);
-        }, 100);
-        return e.promise();
-    }
-});
-//注册错误捕获事件
-testError.onError("test","triggerError",function(err,name){
-      expect(err).toBe(&#39;reject&#39;);
-      expect(name).toBe(&#39;call&#39;);
-});
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var testError = st.attachTrigger({
+                test: function(name) {
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        //拒绝契约
+                        e.reject(&#39;reject&#39;);
+                    }, 100);
+                    return e.promise();
+                }
+            });
+            //注册错误捕获事件
+            testError.onError("test", "triggerError", function(err, name) {
+                expect(err).toBe(&#39;reject&#39;);
+                expect(name).toBe(&#39;call&#39;);
 
-testError.test(&#39;call&#39;);</code></pre>
-
+            })
+            testError.test(&#39;call&#39;);</code></pre>
+</div>
             </div>
             <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
             <button class="btn-runDemo btn btn-success" type="button">edit code</button>
@@ -1952,61 +1820,14 @@ testError.test(&#39;call&#39;);</code></pre>
 </div>
 
                 
-                    <div id="method_onHandler" class="method item">
-    <h3 class="name">onHandler</h3>
-    <code>
-    onHandler
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        name
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        trName
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [priority]
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [mode]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+                    <div id="event_onHandler" class="events item">
+    <h3 class="name"><code>onHandler</code></h3>
+    <span class="type"></span>
 
     
 
     
 
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -2022,19 +1843,17 @@ testError.test(&#39;call&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l1075"><code>src\base\aop.js:1075</code></a>
+        <a href="../files/src_base_aop.js.html#l661"><code>src\base\aop.js:661</code></a>
         
         </p>
-
 
         
 
         
     </div>
-
-    <div class="description well well-small sign-left3">
-        <p>注册手动的触发的Handler</p>
-
+     <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>注册手动的触发的Handler</p>
+</div>
     </div>
 
     
@@ -2135,33 +1954,33 @@ testError.test(&#39;call&#39;);</code></pre>
         </div>
     
 
-    
 
     
         <div class="example">
             <h4>Example:</h4>
+
             <div class="example-content">
-                <pre class="code prettyprint"><code>var obj = st.attachTrigger({
-    test: function(text) {
-        //手动执行handler
-        return this.fireHandler(&#39;handler&#39;, [text, "run"]);
-    }
-});
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var obj = st.attachTrigger({
+                test: function(text) {
+                    //手动执行handler
+                    return this.fireHandler(&#39;handler&#39;, [text, "run"]);
+                }
+            });
 
-//注册handler1
-obj.onHandler(&#39;handler&#39;, &#39;handler1&#39;, function(e, text, state) {
-    //返回结果
-    return text + &#39;-&#39; + state + &#39;-&#39; + &#39;handler1&#39;;
-})
+            //注册handler1
+            obj.onHandler(&#39;handler&#39;, &#39;handler1&#39;, function(e, text, state) {
+                //返回结果
+                return text + &#39;-&#39; + state + &#39;-&#39; + &#39;handler1&#39;;
+            })
 
-//注册handler2
-obj.onHandler(&#39;handler&#39;, &#39;handler2&#39;, function(e, text, state) {
-    //接受handler1结果
-    return e.result + &#39;-&#39; + &#39;handler2&#39;;
-})
+            //注册handler2
+            obj.onHandler(&#39;handler&#39;, &#39;handler2&#39;, function(e, text, state) {
+                //接受handler1结果
+                return e.result + &#39;-&#39; + &#39;handler2&#39;;
+            })
 
-expect(obj.test(&#39;test&#39;)).toBe(&#39;test-run-handler1-handler2&#39;);</code></pre>
-
+            expect(obj.test(&#39;test&#39;)).toBe(&#39;test-run-handler1-handler2&#39;);</code></pre>
+</div>
             </div>
             <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
             <button class="btn-runDemo btn btn-success" type="button">edit code</button>
@@ -2170,49 +1989,14 @@ expect(obj.test(&#39;test&#39;)).toBe(&#39;test-run-handler1-handler2&#39;);</co
 </div>
 
                 
-                    <div id="method_onRound" class="method item">
-    <h3 class="name">onRound</h3>
-    <code>
-    onRound
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        name
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        trName
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        fn
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+                    <div id="event_onRound" class="events item">
+    <h3 class="name"><code>onRound</code></h3>
+    <span class="type"></span>
 
     
 
     
 
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
     
 
     
@@ -2228,19 +2012,17 @@ expect(obj.test(&#39;test&#39;)).toBe(&#39;test-run-handler1-handler2&#39;);</co
             
         
         
-        <a href="../files/src_base_aop.js.html#l1273"><code>src\base\aop.js:1273</code></a>
+        <a href="../files/src_base_aop.js.html#l734"><code>src\base\aop.js:734</code></a>
         
         </p>
-
 
         
 
         
     </div>
-
-    <div class="description well well-small sign-left3">
-        <p>注册环绕触发事件</p>
-
+     <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>注册环绕触发事件</p>
+</div>
     </div>
 
     
@@ -2305,31 +2087,29 @@ expect(obj.test(&#39;test&#39;)).toBe(&#39;test-run-handler1-handler2&#39;);</co
         </div>
     
 
-    
 
     
         <div class="example">
             <h4>Example:</h4>
+
             <div class="example-content">
-                <pre class="code prettyprint"><code>var result = [];
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj3 = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
 
- var obj3 = st.attachTrigger({
-    test: function(name) {
-        result.push(name);
-    }
-});
+            //注册环绕事件，事件方法参数第一为fn为原方法，后面的为执行参数
+            obj3.onRound("test", "roundTest", function(fn, name) {
+                result.push(&#39;before&#39;);
+                //执行原有方法
+                fn(name);
+                result.push(&#39;after&#39;);
+            });
 
-//注册环绕事件，事件方法参数第一为fn为原方法，后面的为执行参数
-obj3.onRound("test", "roundTest", function(fn, name) {
-    result.push(&#39;before&#39;);
-    //执行原有方法
-    fn(name);
-    result.push(&#39;after&#39;);
-});
-
-obj3.test(&#39;round&#39;);
-expect(result.join(&#39;,&#39;)).toBe("before,round,after");</code></pre>
-
+            obj3.test(&#39;round&#39;);
+            expect(result.join(&#39;,&#39;)).toBe("before,round,after");</code></pre>
+</div>
             </div>
             <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
             <button class="btn-runDemo btn btn-success" type="button">edit code</button>
@@ -2340,21 +2120,13 @@ expect(result.join(&#39;,&#39;)).toBe("before,round,after");</code></pre>
                 
             </div>
         
-
-        
-
-        
-
-        
     </div>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

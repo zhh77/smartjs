@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,42 +263,16 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>src\dataManager\dataManager-table.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums" id='src_code'>
-&#x27;use strict&#x27;;
 /**
     针对于表类型的数据进行管理
     
@@ -298,9 +287,9 @@
     @module DataManager
     @submodule DataManager-Table
 */
-stDefine(&quot;dataManager-table&quot;, function(st) {
-	var isArray = $.isArray,
-		isPlainObj = $.isPlainObject,
+_stDefine(&quot;dataManager-table&quot;, function(st) {
+	var isArray = st.isArray,
+		isPlainObj = st.isPlainObject,
 		_states = [&quot;_$new&quot;, &quot;_$selected&quot;, &quot;_$updated&quot;, &quot;_$deleted&quot;],
 		_dtConfig = {
 			//分页设置
@@ -312,7 +301,7 @@ stDefine(&quot;dataManager-table&quot;, function(st) {
 			},
 			getField : {
 				pageInf : &quot;pageInf&quot;,
-				result :　&quot;result&quot;
+				result :&quot;result&quot;
 			}
 		};
 
@@ -519,7 +508,7 @@ stDefine(&quot;dataManager-table&quot;, function(st) {
 	function handleResult(e, dm, op, policy, isTrigger) {
 		var data = policy.data,pageInf;
 		if(data &amp;&amp; (pageInf = data[op.getField.pageInf])){
-			$.extend(op.pageInf,pageInf);
+			st.mergeObj(op.pageInf,pageInf);
 			policy.data = data[op.getField.result];
 		}
 	}
@@ -544,7 +533,7 @@ stDefine(&quot;dataManager-table&quot;, function(st) {
 				if (isReplace)
 					store[i] = data;
 				else
-					$.extend(item, data);
+					st.mergeObj(item, data);
 
 				isUpdated = true;
 				return false;
@@ -819,12 +808,10 @@ stDefine(&quot;dataManager-table&quot;, function(st) {
     </pre>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,51 +263,27 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>priorityList <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <p>权重列表,根据权重的由大到小进入插入。
+      <div class="stdoc-code"><p>权重列表,根据权重的由大到小进入插入。
 具有两种item模式：</p>
 <pre class="code prettyprint"><code>1. 默认，正常item，手动设置priority
 2. self，读取item的priority属性</code></pre>
-
+</div>
  </div>
 
-<div class="well well-small sign-left2" id="classesItems">
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
     
-        <div class="index-section methods">
+        <div class="index-section methods col-sm-4">
             <h3>Methods</h3>
-
+            
             <ul class="index-list methods">
                 
                     <li class="index-item method">
@@ -338,14 +329,19 @@
                     </li>
                 
             </ul>
+            
         </div>
     
-
+        <div class="index-section properties col-sm-4">
+            <h3>Properties</h3>
+            
+        </div>
     
-
-    
-
-    
+        <div class="index-section events col-sm-4">
+            <h3>Events</h3>
+            
+        </div>
+    </div>
 </div>
 
 <div>
@@ -356,25 +352,24 @@
         
         
         
-        
     </ul>
 
     <div class="tab-content">
         <div id="class" class="tab-pane active">
-           <div class="well well-small classDetail sign-left1">
+            <div class="well well-small classDetail sign-left1">
             
 
             
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/src_base_util.js.html#l349"><code>src\base\util.js:349</code></a>
+                    Defined in: <a href="../files/src_base_base.js.html#l472"><code>src\base\base.js:472</code></a>
                 </div>
             
 
             
                 
-                    Module: <a href="../modules/Util.html">Util</a>
+                    Module: <a href="../modules/Base.html">Base</a>
                 
             
 
@@ -435,7 +430,7 @@
             
         
         
-        <a href="../files/src_base_util.js.html#l349"><code>src\base\util.js:349</code></a>
+        <a href="../files/src_base_base.js.html#l472"><code>src\base\base.js:472</code></a>
         
         </p>
 
@@ -501,27 +496,50 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var list = st.priorityList(),
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>base</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var list = st.priorityList,
+                result = [];
+
+            //添加项
+            list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
+
+            //10为第一个
+            expect(list.at(0)).toBe(10);
+
+
+            //按优先级大到小循环
+            list.each(function(item) {
+                result.push(item);
+            })
+
+            expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);
+
             result = [];
 
-        //添加项
-        list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
+            //删除 item为1的项
+            list.remove(function(item) {
+                if (item === 1)
+                //结束匹配
+                    return "done";
+            })
 
-        //10为第一个
-        expect(list.at(0)).toBe(10);
+            //按优先级小到大循环
+            list.each(true, function(item) {
+                result.push(item);
+            })
 
-
-        //按优先级大到小循环
-        list.each(function(item) {
-            result.push(item);
-        })
-
-        expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
-
+            expect(result + &#39;&#39;).toBe(&#39;-1,0,5,10&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -587,7 +605,7 @@
             
         
         
-        <a href="../files/src_base_util.js.html#l387"><code>src\base\util.js:387</code></a>
+        <a href="../files/src_base_base.js.html#l494"><code>src\base\base.js:494</code></a>
         
         </p>
 
@@ -598,8 +616,8 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>执行回调</p>
-
+        <div class="stdoc-code"><p>执行回调</p>
+</div>
     </div>
 
     
@@ -650,30 +668,6 @@
 
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var list = st.priorityList(),
-result = [];
-
-            //添加项
-            list.add(1).add(0);
-
-            //根据priority添加项
-            list.add(10, 10).add(5, 5).add(-1, -1);
-
-            //按优先级大到小循环
-            list.each(function(item) {
-                result.push(item);
-            })
-
-expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
     
 </div>
 
@@ -726,7 +720,7 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_util.js.html#l556"><code>src\base\util.js:556</code></a>
+        <a href="../files/src_base_base.js.html#l614"><code>src\base\base.js:614</code></a>
         
         </p>
 
@@ -737,8 +731,8 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>根据序号获取item</p>
-
+        <div class="stdoc-code"><p>根据序号获取item</p>
+</div>
     </div>
 
     
@@ -825,7 +819,7 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_util.js.html#l566"><code>src\base\util.js:566</code></a>
+        <a href="../files/src_base_base.js.html#l624"><code>src\base\base.js:624</code></a>
         
         </p>
 
@@ -836,8 +830,8 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>清除所有项</p>
-
+        <div class="stdoc-code"><p>清除所有项</p>
+</div>
     </div>
 
     
@@ -900,7 +894,7 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_util.js.html#l500"><code>src\base\util.js:500</code></a>
+        <a href="../files/src_base_base.js.html#l578"><code>src\base\base.js:578</code></a>
         
         </p>
 
@@ -911,8 +905,8 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>循环列表方法，默认根据priority大到小</p>
-
+        <div class="stdoc-code"><p>循环列表方法，默认根据priority大到小</p>
+</div>
     </div>
 
     
@@ -964,34 +958,6 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>            var list = st.priorityList(),
-                result = [];
-
-            //添加项
-            list.add(1).add(0).add(10, 10).add(5, 5).add(-1, -1);
-
-             //按优先级大到小循环
-            list.each(function(item) {
-                result.push(item);
-            })
-            expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);
-
-            result = [];
-
-            //按优先级小到大循环
-            list.each(true,function(item) {
-                result.push(item);
-            })
-            expect(result + &#39;&#39;).toBe(&#39;-1,0,1,5,10&#39;);</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
-    
 </div>
 
                 
@@ -1033,7 +999,7 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_util.js.html#l576"><code>src\base\util.js:576</code></a>
+        <a href="../files/src_base_base.js.html#l634"><code>src\base\base.js:634</code></a>
         
         </p>
 
@@ -1044,8 +1010,8 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>获取列表长度</p>
-
+        <div class="stdoc-code"><p>获取列表长度</p>
+</div>
     </div>
 
     
@@ -1116,7 +1082,7 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
             
         
         
-        <a href="../files/src_base_util.js.html#l452"><code>src\base\util.js:452</code></a>
+        <a href="../files/src_base_base.js.html#l544"><code>src\base\base.js:544</code></a>
         
         </p>
 
@@ -1127,8 +1093,8 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>执行回调</p>
-
+        <div class="stdoc-code"><p>执行回调</p>
+</div>
     </div>
 
     
@@ -1167,28 +1133,6 @@ expect(result + &#39;&#39;).toBe(&#39;10,5,1,0,-1&#39;);</code></pre>
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var list = st.priorityList();
-
-list.add({id : 1});
-list.add({id : 2});
-
-               //删除 item为1的项
-            list.remove(function(item){
-                if(item.id === 1)
-                    //结束匹配
-                    return "done";
-            })
-
-            expect(list.len()).toBe(1);</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
-    
 </div>
 
                 
@@ -1198,17 +1142,13 @@ list.add({id : 2});
         
 
         
-
-        
     </div>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

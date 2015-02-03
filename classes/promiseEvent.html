@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,50 +263,26 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>promiseEvent <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <p>基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
+      <div class="stdoc-code"><p>基于事件和promise的回调管理，类似于jquery的callbacks，但具有结果传递，优先级，事件参数，promise控制等功能；
 默认注册的事件都是按照优先级，依次执行，无论同步还是异步；但在非阻塞模式下，则事件不会等待上一个执行完毕（异步），
 直接回依次执行，只是在最后的结果中会等待所有的事件执行完毕之后才返回</p>
-
+</div>
  </div>
 
-<div class="well well-small sign-left2" id="classesItems">
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
     
-        <div class="index-section methods">
+        <div class="index-section methods col-sm-4">
             <h3>Methods</h3>
-
+            
             <ul class="index-list methods">
                 
                     <li class="index-item method">
@@ -344,14 +335,19 @@
                     </li>
                 
             </ul>
+            
         </div>
     
-
+        <div class="index-section properties col-sm-4">
+            <h3>Properties</h3>
+            
+        </div>
     
-
-    
-
-    
+        <div class="index-section events col-sm-4">
+            <h3>Events</h3>
+            
+        </div>
+    </div>
 </div>
 
 <div>
@@ -362,12 +358,11 @@
         
         
         
-        
     </ul>
 
     <div class="tab-content">
         <div id="class" class="tab-pane active">
-           <div class="well well-small classDetail sign-left1">
+            <div class="well well-small classDetail sign-left1">
             
 
             
@@ -470,7 +465,7 @@
                         <p>promiseEvent的模式，可以混用；</p>
 <pre><code>1. 默认；event模式，所有的注册的事件，执行时，第一个事件参数为e（详细说明见promiseEvent-EventArg）
 2. &#39;callback&#39; : 回调模式; 与event模式对立，执行时不会添加事件参数e
-2. &#39;none&#39; : 全部事件执行一次，即有执行动作就销毁
+2. &#39;once&#39; : 全部事件执行一次，即有执行动作就销毁
 3. &#39;noBlock&#39; : 非阻塞模式；</code></pre>
 
                     </div>
@@ -487,55 +482,148 @@
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//使用once模式创建promiseEvent
-var events = st.promiseEvent("once");
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>基础</a></li>
+                
+                <li role="presentation"   _no='1'> <a>once模式</a></li>
+                
+                <li role="presentation"   _no='2'> <a>callback模式</a></li>
+                
+                <li role="presentation"   _no='3'> <a>promise示例</a></li>
+                
+                <li role="presentation"   _no='4'> <a>非阻塞模式</a></li>
+                
+                <li role="presentation"   _no='5'> <a>结果传递</a></li>
+                
+            </ul>
 
-//添加回调
-events.add(&#39;call1&#39;, function(e, text) {
-    return text;
-});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            //标准模式
+            var events = st.promiseEvent(),
+                result = [];
 
-//执行事件
-expect(events.fire(&#39;called&#39;)).toBe(&#39;called&#39;);
+            //注册事件
+            events.add(&#39;call1&#39;, function(e, text) {
+                result.push(&#39;call1&#39;);
+            });
 
-var result = [];
+            //自定义priority注册事件
+            events.add(&#39;call2&#39;, function(e, text) {
+                result.push(&#39;call2&#39;);
+            },100);
 
-//创建一个noBlock模式的promiseEvents;
-var noBlockEvents = st.promiseEvent("noBlock");
+            //单once模式注册
+            events.add(&#39;call3&#39;, function(e, text) {
+                result.push(&#39;call3&#39;);
+            },&#39;once&#39;);
 
-//第一个回调延迟100
-noBlockEvents.add("c1", function(e) {
-    //异步的promise处理
-    setTimeout(function() {
-        result.push(&#39;c1&#39;);
-        e.resolve();
-    }, 100);
-    return e.promise();
-});
+            //所有设置
+            events.add(&#39;call4&#39;, function(e, text) {
+                result.push(&#39;call4&#39;);
+            },50,&#39;once&#39;);
 
-//第二个正常执行
-noBlockEvents.add("c2", function(e) {
-    result.push(&#39;c2&#39;);
-});
+            //返回promise
+            events.add("promiseCall", function(e, text) {
+                //异步的方法
+                setTimeout(function() {
+                    result.push(&#39;promiseCall&#39;);
+                    e.resolve();
+                },0);
+                return e.promise();
+            },20);
 
-//第三个回调延迟50
-noBlockEvents.add("c3", function(e) {
-    setTimeout(function() {
-        result.push(&#39;c3&#39;);
-        e.resolve();
-    }, 50);
-    return e.promise();
-});
+            //回调中如果存在promise需要,st.when来获取结果
+            st.when(events.fire(&#39;test&#39;)).done(function(){
+                expect(result.join(&#39;-&#39;)).toBe(&#39;call2-call4-promiseCall-call1-call3&#39;);
 
-$.when(noBlockEvents.fire()).done(function(data) {
-    //最终执行顺序是c2-c3-c1
-    expect(result + &#39;&#39;).toBe(&#39;c2,c3,c1&#39;);
-});</code></pre>
+            });</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            //已once模式创建事件管理
+            var onceCalls = st.promiseEvent("once"),
+                result = [];
 
+            onceCalls.add("c1", function {
+                result.push("c1");
+            });
+            //执行之后即销毁
+            onceCalls.fire
+            expect(onceCalls.has(&#39;c1&#39;)).toBe(false);</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj2 = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            }, "callback");
+
+            obj2.onBefore("test", "addBefore", function(name) {
+                result.push(&#39;before-&#39; + name);
+            }).on("test", "addAfter", function(name) {
+                result.push(&#39;after-&#39; + name)
+            });
+            obj2.test(&#39;bind&#39;);
+            expect(result.join(&#39;,&#39;)).toBe("before-bind,bind,after-bind");</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var pCalls = st.promiseEvent(),
+                result = [];
+
+            pCalls.add("c1", function(e, name) {
+                //延迟100ms
+                setTimeout(function() {
+                    //完成promise,并返回结果
+                    e.resolve(name + &#39;,resolve!&#39;);
+                }, 100);
+
+                //返回promise
+                return e.promise();
+            });
+
+            //使用when来监控promiseEvent的执行，使用done来处理执行完毕的方法
+            $.when(pCalls.fire("call")).done(function(data) {
+                expect(data).toBe(&#39;call,resolve!&#39;);
+
+            });</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            //创建一个noBlock模式的promiseEvents;
+            var noBlockCalls = st.promiseEvent("noBlock"),
+                result = [];
+
+            //第一个回调延迟100
+            noBlockCalls.add("c1", function(e) {
+                setTimeout(function() {
+                    result.push(&#39;c1&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            });
+
+            //第二个正常执行
+            noBlockCalls.add("c2", function(e) {
+                result.push(&#39;c2&#39;);
+            });
+
+            //第三个回调延迟50
+            noBlockCalls.add("c3", function(e) {
+                setTimeout(function() {
+                    result.push(&#39;c3&#39;);
+                    e.resolve();
+                }, 50);
+                return e.promise();
+            });
+
+            $.when(noBlockCalls.fire()).done(function(data) {
+                //最终执行顺序是c2-c3-c1
+                expect(result + &#39;&#39;).toBe(&#39;c2,c3,c1&#39;);
+
+            });</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var resultCalls = st.promiseEvent
+            resultCalls.add("c1", function(e) {
+                return "c1";
+            }).add("c2", function(e) {
+                return e.result + ",c2";
+            });
+            expect(resultCalls.fire).toBe(&#39;c1,c2&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -613,7 +701,7 @@ $.when(noBlockEvents.fire()).done(function(data) {
             
         
         
-        <a href="../files/src_base_aop.js.html#l169"><code>src\base\aop.js:169</code></a>
+        <a href="../files/src_base_aop.js.html#l114"><code>src\base\aop.js:114</code></a>
         
         </p>
 
@@ -624,8 +712,8 @@ $.when(noBlockEvents.fire()).done(function(data) {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>添加事件回调方法</p>
-
+        <div class="stdoc-code"><p>添加事件回调方法</p>
+</div>
     </div>
 
     
@@ -714,85 +802,57 @@ $.when(noBlockEvents.fire()).done(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//callbak 模式下添加事件
-var calls = st.promiseEvent("callback"),
-    ret = [];
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-//没有eventArg参数
-calls.add("c1", function(name) {
-    ret.push(name + &#39;-c1&#39;);
-}).add("c2", function(name) {
-    ret.push(name + &#39;-c2&#39;);
-});
-calls.fire(&#39;test&#39;);
-expect(ret.join(&#39;;&#39;)).toBe(&#39;test-c1;test-c2&#39;);
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            //标准模式
+            var events = st.promiseEvent(),
+                result = [];
 
+            //注册事件
+            events.add(&#39;call1&#39;, function(e, text) {
+                result.push(&#39;call1&#39;);
+            });
 
-//标准模式
-var events = st.promiseEvent(),
-    result = [];
+            //自定义priority注册事件
+            events.add(&#39;call2&#39;, function(e, text) {
+                result.push(&#39;call2&#39;);
+            },100);
 
-//注册事件
-events.add(&#39;call1&#39;, function(e, text) {
-    result.push(&#39;call1&#39;);
-});
+            //单once模式注册
+            events.add(&#39;call3&#39;, function(e, text) {
+                result.push(&#39;call3&#39;);
+            },&#39;once&#39;);
 
-//自定义priority注册事件
-events.add(&#39;call2&#39;, function(e, text) {
-    result.push(&#39;call2&#39;);
-},100);
+            //所有设置
+            events.add(&#39;call4&#39;, function(e, text) {
+                result.push(&#39;call4&#39;);
+            },50,&#39;once&#39;);
 
-//单once模式注册
-events.add(&#39;call3&#39;, function(e, text) {
-    result.push(&#39;call3&#39;);
-},&#39;once&#39;);
+            //返回promise
+            events.add("promiseCall", function(e, text) {
+                //异步的方法
+                setTimeout(function() {
+                    result.push(&#39;promiseCall&#39;);
+                    e.resolve();
+                },0);
+                return e.promise();
+            },20);
 
-//所有设置
-events.add(&#39;call4&#39;, function(e, text) {
-    result.push(&#39;call4&#39;);
-},50,&#39;once&#39;);
+            //回调中如果存在promise需要,st.when来获取结果
+            st.when(events.fire(&#39;test&#39;)).done(function(){
+                expect(result.join(&#39;-&#39;)).toBe(&#39;call2-call4-promiseCall-call1-call3&#39;);
 
-//返回promise
-events.add("promiseCall", function(e, text) {
-    //异步的方法
-    setTimeout(function() {
-        result.push(&#39;promiseCall&#39;);
-        e.resolve();
-    },0);
-    return e.promise();
-},20);
-
-//回调中如果存在promise需要,$.when来获取结果
-$.when(events.fire(&#39;test&#39;)).done(function(){
-    expect(result.join(&#39;-&#39;)).toBe(&#39;call2-call4-promiseCall-call1-call3&#39;);
-});
-
-
-//result传递
-var resultEvents = st.promiseEvent();
-resultEvents.add("c1", function(e) {
-    //使用return传递结果
-    return "c1";
-}).add("c2", function(e) {
-    //e.result是由c1返回过来的值; 使用事件参数e的resolve传递
-    setTimeout(function() {
-        e.resolve(e.result + "-c2");
-    },0);
-    return e.promise();
-
-}).add("c3", function(e) {
-    //e.result是由c1返回过来的值
-    return e.result + "-c3";
-});
-
-$.when(resultEvents.fire()).done(function(ret){
-    expect(ret).toBe(&#39;c1-c2-c3&#39;);
-})</code></pre>
-
+            });</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -834,7 +894,7 @@ $.when(resultEvents.fire()).done(function(ret){
             
         
         
-        <a href="../files/src_base_aop.js.html#l143"><code>src\base\aop.js:143</code></a>
+        <a href="../files/src_base_aop.js.html#l103"><code>src\base\aop.js:103</code></a>
         
         </p>
 
@@ -845,8 +905,8 @@ $.when(resultEvents.fire()).done(function(ret){
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>清空所有事件回调</p>
-
+        <div class="stdoc-code"><p>清空所有事件回调</p>
+</div>
     </div>
 
     
@@ -856,25 +916,32 @@ $.when(resultEvents.fire()).done(function(ret){
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var events = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-//添加回调
-events.add(&#39;call1&#39;, function(e, text) {});
-events.add(&#39;call2&#39;, function(e, text) {});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var events = st.promiseEvent
 
-//回调事件总数为2
-expect(events.len()).toBe(2);
+            //添加回调
+            events.add(&#39;call1&#39;, function(e, text) {});
+            events.add(&#39;call2&#39;, function(e, text) {});
 
-//清除events下面注册的事件
-events.clear();
+            //回调事件总数为2
+            expect(events.len).toBe(2);
 
-//回调事件总数为0
-expect(events.len()).toBe(0);</code></pre>
+            //清除events下面注册的事件
+            events.clear();
 
+            //回调事件总数为0
+            expect(events.len()).toBe(0);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -934,7 +1001,7 @@ expect(events.len()).toBe(0);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l544"><code>src\base\aop.js:544</code></a>
+        <a href="../files/src_base_aop.js.html#l320"><code>src\base\aop.js:320</code></a>
         
         </p>
 
@@ -945,8 +1012,8 @@ expect(events.len()).toBe(0);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>执行回调</p>
-
+        <div class="stdoc-code"><p>执行回调</p>
+</div>
     </div>
 
     
@@ -1012,57 +1079,6 @@ expect(events.len()).toBe(0);</code></pre>
     
 
     
-        <div class="example">
-            <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>//once模式创建
-var calls = st.promiseEvent("once");
-
-//注册call1
-calls.add(&#39;call1&#39;, function(e, text) {
-    return text;
-})
-
-//执行call1，返回called
-expect(calls.fire(&#39;called&#39;)).toBe(&#39;called&#39;);
-
-var result = &#39;&#39;;
-
-//使用eventArg控制
-calls.add("c1", function(e) {
-    //阻止后续回调
-    e.stopPropagation();
-    result += "c1";
-})
-.add("c2", function() {
-    result += "c2";
-});
-
-//只执行了c1
-calls.fire();
-expect(result).toBe(&#39;c1&#39;);
-
-
-//promise模式下
-calls.add("c1", function(e, name) {
-    setTimeout(function() {
-        e.resolve(name + &#39;-c1&#39;);
-    }, 100);
-    return e.promise();
-});
-
-//使用when来监控返回的result
-$.when(calls.fire("call")).done(function(ret) {
-    expcet(ret).toBe(&#39;call-c1&#39;);
-}.fail(function(error){
-
-}));</code></pre>
-
-            </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
-        </div>
-    
 </div>
 
                 
@@ -1126,7 +1142,7 @@ $.when(calls.fire("call")).done(function(ret) {
             
         
         
-        <a href="../files/src_base_aop.js.html#l296"><code>src\base\aop.js:296</code></a>
+        <a href="../files/src_base_aop.js.html#l156"><code>src\base\aop.js:156</code></a>
         
         </p>
 
@@ -1137,8 +1153,8 @@ $.when(calls.fire("call")).done(function(ret) {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>根据上下文对象执行回调;fire方法的增强</p>
-
+        <div class="stdoc-code"><p>根据上下文对象执行回调;fire方法的增强</p>
+</div>
     </div>
 
     
@@ -1223,30 +1239,37 @@ $.when(calls.fire("call")).done(function(ret) {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var events = st.promiseEvent(),
-target = {
-    name : &#39;target&#39;
-};
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
- //注册事件
- events.add(&#39;call1&#39;, function(e, text) {
-    return this.name + &#39;-&#39; + text + &#39;-&#39; + e.extend();
- });
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var events = st.promiseEvent,
+                target = {
+                    name: &#39;target&#39;
+                };
 
- //使用fireWith执行
- var result = events.fireWith(target,[&#39;test&#39;],function(e){
-    //扩展事件参数；只会在这一次的fire中生效
-    e.extend = function(){
-        return &#39;extend&#39;;
-    }
- });
+            //注册事件
+            events.add(&#39;call1&#39;, function(e, text) {
+                return this.name + &#39;-&#39; + text + &#39;-&#39; + e.extend
+            });
 
- expect(result).toBe(&#39;target-test-extend&#39;);</code></pre>
+            //使用fireWith执行
+            var result = events.fireWith(target, [&#39;test&#39;], function(e) {
+                //扩展事件参数；只会在这一次的fire中生效
+                e.extend = function() {
+                    return &#39;extend&#39;;
+                }
+            })
 
+            expect(result).toBe(&#39;target-test-extend&#39;);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1300,7 +1323,7 @@ target = {
             
         
         
-        <a href="../files/src_base_aop.js.html#l505"><code>src\base\aop.js:505</code></a>
+        <a href="../files/src_base_aop.js.html#l287"><code>src\base\aop.js:287</code></a>
         
         </p>
 
@@ -1311,8 +1334,8 @@ target = {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>判断是否存在事件回调</p>
-
+        <div class="stdoc-code"><p>判断是否存在事件回调</p>
+</div>
     </div>
 
     
@@ -1362,17 +1385,24 @@ target = {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code> var calls = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-calls.add("call1", function(e) {});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var calls = st.promiseEvent
 
-//判断是否注册了"call1"的event
-expect(calls.has("call1")).toBeTruthy();</code></pre>
+            calls.add("call1", function(e) {});
 
+            //判断是否注册了"call1"的event
+            expect(calls.has("call1")).toBeTruthy;</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1416,7 +1446,7 @@ expect(calls.has("call1")).toBeTruthy();</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l535"><code>src\base\aop.js:535</code></a>
+        <a href="../files/src_base_aop.js.html#l311"><code>src\base\aop.js:311</code></a>
         
         </p>
 
@@ -1427,8 +1457,8 @@ expect(calls.has("call1")).toBeTruthy();</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>获取注册的事件长度/数</p>
-
+        <div class="stdoc-code"><p>获取注册的事件长度/数</p>
+</div>
     </div>
 
     
@@ -1499,7 +1529,7 @@ expect(calls.has("call1")).toBeTruthy();</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l272"><code>src\base\aop.js:272</code></a>
+        <a href="../files/src_base_aop.js.html#l142"><code>src\base\aop.js:142</code></a>
         
         </p>
 
@@ -1510,8 +1540,8 @@ expect(calls.has("call1")).toBeTruthy();</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>删除事件回调方法</p>
-
+        <div class="stdoc-code"><p>删除事件回调方法</p>
+</div>
     </div>
 
     
@@ -1547,20 +1577,27 @@ expect(calls.has("call1")).toBeTruthy();</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var events = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-//注册事件
-events.add(&#39;call1&#39;, function(e, text) {});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var events = st.promiseEvent
 
-//删除事件
-events.remove(&#39;call1&#39;);
+            //注册事件
+            events.add(&#39;call1&#39;, function(e, text) {});
 
-expect(events.len()).toBe(0);</code></pre>
+            //删除事件
+            events.remove(&#39;call1&#39;);
 
+            expect(events.len).toBe(0);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -1572,17 +1609,13 @@ expect(events.len()).toBe(0);</code></pre>
         
 
         
-
-        
     </div>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

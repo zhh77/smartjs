@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Util - SmartJs</title>
+    <title>src\base\deferred.js - SmartJs</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,102 +263,217 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
-    <h1>Util <small>Module</small></h1>
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>src\base\deferred.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small sign-left1">
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+&quot;use strict&quot;;
+/**
+    Promise的实现对象，接口基本与Jquery相同，不依赖JQuery的时候使用;
     
+    Update Note：
+        + 2014.10 ：Created
 
-    
+    @module Promise
+*/
+_stDefine(&#x27;deferred&#x27;, function(st) {
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_base_util.js.html#l349"><code>src\base\util.js:349</code></a>
-        </div>
-    
+    var priorityList = st.priorityList,
+        sliceArgs = st.sliceArgs;
 
-    
+    /**
+     * Deferred对象，非依赖jquery下加载使用
+     * @class Deferred
+     * @constructor
+     */
+    function Deferred() {
+        var defer = this;
+        defer.__state = &#x27;pendding&#x27;;
+        defer.__resolvedCalls = priorityList();
+        defer.__rejectedCalls = priorityList();
+        defer.__alwaysCalls = priorityList();
+    }
+
+    function addCallbacks(defer, callbacks, state) {
+        var status = defer.state(),
+            list,
+            len = callbacks.length,
+            priority;
+
+        if (len &gt; 0) {
+            callbacks = sliceArgs(callbacks);
+
+            if (len &gt; 1) {
+                priority = callbacks[len - 1];
+
+                if (priority === undefined || typeof priority === &#x27;number&#x27;)
+                    callbacks.pop();
+                else
+                    priority = null;
+            }
+
+            if (status === state) {
+                callbacks.forEach(function(callback) {
+                    callback &amp;&amp; callback.apply(null, defer.__result);
+                })
+            } else {
+                list = defer[&#x27;__&#x27; + state + &#x27;Calls&#x27;];
+
+                callbacks.forEach(function(callback) {
+                    callback &amp;&amp; list.add(callback, priority);
+                })
+            }
+        }
+
+        return defer;
+    }
+
+    function complete(defer, args, state) {
+        defer.__state = state;
+
+        var list = defer[&#x27;__&#x27; + state + &#x27;Calls&#x27;],
+            fnCallback = function(callback) {
+                callback.apply(defer, args);
+            };
+
+        list.each(fnCallback)
+
+        defer.__alwaysCalls.each(fnCallback);
+    }
+
+    Deferred.prototype = {
+        /**
+         * 解决递延对象，并根据给定的参数调用任何完成的回调函数
+         * @method resolve
+         * @param  {object} result 解决传递的结果
+         */
+        resolve: function(result) {
+            complete(this, arguments, &#x27;resolved&#x27;);
+        },
+        /**
+         * 拒绝延迟对象，并根据给定的参数调用任何失败的回调函数。
+         * @method reject
+         * @param  {object} arg 拒绝传递的参数
+         */
+        reject: function(arg) {
+            complete(this, arguments, &#x27;rejected&#x27;);
+        },
+        /**
+         * 返回契约
+         * @method promise
+         */
+        promise: function() {
+            return this.__state === &#x27;pendding&#x27; ? this : this.__result;
+        },
+        /**
+         * 返回契约状态；
+         *     1. pending: 未完成状态。 
+         *     2. resolved: 解决状态。 
+         *     3. rejected: 拒绝的状态。
+         * @method state
+         */
+        state: function() {
+            return this.__state;
+        },
+         /**
+         * 当延迟成功时调用一个函数或者数组函数。
+         * @method done
+         * @param  {function|array} callback 回调函数或者数组函数
+         */
+        done: function(callback) {
+            return addCallbacks(this, arguments, &#x27;resolved&#x27;);
+        },
+        /**
+         * 当延迟失败时调用一个函数或者数组函数。
+         * @method fail
+         * @param  {function|array} callback 回调函数或者数组函数
+         */
+        fail: function(callback) {
+            return addCallbacks(this, arguments, &#x27;rejected&#x27;);
+        },
+        /**
+         * 当递延对象是解决或拒绝时被调用添加处理程序；
+         * @method always
+         * @param  {function|array} callback 回调函数或者数组函数
+         */
+        always: function() {
+            return addCallbacks(this, arguments, &#x27;always&#x27;);
+        },
+        /**
+         * 添加处理程序被调用时，递延对象得到解决或者拒绝；
+         * @method then
+         * @param  {function} doneCallback 成功回调函数
+         * @param  {function} callback 失败回调函数或者数组函数
+         * @param  {number} priority 权重；优先级
+         */
+        then: function(doneCallback, failCallback, priority) {
+            doneCallback &amp;&amp; this.done(doneCallback, priority);
+            failCallback &amp;&amp; this.fail(failCallback, priority);
+            return this;
+        }
+    }
+
+    return {
+        Deferred: function() {
+            return new Deferred();
+        },
+        /**
+         * 捕获promise的方法，使用st.when调用；
+         * @method when
+         * @param  {object|args} result 单个判断对象或者一组（参数组）判断对象
+         */
+        when: function() {
+            var deferList = sliceArgs(arguments),
+                count = deferList.length,
+                isResolve = true,
+                num = 0,
+                rets = new Array(count),
+                isFinish,
+                whenDefer = new Deferred();
+
+            function process(i, result, state) {
+                num++;
+                if (isResolve &amp;&amp; state === &#x27;rejected&#x27;)
+                    isResolve = false;
+
+                rets[i] = result;
+
+                if (num === count) {
+                    whenDefer[isResolve ? &#x27;resolve&#x27; : &#x27;reject&#x27;].apply(whenDefer, rets);
+                    isFinish = true;
+                }
+            }
+
+            deferList.forEach(function(defer, i) {
+                if (defer instanceof Deferred) {
+                    defer.always(function(result) {
+                        process(i, result, this.state());
+                    })
+                } else
+                    process(i, defer);
+            })
+
+            if (isFinish) {
+                whenDefer.__result = rets;
+            }
+            return whenDefer;
+        }
+    };
+})
+
+    </pre>
 </div>
 
-
-
-<div class="moduledesc well well-small sign-left3">
-    <p>工具包模块</p>
-<p>Feartures : </p>
-<pre class="code prettyprint"><code>1. 基础公共方法
-2. 基础公共对象</code></pre>
-<p>Update Note：</p>
-<pre class="code prettyprint"><code>+ 2014.8.06 加入priorityList
-+ 2014.5 ：Created</code></pre>
-
-</div>
-
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/priorityList.html">
-                        priorityList
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/util.html">
-                        util
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
-</div>
-
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

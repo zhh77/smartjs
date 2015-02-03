@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Deferred",
         "EventArg",
         "EventArg(flowController)",
         "EventArg(trigger)",
@@ -9,6 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "attachTrigger",
         "baseDataManager",
         "baseDataService",
+        "common",
         "dataManager",
         "dataServices",
         "factory",
@@ -16,16 +18,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "klass",
         "klassBase",
         "priorityList",
-        "promiseEvent",
-        "util"
+        "promiseEvent"
     ],
     "modules": [
         "AOP",
+        "Base",
         "DataManager",
         "DataManager-Table",
         "FilterBuilder",
         "OOP",
-        "Util"
+        "Promise"
     ],
     "allModules": [
         {
@@ -50,6 +52,19 @@ YUI.add("yuidoc-meta", function(Y) {
                 },
                 {
                     "name": "EventArg(flowController)"
+                }
+            ]
+        },
+        {
+            "displayName": "Base",
+            "name": "Base",
+            "description": "SmartJS基础模块\n\nFeartures : \n    1. 基础公共方法\n    2. 基础公共对象\n\nUpdate Note：\n    + 2014.10.16 getObj和setObj支持array设置和获取\n    + 2014.8.06 加入priorityList\n    + 2014.5 ：Created",
+            "classes": [
+                {
+                    "name": "common"
+                },
+                {
+                    "name": "priorityList"
                 }
             ]
         },
@@ -108,15 +123,12 @@ YUI.add("yuidoc-meta", function(Y) {
             ]
         },
         {
-            "displayName": "Util",
-            "name": "Util",
-            "description": "工具包模块\n\nFeartures : \n\t1. 基础公共方法\n\t2. 基础公共对象\n\nUpdate Note：\n\t+ 2014.8.06 加入priorityList\n\t+ 2014.5 ：Created",
+            "displayName": "Promise",
+            "name": "Promise",
+            "description": "Promise的实现对象，接口基本与Jquery相同，不依赖JQuery的时候使用;\n\nUpdate Note：\n    + 2014.10 ：Created",
             "classes": [
                 {
-                    "name": "util"
-                },
-                {
-                    "name": "priorityList"
+                    "name": "Deferred"
                 }
             ]
         }

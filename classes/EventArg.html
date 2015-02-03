@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
 </head>
-<body class="yui3-smart">
+<body class="yui3-smart" _assetsPath="../assets">
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -49,21 +49,18 @@
             </div>
         </div>
     </nav>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-	    <div id="sidebar">
+    <div id="sidebar">
     <h3>Modules/Classes</h3>
         <div id="api-tabview-filter">
             <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
         </div>
-        <dl>
+        <dl id="sidebar_list">
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/AOP.html">AOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -118,10 +115,36 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Base.html">Base</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/common.html">common</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/priorityList.html">priorityList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/DataManager.html">DataManager</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -160,10 +183,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/FilterBuilder.html">FilterBuilder</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -186,10 +209,10 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
                     <a href="../modules/OOP.html">OOP</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
@@ -220,23 +243,15 @@
                 </dd>
              
                 <dt>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <a href="../modules/Util.html">Util</a>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/Promise.html">Promise</a>
                 </dt>
-                <dd class="hide">
+                <dd>
                     <ul>
                    
                        <li>
                             
-                           <a href="../classes/util.html">util</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
-                           <a href="../classes/priorityList.html">priorityList</a>
+                           <a href="../classes/Deferred.html">Deferred</a>
                            <ul>
                                 
                            </ul>
@@ -248,49 +263,25 @@
         </dl>
 </div>
    
-        </div>
-        <div class="col-sm-9">
-            <!--     <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
- -->
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <div class="page-header">
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
     <h1>EventArg <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <p>promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；
+      <div class="stdoc-code"><p>promiseEvent中事件回调的EventArg(e)参数对象;通过EventArg可以对事件进行阻止冒泡、promise、事件删除还有结果传递等控制；
 EventArg针对上下文对象（比较trigger和flowController）下，具有的独立的方法；</p>
-
+</div>
  </div>
 
-<div class="well well-small sign-left2" id="classesItems">
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
     
-        <div class="index-section methods">
+        <div class="index-section methods col-sm-4">
             <h3>Methods</h3>
-
+            
             <ul class="index-list methods">
                 
                     <li class="index-item method">
@@ -322,14 +313,19 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
                     </li>
                 
             </ul>
+            
         </div>
     
-
+        <div class="index-section properties col-sm-4">
+            <h3>Properties</h3>
+            
+        </div>
     
-
-    
-
-    
+        <div class="index-section events col-sm-4">
+            <h3>Events</h3>
+            
+        </div>
+    </div>
 </div>
 
 <div>
@@ -340,19 +336,18 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
         
         
         
-        
     </ul>
 
     <div class="tab-content">
         <div id="class" class="tab-pane active">
-           <div class="well well-small classDetail sign-left1">
+            <div class="well well-small classDetail sign-left1">
             
 
             
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/src_base_aop.js.html#l337"><code>src\base\aop.js:337</code></a>
+                    Defined in: <a href="../files/src_base_aop.js.html#l178"><code>src\base\aop.js:178</code></a>
                 </div>
             
 
@@ -418,7 +413,7 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
             
         
         
-        <a href="../files/src_base_aop.js.html#l397"><code>src\base\aop.js:397</code></a>
+        <a href="../files/src_base_aop.js.html#l207"><code>src\base\aop.js:207</code></a>
         
         </p>
 
@@ -429,8 +424,8 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行</p>
-
+        <div class="stdoc-code"><p>拒绝契约，在任何一个事件中reject都会停止所有后续promiseEvent的执行</p>
+</div>
     </div>
 
     
@@ -466,28 +461,37 @@ EventArg针对上下文对象（比较trigger和flowController）下，具有的
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-pCalls.add("c1", function(e, name) {
-    //延迟100ms
-    setTimeout(function() {
-        //拒绝promise,并返回结果
-        e.reject(name + &#39;,reject!&#39;);
-    }, 100);
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var pCalls = st.promiseEvent(),
+                result = [];
 
-    //返回promise
-      return e.promise();
-});
+            pCalls.add("c1", function(e, name) {
+                //延迟100ms
+                setTimeout(function() {
+                    //拒绝promise,并返回结果
+                    e.reject(name + &#39;,reject!&#39;);
+                }, 100);
 
-//使用when来监控promiseEvent的执行，使用fail捕获reject
-$.when(pCalls.fire("call")).fail(function(data) {
-    expect(data).toBe(&#39;call,reject!&#39;);
-});</code></pre>
+                //返回promise
+                return e.promise();
+            });
 
+            //使用when来监控promiseEvent的执行，使用fail捕获reject
+            $.when(pCalls.fire("call")).fail(function(data) {
+                expect(data).toBe(&#39;call,reject!&#39;);
+
+            });</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -529,7 +533,7 @@ $.when(pCalls.fire("call")).fail(function(data) {
             
         
         
-        <a href="../files/src_base_aop.js.html#l423"><code>src\base\aop.js:423</code></a>
+        <a href="../files/src_base_aop.js.html#l216"><code>src\base\aop.js:216</code></a>
         
         </p>
 
@@ -540,8 +544,8 @@ $.when(pCalls.fire("call")).fail(function(data) {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>删除当前事件；与promiseEvent.add的&#39;once&#39;模式，不同在于可以手动进行控制</p>
-
+        <div class="stdoc-code"><p>删除当前事件；与promiseEvent.add的&#39;once&#39;模式，不同在于可以手动进行控制</p>
+</div>
     </div>
 
     
@@ -551,22 +555,30 @@ $.when(pCalls.fire("call")).fail(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var calls = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-calls.add("onceTest", function(e) {
-    //删除"onceTest"这个事件；
-    e.remove();
-});
-//执行后才会触发删除
-calls.fire();
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var calls = st.promiseEvent,
+                result = [];
 
-//"onceTest"已经不在calls中
-expect(calls.has("onceTest")).toBe(false);</code></pre>
+            calls.add("onceTest", function(e) {
+                //删除"onceTest"这个事件；
+                e.remove
+            });
+            //执行后才会触发删除
+            calls.fire();
 
+            //"onceTest"已经不在calls中
+            expect(calls.has("onceTest")).toBe(false);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -616,7 +628,7 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
             
         
         
-        <a href="../files/src_base_aop.js.html#l369"><code>src\base\aop.js:369</code></a>
+        <a href="../files/src_base_aop.js.html#l194"><code>src\base\aop.js:194</code></a>
         
         </p>
 
@@ -627,8 +639,8 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>完成契约</p>
-
+        <div class="stdoc-code"><p>完成契约</p>
+</div>
     </div>
 
     
@@ -665,27 +677,106 @@ expect(calls.has("onceTest")).toBe(false);</code></pre>
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var pCalls = st.promiseEvent();
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+                <li role="presentation"   _no='1'> <a>aop</a></li>
+                
+                <li role="presentation"   _no='2'> <a>aop</a></li>
+                
+            </ul>
 
-pCalls.add("c1", function(e, name) {
-    //延迟100ms
-    setTimeout(function() {
-        //完成promise,并返回结果
-        e.resolve(name + &#39;,resolve!&#39;);
-    }, 100);
-    //返回promise
-    return e.promise();
-});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var result = [],obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
 
-//使用when来监控promiseEvent的执行，使用done来处理执行完毕的方法
-$.when(pCalls.fire("call")).done(function(data) {
-    expect(data).toBe(&#39;call,resolve!&#39;);
-});</code></pre>
+            obj.onBefore(&#39;test&#39;, &#39;testBefore&#39;, function(e, name) {
+                setTimeout(function() {
+                    result.push(name + &#39;-before1&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            })
 
+            obj.onBefore(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+                result.push(name + &#39;-before2&#39;);
+            })
+
+            obj.on(&#39;test&#39;, &#39;testBefore2&#39;, function(e, name) {
+                setTimeout(function() {
+                    result.push(name + &#39;-after&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            })
+
+            $.when(obj.test(&#39;call&#39;)).done(function() {
+                expect(result.join(&#39;,&#39;)).toBe(&#39;call-before1,call-before2,call,call-after&#39;);
+
+            })</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var pCalls = st.promiseEvent(),
+                result = [];
+
+            pCalls.add("c1", function(e, name) {
+                setTimeout(function() {
+                    e.resolve(name + &#39;-c1&#39;);
+                }, 100);
+                return e.promise();
+            });
+
+            pCalls.add("c2", function(e, name) {
+                return e.result + &#39;-c2&#39;;
+            });
+
+            pCalls.add("c3", function(e, name) {
+                setTimeout(function() {
+                    e.resolve(e.result + &#39;-c3&#39;);
+                }, 100);
+                return e.promise();
+            });
+
+            $.when(pCalls.fire("call")).done(function(data) {
+                expect(data).toBe(&#39;call-c1-c2-c3&#39;);
+
+            });</code></pre>
+</div><div class="stdoc-code"><pre class="code prettyprint"><code>            var noBlockCalls2 = st.promiseEvent(),
+                result = [];
+            //第一个回调延迟100
+            noBlockCalls2.add("c1", function(e) {
+                setTimeout(function() {
+                    result.push(&#39;c1&#39;);
+                    e.resolve();
+                }, 100);
+                //在返回promise的时候，指定noBlock模式
+                return e.promise("noBlock");
+            });
+            //第二个正常执行
+            noBlockCalls2.add("c2", function(e) {
+                result.push(&#39;c2&#39;);
+            });
+            //第三个回调延迟100
+            noBlockCalls2.add("c3", function(e) {
+                setTimeout(function() {
+                    result.push(&#39;c3&#39;);
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            });
+
+            $.when(noBlockCalls2.fire()).done(function(data) {
+                //最终执行顺序是c2-c1-c3
+                expect(result + &#39;&#39;).toBe(&#39;c2,c1,c3&#39;);
+
+            });</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -727,7 +818,7 @@ $.when(pCalls.fire("call")).done(function(data) {
             
         
         
-        <a href="../files/src_base_aop.js.html#l343"><code>src\base\aop.js:343</code></a>
+        <a href="../files/src_base_aop.js.html#l184"><code>src\base\aop.js:184</code></a>
         
         </p>
 
@@ -738,8 +829,8 @@ $.when(pCalls.fire("call")).done(function(data) {
     </div>
 
     <div class="description well well-small sign-left3">
-        <p>停止所有后续事件执行</p>
-
+        <div class="stdoc-code"><p>停止所有后续事件执行</p>
+</div>
     </div>
 
     
@@ -749,27 +840,29 @@ $.when(pCalls.fire("call")).done(function(data) {
     
         <div class="example">
             <h4>Example:</h4>
-            <div class="example-content">
-                <pre class="code prettyprint"><code>var events = st.promiseEvent(),
-    result = [];
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>aop</a></li>
+                
+            </ul>
 
-events.add("c1", function(e) {
-    //阻止冒泡
-    e.stopPropagation();
-    result.push("c1");
-})
-.add("c2", function() {
-    result.push("c2");
-});
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>            var calls = st.promiseEvent,
+                result = [];
 
-//只执行了c1
-events.fire();
-
-expect(result.join(&#39;-&#39;)).toBe(&#39;c1&#39;)</code></pre>
-
+            calls.add("c1", function(e) {
+                //停止执行
+                e.stopPropagation
+            }).add("c2", function() {
+                result.push("c2");
+            });
+            calls.fire();
+            expect(result.length).toBe(0);</code></pre>
+</div>
             </div>
-            <button class="btn-viewDemo btn btn-success" type="button">view demo</button>
-            <button class="btn-runDemo btn btn-success" type="button">edit code</button>
+
+             <button class="btn btn-info btn-viewDemo" type="button">view demo</button>
+            <button class="btn btn-info btn-editDemo" type="button">edit code</button>
         </div>
     
 </div>
@@ -781,17 +874,13 @@ expect(result.join(&#39;-&#39;)).toBe(&#39;c1&#39;)</code></pre>
         
 
         
-
-        
     </div>
 </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <a id="gotoTop" class='well well-small' href='#'>
     Top
 </a>

@@ -35,7 +35,7 @@ $(function() {
 
     code = window.name;
     html = getCode('html');
-    code = getCode('script') || code;
+    code = getCode('script') ||  (html ? '' : code);
 
     function getCode(type) {
         var index = code.indexOf('<'+ type + '>');
@@ -43,11 +43,12 @@ $(function() {
         if (index > -1) {
             return code.substring(index + type.length + 2, code.indexOf('</'+ type + '>'));
         }
+        return '';
     }
 
     function resetCode() {
         editor.setValue(code);
-        htmlEditor.setValue(html || '');
+        htmlEditor.setValue(html);
         ifrRender.src = "demo.html";
     }
     resetCode();
