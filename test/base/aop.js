@@ -1,30 +1,79 @@
 (function() {
-
+	var $ = window.jQuery || st;
+	
     describe('PromiseEvent Test', function() {
-        var calls = st.promiseEvent(),
-            result;
 
-        beforeEach(function() {
-            result = [];
-        })
 
-        calls.add('call1', function(e, text) {
-            result.push(text);
-        })
+        it("add", function(endTest) {
+            //标准模式
+            var events = st.promiseEvent(),
+                result = [];
 
-        it("Add", function() {
-            calls.fire('called');
-            expect(result.join(',')).toBe('called');
+            //注册事件
+            events.add('call1', function(e, text) {
+                result.push('call1');
+            });
+
+            //自定义priority注册事件
+            events.add('call2', function(e, text) {
+                result.push('call2');
+            },100);
+
+            //单once模式注册
+            events.add('call3', function(e, text) {
+                result.push('call3');
+            },'once');
+
+            //所有设置
+            events.add('call4', function(e, text) {
+                result.push('call4');
+            },50,'once');
+
+            //返回promise
+            events.add("promiseCall", function(e, text) {
+                //异步的方法
+                setTimeout(function() {
+                    result.push('promiseCall');
+                    e.resolve();
+                },0);
+                return e.promise();
+            },20);
+
+            //回调中如果存在promise需要,st.when来获取结果
+            st.when(events.fire('test')).done(function(){
+                expect(result.join('-')).toBe('call2-call4-promiseCall-call1-call3');
+                endTest();
+            });
         })
 
         it("Remove", function() {
+            var calls = st.promiseEvent(),
+                result = [];
+            //添加事件
+            calls.add('call1', function(e, text) {
+                result.push(text);
+            })
+            //删除事件
             calls.remove('call1');
             calls.fire('called');
-            expect(result.join(',')).toBe('');
+            //无事件执行
+            expect(result.length).toBe(0);
         })
 
+        it("has", function() {
+            var calls = st.promiseEvent();
+
+            calls.add("call1", function(e) {});
+
+            //判断是否注册了"call1"的event
+            expect(calls.has("call1")).toBeTruthy();
+        })
+
+
         it("Priority", function() {
-            var arrP = [10, 5, null, 100, 10],
+            var calls = st.promiseEvent(),
+                result = [],
+                arrP = [10, 5, null, 100, 10],
                 len = arrP.length,
                 i = 0,
                 p;
@@ -43,32 +92,46 @@
                 }
             }
 
-
             calls.fire();
             expect(result.join(',')).toBe('3-100,0-10,4-10,1-5,2-d');
         })
 
-        it("Reset", function() {
-            calls.clear();
-            calls.fire();
-            expect(result.length).toBe(0);
+        it("clear", function() {
+            var events = st.promiseEvent();
+
+            //添加回调
+            events.add('call1', function(e, text) {});
+            events.add('call2', function(e, text) {});
+
+            //回调事件总数为2
+            expect(events.len()).toBe(2);
+
+            //清除events下面注册的事件
+            events.clear();
+
+            //回调事件总数为0
+            expect(events.len()).toBe(0);
         })
 
-        it("Callback fire remove", function() {
-            calls.add("onceTest", function(e) {
-                //删除"onceTest"这个事件；
-                e.remove();
-            });
-            //执行后才会触发删除
-            calls.fire();
+        it("remove",function(){
+            var events = st.promiseEvent();
 
-            //"onceTest"已经不在calls中
-            expect(calls.has("onceTest")).toBe(false);
+            //注册事件
+            events.add('call1', function(e, text) {});
+
+            //删除事件
+            events.remove('call1');
+
+            expect(events.len()).toBe(0);
         })
+
 
         it("StopPropagation", function() {
-            calls.clear();
+            var calls = st.promiseEvent(),
+                result = [];
+
             calls.add("c1", function(e) {
+                //停止执行
                 e.stopPropagation();
             }).add("c2", function() {
                 result.push("c2");
@@ -100,10 +163,14 @@
         })
 
         it("Once Mode", function() {
-            var onceCalls = st.promiseEvent("once");
+            //已once模式创建事件管理
+            var onceCalls = st.promiseEvent("once"),
+                result = [];
+
             onceCalls.add("c1", function() {
                 result.push("c1");
             });
+            //执行之后即销毁
             onceCalls.fire();
             expect(onceCalls.has('c1')).toBe(false);
         })
@@ -119,7 +186,11 @@
         })
 
         it("callback mode", function() {
-            var calls = st.promiseEvent("callback");
+            //callback模式创建
+            var calls = st.promiseEvent("callback"),
+                result = [];
+
+            //没有eventArg参数
             calls.add("c1", function(name) {
                 result.push(name + '-c1');
             }).add("c2", function(name) {
@@ -129,12 +200,11 @@
             expect(calls.fire("call") + '').toBe('call-c1,call-c2');
         })
 
-        var pCalls;
-        beforeEach(function() {
-            pCalls = st.promiseEvent();
-        });
 
         it("promise - resolve", function(testCall) {
+            var pCalls = st.promiseEvent(),
+                result = [];
+
             pCalls.add("c1", function(e, name) {
                 setTimeout(function() {
                     result.push(name);
@@ -150,7 +220,24 @@
             }, 100)
         })
 
+        it("promise - remove", function() {
+            var calls = st.promiseEvent(),
+                result = [];
+
+            calls.add("onceTest", function(e) {
+                //删除"onceTest"这个事件；
+                e.remove();
+            });
+            //执行后才会触发删除
+            calls.fire();
+
+            //"onceTest"已经不在calls中
+            expect(calls.has("onceTest")).toBe(false);
+        })
+
         it("promise - result", function(testCall) {
+            var pCalls = st.promiseEvent(),
+                result = [];
 
             pCalls.add("c1", function(e, name) {
                 //延迟100ms
@@ -171,6 +258,9 @@
         })
 
         it("promise - reject", function(testCall) {
+            var pCalls = st.promiseEvent(),
+                result = [];
+
             pCalls.add("c1", function(e, name) {
                 //延迟100ms
                 setTimeout(function() {
@@ -190,6 +280,9 @@
         })
 
         it("promise - multi", function(testCall) {
+            var pCalls = st.promiseEvent(),
+                result = [];
+
             pCalls.add("c1", function(e, name) {
                 setTimeout(function() {
                     e.resolve(name + '-c1');
@@ -216,7 +309,8 @@
 
         it("noBlock mode", function(testCall) {
             //创建一个noBlock模式的promiseEvents;
-            var noBlockCalls = st.promiseEvent("noBlock");
+            var noBlockCalls = st.promiseEvent("noBlock"),
+                result = [];
 
             //第一个回调延迟100
             noBlockCalls.add("c1", function(e) {
@@ -249,7 +343,8 @@
         })
 
         it("promise - noBlock", function(testCall) {
-            var noBlockCalls2 = st.promiseEvent();
+            var noBlockCalls2 = st.promiseEvent(),
+                result = [];
             //第一个回调延迟100
             noBlockCalls2.add("c1", function(e) {
                 setTimeout(function() {
@@ -281,22 +376,13 @@
     })
 
     describe('Trigger Test', function() {
-        var result, obj = st.attachTrigger({
-            test: function(name) {
-                result.push(name);
-            },
-            child: {
+        it("Bind Test", function() {
+            var result = [], obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
-            }
-        });
+            });
 
-        beforeEach(function() {
-            result = [];
-        });
-
-        it("Bind Test", function() {
             //注册前置
             obj.onBefore("test", "addBefore", function(e, name) {
                 result.push('before-' + name)
@@ -312,17 +398,25 @@
         })
 
         it("Bind Child", function() {
-            obj.onBefore("child.test", "addBefore", function(e, name) {
+            var result = [], obj = st.attachTrigger({
+                test: {
+                    child: function(name) {
+                        result.push(name);
+                    }
+                }
+            });
+            //注册子对象方法
+            obj.onBefore("test.child", "addBefore", function(e, name) {
                 result.push('before-' + name)
-            }).on("child.test", "addAfter", function(e, name) {
+            }).on("test.child", "addAfter", function(e, name) {
                 result.push('after-' + name)
             });
-            obj.test('bind');
+            obj.test.child('bind');
             expect(result.join(',')).toBe("before-bind,bind,after-bind");
         })
 
         it("Custom Interface", function() {
-            var obj1 = st.attachTrigger({
+            var result = [], obj1 = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -345,7 +439,7 @@
         })
 
         it("callback mode", function() {
-            var obj2 = st.attachTrigger({
+            var result = [],obj2 = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -361,7 +455,7 @@
         })
 
         it("round mode", function() {
-            var obj3 = st.attachTrigger({
+            var result = [],obj3 = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -403,7 +497,7 @@
         })
 
         it("promise - resolve", function(testCall) {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -436,7 +530,7 @@
         })
 
         it("all promise", function(testCall) {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     //在原始方法中使用jquery的deferred
                     var e = $.Deferred();
@@ -512,43 +606,20 @@
 
         })
 
-        var rejectTest = st.attachTrigger({
-            testReject: function() {
-                result.push("base");
-            },
-            test: function(name) {
-                var e = $.Deferred();
-                setTimeout(function() {
-                    result.push("base");
-                    name == "call2" ? e.reject('reject') : e.resolve();
-                }, 100);
-                return e.promise();
-            }
-        });
-
-        rejectTest.onBefore('testReject', 'testBefore', function(e, name) {
-            result.push('before');
-            e.reject("beforeReject");
-            return e.promise();
-        })
-
-        rejectTest.onBefore('test', 'testBefore', function(e, name) {
-            setTimeout(function() {
-                result.push('before');
-                name == "call1" ? e.reject("beforeReject") : e.resolve();
-            }, 100);
-            return e.promise();
-        })
-
-        rejectTest.on('test', 'testAfter', function(e, name) {
-            setTimeout(function() {
-                result.push('after');
-                e.reject("afterReject");
-            }, 100);
-            return e.promise();
-        })
-
         it("reject", function(testCall) {
+            var result = [], rejectTest = st.attachTrigger({
+                testReject: function() {
+                    result.push("base");
+                }
+            });
+
+            rejectTest.onBefore('testReject', 'testBefore', function(e, name) {
+                result.push('before');
+                e.reject("beforeReject");
+                return e.promise();
+            })
+
+
             $.when(rejectTest.testReject('call1')).fail(function(err) {
                 expect(err).toBe('beforeReject');
                 expect(result.join(',')).toBe('before');
@@ -558,6 +629,24 @@
         })
 
         it("promise - before reject", function(testCall) {
+            var result = [], rejectTest = st.attachTrigger({
+                test: function(name) {
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        result.push("base");
+                    }, 100);
+                    return e.promise();
+                }
+            });
+
+            rejectTest.onBefore('test', 'testBefore', function(e, name) {
+                setTimeout(function() {
+                    result.push('before');
+                    e.reject("beforeReject");
+                }, 100);
+                return e.promise();
+            })
+
             $.when(rejectTest.test('call1')).fail(function(err) {
                 expect(err).toBe('beforeReject');
                 expect(result.join(',')).toBe('before');
@@ -566,6 +655,25 @@
         })
 
         it("promise - base reject", function(testCall) {
+            var result = [], rejectTest = st.attachTrigger({
+                test: function(name) {
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        result.push("base");
+                        e.reject('reject');
+                    }, 100);
+                    return e.promise();
+                }
+            });
+
+            rejectTest.onBefore('test', 'testBefore', function(e, name) {
+                setTimeout(function() {
+                    result.push('before');
+                    e.resolve();
+                }, 100);
+                return e.promise();
+            })
+
             $.when(rejectTest.test('call2')).fail(function(err) {
                 expect(err).toBe('reject');
                 expect(result.join(',')).toBe('before,base');
@@ -574,9 +682,27 @@
         })
 
         it("promise - after reject", function(testCall) {
+            var result = [], rejectTest = st.attachTrigger({
+                test: function(name) {
+                    var e = $.Deferred();
+                    setTimeout(function() {
+                        result.push("base");
+                        e.resolve();
+                    }, 100);
+                    return e.promise();
+                }
+            });
+            rejectTest.on('test', 'testAfter', function(e, name) {
+                setTimeout(function() {
+                    result.push('after');
+                    e.reject("afterReject");
+                }, 100);
+                return e.promise();
+            })
+
             $.when(rejectTest.test('call3')).fail(function(err) {
                 expect(err).toBe('afterReject');
-                expect(result.join(',')).toBe('before,base,after');
+                expect(result.join(',')).toBe('base,after');
                 testCall();
             });
         })
@@ -602,7 +728,7 @@
         })
 
         it("stopPropagation", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -627,7 +753,7 @@
         })
 
         it("preventDefault", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -635,6 +761,7 @@
 
             obj.onBefore('test', 'testBefore', function(e, name) {
                 result.push(name + '-before1');
+                //阻止前置后续的事件&阻止默认方法
                 e.preventDefault();
             })
 
@@ -652,7 +779,7 @@
         })
 
         it("stop", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -660,6 +787,7 @@
 
             obj.onBefore('test', 'testBefore', function(e, name) {
                 result.push(name + '-before1');
+                //停止执行
                 e.stop();
             })
 
@@ -678,7 +806,7 @@
         })
 
         it("stopPropagation && preventDefault", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -705,7 +833,7 @@
         })
 
         it("offBefore && off", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -737,7 +865,7 @@
         })
 
         it("on - object", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: function(name) {
                     result.push(name);
                 }
@@ -765,18 +893,41 @@
             obj.test('call');
             expect(result.join(',')).toBe('before,call,after');
         })
+
+        it("extend", function() {
+            var result = [], obj = st.attachTrigger({
+                test: function(name) {
+                    result.push(name);
+                }
+            });
+
+            //注册后置testAfter
+            obj.on('test', 'testAfter', function(e, name) {
+                result.push('after');
+            });
+
+            //扩展替换test
+            obj.extend({
+                test : function(name){
+                    result.push(name + ':extend')
+                }
+            });
+
+            obj.test('test');
+
+            expect(result.join('-')).toBe('test:extend-after');
+        })
     });
 
     describe("property trigger", function() {
-        var result;
-        beforeEach(function() {
-            result = [];
-        })
-
         it("watch prop change", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: 1
             });
+            //属性监听只有before，after两种方法注入类型，不支持round环绕模式。
+            //before：主要使用在做值变化的控制，比如是否需要更新，或者改变更新的值等等。
+            //after：在after则是无法干预值的变化，因此只是做监听使用；
+
             //回调方法中有三个参数,事件参数e；更新的值value；原来的值oldValue
             obj.onBefore('test', 'testBefore', function(e, value, oldValue) {
                 result.push(value + '-before-' + oldValue);
@@ -796,7 +947,7 @@
         })
 
         it("watch prop change cancel", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: 1
             });
 
@@ -817,7 +968,7 @@
         })
 
         it("watch prop change value", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 test: 1
             });
 
@@ -844,7 +995,7 @@
         })
 
         it("watch child prop", function() {
-            var obj = st.attachTrigger({
+            var result = [],obj = st.attachTrigger({
                 child: {
                     test: 1
                 }
@@ -869,94 +1020,132 @@
     })
 
     describe("flowController", function() {
-        var log = function() {
-                arr.push.apply(arr, arguments)
-            },
-            arr, html;
-
-        beforeEach(function() {
-            arr = [];
-            html = [];
-        })
-
-        //以widget简单的的生命周期为例
-        var flow = st.flowController({
-            flow: {
-                init: function(e, name, op) {
-                    log(name, 'init');
-                    //input的进入buildInput流程
-                    if (name === 'input')
-                    //指定进入buildInput，同时指定的参数
-                        e.next("buildInput", [op.type]);
-                    //进入cancel流程
-                    else if (name === 'cancel')
-                        e.next('cancel')
-                },
-                buildInput: function(e, type) {
-                    log('buildInput');
-                    //返回传递结果
-                    return type;
-                },
-                cancel: function(e) {
-                    log('cancel');
-                    e.end();
-                },
-                render: function(e, name, op) {
-                    //判断是否存在传递结果
-                    e.result && log(e.result);
-                    log('render');
-                },
-                complete: function(e, name, op) {
-                    log('complete');
-                }
-            },
-            //设定执行流程
-            order: ["init", "render", "complete"]
-        });
-
         it("boot", function() {
+            //以widget简单的的生命周期为例
+            var result = [],flow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        result.push(name, 'init');
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                //设定执行流程
+                order: ["init", "render", "complete"]
+            });
             //执行构建div的流程
             flow.boot("div");
 
             //正常输出init，render，complete三个流程
-            expect(arr + '').toBe('div,init,render,complete');
+            expect(result + '').toBe('div,init,render,complete');
         })
 
         it("next", function() {
+            var result = [],flow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        result.push(name, 'init');
+                        //input的进入buildInput流程
+                        if (name === 'input')
+                        //指定进入buildInput，同时指定的参数
+                            e.next("buildInput", [op.type]);
+                    },
+                    buildInput: function(e, type) {
+                        result.push('buildInput');
+                        //返回传递结果
+                        return type;
+                    },
+                    render: function(e, name, op) {
+                        //判断是否存在传递结果
+                        e.result && result.push(e.result);
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                //设定执行流程
+                order: ["init", "render", "complete"]
+            });
+
             //执行构建input的流程，设置input的type
             flow.boot("input", {
                 type: 'text'
             });
 
             //除正常流程外，在init后进入buildInput流程
-            expect(arr + '').toBe('input,init,buildInput,text,render,complete');
+            expect(result + '').toBe('input,init,buildInput,text,render,complete');
         })
 
         it("end", function() {
+            var result = [],flow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        result.push(name, 'init');
+                        //进入cancel流程
+                        if (name === 'cancel')
+                            e.next('cancel');
+                    },
+                    cancel: function(e) {
+                        result.push('cancel');
+                        e.end();
+                    },
+                    render: function(e, name, op) {
+                        //判断是否存在传递结果
+                        e.result && result.push(e.result);
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                //设定执行流程
+                order: ["init", "render", "complete"]
+            });
             flow.boot("cancel");
-            expect(arr + '').toBe('cancel,init,cancel');
+            expect(result + '').toBe('cancel,init,cancel');
         })
 
         it("boot with start", function() {
+            var result = [],flow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        result.push(name, 'init');
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                //设定执行流程
+                order: ["init", "render", "complete"]
+            });
+
             //从render阶段开始构建div
             flow.bootWithStart('render', ["div"]);
 
             //略过了render阶段
-            expect(arr + '').toBe('render,complete');
+            expect(result + '').toBe('render,complete');
         })
 
         it("simple Mode", function() {
-            //简单流程，流程中不带事件参数EventArg
-            var flow = st.flowController({
+            //简单流程，流程中不带事件参数EventArg（对应trigger和promiseEvent的callback模式）
+            var result=[], flow = st.flowController({
                 flow: {
                     init: function(name, op) {
-                        log(name, 'init');
+                        result.push(name, 'init');
                     },
                     render: function(name, op) {
-                        log('render');
+                        result.push('render');
                     },
                     complete: function(name, op) {
-                        log('complete');
+                        result.push('complete');
                     }
                 },
                 order: ["init", "render", "complete"],
@@ -965,13 +1154,11 @@
             })
 
             flow.boot("boot");
-            expect(arr + '').toBe('boot,init,render,complete');
+            expect(result + '').toBe('boot,init,render,complete');
         })
 
         it("changeArg & originalArgs", function() {
-            var result = [];
-
-            var flow = st.flowController({
+            var result = [],flow = st.flowController({
                 flow: {
                     init: function(e, name) {
                         result.push(name,'init');
@@ -979,8 +1166,8 @@
                         e.changeArgs(['text']);
                     },
                     render: function(e,type) {
-                        //恢复原始参数
                         result.push('render',type);
+                        //恢复原始参数
                         e.recoverArgs();
                     },
                     complete: function(e, name) {
@@ -996,211 +1183,359 @@
             expect(result + '').toBe('input,init,render,text,complete,input');
         })
 
-        var promiseFlow = st.flowController({
-            flow: {
-                init: function(e, name, op) {
-                    setTimeout(function() {
-                        log(name, 'init');
-                        if (name === 'input')
-                            e.next("buildInput", [op.type]);
-                        else if (name === 'cancel')
-                            e.next('cancel')
-
-                        e.resolve();
-                    }, 100)
-                    return e.promise();
-                },
-                buildInput: function(e, type) {
-                    setTimeout(function() {
-                        log('buildInput');
-                        e.resolve(type);
-                    }, 100)
-                    return e.promise();
-                },
-                cancel: function(e) {
-                    setTimeout(function() {
-                        log('cancel');
-                        e.end().resolve();
-                    }, 100)
-                    return e.promise();
-
-                },
-                render: function(e, name, op) {
-                    e.result && log(e.result);
-                    log('render');
-                },
-                complete: function(e, name, op) {
-                    log('complete');
-                }
-            },
-            order: ["init", "render", "complete"]
-        });
-
-
         it("promise", function(testCall) {
+            var result = [], promiseFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"]
+            });
+
             $.when(promiseFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('div,init,render,complete');
+                expect(result + '').toBe('div,init,render,complete');
                 testCall();
             })
         })
 
         it("promise - next", function(testCall) {
+            var result = [], promiseFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            if (name === 'input')
+                                e.next("buildInput", [op.type]);
+
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    buildInput: function(e, type) {
+                        setTimeout(function() {
+                            result.push('buildInput');
+                            e.resolve(type);
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        e.result && result.push(e.result);
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"]
+            });
+
             $.when(promiseFlow.boot("input", {
                 type: 'text'
             })).done(function() {
-                expect(arr + '').toBe('input,init,buildInput,text,render,complete');
+                expect(result + '').toBe('input,init,buildInput,text,render,complete');
                 testCall();
             });
 
         })
 
         it("promise - end", function(testCall) {
+            var result = [], promiseFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            if (name === 'cancel')
+                                e.next('cancel')
+
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    cancel: function(e) {
+                        setTimeout(function() {
+                            result.push('cancel');
+                            e.end().resolve();
+                        }, 100)
+                        return e.promise();
+
+                    },
+                    render: function(e, name, op) {
+                        e.result && result.push(e.result);
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"]
+            });
             $.when(promiseFlow.boot("cancel")).done(function() {
-                expect(arr + '').toBe('cancel,init,cancel');
+                expect(result + '').toBe('cancel,init,cancel');
                 testCall();
             })
         })
 
-        //异步的流程，使用trigger
-        var triggerFlow = st.flowController({
-            flow: {
-                init: function(e, name, op) {
-                    //模拟异步
-                    setTimeout(function() {
-                        log(name, 'init');
-                        e.resolve();
-                    }, 100)
-                    return e.promise();
-                },
-                render: function(e, name, op) {
-                    log('render');
-                },
-                complete: function(e, name, op) {
-                    log('complete');
-                }
-            },
-            order: ["init", "render", "complete"],
-            trigger: true
-        });
-
         it("trigger", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             //在init之前注入
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
-                log('initBefore');
-            }, "once");
+                result.push('initBefore');
+            });
 
             //在init之后注入异步
             triggerFlow.on("init", "initAfter", function(e, name, op) {
                 setTimeout(function() {
-                    log('initAfter');
+                    result.push('initAfter');
                     e.resolve();
                 }, 100)
                 return e.promise();
-            }, "once");
+            });
 
             //使用when来捕获异步的流程执行结果
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,div,init,initAfter,render,complete');
+                expect(result + '').toBe('initBefore,div,init,initAfter,render,complete');
                 testCall();
             })
         })
 
         it("trigger - next", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
-                    log('initBefore');
+                    result.push('initBefore');
                     e.next('complete').resolve();
                 }, 100)
                 return e.promise();
-            }, "once");
+            });
 
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,div,init,complete');
+                expect(result + '').toBe('initBefore,div,init,complete');
                 testCall();
             })
 
         })
 
         it("trigger - end", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
-                    log('initBefore');
+                    result.push('initBefore');
                     //停止流程
                     e.end().resolve();
                 }, 100)
                 return e.promise();
-            }, "once");
+            });
 
             $.when(triggerFlow.boot("div")).done(function() {
                 //执行了注入事件initBefore后停止流程
-                expect(arr + '').toBe('initBefore');
+                expect(result + '').toBe('initBefore');
                 testCall();
             })
         })
 
         it("trigger - stopPropagation", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
-                    log('initBefore');
+                    result.push('initBefore');
                     e.stopPropagation().resolve();
                 }, 100)
                 return e.promise();
-            }, "once");
+            });
 
             triggerFlow.onBefore("init", "initBefore2", function(e, name, op) {
-                log('initBefore2');
-            }, "once");
+                result.push('initBefore2');
+            });
 
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,div,init,render,complete');
+                expect(result + '').toBe('initBefore,div,init,render,complete');
                 testCall();
             })
         })
 
         it("trigger - preventDefault", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
-                    log('initBefore');
+                    result.push('initBefore');
                     e.preventDefault().resolve();
                 }, 100)
                 return e.promise();
-            }, 10, "once");
+            }, 10);
 
             triggerFlow.on("init", "initAfter", function(e, name, op) {
-                log('initAfter');
-            }, "once");
+                result.push('initAfter');
+            });
 
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,initBefore2,initAfter,render,complete');
+                expect(result + '').toBe('initBefore,initAfter,render,complete');
                 testCall();
             })
         })
 
         it("trigger - stop", function(testCall) {
+            //异步的流程，使用trigger
+            var result = [], triggerFlow = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        //模拟异步
+                        setTimeout(function() {
+                            result.push(name, 'init');
+                            e.resolve();
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        result.push('render');
+                    },
+                    complete: function(e, name, op) {
+                        result.push('complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             triggerFlow.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
-                    log('initBefore');
+                    result.push('initBefore');
                     e.stop().resolve();
                 }, 100)
                 return e.promise();
-            }, "once");
+            });
 
             triggerFlow.onBefore("init", "initBefore2", function(e, name, op) {
-                log('initBefore2');
-            }, "once");
+                result.push('initBefore2');
+            });
 
             triggerFlow.on("init", "initAfter", function(e, name, op) {
-                log('initAfter');
-            }, "once");
+                result.push('initAfter');
+            });
 
             $.when(triggerFlow.boot("div")).done(function() {
-                expect(arr + '').toBe('initBefore,render,complete');
+                expect(result + '').toBe('initBefore,render,complete');
                 testCall();
             });
         })
 
         it("trigger - transfer Result", function(testCall) {
-            var flow = st.flowController({
+            var result = [], flow = st.flowController({
                 flow: {
                     init: function(e, name, op) {
                         setTimeout(function() {
@@ -1242,26 +1577,25 @@
 
         })
 
-        var _err, flowReject = st.flowController({
-            flow: {
-                init: function(e, name, op) {
-                    setTimeout(function() {
-                        e.reject('init-reject');
-                    }, 100)
-                    return e.promise();
-                },
-                render: function(e, name, op) {
-                    e.resolve(e.result + '-render');
-                },
-                complete: function(e, name, op) {
-                    e.resolve(e.result + '-complete');
-                }
-            },
-            order: ["init", "render", "complete"],
-            trigger: true
-        });
-
         it("reject", function(testCall) {
+            var flowReject = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        setTimeout(function() {
+                            e.reject('init-reject');
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        e.resolve(e.result + '-render');
+                    },
+                    complete: function(e, name, op) {
+                        e.resolve(e.result + '-complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
 
             $.when(flowReject.boot('boot')).fail(function(err) {
                 expect(err + '').toBe('init-reject');
@@ -1270,6 +1604,25 @@
         })
 
         it("trigger - reject", function(testCall) {
+            var result, flowReject = st.flowController({
+                flow: {
+                    init: function(e, name, op) {
+                        setTimeout(function() {
+                            e.reject('init-reject');
+                        }, 100)
+                        return e.promise();
+                    },
+                    render: function(e, name, op) {
+                        e.resolve(e.result + '-render');
+                    },
+                    complete: function(e, name, op) {
+                        e.resolve(e.result + '-complete');
+                    }
+                },
+                order: ["init", "render", "complete"],
+                trigger: true
+            });
+
             flowReject.onBefore("init", "initBefore", function(e, name, op) {
                 setTimeout(function() {
                     //拒绝契约，结束流程
@@ -1278,30 +1631,30 @@
                 return e.promise();
             });
 
-            $.when(flowReject.boot('boot')).done(function(result) {
-                arr = result;
+            $.when(flowReject.boot('boot')).done(function(data) {
+                result = data;
             }).fail(function(err) {
-                expect(arr + '').toBe('');
+                expect(result).toBeUndefined();
                 expect(err + '').toBe('initBefore-reject');
                 testCall();
             });
         })
 
         it("trigger - callback mode & interface change", function(testCall) {
-            var flow = st.flowController({
+            var result=[], flow = st.flowController({
                 flow: {
                     init: function(e, name, op) {
                         setTimeout(function() {
-                            log(name, 'init');
+                            result.push(name, 'init');
                             e.resolve();
                         }, 100)
                         return e.promise();
                     },
                     render: function(e, name, op) {
-                        log('render');
+                        result.push('render');
                     },
                     complete: function(e, name, op) {
-                        log('complete');
+                        result.push('complete');
                     }
 
                 },
@@ -1317,26 +1670,26 @@
             });
 
             flow.bind('init', 'initAfter', function(name, op) {
-                log(name + '-initAfter');
+                result.push(name + '-initAfter');
             })
 
             $.when(flow.boot('boot')).done(function() {
-                expect(arr + '').toBe('boot,init,boot-initAfter,render,complete');
+                expect(result + '').toBe('boot,init,boot-initAfter,render,complete');
                 testCall();
             });
         })
 
         it("simple mode & trigger callback mode", function(testCall) {
-            var flow = st.flowController({
+            var result=[],flow = st.flowController({
                 flow: {
                     init: function(name, op) {
-                        log(name, 'init');
+                        result.push(name, 'init');
                     },
                     render: function(name, op) {
-                        log('render');
+                        result.push('render');
                     },
                     complete: function(name, op) {
-                        log('complete');
+                        result.push('complete');
                     }
 
                 },
@@ -1348,31 +1701,31 @@
             });
 
             flow.on('init', 'initAfter', function(name, op) {
-                log(name + '-initAfter');
+                result.push(name + '-initAfter');
             })
 
             $.when(flow.boot('boot')).done(function() {
-                expect(arr + '').toBe('boot,init,boot-initAfter,render,complete');
+                expect(result + '').toBe('boot,init,boot-initAfter,render,complete');
                 testCall();
             });
         })
 
         it("all trigger", function(testCall) {
-            var flow = st.flowController({
+            var result=[], flow = st.flowController({
                 flow: {
                     init: function(e, name, op) {
-                        log(name, 'init');
+                        result.push(name, 'init');
 
                     },
                     render: function(e, name, op) {
                         setTimeout(function() {
-                            log('render');
+                            result.push('render');
                             e.resolve();
                         }, 100)
                         return e.promise();
                     },
                     complete: function(e, name, op) {
-                        log('complete');
+                        result.push('complete');
                     }
                 },
                 order: ["init", "render", "complete"],
@@ -1380,16 +1733,16 @@
             });
 
             flow.on('init', 'initAfter', function(e, name, op) {
-                log('initAfter');
+                result.push('initAfter');
             })
 
             // flow.on('render', 'rendertAfter', function(e,name, op) {
-            //     log('rendertAfter');
+            //     result.push('rendertAfter');
             // })
 
             $.when(flow.boot('boot')).done(function() {
-                // expect(arr + '').toBe('boot,init,initAfter,render,rendertAfter,complete');
-                expect(arr + '').toBe('boot,init,initAfter,render,complete');
+                // expect(result + '').toBe('boot,init,initAfter,render,rendertAfter,complete');
+                expect(result + '').toBe('boot,init,initAfter,render,complete');
                 testCall();
             });
         });

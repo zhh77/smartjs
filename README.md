@@ -1,6 +1,6 @@
 # smartjs 
 
-ver : 0.4
+ver : 0.6.0
 
 author : Roy Zhang 
 
@@ -11,6 +11,21 @@ desc ：
         介绍在我的博客中同步 http://www.cnblogs.com/zhh8077/
 
 update : 
+
+ver 0.6 - 2015.1
+
+  1. 提供node版本-smart.js, 安装命令npm install smart.js；
+
+  2. trigger加入extend方法；
+
+
+ver 0.5 - 2014.11
+
+  1. 提供独立运行版本，不依赖jquery；
+
+  2. 注释基于新版smartdoc进行重构；
+
+
 ver 0.4 - 2014.8.9
 
   1. 添加权重数组 - priorityList,优化aop；

@@ -9,7 +9,7 @@
 		if (params) {
 			return function(item) {
 				var check = true;
-				$.each(params, function(name, value) {
+				st.each(params, function(name, value) {
 					if (item[name] !== value) {
 						check = false;
 						return check;
@@ -22,7 +22,7 @@
 
 	//取对象数据，测试使用array只取第一条
 	function getData(data) {
-		return $.isArray(data) ? data[0] : data;
+		return st.isArray(data) ? data[0] : data;
 	}
 
 	function buildFitler(filter) {
@@ -53,7 +53,7 @@
 
 				if (filter) {
 					//测试使用，只更新第一条匹配数据
-					$.each(_db, function(i, item) {
+					st.each(_db, function(i, item) {
 						if (filter(item)) {
 							_db[i] = data;
 							return false;
@@ -88,7 +88,7 @@
 
 			if (filter) {
 				//测试使用，只更新第一条匹配数据
-				$.each(_cache, function(i, item) {
+				st.each(_cache, function(i, item) {
 					if (filter(item)) {
 						_cache[i] = data;
 						return false;
@@ -104,7 +104,6 @@
 			op.filter = buildFitler(op.filter || op.params);
 		}
 	});
-
 
 	//添加一个简单的table类型的数据管理
 	dataManager.add("Table", {

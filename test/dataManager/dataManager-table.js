@@ -8,7 +8,7 @@
 		if (params) {
 			return function(item) {
 				var check = true;
-				$.each(params, function(name, value) {
+				st.each(params, function(name, value) {
 					if (item[name] !== value) {
 						check = false;
 						return check;
@@ -20,7 +20,7 @@
 	}
 
 	function getData(data) {
-		return $.isArray(data) ? data[0] : data;
+		return st.isArray(data) ? data[0] : data;
 	}
 	//模拟服务端异步返回数据,只接受params
 	dataServices.add("server1", {
@@ -39,7 +39,7 @@
 					data = getData(op.data);
 
 				if (filter) {
-					$.each(_db, function(i, item) {
+					st.each(_db, function(i, item) {
 						if (filter(item)) {
 							_db[i] = data;
 							return false;
@@ -72,7 +72,7 @@
 				data = getData(op.data);
 
 			if (filter) {
-				$.each(_cache, function(i, item) {
+				st.each(_cache, function(i, item) {
 					if (filter(item)) {
 						_cache[i] = data;
 						return false;

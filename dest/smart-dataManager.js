@@ -15,15 +15,14 @@
 
     @module FilterBuilder
 */
-stDefine('filterBuilder', function(st) {
+_stDefine('filterBuilder', function(st) {
 	//空值忽略条件标示符
 	var NullIgnoreSign = ["{", "}"],
 		//关系字符
 		Relations = ["and", "or"],
-		isArray = $.isArray;
+		isArray = st.isArray;
 
 	/**
-<<<<<<< HEAD
 	   过滤生成器对象；可以使用：条件字符串；参数；方法来构建； 
 	   条件字符串的过滤操作见[Operations](Operations.html)
 	   @class FilterBuilder
@@ -85,39 +84,6 @@ stDefine('filterBuilder', function(st) {
 			expect(coder1.length).toBe(1);
 			expect(coder1[0].name).toBe('coder1');
 			
-=======
-	 * 过滤生成器对象
-	 * @class FilterBuilder
-	 * @constructor
-	 * @param {string|function|object} filter 三种类型： 
-	 * 1. {string}, 查询字符串
-	 * 2. {object}, 参数对象
-	 * 3. {function}, 过滤方法
-	 * @return {FilterBuilder} 返回过滤生成器对象
-	 * @example
-	 * 		//查询字符串,{age > @age}用{}包含的条件表示当@age为null的时候，忽略此条件
-	 * 		var str = "{age > @age} and (role = @sa or role = @coder) and project = @project";
-			
-			//创建过滤器
-			var filter = st.filterBuilder(str);
-			
-			//生成过滤方法
-			var filterFn = filter.buildFn({
-				age : 20,
-				sa : 'sa',
-				coder : 'coder',
-				project : "smartjs"
-			});
-			
-			//定义数据
-			var data = [
-					{name: "roy",age: 30,role: "coder",project: "smartjs"},
-			 		{name: "coder1", age: 20, role: "coder", project: "smartjs"}
-			];
-			
-			//过滤数据
-			var result = data.filter(filterFn);
->>>>>>> origin/master
 	 */
 	function FilterBuilder(filter) {
 		if (filter) {
@@ -145,27 +111,17 @@ stDefine('filterBuilder', function(st) {
 		 * @param  {object} params 过滤的参数值
 		 * @return {object}   条件参数
 		 * @example
-<<<<<<< HEAD
 		   		var str = "age > @age and (role = @sa or role = @coder) and project = @project";
 				var filter = st.filterBuilder(str);
 		  
 		   		//生成条件
 		   		var conditions = filter.buildCondition({
 		   			age : 20,
-=======
-		 * 		var str = "age > @age and (role = @sa or role = @coder) and project = @project";
-				var filter = st.filterBuilder(str);
-		 *
-		 * 		//生成条件
-		 * 		var conditions = filter.buildCondition({
-		 * 			age : 20,
->>>>>>> origin/master
 					sa : 'sa',
 					coder : 'coder',
 					project : "smartjs"
 				})
 
-<<<<<<< HEAD
 				log(conditions);
 
 		   		// 生成的conditions对象
@@ -177,17 +133,6 @@ stDefine('filterBuilder', function(st) {
 	   			// 	 ]},
 		   		// 	 {"field":"project","operation":"=","param":"smartjs"}
 		   		// ]}
-=======
-		 * 		//生成的conditions对象
-		 * 		{"and":[
-		 * 			{"field":"age","operation":">","param":20},
-	 * 				{"or":[
-	 * 					{"field":"role","operation":"=","param":"sa"},
-	 * 					{"field":"role","operation":"=","param":"coder"}
-	 * 				]},
-		 * 			{"field":"project","operation":"=","param":"smartjs"}
-		 * 		]}
->>>>>>> origin/master
 		 */
 		buildCondition: function(params) {
 			if (this._conditions)
@@ -197,10 +142,9 @@ stDefine('filterBuilder', function(st) {
 		 * 生成过滤方法
 		 * @method buildFn
 		 * @param  [params] {object}  过滤的参数值
-		 * @param  [mergeFilter]  {string|function|object}需要合并的过滤条件
+		 * @param  [mergeFilter]  {string|function|object} 需要合并的过滤条件;合并全部都为and
 		 * @return {function} 过滤方法
 		 * @example
-<<<<<<< HEAD
 		 * 		var data = [
 		 * 			{name : 'sa1', role : 'sa', age : 33},
 		 * 			{name : 'sa2', role : 'sa', age : 25}
@@ -216,13 +160,6 @@ stDefine('filterBuilder', function(st) {
 		 * 		expect(sa.length).toBe(1);
 		 * 		expect(sa[0].name).toBe('sa1')
 		 * 		
-=======
-		 * 		//创建role的过滤器
-		 * 		var filter = st.filterBuilder("role = @role");
-		 *
-		 * 		//传入条件参数，合并age的过滤
-		 * 		filter.buildFn({role:"sa",age:20},"age > @age")
->>>>>>> origin/master
 		 */
 		buildFn: function(params, mergeFilter) {
 			var self = this,filterType,
@@ -238,11 +175,7 @@ stDefine('filterBuilder', function(st) {
 					fnFilter = buildFn(conditions)
 			} else if(!mergeFilter)
 				//参数过滤非合并参数模式下，根据参数创建过滤方法
-<<<<<<< HEAD
 				fnFilter = compileObjectCondition(st.mix(params, self._params));
-=======
-				fnFilter = compileObjectCondition(st.mergeObj(params, self._params));
->>>>>>> origin/master
 
 			//存在合并过滤情况下，生成合并过滤方法
 			if (mergeFilter) {
@@ -253,11 +186,7 @@ stDefine('filterBuilder', function(st) {
 					mergeFilterFn = mergeFilter;
 			}
 			//合并过滤条件
-<<<<<<< HEAD
 			return st.mergeFn(fnFilter, mergeFilterFn,true);
-=======
-			return st.mergeFn(fnFilter, mergeFilterFn);
->>>>>>> origin/master
 		}
 	}
 
@@ -265,7 +194,7 @@ stDefine('filterBuilder', function(st) {
 	function compileObjectCondition(obj) {
 		return function(item) {
 			var check = true;
-			$.each(obj, function(name, value) {
+			st.each(obj, function(name, value) {
 				if (item[name] !== value) {
 					check = false;
 					return check;
@@ -443,7 +372,7 @@ stDefine('filterBuilder', function(st) {
 		return function(data) {
 			var result = true,
 				isOr;
-			$.each(conditions, function(relation, condition) {
+			st.each(conditions, function(relation, condition) {
 				if (!checkGroup(data, condition, relation === 'or')) {
 					result = false;
 				}
@@ -488,11 +417,7 @@ stDefine('filterBuilder', function(st) {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * 针对过滤器条件字符串的条件过滤操作；预设了基础操作；另外可以通过<code>st.extendOperation(operation,checkFn)</code>进行扩展和重写
-=======
-	 * 判断操作配置对象
->>>>>>> origin/master
 	 * @class Operations
 	 */
 	var Operations = {
@@ -587,7 +512,6 @@ stDefine('filterBuilder', function(st) {
 			return new FilterBuilder(filter);
 		},
 		/**
-<<<<<<< HEAD
 		   扩展判断操作符,如：'='比较操作符,name = @name
 		   @method extendOperation
 		   @param  {string} operation 操作名称
@@ -596,16 +520,6 @@ stDefine('filterBuilder', function(st) {
 		   		//添加大于操作符'>'
 		   		st.extendOperation('>',function(data, param) {
 		   			//data为数据，param为条件参数
-=======
-		 * 扩展判断操作符,如：'='比较操作符,name = @name
-		 * @method extendOperation
-		 * @param  {string} operation 操作名称
-		 * @param  {function} checkFn   判断方法
-		 * @example
-		 * 		//添加大于操作符'>'
-		 * 		st.extendOperation('>',function(data, param) {
-		 * 			//data为数据，param为条件参数
->>>>>>> origin/master
 					return data > param;
 				});
 		 */
@@ -613,7 +527,8 @@ stDefine('filterBuilder', function(st) {
 			Operations[operation] = checkFn;
 		}
 	};
-});/**
+})
+/**
     数据管理模块
     
     Feartures : 
@@ -626,7 +541,7 @@ stDefine('filterBuilder', function(st) {
 
     @module DataManager
 */
-stDefine('dataManager', function(st) {
+_stDefine('dataManager', function(st) {
 
 	var dataManager, policyManager, dataServices,
 		_config = {
@@ -638,51 +553,15 @@ stDefine('dataManager', function(st) {
 		},
 		defFilterBuilder = st.filterBuilder(),
 		promiseEvent = st.promiseEvent,
-		isFunction = $.isFunction;
-
+		isFunction = st.isFunction;
 
 	/**
-	 * 数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
-	 * 数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
-	 * @class dataServices
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 * 		//注册cache的数据服务
-			dataServices.add("cache", {
-				//实现search接口方法
-				search: function(op) {
-					var result, filter = op.filter;
-					//过滤数据
-					result = filter ? _cache.filter(filter) : _cache;
-					
-					//执行成功之后的方法
-					op.success && op.success(result);
-				},
-				//实现update接口方法
-				update: function(op) {
-					var filter = op.filter,
-						data = getData(op.data);
-
-					if (filter) {
-						//测试使用，只更新第一条匹配数据
-						$.each(_cache, function(i, item) {
-							if (filter(item)) {
-								_cache[i] = data;
-								return false;
-							}
-						})
-					} else {
-						_cache = op.data || [];
-					}
-					op.success && op.success(op.data);
-				},
-				//实现initOptions接口方法
-				initOptions: function(op) {
-					//生成fitler，当filter为obj类型时，编译成fn
-					op.filter = buildFitler(op.filter || op.params);
-				}
-			});
+	   数据服务管理；定义了数据服务的接口和通用操作方法；不能直接使用，必须创建具体类型的数据服务； 
+	   数据服务的定义就比较广了，可以是具体的对象方式locaStorage，IndexDB，或者是一些行为ajax，comet，websocket；也可以是根据业务规则定义的rest，cache等；
+	   @class dataServices
+	   @constructor
+	   @extends factory
+       @demo test/dataManager/demo.js [dataServices]
 	 */
 	dataServices = st.factory({
 		name: "dataServices",
@@ -693,17 +572,7 @@ stDefine('dataManager', function(st) {
 			 * @param  {string} type 操作类型；1. search; 2. update
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
-			 * @return {object}      操作结果
-			 * @example
-			 * 		//执行查询cache的操作
-			 * 		var result = dataServices.operate('search',{
-			 * 			//设置数据服务类型为cache
-			 * 			dsType : 'cache',
-			 * 			//过滤参数
-			 * 			fitler : {name : 'roy'},
-			 * 			//换成的key，cache类型数据服务特有属性参数
-			 * 			cacheKey : 'test'
-			 * 		});
+			 * @return {object|promise}      操作结果或者promise
 			 */
 			operate: function(type, op) {
 				var ds = this.find(op.dsType);
@@ -721,18 +590,6 @@ stDefine('dataManager', function(st) {
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
 			 * @return {object}      操作结果
-			 * @example
-			 * 		//使用ajax进行查询
-			 * 		dataServices.search({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'ajax',
-			 * 			//服务地址
-			 * 			url : 'xxxx',
-			 * 			//查询参数
-			 * 			param : {name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
 			 */
 			search: function(op) {
 				return this.operate('search', op);
@@ -743,18 +600,6 @@ stDefine('dataManager', function(st) {
 			 * @param  {object} op   参数；具体参数同数据服务
 			 * @param  {object} op.dsType   数据服务类型
 			 * @return {object}      操作结果
-		 	 * @example
-			 * 		//使用rest进行更新
-			 * 		dataServices.update({
-			 * 			//设置数据服务为ajax类型
-			 * 			dsType:'rest',
-			 * 			//rest服务地址
-			 * 			url : 'user/update/{id}',
-			 * 			//更新参数
-			 * 			param : {id : 1 ,name : 'roy'},
-			 * 			//成功之后执行的方法
-			 * 			success : function(result){...}
-			 * 		})
 			 */
 			update: function(op) {
 				return this.operate('update', op);
@@ -800,12 +645,12 @@ stDefine('dataManager', function(st) {
 	})
 
 	/**
-	 * 数据管理器工厂
-	 * @class dataManager
-	 * @constructor
-	 * @extends factory
-	 * @example
-	 *
+	   数据管理器工厂； 更多数据管理的例子见smartjs其他数据管理项
+	   @class dataManager
+	   @constructor
+	   @extends factory
+       @demo test/dataManager/demo.js [dataManager]
+
 	 */
 	dataManager = st.factory({
 		name: "dataManager",
@@ -832,8 +677,9 @@ stDefine('dataManager', function(st) {
 		 */
 		base: {
 			/**
-			 * 是否过滤模式
+			 * 是否过滤模式; true时,使用filterBuilder组织过滤
 			 * @type {Boolean} _filterMode
+			 * @default true
 			 */
 			_filterMode: true,
 			//_operations : ["get","set"],
@@ -847,11 +693,7 @@ stDefine('dataManager', function(st) {
 			klassInit: function(op) {
 				var dm = st.attachTrigger(this);
 
-<<<<<<< HEAD
 				op = dm.op = st.mix(op, _config.dmOp);
-=======
-				op = dm.op = st.mergeObj(op, _config.dmOp);
->>>>>>> origin/master
 
 				initPolicy(dm, op.get, 'get');
 				initPolicy(dm, op.set, 'set');
@@ -963,11 +805,7 @@ stDefine('dataManager', function(st) {
 			 */
 			buildPolicy: function(policy, defPolicy) {
 				this.buildParams(policy, defPolicy)
-<<<<<<< HEAD
 				st.mix(policy, defPolicy, _config.ignoreMerges);
-=======
-				st.mergeObj(policy, defPolicy, _config.ignoreMerges);
->>>>>>> origin/master
 			}
 		}
 	});
@@ -1082,8 +920,8 @@ stDefine('dataManager', function(st) {
 	}
 
 	function whenFlow(fireResult, success, error) {
-		var d = $.Deferred();
-		$.when(fireResult).done(function(result) {
+		var d = st.Deferred();
+		st.when(fireResult).done(function(result) {
 			success && success(result);
 			d.resolve(result);
 		}).fail(function(err) {
@@ -1115,11 +953,7 @@ stDefine('dataManager', function(st) {
 				pType = typeof params;
 				if (pType === typeof mgParams && pType === 'object') {
 					//合并条件参数
-<<<<<<< HEAD
 					st.mix(params, mgParams);
-=======
-					st.mergeObj(params, mgParams);
->>>>>>> origin/master
 				}
 			} else {
 				policy.params = mgParams;
@@ -1171,13 +1005,14 @@ stDefine('dataManager', function(st) {
 		var dsOp, fnDsQueue, i = 0;
 
 		function buildDsOp(op) {
-			var conf = $.extend(true, {}, op, policy);
+			var conf = st.mergeMulti(true,[{},op, policy]);
 			conf.success = success;
 			conf.error = error;
 			dm.setDataSerive(conf);
 			return conf;
 		}
-		if ($.isArray(ds)) {
+
+		if (st.isArray(ds)) {
 			fnDsQueue = function() {
 				if (dsOp = ds[i++]) {
 					dsOp = buildDsOp(dsOp);
@@ -1238,7 +1073,7 @@ stDefine('dataManager', function(st) {
 			dm.stopTimer = function(id) {
 				var ts = this.__timers,
 					no;
-				if ($.isEmptyObject(ts))
+				if (st.isEmptyObject(ts))
 					return;
 
 				if (id) {
@@ -1247,7 +1082,7 @@ stDefine('dataManager', function(st) {
 						clearInterval(no);
 					}
 				} else {
-					$.each(ts, function(i, no) {
+					st.each(ts, function(i, no) {
 						no && clearInterval(no);
 					});
 					this.__timers = {};
@@ -1303,7 +1138,7 @@ stDefine('dataManager', function(st) {
 				return;
 			}
 
-			_policy = $.extend({
+			_policy = st.mergeObj({
 				mergeFilter: false,
 				way: 'ds',
 			}, trPolicy);
@@ -1327,7 +1162,7 @@ stDefine('dataManager', function(st) {
 			var trigger = op.get && op.get.trigger;
 			if (trigger) {
 
-				$.each(trigger, function(i, trPolicy) {
+				st.each(trigger, function(i, trPolicy) {
 					compileTrigger(i, trPolicy, dm, flow, op);
 				});
 				op.get.trigger = null;
@@ -1340,7 +1175,8 @@ stDefine('dataManager', function(st) {
 		dataPolicyManager: policyManager,
 		dataServices: dataServices
 	};
-});/**
+})
+/**
     针对于表类型的数据进行管理
     
     Feartures : 
@@ -1354,9 +1190,9 @@ stDefine('dataManager', function(st) {
     @module DataManager
     @submodule DataManager-Table
 */
-stDefine("dataManager-table", function(st) {
-	var isArray = $.isArray,
-		isPlainObj = $.isPlainObject,
+_stDefine("dataManager-table", function(st) {
+	var isArray = st.isArray,
+		isPlainObj = st.isPlainObject,
 		_states = ["_$new", "_$selected", "_$updated", "_$deleted"],
 		_dtConfig = {
 			//分页设置
@@ -1368,18 +1204,14 @@ stDefine("dataManager-table", function(st) {
 			},
 			getField : {
 				pageInf : "pageInf",
-				result :　"result"
+				result :"result"
 			}
 		};
 
 	st.dataManager.add("DataTable", {
 		init: function(op) {
 			var dm = this;
-<<<<<<< HEAD
 			st.mix(true, op, _dtConfig);
-=======
-			st.mergeObj(true, op, _dtConfig);
->>>>>>> origin/master
 
 			dm.$store = [];
 
@@ -1579,7 +1411,7 @@ stDefine("dataManager-table", function(st) {
 	function handleResult(e, dm, op, policy, isTrigger) {
 		var data = policy.data,pageInf;
 		if(data && (pageInf = data[op.getField.pageInf])){
-			$.extend(op.pageInf,pageInf);
+			st.mergeObj(op.pageInf,pageInf);
 			policy.data = data[op.getField.result];
 		}
 	}
@@ -1604,7 +1436,7 @@ stDefine("dataManager-table", function(st) {
 				if (isReplace)
 					store[i] = data;
 				else
-					$.extend(item, data);
+					st.mergeObj(item, data);
 
 				isUpdated = true;
 				return false;
@@ -1687,11 +1519,7 @@ stDefine("dataManager-table", function(st) {
 			pageInf = config.pageInf;
 			//根据分页信息设置检索范围
 			if (pageInf && pageInf.page) {
-<<<<<<< HEAD
 				st.mix(pageinf, _dtConfig.pageInf);
-=======
-				st.mergeObj(pageinf, _dtConfig.pageInf);
->>>>>>> origin/master
 				start = (pageInf.page - 1) * pageInf.pageSize;
 				start + pageInf.pageSize > end && (end = start + pageInf.pageSize);
 			}
