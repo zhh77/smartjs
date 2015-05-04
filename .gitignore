@@ -1,0 +1,4 @@
+*.bat
+node_modules
+.idea
+doc

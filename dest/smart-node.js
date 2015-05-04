@@ -138,7 +138,7 @@ _stDefine("base",function(st) {
 
             st.each(obj, function(name, value) {
                 ns = group + name;
-                if (!exclude || exclude(ns))
+                if (!exclude || exclude(ns,value))
                     copyObj[name] = _copy(deep, value, exclude, ns + '.');
             })
         } else if (st.isArray(obj)) {
@@ -2105,14 +2105,20 @@ _stDefine('oop', function(st) {
 
                 //自执行初始化判断
                 if (!(self instanceof _obj)) {
+                    
                     if (len === 0)
                         return new _obj();
                     if (len < 4)
                         return new _obj(args[0], args[1], args[2]);
-                    else if (len < 7)
-                        return new _obj(args[0], args[1], args[2], args[3], args[4], args[5]);
+                    else if (len < 6)
+                        return new _obj(args[0], args[1], args[2], args[3], args[4]);
                     else
-                        return new _obj(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                    {
+                        //性能考虑，大于5个参数才走自动初始化方式
+                        var _newObj = new _paramObj;
+                        _obj.apply(_newObj,args);
+                        return _newObj;
+                   }
                 }
                 //设置指针对象
                 self._$indicator = {};
@@ -2122,7 +2128,9 @@ _stDefine('oop', function(st) {
                 _onKlassInit.fireWith(self,config);
                 //klassInit默认初始化
                 self.klassInit && self.klassInit.apply(self, args);
-            }
+            },
+            //方法初始函数，即new klass(param)与klass(param)等效
+            _paramObj = function(){};
 
         if (parent) {
             _super = parent.prototype || parent;
@@ -2137,7 +2145,7 @@ _stDefine('oop', function(st) {
         } else
             _proto = st.mergeObj(_obj.prototype, _klassBase);
 
-        _obj.fn = _proto;
+        _obj.fn = _paramObj.prototype = _proto;
 
         st.mergeMulti([_proto, _prop,{
             //类标示

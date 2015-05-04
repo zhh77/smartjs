@@ -1,0 +1,24 @@
+{
+  "name": "SmartJs",
+  "description" : "提供AOP,OOP,Promise,DataService,DataManager等编程基类",
+  "file" : "smart",
+  "version": "0.0.7",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-requirejs": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-jasmine" : "*",
+    "grunt-contrib-watch" : "*",
+    "grunt-contrib-connect" : "*",
+    "grunt-contrib-smartdoc" : "*",
+    "grunt-strip": "*"
+  },
+  "dependencies": {
+    "express": "3.x"
+  }
+}

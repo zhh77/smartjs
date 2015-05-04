@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Smart Test</title>
+
+  <link rel="stylesheet" type="text/css" href="lib/jasmine/jasmine.css">
+  <!--[if lt IE 9]> 
+  <script src="lib/es5-shim.min.js"></script> 
+  <![endif]--> 
+  <script src="lib/jasmine/jasmine.js"></script>
+  <script src="lib/jasmine/jasmine-html.js"></script>
+  <script src="lib/jasmine/boot.js"></script>
+  <script data-main="test/main_dev_noJQ.js" src="lib/require.js"></script>
+
+<style type="text/css">
+	#testMenu li {
+		display: inline-block;
+		margin: 0 10px 10px 0;
+		background-color: #007069;
+		border:solid 2px #007069;
+		padding : 5px;
+	}
+
+	#testMenu a {
+		text-decoration:none;
+		color:#fff;
+	}
+
+	#testMenu a:hover {
+		text-decoration:underline;
+	}
+
+	#testMenu li.selected{
+		background-color: #ffe;
+	}
+
+	#testMenu li.selected a {
+		font-weight: bold;
+		color : #333;
+	}
+
+
+</style>
+</head>
+
+<body>
+<div><ul id="testMenu"></ul></div>
+</body>
+</html>
